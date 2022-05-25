@@ -1,0 +1,155 @@
+#map {
+bottom: 0;
+left: 0;
+position: absolute;
+right: 0;
+top: 0;
+}
+/*Legend specific*/
+.legend {
+padding: 6px 4px;
+font: 14px Arial, Helvetica, sans-serif;
+background: white;
+background: rgba(255, 255, 255, 0.8);
+box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+border-radius: 5px;
+line-height: 18px;
+color: #555;
+}
+
+select {
+    -webkit-appearance: auto;
+    -moz-appearance: auto;
+    appearance: auto;
+    text-align-last:center;
+    text-align: center;
+}
+
+.legend h4 {
+text-align: center;
+font-size: 16px;
+margin: 2px 12px 8px;
+color: #777;
+}
+
+.legend span {
+position: relative;
+bottom: 3px;
+}
+
+.legend i {
+width: 18px;
+height: 18px;
+float: left;
+margin: 0 8px 0 0;
+opacity: 0.7;
+}
+
+.legend i.icon {
+background-size: 18px;
+background-color: rgba(255, 255, 255, 1);
+}
+
+.slidecontainer {
+width: 100%; /* Width of the outside container */
+}
+
+.selectcontainer{
+width: 100%
+}
+
+/* The slider itself */
+.slider {
+-webkit-appearance: none;  /* Override default CSS styles */
+appearance: none;
+width: 100%; /* Full-width */
+height: 25px; /* Specified height */
+background: #d3d3d3; /* Grey background */
+outline: none; /* Remove outline */
+opacity: 0.6; /* Set transparency (for mouse-over effects on hover) */
+-webkit-transition: .2s; /* 0.2 seconds transition on hover */
+transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+-webkit-appearance: none; /* Override default look */
+appearance: none;
+width: 25px; /* Set a specific slider handle width */
+height: 25px; /* Slider handle height */
+background: #04AA6D; /* Green background */
+cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+width: 25px; /* Set a specific slider handle width */
+height: 25px; /* Slider handle height */
+background: #04AA6D; /* Green background */
+cursor: pointer; /* Cursor on hover */
+}
+
+.slider span {
+position: relative;
+bottom: 3px;
+}
+
+/* The slider itself */
+.select {
+-webkit-appearance: none;  /* Override default CSS styles */
+appearance: none;
+width: 100%; /* Full-width */
+height: 25px; /* Specified height */
+background: #d3d3d3; /* Grey background */
+outline: none; /* Remove outline */
+opacity: 0.6; /* Set transparency (for mouse-over effects on hover) */
+-webkit-transition: .2s; /* 0.2 seconds transition on hover */
+transition: opacity .2s;
+}
+
+datalist {
+display: flex;
+justify-content: space-between;
+color: black;
+background: #d3d3d3; /* Green background */
+opacity: 1;
+width: 100%;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+html, body, #map {
+    height: 100%;
+    font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+#sidebar {
+height: 75% !important;
+}
+/* @media (max-width: 768px) {
+#sidebar {
+height: 96% !important;
+}
+} */
+
+.outer-div {
+width: 100%;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+}
+
+.inner-div {
+width: 100%;
+margin: 10px;
+padding: 5px;
+}

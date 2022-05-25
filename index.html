@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" crossorigin=""/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-sidebar-v2@3.0.4/css/leaflet-sidebar.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css" type="text/css">
+    <link rel="stylesheet" href="./assets/style.css" type="text/css">
+  </head>
+  
+  <body>
+      <div id="sidebar" class="leaflet-sidebar collapsed">
+
+        <!-- nav tabs -->
+        <div class="leaflet-sidebar-tabs">
+            <!-- top aligned tabs -->
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
+                <li><a href="#info" role="tab"><i class="fa fa-info"></i></a></li>
+                <li><a href="https://github.com/colinbrust/mco/tree/main/normals" target="_blank"><i class="fa fa-github"></i></a></li>
+            </ul>
+        </div>
+
+        <!-- panel content -->
+        <div class="leaflet-sidebar-content">
+            <div class="leaflet-sidebar-pane" id="home">
+                <h1 class="leaflet-sidebar-header">
+                    Montana Climate Normals
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-right"></i></span>
+                </h1>
+                <p>
+                  Welcome to the Montana climate normals web app! To get started, select a variable from the variables dropdown list. You can 
+                  also choose the time period of the normal, and different normal statistics. 
+                </p>
+                <table>
+                  <tr>
+                    <td><b>Select a Variable:</b></td>
+                    <td id="var-container"></td>
+                  </tr>
+                  <tr>
+                    <td><b>Select a Time Period:</b></td>
+                    <td id="time-container"></td>
+                  </tr>
+                  <tr>
+                    <td><b>Select a Statistic: </b></td>
+                    <td id="stat-container"></td>
+                  </tr>
+                  <tr>
+                    <td><b>Choose Overlays: </b></td>
+                    <td id="over-container"></td>
+                  </tr>
+                </table> 
+                <div class="outer-div">
+                  <div id="slide-container"  class="inner-div"></div>
+                </div>
+                <div class="outer-div">
+                  <div id="legend-container" class="inner-div"></div>
+                </div>
+            </div>
+            <div class="leaflet-sidebar-pane" id="info">
+              <h1 class="leaflet-sidebar-header">
+                Rethinking Climate Normals<span class="leaflet-sidebar-close"><i class="fa fa-caret-right"></i></span>
+              </h1>
+              <h2>What are Climate Normals?</h2>
+              <p>
+                Climate normals are 30-year summaries of climate data that are generated each decade. Normals provide a broad f
+                overview of average climate conditions over the past 30 years. To create the normals,
+                historical data from the past 30 years are summarized across different timescales (e.g., months, seasons, or 
+                years) using common metrics such as the <i>mean</i> or <i>median</i>. State and local governments
+                create and use these normals to help contextualize current conditions from the perspective of the past few
+                decades.
+              </p>
+              <p>
+                While these normals are extremely useful for contextualizing current conditions, a downfall is that they can
+                don't give any insight into how likely or unlikely a given event is. For example, if a farmer asked "what is
+                the probability that I get at least four inches of rain at my farm this summer?" or "I got 15 inches of
+                rain at my farm this year. How likely is that?", a mean or median doesn't help answer the question. Ideally,
+                a climate normal should both convey average conditions and allow for investigation into these types of
+                likelihoods. This finer-level detail is possible by using a gamma distribution to summarize historical
+                data. In the following sections, we explain what a gamma distribution is and then use Gamma Distribution
+                normals of Montana to contextualize recent precipitation events. 
+              </p>
+              <h2>What is the Gamma Distribution?</h2>
+            </div>
+        </div>
+    </div>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://unpkg.com/georaster"></script>
+    <script src="https://unpkg.com/chroma-js"></script>
+    <script src="https://unpkg.com/georaster-layer-for-leaflet"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/flatgeobuf@3.22.0/dist/flatgeobuf-geojson.min.js"></script>
+    <script src="https://unpkg.com/leaflet-gesture-handling"></script>
+    <script src="https://unpkg.com/papaparse@5.3.2/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-sidebar-v2@3.2.3/js/leaflet-sidebar.js"></script>
+    <script> src="https://raw.githubusercontent.com/vogdb/Leaflet.ActiveLayers/master/src/ActiveLayers.js"</script>
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => { 
+
+        var longNameMap = {
+          'erc': 'Energy Release Component',
+          'pr': 'Precipitation',
+          'rmax': 'Max. Relative Humidity',
+          'rmin': 'Min. Relative Humidity',
+          'sph': 'Specific Humidity',
+          'srad': 'Solar Radiation',
+          // 'th': 'Wind Direction',
+          'tmmn': 'Min. Air Temperature',
+          'tmmx': 'Max. Air Temperature',
+          'vpd': 'Vapor Pressure Deficit',
+          'vs': 'Wind Speed'
+        };
+
+        var typeMap = {
+          'mean': 'Mean',
+          'mode': 'Mode', 
+          'median': 'Median', 
+          'variance': 'Variance',
+          'alpha': 'Alpha',
+          'beta': 'Beta',
+          'quantiles': 'Quantiles'
+        };
+
+        var timeHash = {
+          'Annual': 'annual',
+          'January': 'jan',
+          'February': 'feb',
+          'March': 'mar',
+          'April': 'apr',
+          'May': 'may',
+          'June': 'jun',
+          'July': 'jul',
+          'August': 'aug',
+          'September': 'sep',
+          'October': 'oct',
+          'November': 'nov',
+          'December': 'dec'
+        }
+
+        var colorMap = {
+          'alpha': 'PuOr',
+          'beta': 'YlOrRd',
+          'pr': 'BrBG',
+          'tmmn': 'Blues',
+          'tmmx': 'Reds',
+          'rmax': 'BrBG',
+          'rmin': 'BrBG',
+          'th': 'PuRd',
+          'erc': 'PuRd',
+          'vpd': 'PuRd',
+          'vs': 'PuRd',
+          'sph': 'PuOr',
+          'srad': 'RdBu',
+        }
+
+        var legendMap = {
+          'rmax': 'Relative Humidity (%)',
+          'rmin': 'Relative Humidity (%)',
+          'sph': 'Specific Humidity (kg/kg)',
+          'th': 'Wind Direction (deg.)',
+          'srad': 'Solar Radiation (W/m^2)',
+          'vs': 'Wind Speed (m/s)',
+          'erc': 'Energy Release Index',
+          'vpd': 'Vapor Pressure Deficit (kPa)', 
+          'pr': 'Precipitation (in)',
+          'tmmx': 'Temperature (F)',
+          'tmmn': 'Temperature (F)',
+          'alpha': 'Alpha Parameter',
+          'beta': 'Beta Parameter',
+        }
+
+        // initalize leaflet map and set some prefs
+        const map = L.map('map', {
+          preferCanvas: true, 
+          gestureHandling: true, 
+          attributionControl: false
+        }).setView(new L.LatLng(47, -107.5), 7);
+        
+
+        //set min zoom
+        map.options.minZoom = 5;
+      
+        //add MCO attribution
+        map.addControl(L.control.attribution({
+            position: 'bottomright',
+            prefix: '<a href="https://climate.umt.edu/" target="_blank">MCO</a>'
+        }));
+
+        // add OpenStreetMap basemap
+        L.tileLayer('https://api.maptiler.com/tiles/hillshades/{z}/{x}/{y}.png?key=94vjatYf0fxNnMGBpIwo', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        //add stamen toner labels and lines
+        L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.png').addTo(map);
+        L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-lines/{z}/{x}/{y}.png').addTo(map);
+
+        var sidebar = L.control
+          .sidebar({ container: "sidebar", position: "right" })
+          .addTo(map)
+          .open('home');
+
+        //define legend control
+        var legend = L.control({ position: "bottomleft" });
+        var legend_right = L.control({ position: "bottomright"})
+
+        async function get_legend_data() {
+          return fetch('https://data.climate.umt.edu/mt-normals/legend_data.json').then(res => res.json());
+        }
+
+
+        var legend_data = await get_legend_data();
+        legend_data = JSON.parse(legend_data)
+        
+        //define active layers layer group to populate as cogs are added
+        var activeLayers = new L.LayerGroup();
+
+        // define featureSelect
+        var featureSelect = L.control({
+            position: 'topleft'
+        })
+
+        // create DOM object
+        featureSelect.onAdd = function(map) {
+            var div = L.DomUtil.create('select');
+            div.name = 'feature-select'
+
+            return div
+        }
+
+        //add to map
+        featureSelect.addTo(map);
+
+        // define timeSelect
+        var timeSelect = L.control({
+            position: 'topleft'
+        })
+
+        // create DOM object
+        timeSelect.onAdd = function(map) {
+            var div = L.DomUtil.create('select');
+            div.name = 'time-select'
+            div.innerHTML = `
+            <div class='slidecontainer' id='slidecontainer'>
+              teststestsetest
+            </div>
+          `
+            return div
+        }
+
+        // //add to map
+        timeSelect.addTo(map);
+
+        // define typeSelect
+        var typeSelect = L.control({
+            position: 'topleft'
+        })
+
+        // create DOM object
+        typeSelect.onAdd = function(map) {
+            var div = L.DomUtil.create('select');
+            div.name = 'type-select'
+            div.innerHTML = `
+            <div class='slidecontainer' id='slidecontainer'>
+              <hr>
+              <select class='select' id='select'>
+                <option value='alpha'>Alpha</option>
+                <option value='beta'>Beta</option>
+                <option value='mean' selected='selected'>Mean</option>
+                <option value='median'>Median</option>
+                <option value='mode'>Mode</option>
+                <option value='variance'>Variance</option>
+                <option value='quantiles'>Quantiles</option>
+              </select>
+              <hr>
+            </div>
+            `
+            return div
+        }
+
+        // //add to map
+        typeSelect.addTo(map);
+
+
+        $("select[name=feature-select]").empty()
+        $("select[name=time-select]").empty()
+
+        $("select[name=feature-select]")
+
+        $("select[name=feature-select]")
+                .append($('<hr>', {
+                        class: 'divider'
+                    }));
+      
+        for (var v in longNameMap) {
+
+          $("select[name=feature-select]")
+              .append($('<option>', {
+                      value: `${v}`
+                  })
+                  .text(`${longNameMap[v]}`));
+        };
+        $("select[name=feature-select]").val('')
+
+
+
+        for (var item in timeHash) {
+            $("select[name=time-select]")
+                .append($('<option>', {
+                        value: timeHash[item]
+                    })
+                    .text(item));
+        }
+
+        //define layer control for baselayers (will be removed with selector change)
+        var layerControl = L.control.layers(null, null, {position: 'topleft', sortLayers: true, collapsed: false})
+        
+        //define layer control for flatgeobufs (will not be removed with selector change)
+        var fgbLayerControl = L.control.layers(null, null, {position: 'topleft', sortLayers: true, collapsed: false}).addTo(map)
+        var slider = L.control({position: 'topleft'});
+
+        function updateTextInput(val) {
+          document.getElementById('textInput').value=val; 
+        }
+
+        slider.onAdd = function (map) {
+          var div = L.DomUtil.create('div', 'slider');
+          $(div).mousedown(function () {
+            map.dragging.disable();
+          });
+          // div.id = 'slider'
+          div.innerHTML = `
+            <div class='slidecontainer' id='slidecontainer'>
+              <input type='range' class='slider' id='slider' min=0 max=10 value=5 list='tickmarks''>
+              <datalist id="tickmarks">
+                <option value="0" label="1st"></option>
+                <option value="1"></option>
+                <option value="2"></option>
+                <option value="3"></option>
+                <option value="4"></option>
+                <option value="5" label="50th"></option>
+                <option value="6"></option>
+                <option value="7"></option>
+                <option value="8"></option>
+                <option value="9"></option>
+                <option value="10" label="99th"></option>
+              </datalist>
+            </div>
+          `
+          return div;
+        };
+
+        var ACTIVE;
+        // define COG load function 
+        function addCOG(url, long_name, what, short_name, display = false, min = NaN, max = NaN) { 
+
+          fetch(url)
+          .then(response => response.arrayBuffer())
+          .then(arrayBuffer => {
+            parseGeoraster(arrayBuffer).then(georaster => {
+              //define some constants from the georaster package
+              if (isNaN(min)) {
+                min = georaster.mins[0];
+              }
+              if (isNaN(max)) {
+                max = georaster.maxs[0];
+              }
+
+              if (what === 'alpha' | what === 'beta') {
+                  var scale = chroma.scale(colorMap[what]).domain([min, max])
+              } else {
+                if (short_name === 'srad') {
+                  var scale = chroma.scale(colorMap[short_name]).domain([max, min])
+                } else {
+                  var scale = chroma.scale(colorMap[short_name]).domain([min, max])
+                }
+              }
+              
+              // define COG georaster
+              var layer = new GeoRasterLayer({
+                  georaster: georaster,
+                  opacity: 0.9,
+                  updateWhenZooming: false,
+                  pixelValuesToColorFn: function(pixelValues) {
+                    var pixelValue = pixelValues[0]; // there's just one band in this raster
+                    // if there's zero wind, don't return a color
+                    if (pixelValue === -32768 | isNaN(pixelValue)) return null;
+                    var color = scale(pixelValue).hex();
+                    return color;
+                  },
+                  resolution: 256
+              });
+              //add layers to layerControl
+              layerControl.addBaseLayer(layer, long_name)
+              //display layer if ture
+              if(display == true){
+                ACTIVE = layer;
+                layer.addTo(map)
+              }
+
+              layer.name = long_name
+              //add to active layer array for removal
+              activeLayers.addLayer(layer)
+
+              return scale;
+            });
+          });
+        }
+
+        //define function to add flatgeobuf files
+        async function addFGB(fgb_url, fgb_name, weight, display = false, popup_property){
+          //define tempGroup 
+          var tempGroup = [];    
+          //redefine popup property    
+          var popup_property_ = popup_property
+          //async wait for flatgeobuf fetch
+          const response = await fetch(fgb_url)
+          //loop each feature
+          for await (const f of flatgeobuf.deserialize(response.body))
+            //if there is a popop property to bind, do it.
+            if(popup_property_ == null){
+              tempGroup.push(L.geoJSON(f, {color: 'black', fillOpacity: 0, weight: weight}));
+            } else {
+              tempGroup.push(L.geoJSON(f, {color: 'black', fillOpacity: 0, weight: weight}).bindTooltip(f.properties[popup_property_]));
+            }
+          //define tempGroupLayer feature group to add to layer control
+          var tempGroupLayer = L.featureGroup(tempGroup);
+          //add group to the fgb laer control 
+          fgbLayerControl.addOverlay(tempGroupLayer , fgb_name); 
+          //display if display param == true on initial load
+          if(display == true){
+            tempGroupLayer.addTo(map)
+          }
+        };
+        
+        // add FGBs to map (before selector change!!)
+        addFGB('https://data.climate.umt.edu/mt-normals/fgb/mt.fgb', fgb_name = 'Montana', weight = 3, display = true, popup_property = null);
+        addFGB('https://data.climate.umt.edu/mt-normals/fgb/mt_counties.fgb', fgb_name = 'Counties', weight = 1, display = false, popup_property = 'County');
+        addFGB('https://data.climate.umt.edu/drought-indicators/fgb/states.fgb', fgb_name = 'States', weight = 1, display = true, popup_property = null);
+        
+        slider.addTo(map);
+
+        var cleanUp = function(){
+          //remove active layers from map
+          activeLayers.eachLayer(function(l) { map.removeLayer(l);});
+          //remove old layer control
+          map.removeControl(layerControl);
+          //remove old legend
+          map.removeControl(legend);
+          map.removeControl(legend_right);
+          //map.removeControl(slider);
+        }
+
+        var loc = document.getElementById('home')
+        function setParent(el, newParent){
+            console.log(el);
+            newParent.appendChild(el);
+        }
+
+        setParent(featureSelect.getContainer(), document.getElementById('var-container'));
+        setParent(timeSelect.getContainer(), document.getElementById('time-container'));
+        setParent(typeSelect.getContainer(), document.getElementById('stat-container'));
+        setParent(fgbLayerControl.getContainer(), document.getElementById('over-container'));
+        setParent(slider.getContainer(), document.getElementById('slide-container'));
+        $("#slide-container").hide()
+
+        var build_urls = function(variable, ptype, period) {
+
+          var quantiles = [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 99]
+          var params = ['alpha', 'beta']
+          var urls = []
+
+          if (ptype === 'gamma') {
+            var labs = [`a) Alpha Parameter`, `b) Beta Parameter`]
+            var display = [true, false]
+            var out = params.forEach(function(x) {
+
+              var url = `https://data.climate.umt.edu/mt-normals/cog/${variable}/${period}_${x}.tif`
+              urls.push(url);
+            })
+          } else if (ptype === 'quantiles') {
+            var lab_options = ['a)', 'b)', 'c)', 'd)', 'e)', 'f)', 'g)', 'h)', 'i)', 'j)', 'k)']
+            var num_suffix = ['st', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th']
+            var display = [false, false, false, false, false, true, false, false, false, false, false]
+            var labs = []
+            var out = quantiles.forEach(function(x, i) {
+              var url = `https://data.climate.umt.edu/mt-normals/cog/${variable}/quantiles/${period}_${x}th.tif`
+              var lab = `${lab_options[i]} ${x}${num_suffix[i]} Percentile`
+              urls.push(url);
+              labs.push(lab);
+            })
+          } else {
+            var urls = [`https://data.climate.umt.edu/mt-normals/cog/${variable}/${period}_${ptype}.tif`];
+            var labs = [`${longNameMap[variable]} ${typeMap[ptype]}`];
+            var display = [true];
+          }
+
+          return {'urls': urls, 'labs': labs, 'display': display}
+        }
+
+        var calc_legend_breaks = function(min, max, breaks) {
+          var diff = max - min;
+          var step = diff/breaks;
+          var out = []
+
+          for (var i = 0; i < breaks; i++) {
+            var v = min + (step * i);
+            out.push(v);
+          }
+          return out;
+        }
+
+        var build_legend = function(legend, short_name, what, min, max, nquantiles = 12, scalar = 10, location = "bottomleft") {
+          
+          console.log(short_name)
+          if (what === 'alpha' | what === 'beta') {
+              var scale = chroma.scale(colorMap[what]).domain([min, max])
+          } else {
+            if (short_name === 'srad') {
+              var scale = chroma.scale(colorMap[short_name]).domain([max, min])
+            } else {
+              var scale = chroma.scale(colorMap[short_name]).domain([min, max])
+            }
+          }
+          var breaks = calc_legend_breaks(min, max, nquantiles);
+          //create new legend "contol" object
+          if (location === "")
+          legend = L.control({ position: location });
+          
+          legend.onAdd = function(map) {
+              var div = L.DomUtil.create("div", "legend");
+              if (what === 'alpha' | what === 'beta') {
+                var legend_name = legendMap[what];
+              } else {
+                var legend_name = legendMap[short_name];
+              }
+              div.innerHTML += "<h4>"+legend_name+"</h4>";
+              for (var i=0; i < nquantiles; i++) {
+                if (i === 0) {
+                  var txt = min/scalar;
+                  if (short_name === 'pr') {txt = txt/25.4}
+                  if (short_name === 'tmmn' | short_name === 'tmmx') {txt = (txt - 273.15) * (9/5) + 32 }
+                  if (txt < 1) {
+                    txt = Math.round(txt * 10000) / 10000
+                  } else {
+                    txt = Math.round(txt)
+                  }
+                } else if (i === nquantiles-1) {
+                  var txt = max/scalar;
+                  if (short_name === 'pr') {txt = txt/25.4}
+                  if (short_name === 'tmmn' | short_name === 'tmmx') {txt = (txt - 273.15) * (9/5) + 32 }
+                  if (txt < 1) {
+                    txt = Math.round(txt * 10000) / 10000
+                  } else {
+                    txt = Math.round(txt)
+                  }
+                } else {
+                  var txt = '';
+                }
+                div.innerHTML += '<i style="background: '+scale(breaks[i]).hex()+'"></i><span>'+txt+'</span><br>';
+              }
+              return div;
+            };
+            //add to map
+            legend.addTo(map);
+            setParent(legend.getContainer(), document.getElementById('legend-container'));
+        }
+
+        // get jQuery value $('select').val()
+        //function to call when selector is choosen
+        $("select[name=feature-select],select[name=time-select],select[name=type-select]").change(function() {
+          
+          $("#slider").val(5);
+          var short_name = $('select[name=feature-select]').val()
+          var time = $('select[name=time-select]').val()
+          var what = $('select[name=type-select]').val()
+
+          cleanUp();
+
+          //clear the active layers group to repopulate
+          activeLayers = new L.LayerGroup();
+
+          //create new layer control 
+          //add it to the map
+          if (what === 'quantiles') {
+            $("#slide-container").show()
+            //$('#over-container').show()
+          } else {
+            $("#slide-container").hide()
+            //$('#over-container').show()
+          }
+
+          var url_names = build_urls(short_name, what, time)
+          var urls = url_names['urls']
+          var labs = url_names['labs']
+          var display = url_names['display']
+
+          var min;
+          var max;
+          var scale;
+          urls.forEach(function(x, i) {
+
+            var min_max = legend_data[short_name + '-' + what + '-' + time]
+            min = min_max['min']
+            max = min_max['max']
+            addCOG(x, labs[i], what, short_name, display[i], min, max)
+
+            build_legend(legend, short_name, what, min, max, 12, 1, "bottomleft")
+            
+
+          })
+
+        });
+
+      var labs = [
+        "a) 1st Percentile", "b) 10th Percentile", "c) 20th Percentile", "d) 30th Percentile", "e) 40th Percentile",
+        "f) 50th Percentile", "g) 60th Percentile", "h) 70th Percentile", "i) 80th Percentile", "j) 90th Percentile", "k) 99th Percentile" 
+      ]
+
+      $("#slider").on("input change", function() {
+      // $("#slider").mouseup(function() {
+        var layers = activeLayers._layers;
+
+        var sel;
+        for (var key in layers) {
+          var layer = layers[key];
+          var nm = layer.name;
+          var match = labs[this.value];
+
+          if (nm === match) {
+            sel = layer
+            break;
+          }
+        }
+
+        map.removeLayer(ACTIVE);
+        sel.addTo(map);
+        //add to active layer array for removal
+        activeLayers.addLayer(sel)
+        ACTIVE = sel;
+      })
+
+
+      });
+    </script>
+  </body>
+</html>
