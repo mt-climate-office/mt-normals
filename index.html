@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>MT Climate Normals</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -19,7 +20,7 @@
             <ul role="tablist">
                 <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
                 <li><a href="#info" role="tab"><i class="fa fa-info"></i></a></li>
-                <li><a href="https://github.com/colinbrust/mco/tree/main/normals" target="_blank"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://github.com/mt-climate-office/mt-normals" target="_blank"><i class="fa fa-github"></i></a></li>
             </ul>
         </div>
 
@@ -65,24 +66,38 @@
               </h1>
               <h2>What are Climate Normals?</h2>
               <p>
-                Climate normals are 30-year summaries of climate data that are generated each decade. Normals provide a broad f
+                Climate normals are 30-year summaries of climate data that are generated each decade. Normals provide a broad
                 overview of average climate conditions over the past 30 years. To create the normals,
                 historical data from the past 30 years are summarized across different timescales (e.g., months, seasons, or 
-                years) using common metrics such as the <i>mean</i> or <i>median</i>. State and local governments
-                create and use these normals to help contextualize current conditions from the perspective of the past few
-                decades.
+                years) using common metrics such as the <i>mean</i> or <i>median</i>. These normals to help contextualize 
+                current conditions from the perspective of the past few decades.
               </p>
               <p>
-                While these normals are extremely useful for contextualizing current conditions, a downfall is that they can
-                don't give any insight into how likely or unlikely a given event is. For example, if a farmer asked "what is
-                the probability that I get at least four inches of rain at my farm this summer?" or "I got 15 inches of
-                rain at my farm this year. How likely is that?", a mean or median doesn't help answer the question. Ideally,
-                a climate normal should both convey average conditions and allow for investigation into these types of
-                likelihoods. This finer-level detail is possible by using a gamma distribution to summarize historical
-                data. In the following sections, we explain what a gamma distribution is and then use Gamma Distribution
-                normals of Montana to contextualize recent precipitation events. 
+                While these normals are extremely useful for contextualizing current conditions, a downfall is that they
+                don't give any insight into how likely or unlikely a given event is. For example, if a rancher asked "what is
+                the probability that I get at least four inches of rain this summer?" or "I got 15 inches of
+                rain this year. How likely is that?", a mean or median doesn't help answer the question. Additionally,
+                conventional normals like the <i>mean</i> or <i>median</i> data don't tell us anything about the underlying 
+                structure of the data. Ideally, a climate normal should both convey average conditions and allow for further investigation 
+                into the underlying data. This finer-level detail is possible by using a gamma distribution to 
+                summarize historical data. In the following sections, we explain what a gamma distribution is and then use Gamma 
+                Distribution normals of Montana to contextualize recent precipitation events. 
               </p>
               <h2>What is the Gamma Distribution?</h2>
+              <p>
+                A gamma distribution is a continuous function that uses two parameters, alpha and beta, to summarize a set
+                of data. For example, the figure below shows a histogram of annual precipitation over a 30 year period with the
+                a gamma distribution fit to the data:
+                <figure>
+                  <img src="./assets/ppt_example.png" alt="Gamma Example" style="width:100%">
+                </figure>
+                In this example, the gamma distribution fits the observed data pretty well. In fact, the gamma distribution can 
+                approximate any distribution of data so long as they are greater than zero and approximately normally distributed (check).
+                - Additionally, the alpha and beta parameters of the distribution can be used to directly calculate the mean, mode, and variance 
+                of a distribution...Once you have the alpha and beta parameters you can essentially answer any question you want about the data
+                with only two numbers...Because of this convenience, we used the gamma distribution with gridmet meteorology to derive climate 
+                normals for Montana. <b>Expand on above paragraph.</b>
+              </p>
             </div>
         </div>
     </div>
