@@ -314,12 +314,10 @@
         $("select[name=time-select]").empty()
 
         $("select[name=feature-select]")
-
-        $("select[name=feature-select]")
-                .append($('<hr>', {
-                        class: 'divider'
-                    }));
-      
+              .append($('<option>', {
+                      value: `None`
+                  })
+                  .text(` `));
         for (var v in longNameMap) {
 
           $("select[name=feature-select]")
@@ -328,10 +326,10 @@
                   })
                   .text(`${longNameMap[v]}`));
         };
-        $("select[name=feature-select]").val('')
 
 
 
+      
         for (var item in timeHash) {
             $("select[name=time-select]")
                 .append($('<option>', {
