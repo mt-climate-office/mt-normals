@@ -143,6 +143,7 @@
           font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
       }
 
+      /* SIDEBAR! You can override the height of the sidebar here and can also change it for mobile with the commented out media CSS below. */
       #sidebar {
       height: 75% !important;
       }
@@ -429,7 +430,7 @@
         // SIDEBAR! - Move the feature selector and the layer control into the sidebar divs that we defined in the HTML body. 
         // NOTE: you must add an element to the map before you call this function on it. This means if you re-add the legend to
         // the map every time you make a selection, you have to run this function on the legend after you call legend.addTo(map).
-        
+
         setParent(featureSelect.getContainer(), document.getElementById('var-container'));
         setParent(fgbLayerControl.getContainer(), document.getElementById('home'));
 
