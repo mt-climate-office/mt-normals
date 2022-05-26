@@ -85,18 +85,28 @@
               </p>
               <h2>What is the Gamma Distribution?</h2>
               <p>
-                A gamma distribution is a continuous function that uses two parameters, alpha and beta, to summarize a set
-                of data. For example, the figure below shows a histogram of annual precipitation over a 30 year period with the
+                A gamma distribution is a continuous function that is defined by two parameters, alpha and beta. When fitting a gamma 
+                distribution to a set of data (<b>x</b>), alpha and beta are chosen such that when a value from <b>x</b> is passed
+                into the gamma function, the resulting value is as close to the observed density of <b>x</b> on a 
+                <a href="https://en.wikipedia.org/wiki/Probability_density_function">probability density function</a> (can someone make 
+                sure this makes sense). For example, the figure below shows a histogram of annual precipitation over a 30 year period with
                 a gamma distribution fit to the data:
                 <figure>
                   <img src="./assets/ppt_example.png" alt="Gamma Example" style="width:100%">
+                  <!-- This figure was created with the make_synthetic_plot function in ./R/normals_slim.R -->
                 </figure>
                 In this example, the gamma distribution fits the observed data pretty well. In fact, the gamma distribution can 
                 approximate any distribution of data so long as they are greater than zero and approximately normally distributed (check).
-                - Additionally, the alpha and beta parameters of the distribution can be used to directly calculate the mean, mode, and variance 
-                of a distribution...Once you have the alpha and beta parameters you can essentially answer any question you want about the data
-                with only two numbers...Because of this convenience, we used the gamma distribution with gridmet meteorology to derive climate 
-                normals for Montana. <b>Expand on above paragraph.</b>
+                In the gamma distribution, the alpha parameter defines the shape of the distribution, or how spread out the curve is. 
+                The beta parameter defines the rate of distribution, or how rapidly the curve rises and falls. A convenient quality of 
+                the gamma distribution is that there are closed-form solutions to the underlying data's mean, mode and variance that can 
+                be calculated using only alpha and beta. Additionally, other statistics like the median, IQR, and exceedance probabilities 
+                can easily be calculated by passing alpha, beta and a value from <b>x</b> into a various different functions. This means that 
+                by fitting a gamma distribution to a set of data, we can completely encode the underlying structure of the data into the alpha
+                and beta parameters. This not only cuts down on storage space, but also allows for deeper investigation into the datasets than 
+                only deriving the traditional normals of mean, median, etc. Because of this convenience, we used 
+                <a href="https://www.climatologylab.org/gridmet.html">gridMET</a> meteorology to derive gamma distribution climate normals across
+                Montana for the 1991 - 2020 period. 
               </p>
             </div>
         </div>
