@@ -238,13 +238,14 @@
                 <option value='median'>Median</option>
                 <option value='mode'>Mode</option>
                 <option value='variance'>Variance</option>
-                <option value='quantiles'>Quantiles</option>
               </select>
               <hr>
             </div>
             `
             return div
         }
+        //                 <option value='quantiles'>Quantiles</option>
+
 
         // Add selection elements to map.
         featureSelect.addTo(map);
@@ -311,7 +312,7 @@
                 max = georaster.maxs[0];
               }
 
-              if (statistic  === 'alpha' || statistic  === 'beta') {short_name = statistic };
+              if (statistic  === 'alpha' || statistic  === 'beta') {short_name = statistic};
               if (short_name === 'srad') {
                 var scale = chroma.scale(colorMap[short_name]).domain([max, min]);
               } else {
@@ -336,7 +337,7 @@
               //add layers to layerControl
               layerControl.addBaseLayer(layer, long_name)
               //display layer if ture
-              if(display == true){
+              if(display === true){
                 ACTIVE = layer;
                 layer.addTo(map)
               }
@@ -512,7 +513,7 @@
 
         // Update the map on a selector change.
         $("select[name=feature-select],select[name=time-select],select[name=type-select]").change(function() {
-          
+
           // Get selected values.
           var short_name = $('select[name=feature-select]').val()
           var time = $('select[name=time-select]').val()
@@ -537,7 +538,6 @@
           $("#var-description").text(update_variable_text(short_name, time));
           $("#stat-description").text(update_statistic_text(statistic ));
 
-
           var url_names = build_urls(short_name, statistic , time);
           var urls = url_names['urls'];
           var labs = url_names['labs'];
@@ -545,7 +545,7 @@
 
           // Add each COG to the map. 
           urls.forEach(function(x, i) {
-            addCOG(x, labs[i], statistic , short_name, display[i], min, max)
+            addCOG(x, labs[i], statistic , short_name, display[i], min, max);
           })
 
           var min = legend_data[short_name + '-' + statistic  + '-' + time]['min']
@@ -559,11 +559,13 @@
             nquantiles=12)
         });
 
+        
       // Function to change the map layer with the slider. 
       // This seems really hacky and I'm sure there is a better way to do it but this solution is working for the time being. 
       $("#slider").on("input change", function() {
         $("output").text(labs[this.value]);
         var layers = activeLayers._layers;
+        console.log(labs);
         var sel;
 
         // Iterate over all active layers. 
@@ -579,13 +581,12 @@
           }
         }
 
-        // Remove old layers from the map
-        map.removeLayer(ACTIVE);
-        sel.addTo(map);
-
         //add to active layer array for removal
         activeLayers.addLayer(sel)
         ACTIVE = sel;
+
+        map.removeLayer(ACTIVE);
+        sel.addTo(map);
       })
     });
     </script>
