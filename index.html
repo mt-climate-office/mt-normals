@@ -7,7 +7,6 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" crossorigin=""/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-sidebar-v2@3.0.4/css/leaflet-sidebar.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css" type="text/css">
     <link rel="stylesheet" href="./assets/style.css" type="text/css">
   </head>
   
@@ -139,99 +138,24 @@
         </div>
     </div>
     <div id="map"></div>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/georaster"></script>
     <script src="https://unpkg.com/chroma-js"></script>
     <script src="https://unpkg.com/georaster-layer-for-leaflet"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://unpkg.com/flatgeobuf@3.22.0/dist/flatgeobuf-geojson.min.js"></script>
-    <script src="https://unpkg.com/leaflet-gesture-handling"></script>
     <script src="https://unpkg.com/papaparse@5.3.2/papaparse.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/leaflet-sidebar-v2@3.2.3/js/leaflet-sidebar.js"></script>
-    <script> src="https://raw.githubusercontent.com/vogdb/Leaflet.ActiveLayers/master/src/ActiveLayers.js"</script>
+    <script src="./assets/libs.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", async () => { 
-
-        var longNameMap = {
-          'erc': 'Energy Release Component',
-          'pr': 'Precipitation',
-          'rmax': 'Max. Relative Humidity',
-          'rmin': 'Min. Relative Humidity',
-          'sph': 'Specific Humidity',
-          'srad': 'Solar Radiation',
-          // 'th': 'Wind Direction',
-          'tmmn': 'Min. Air Temperature',
-          'tmmx': 'Max. Air Temperature',
-          'vpd': 'Vapor Pressure Deficit',
-          'vs': 'Wind Speed'
-        };
-
-        var typeMap = {
-          'mean': 'Mean',
-          'mode': 'Mode', 
-          'median': 'Median', 
-          'variance': 'Variance',
-          'alpha': 'Alpha',
-          'beta': 'Beta',
-          'quantiles': 'Quantiles'
-        };
-
-        var timeHash = {
-          'Annual': 'annual',
-          'January': 'jan',
-          'February': 'feb',
-          'March': 'mar',
-          'April': 'apr',
-          'May': 'may',
-          'June': 'jun',
-          'July': 'jul',
-          'August': 'aug',
-          'September': 'sep',
-          'October': 'oct',
-          'November': 'nov',
-          'December': 'dec'
-        }
-
-        var colorMap = {
-          'alpha': 'PuOr',
-          'beta': 'YlOrRd',
-          'pr': 'BrBG',
-          'tmmn': 'Blues',
-          'tmmx': 'Reds',
-          'rmax': 'BrBG',
-          'rmin': 'BrBG',
-          'th': 'PuRd',
-          'erc': 'PuRd',
-          'vpd': 'PuRd',
-          'vs': 'PuRd',
-          'sph': 'PuOr',
-          'srad': 'RdBu',
-        }
-
-        var legendMap = {
-          'rmax': 'Relative Humidity (%)',
-          'rmin': 'Relative Humidity (%)',
-          'sph': 'Specific Humidity (kg/kg)',
-          'th': 'Wind Direction (deg.)',
-          'srad': 'Solar Radiation (W/m^2)',
-          'vs': 'Wind Speed (m/s)',
-          'erc': 'Energy Release Index',
-          'vpd': 'Vapor Pressure Deficit (kPa)', 
-          'pr': 'Precipitation (in)',
-          'tmmx': 'Temperature (F)',
-          'tmmn': 'Temperature (F)',
-          'alpha': 'Alpha Parameter',
-          'beta': 'Beta Parameter',
-        }
 
         // initalize leaflet map and set some prefs
         const map = L.map('map', {
           preferCanvas: true, 
-          gestureHandling: true, 
           attributionControl: false
         }).setView(new L.LatLng(47, -107.5), 7);
         
-
         //set min zoom
         map.options.minZoom = 5;
       
@@ -250,71 +174,60 @@
         L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.png').addTo(map);
         L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner-lines/{z}/{x}/{y}.png').addTo(map);
 
+        // Add sidebar to map. 
         var sidebar = L.control
           .sidebar({ container: "sidebar", position: "right" })
           .addTo(map)
           .open('home');
 
+        //define layer control for baselayers (will be removed with selector change)
+        var layerControl = L.control.layers(null, null, {position: 'topleft', sortLayers: true, collapsed: false})
+        
+        //define layer control for flatgeobufs (will not be removed with selector change)
+        var fgbLayerControl = L.control.layers(null, null, {position: 'topleft', sortLayers: true, collapsed: false}).addTo(map)
+
+        // Create new slider control.
+        var slider = L.control({position: 'topleft'});
+
         //define legend control
         var legend = L.control({ position: "bottomleft" });
-        var legend_right = L.control({ position: "bottomright"})
 
+        // Read legend data and json file
         async function get_legend_data() {
           return fetch('https://data.climate.umt.edu/mt-normals/legend_data.json').then(res => res.json());
         }
-
-
         var legend_data = await get_legend_data();
-        legend_data = JSON.parse(legend_data)
+        legend_data = JSON.parse(legend_data);
         
         //define active layers layer group to populate as cogs are added
         var activeLayers = new L.LayerGroup();
 
-        // define featureSelect
+        // Define all selection dropdowns.
         var featureSelect = L.control({
             position: 'topleft'
-        })
-
-        // create DOM object
-        featureSelect.onAdd = function(map) {
-            var div = L.DomUtil.create('select');
-            div.name = 'feature-select'
-
-            return div
-        }
-
-        //add to map
-        featureSelect.addTo(map);
-
-        // define timeSelect
+        });
         var timeSelect = L.control({
             position: 'topleft'
-        })
-
-        // create DOM object
-        timeSelect.onAdd = function(map) {
-            var div = L.DomUtil.create('select');
-            div.name = 'time-select'
-            div.innerHTML = `
-            <div class='slidecontainer' id='slidecontainer'>
-              teststestsetest
-            </div>
-          `
-            return div
-        }
-
-        // //add to map
-        timeSelect.addTo(map);
-
-        // define typeSelect
+        });
         var typeSelect = L.control({
             position: 'topleft'
         })
 
-        // create DOM object
+        // Create dropdown DOM objects.
+        featureSelect.onAdd = function(map) {
+            var div = L.DomUtil.create('select');
+            div.name = 'feature-select';
+            return div;
+        }
+        timeSelect.onAdd = function(map) {
+            var div = L.DomUtil.create('select');
+            div.name = 'time-select';
+            return div;
+        }
+
         typeSelect.onAdd = function(map) {
             var div = L.DomUtil.create('select');
-            div.name = 'type-select'
+            div.name = 'type-select';
             div.innerHTML = `
             <div class='slidecontainer' id='slidecontainer'>
               <hr>
@@ -333,13 +246,15 @@
             return div
         }
 
-        // //add to map
+        // Add selection elements to map.
+        featureSelect.addTo(map);
+        timeSelect.addTo(map);
         typeSelect.addTo(map);
-
 
         $("select[name=feature-select]").empty()
         $("select[name=time-select]").empty()
 
+        // Populate feature-select dropdown
         $("select[name=feature-select]")
               .append($('<option>', {
                       value: `None`
@@ -353,10 +268,7 @@
                   })
                   .text(`${longNameMap[v]}`));
         };
-
-
-
-      
+        // Populate time-select dropdown
         for (var item in timeHash) {
             $("select[name=time-select]")
                 .append($('<option>', {
@@ -365,26 +277,17 @@
                     .text(item));
         }
 
-        //define layer control for baselayers (will be removed with selector change)
-        var layerControl = L.control.layers(null, null, {position: 'topleft', sortLayers: true, collapsed: false})
-        
-        //define layer control for flatgeobufs (will not be removed with selector change)
-        var fgbLayerControl = L.control.layers(null, null, {position: 'topleft', sortLayers: true, collapsed: false}).addTo(map)
-        var slider = L.control({position: 'topleft'});
-
-        function updateTextInput(val) {
-          document.getElementById('textInput').value=val; 
-        }
-
+        // Populate slider with options. 
         slider.onAdd = function (map) {
           var div = L.DomUtil.create('div', 'slider');
+
+          // Disable map movement when dragging slider
           $(div).mousedown(function () {
             map.dragging.disable();
           });
-          // div.id = 'slider'
           div.innerHTML = `
             <div class='slidecontainer' id='slidecontainer'>
-              <input type='range' class='slider' id='slider' min=0 max=10 value=5 list='tickmarks''>
+              <input type='range' class='slider' id='slider' min=0 max=10 value=5 list='tickmarks'>
               <datalist id="tickmarks">
                 <option value="0" label="1st"></option>
                 <option value="1"></option>
@@ -403,9 +306,11 @@
           return div;
         };
 
+        // Create active variable that is used to track current layer in slider.
         var ACTIVE;
+
         // define COG load function 
-        function addCOG(url, long_name, what, short_name, display = false, min = NaN, max = NaN) { 
+        function addCOG(url, long_name, statistic , short_name, display = false, min = NaN, max = NaN) { 
 
           fetch(url)
           .then(response => response.arrayBuffer())
@@ -419,15 +324,13 @@
                 max = georaster.maxs[0];
               }
 
-              if (what === 'alpha' | what === 'beta') {
-                  var scale = chroma.scale(colorMap[what]).domain([min, max])
+              if (statistic  === 'alpha' || statistic  === 'beta') {short_name = statistic };
+              if (short_name === 'srad') {
+                var scale = chroma.scale(colorMap[short_name]).domain([max, min]);
               } else {
-                if (short_name === 'srad') {
-                  var scale = chroma.scale(colorMap[short_name]).domain([max, min])
-                } else {
-                  var scale = chroma.scale(colorMap[short_name]).domain([min, max])
-                }
-              }
+                var scale = chroma.scale(colorMap[short_name]).domain([min, max]);
+              };
+              
               
               // define COG georaster
               var layer = new GeoRasterLayer({
@@ -437,7 +340,7 @@
                   pixelValuesToColorFn: function(pixelValues) {
                     var pixelValue = pixelValues[0]; // there's just one band in this raster
                     // if there's zero wind, don't return a color
-                    if (pixelValue === -32768 | isNaN(pixelValue)) return null;
+                    if (pixelValue === -32768 || isNaN(pixelValue)) return null;
                     var color = scale(pixelValue).hex();
                     return color;
                   },
@@ -454,11 +357,9 @@
               layer.name = long_name
               //add to active layer array for removal
               activeLayers.addLayer(layer)
-
-              return scale;
             });
           });
-        }
+        };
 
         //define function to add flatgeobuf files
         async function addFGB(fgb_url, fgb_name, weight, display = false, popup_property){
@@ -485,54 +386,27 @@
             tempGroupLayer.addTo(map)
           }
         };
-        
-        // add FGBs to map (before selector change!!)
-        addFGB('https://data.climate.umt.edu/mt-normals/fgb/mt.fgb', fgb_name = 'Montana', weight = 3, display = true, popup_property = null);
-        addFGB('https://data.climate.umt.edu/mt-normals/fgb/mt_counties.fgb', fgb_name = 'Counties', weight = 1, display = false, popup_property = 'County');
-        addFGB('https://data.climate.umt.edu/drought-indicators/fgb/states.fgb', fgb_name = 'States', weight = 1, display = true, popup_property = null);
-        
-        slider.addTo(map);
 
-        var cleanUp = function(){
+        function cleanUp(){
           //remove active layers from map
           activeLayers.eachLayer(function(l) { map.removeLayer(l);});
           //remove old layer control
           map.removeControl(layerControl);
           //remove old legend
           map.removeControl(legend);
-          map.removeControl(legend_right);
           //map.removeControl(slider);
         }
 
         function setParent(el, newParent){
-            console.log(el);
             newParent.appendChild(el);
         }
-
-        setParent(featureSelect.getContainer(), document.getElementById('var-container'));
-        setParent(timeSelect.getContainer(), document.getElementById('time-container'));
-        setParent(typeSelect.getContainer(), document.getElementById('stat-container'));
-        setParent(fgbLayerControl.getContainer(), document.getElementById('over-container'));
-        setParent(slider.getContainer(), document.getElementById('slide-container'));
-        $("#slide-container").hide()
-        $("#var-outer").hide()
-        $("#stat-outer").hide()
 
         var build_urls = function(variable, ptype, period) {
 
           var quantiles = [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 99]
-          var params = ['alpha', 'beta']
           var urls = []
 
-          if (ptype === 'gamma') {
-            var labs = [`a) Alpha Parameter`, `b) Beta Parameter`]
-            var display = [true, false]
-            var out = params.forEach(function(x) {
-
-              var url = `https://data.climate.umt.edu/mt-normals/cog/${variable}/${period}_${x}.tif`
-              urls.push(url);
-            })
-          } else if (ptype === 'quantiles') {
+          if (ptype === 'quantiles') {
             var lab_options = ['a)', 'b)', 'c)', 'd)', 'e)', 'f)', 'g)', 'h)', 'i)', 'j)', 'k)']
             var num_suffix = ['st', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th']
             var display = [false, false, false, false, false, true, false, false, false, false, false]
@@ -564,10 +438,28 @@
           return out;
         }
 
-        var build_legend = function(legend, short_name, what, min, max, nquantiles = 12, scalar = 10, location = "bottomleft") {
+        var make_legend_text = function(val, short_name, statistic ) {
           
-          if (what === 'alpha' | what === 'beta') {
-              var scale = chroma.scale(colorMap[what]).domain([min, max])
+          if (short_name === 'pr' & (statistic  !== 'alpha') & (statistic  !== 'beta') & (statistic  !== 'variance')) {
+            val = val/25.4
+          }
+          if ((short_name === 'tmmn' || short_name === 'tmmx') & (statistic  !== 'alpha') & (statistic  !== 'beta') & (statistic  !== 'variance')) {
+            val = (val - 273.15) * (9/5) + 32 
+          }
+          if (val < 1) {
+            val = Math.round(val * 10000) / 10000
+          } else {
+            val = Math.round(val)
+          }
+
+          return val;
+        };
+
+        var build_legend = function(short_name, statistic , min, max, nquantiles = 12) {
+          
+          // Define color scale for the legend. 
+          if (statistic  === 'alpha' || statistic  === 'beta') {
+              var scale = chroma.scale(colorMap[statistic ]).domain([min, max])
           } else {
             if (short_name === 'srad') {
               var scale = chroma.scale(colorMap[short_name]).domain([max, min])
@@ -576,38 +468,27 @@
             }
           }
 
+          // Calculate the breaks in the legend. 
           var breaks = calc_legend_breaks(min, max, nquantiles);
+
           //create new legend "contol" object
-          if (location === "")
-          legend = L.control({ position: location });
+          legend = L.control({ position: "bottomleft"});
           
           legend.onAdd = function(map) {
               var div = L.DomUtil.create("div", "legend");
-              if (what === 'alpha' | what === 'beta') {
-                var legend_name = legendMap[what];
+
+              // Add title to the map. 
+              if (statistic  === 'alpha' || statistic  === 'beta') {
+                var legend_name = legendMap[statistic ];
               } else {
                 var legend_name = legendMap[short_name];
               }
               div.innerHTML += "<h4>"+legend_name+"</h4>";
               for (var i=0; i < nquantiles; i++) {
                 if (i === 0) {
-                  var txt = min/scalar;
-                  if (short_name === 'pr') {txt = txt/25.4}
-                  if (short_name === 'tmmn' | short_name === 'tmmx') {txt = (txt - 273.15) * (9/5) + 32 }
-                  if (txt < 1) {
-                    txt = Math.round(txt * 10000) / 10000
-                  } else {
-                    txt = Math.round(txt)
-                  }
+                  var txt = make_legend_text(min, short_name, statistic );
                 } else if (i === nquantiles-1) {
-                  var txt = max/scalar;
-                  if (short_name === 'pr') {txt = txt/25.4}
-                  if (short_name === 'tmmn' | short_name === 'tmmx') {txt = (txt - 273.15) * (9/5) + 32 }
-                  if (txt < 1) {
-                    txt = Math.round(txt * 10000) / 10000
-                  } else {
-                    txt = Math.round(txt)
-                  }
+                  var txt = make_legend_text(max, short_name, statistic );
                 } else {
                   var txt = '';
                 }
@@ -615,176 +496,108 @@
               }
               return div;
             };
+
             //add to map
             legend.addTo(map);
+
+            // Change the legend's parent container so it is in the sidebar. 
             setParent(legend.getContainer(), document.getElementById('legend-container'));
         }
 
-        var update_variable_text = function(v) {
-          switch (v) {
+        // add FGBs to map (before selector change!!)
+        addFGB('https://data.climate.umt.edu/mt-normals/fgb/mt.fgb', fgb_name = 'Montana', weight = 3, display = true, popup_property = null);
+        addFGB('https://data.climate.umt.edu/mt-normals/fgb/mt_counties.fgb', fgb_name = 'Counties', weight = 1, display = false, popup_property = 'County');
+        addFGB('https://data.climate.umt.edu/drought-indicators/fgb/states.fgb', fgb_name = 'States', weight = 1, display = true, popup_property = null);
+        
+        // Add slider to the map. 
+        slider.addTo(map);
 
-            case 'erc':
-              return `
-                Average daily energy release component. The amount of available energy that a fire could burn at a given area. 
-              `
-            case 'pr':
-              return `
-                Total precipitation for the given time period in inches. Precipitation is the combination of rainfall and snowfall. 
-              `
-            case 'rmax':
-              return `
-                  Average daily maximum relative humidity (%). The amount of water vapor in the air relative to the how much water vapor the air can theoretically hold. 
-                  Relative humidity varies based on air temperature and pressure. 
-                `
-            case 'rmin':
-              return `
-                Average daily minimum relative humidity (%). The amount of water vapor in the air relative to the how much water vapor the air can theoretically hold. 
-                  Relative humidity varies based on air temperature and pressure.
-              `
-            case 'sph':
-              return `
-                Average daily specific humidity (kg/kg). The mass of water vapor in one kilogram of air. Unlike relative humidity, specific humidity does not change
-                with air temperature and pressure. 
-              `
-            case 'srad':
-              return `
-                Average daily incoming shortwave solar radiation (W/m^2). 
-              `
-            case 'tmmn':
-              return `
-                Daily average mainimum temperature (deg F). 
-              `
-            case 'tmmx':
-              return `
-                Daily average maximum temperature (deg F).
-              `
-            case 'vpd':
-              return `
-                Average daily vapor pressure deficit (kPa). The difference between how much moisture is currently in the air versus how much moisture can theoretically 
-                be held in the air.
-              `
-            case 'vs':
-              return `
-                The daily average wind speed (m/s).
-              `
-          }
-        }
+        // Move all elements into the sidebar. 
+        setParent(featureSelect.getContainer(), document.getElementById('var-container'));
+        setParent(timeSelect.getContainer(), document.getElementById('time-container'));
+        setParent(typeSelect.getContainer(), document.getElementById('stat-container'));
+        setParent(fgbLayerControl.getContainer(), document.getElementById('over-container'));
+        setParent(slider.getContainer(), document.getElementById('slide-container'));
+        
+        // Hide divs that should only be shown conditionally. 
+        $("#slide-container").hide()
+        $("#var-outer").hide()
+        $("#stat-outer").hide()
 
-        var update_statistic_text = function(s) {
-          switch (s) {
-
-            case 'alpha':
-              return `
-                The alpha parameter of the gamma distribution dictates the shape of the distribution's curve.
-              `
-            case 'beta':
-              return `
-                The beta parameter of the gamma distribution dictates the rate at which the distribution's curve rises and falls. 
-              `
-            case 'mean':
-              return `
-                  The mean is the average value of the selected variable for the 1991 - 2020 record. Because the mean is taken across all values, 
-                  large outliers can skew the value of the mean. 
-                `
-            case 'median':
-              return `
-                   The median is the value that falls in the middle of all values for the 1991 - 2020 record. Unlike the mean, the median is not affected by 
-                   outliers. 
-                `
-            case 'mode':
-              return `
-                  The mode is the value that is most likely to be sampled from a set of data. In the context of the gamma distribution, it is the value that is 
-                  probabalistically most likely to occur (check). 
-                `
-            case 'quantiles':
-              return `
-                  Quantiles are a method of breaking data into equally likely groups. One of the most common uses of quantiles are the median and interquartile range (IQR), 
-                  which measure the center and spread of a set of data. Here, you can adjust the above slider to visualize different quantiles. 
-                `
-            case 'variance':
-              return `
-                The variance quantifies how much each individual data point varies relative to the mean of the distribution. 
-              `
-            }
-          }
-
+        // Update the map on a selector change.
         $("select[name=feature-select],select[name=time-select],select[name=type-select]").change(function() {
           
+          // Get selected values.
           var short_name = $('select[name=feature-select]').val()
           var time = $('select[name=time-select]').val()
-          var what = $('select[name=type-select]').val()
+          var statistic  = $('select[name=type-select]').val()
 
+          // Show description divs that were origionally
           $("#var-outer").show()
           $("#stat-outer").show()
 
-          cleanUp();
-
           //clear the active layers group to repopulate
+          cleanUp();
           activeLayers = new L.LayerGroup();
 
-          if (what === 'quantiles') {
+
+          if (statistic  === 'quantiles') {
             $("#slider").val(5);
-            $("#slide-container").show()
+            $("#slide-container").show();
           } else {
-            $("#slide-container").hide()
-          }
+            $("#slide-container").hide();
+          };
 
           $("#var-description").text(update_variable_text(short_name, time));
-          $("#stat-description").text(update_statistic_text(what));
+          $("#stat-description").text(update_statistic_text(statistic ));
 
 
-          var url_names = build_urls(short_name, what, time)
-          var urls = url_names['urls']
-          var labs = url_names['labs']
-          var display = url_names['display']
+          var url_names = build_urls(short_name, statistic , time);
+          var urls = url_names['urls'];
+          var labs = url_names['labs'];
+          var display = url_names['display'];
 
-          // var min;
-          // var max;
-          // var scale;
+          // Add each COG to the map. 
           urls.forEach(function(x, i) {
 
-            var min_max = legend_data[short_name + '-' + what + '-' + time]
+            var min_max = legend_data[short_name + '-' + statistic  + '-' + time]
             min = min_max['min']
             max = min_max['max']
-            addCOG(x, labs[i], what, short_name, display[i], min, max)
-
-            build_legend(legend, short_name, what, min, max, 12, 1, "bottomleft")
-            
-
+            addCOG(x, labs[i], statistic , short_name, display[i], min, max)
+            build_legend(short_name, statistic , min, max, 12)
           })
-
         });
 
-      var labs = [
-        "a) 1st Percentile", "b) 10th Percentile", "c) 20th Percentile", "d) 30th Percentile", "e) 40th Percentile",
-        "f) 50th Percentile", "g) 60th Percentile", "h) 70th Percentile", "i) 80th Percentile", "j) 90th Percentile", "k) 99th Percentile" 
-      ]
-
+      // Function to change the map layer with the slider. 
+      // This seems really hacky and I'm sure there is a better way to do it but this solution is working for the time being. 
       $("#slider").on("input change", function() {
-      // $("#slider").mouseup(function() {
-        var layers = activeLayers._layers;
 
+        //
+        var layers = activeLayers._layers;
         var sel;
+
+        // Iterate over all active layers. 
         for (var key in layers) {
           var layer = layers[key];
           var nm = layer.name;
           var match = labs[this.value];
-
+          
+          // If the slider value matches an active layer, stop and update map. 
           if (nm === match) {
             sel = layer
             break;
           }
         }
 
+        // Remove old layers from the map
         map.removeLayer(ACTIVE);
         sel.addTo(map);
+
         //add to active layer array for removal
         activeLayers.addLayer(sel)
         ACTIVE = sel;
       })
-
-
-      });
+    });
     </script>
   </body>
 </html>
