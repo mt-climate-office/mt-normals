@@ -280,27 +280,14 @@
         // Populate slider with options. 
         slider.onAdd = function (map) {
           var div = L.DomUtil.create('div', 'slider');
-
           // Disable map movement when dragging slider
           $(div).mousedown(function () {
             map.dragging.disable();
           });
           div.innerHTML = `
             <div class='slidecontainer' id='slidecontainer'>
-              <input type='range' class='slider' id='slider' min=0 max=10 value=5 list='tickmarks'>
-              <datalist id="tickmarks">
-                <option value="0" label="1st"></option>
-                <option value="1"></option>
-                <option value="2"></option>
-                <option value="3"></option>
-                <option value="4"></option>
-                <option value="5" label="50th"></option>
-                <option value="6"></option>
-                <option value="7"></option>
-                <option value="8"></option>
-                <option value="9"></option>
-                <option value="10" label="99th"></option>
-              </datalist>
+              <input type='range' class='slider' id='slider' min=0 max=10 value=5">
+              <output id="output"></output>
             </div>
           `
           return div;
@@ -407,13 +394,12 @@
           var urls = []
 
           if (ptype === 'quantiles') {
-            var lab_options = ['a)', 'b)', 'c)', 'd)', 'e)', 'f)', 'g)', 'h)', 'i)', 'j)', 'k)']
             var num_suffix = ['st', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th']
             var display = [false, false, false, false, false, true, false, false, false, false, false]
             var labs = []
             var out = quantiles.forEach(function(x, i) {
               var url = `https://data.climate.umt.edu/mt-normals/cog/${variable}/quantiles/${period}_${x}th.tif`
-              var lab = `${lab_options[i]} ${x}${num_suffix[i]} Percentile`
+              var lab = `${x}${num_suffix[i]} Percentile`
               urls.push(url);
               labs.push(lab);
             })
@@ -540,9 +526,9 @@
           cleanUp();
           activeLayers = new L.LayerGroup();
 
-
           if (statistic  === 'quantiles') {
             $("#slider").val(5);
+            $("output").text("50th Percentile");
             $("#slide-container").show();
           } else {
             $("#slide-container").hide();
@@ -559,20 +545,24 @@
 
           // Add each COG to the map. 
           urls.forEach(function(x, i) {
-
-            var min_max = legend_data[short_name + '-' + statistic  + '-' + time]
-            min = min_max['min']
-            max = min_max['max']
             addCOG(x, labs[i], statistic , short_name, display[i], min, max)
-            build_legend(short_name, statistic , min, max, 12)
           })
+
+          var min = legend_data[short_name + '-' + statistic  + '-' + time]['min']
+          var max = legend_data[short_name + '-' + statistic  + '-' + time]['max']
+          
+          build_legend(
+            short_name=short_name, 
+            statistic=statistic, 
+            min=min, 
+            max=max, 
+            nquantiles=12)
         });
 
       // Function to change the map layer with the slider. 
       // This seems really hacky and I'm sure there is a better way to do it but this solution is working for the time being. 
       $("#slider").on("input change", function() {
-
-        //
+        $("output").text(labs[this.value]);
         var layers = activeLayers._layers;
         var sel;
 

@@ -73,8 +73,8 @@ var legendMap = {
 }
 
 var labs = [
-  "a) 1st Percentile", "b) 10th Percentile", "c) 20th Percentile", "d) 30th Percentile", "e) 40th Percentile",
-  "f) 50th Percentile", "g) 60th Percentile", "h) 70th Percentile", "i) 80th Percentile", "j) 90th Percentile", "k) 99th Percentile" 
+  "1st Percentile", "10th Percentile", "20th Percentile", "30th Percentile", "40th Percentile",
+  "50th Percentile", "60th Percentile", "70th Percentile", "80th Percentile", "90th Percentile", "99th Percentile" 
 ]
 
 var update_variable_text = function(v) {
