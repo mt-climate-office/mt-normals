@@ -1,25 +1,33 @@
 library(magrittr)
 
 
-roi <- urbnmapr::get_urbn_map(sf = TRUE) %>% 
-  dplyr::filter(state_abbv == 'MT') %>% 
-  sf::st_transform(4326) 
+roi <- urbnmapr::get_urbn_map(sf = TRUE) %>%
+  dplyr::filter(state_abbv == "MT") %>%
+  sf::st_transform(4326)
 
-out_dir = '~/data/gridmet/processed/montana'
+out_dir <- "~/data/gridmet/processed/montana"
 
-list.files("~/data/gridmet/raw/pr", recursive = T, full.names = T, pattern = ".nc") %>% 
-  tail(1) %>% 
+list.files(
+  "~/data/gridmet/raw/pr",
+  recursive = T,
+  full.names = T,
+  pattern = ".nc"
+) %>%
+  tail(1) %>%
   lapply(function(x) {
-    print(x) 
-    
+    print(x)
+
     pth <- file.path(
-      out_dir, 
+      out_dir,
       basename(dirname(x)),
-      stringr::str_replace(basename(x), '.nc', '.tif')
+      stringr::str_replace(basename(x), ".nc", ".tif")
     )
-    
-    if (!file.exists(dirname(pth))) {dir.create(dirname(pth))}
+
+    if (!file.exists(dirname(pth))) {
+      dir.create(dirname(pth))
+    }
+
     r <- raster::stack(x)
-    c <- raster::crop(r, roi) 
-    raster::writeRaster(c, pth, overwrite=T)
+    c <- raster::crop(r, roi)
+    raster::writeRaster(c, pth, overwrite = T)
   })

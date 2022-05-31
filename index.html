@@ -31,9 +31,10 @@
                     Montana Climate Normals
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-right"></i></span>
                 </h1>
+                <h3>Select a Variable to Get Started</h3>
                 <p>
-                  Welcome to the Montana climate normals web app! To get started, select a variable from the variables dropdown list. You can 
-                  also choose the time period of the normal, and different normal statistics. 
+                  Welcome to the Montana climate normals web app! To get started, select a variable from the variables dropdown list. A description of 
+                  what these maps show and how they were generated can be found on the info tab to the right. 
                 </p>
                 <table>
                   <tr>
@@ -59,6 +60,18 @@
                 <div class="outer-div">
                   <div id="legend-container" class="inner-div"></div>
                 </div>
+                <div class="outer-div" id="var-outer">
+                  <b>Variable details:</b>
+                  <hr>
+                  <div id="var-description" class="inner-div"></div>
+                  <hr>
+                </div>
+                <div class="outer-div" id="stat-outer">
+                  <b>Statistic details: </b>
+                  <hr>
+                  <div id="stat-description" class="inner-div"></div>
+                  <hr>
+                </div>
             </div>
             <div class="leaflet-sidebar-pane" id="info">
               <h1 class="leaflet-sidebar-header">
@@ -68,28 +81,28 @@
               <p>
                 Climate normals are 30-year summaries of climate data that are generated each decade. Normals provide a broad
                 overview of average climate conditions over the past 30 years. To create the normals,
-                historical data from the past 30 years are summarized across different timescales (e.g., months, seasons, or 
-                years) using common metrics such as the <i>mean</i> or <i>median</i>. These normals to help contextualize 
+                historical data from the past three decades are summarized across different timescales (e.g., months, seasons, or 
+                years) using common metrics such as the <i>mean</i> or <i>median</i>. These normals help contextualize 
                 current conditions from the perspective of the past few decades.
               </p>
               <p>
-                While these normals are extremely useful for contextualizing current conditions, a downfall is that they
+                While normals are extremely useful for contextualizing current conditions, a downfall is that they
                 don't give any insight into how likely or unlikely a given event is. For example, if a rancher asked "what is
                 the probability that I get at least four inches of rain this summer?" or "I got 15 inches of
-                rain this year. How likely is that?", a mean or median doesn't help answer the question. Additionally,
-                conventional normals like the <i>mean</i> or <i>median</i> data don't tell us anything about the underlying 
+                rain this year. What are the odds of that?", a mean or median doesn't help answer the question. Additionally,
+                conventional normals like the <i>mean</i> or <i>median</i> don't tell us anything about the underlying 
                 structure of the data. Ideally, a climate normal should both convey average conditions and allow for further investigation 
                 into the underlying data. This finer-level detail is possible by using a gamma distribution to 
-                summarize historical data. In the following sections, we explain what a gamma distribution is and then use Gamma 
-                Distribution normals of Montana to contextualize recent precipitation events. 
+                summarize historical data. In the following sections, we explain what a gamma distribution is and then use gamma 
+                distribution normals of Montana to contextualize recent precipitation events. 
               </p>
               <h2>What is the Gamma Distribution?</h2>
               <p>
                 A gamma distribution is a continuous function that is defined by two parameters, alpha and beta. When fitting a gamma 
                 distribution to a set of data (<b>x</b>), alpha and beta are chosen such that when a value from <b>x</b> is passed
                 into the gamma function, the resulting value is as close to the observed density of <b>x</b> on a 
-                <a href="https://en.wikipedia.org/wiki/Probability_density_function">probability density function</a> (can someone make 
-                sure this makes sense). For example, the figure below shows a histogram of annual precipitation over a 30 year period with
+                <a href="https://en.wikipedia.org/wiki/Probability_density_function" target="_blank">probability density function</a> as possible (can someone make 
+                sure this makes sense/is correct). For example, the figure below shows a histogram of annual precipitation over a 30 year period with
                 a gamma distribution fit to the data:
                 <figure>
                   <img src="./assets/ppt_example.png" alt="Gamma Example" style="width:100%">
@@ -97,17 +110,31 @@
                 </figure>
                 In this example, the gamma distribution fits the observed data pretty well. In fact, the gamma distribution can 
                 approximate any distribution of data so long as they are greater than zero and approximately normally distributed (check).
+                </p>
+                <p>
                 In the gamma distribution, the alpha parameter defines the shape of the distribution, or how spread out the curve is. 
                 The beta parameter defines the rate of distribution, or how rapidly the curve rises and falls. A convenient quality of 
                 the gamma distribution is that there are closed-form solutions to the underlying data's mean, mode and variance that can 
                 be calculated using only alpha and beta. Additionally, other statistics like the median, IQR, and exceedance probabilities 
-                can easily be calculated by passing alpha, beta and a value from <b>x</b> into a various different functions. This means that 
+                can easily be calculated by passing alpha, beta and a value from <b>x</b> into other relatively simple functions. This means that 
                 by fitting a gamma distribution to a set of data, we can completely encode the underlying structure of the data into the alpha
                 and beta parameters. This not only cuts down on storage space, but also allows for deeper investigation into the datasets than 
                 only deriving the traditional normals of mean, median, etc. Because of this convenience, we used 
-                <a href="https://www.climatologylab.org/gridmet.html">gridMET</a> meteorology to derive gamma distribution climate normals across
+                <a href="https://www.climatologylab.org/gridmet.html" target="_blank">gridMET</a> meteorology to derive gamma distribution climate normals across
                 Montana for the 1991 - 2020 period. 
               </p>
+              <h2>Montana's Climate Normals</h2>
+              To create Montana's climate normals, we aggregated daily data for each gridMET variable into monthly and annual averages or totals for each year in the 
+              1991 - 2020 reference period. Then, we used the <b>lmomco</b> package in <b>R</b> to derive alpha and beta parameters that best fit the 30-year distribution
+              of monthly or annual data for each pixel across Montana. Using these parameters we then derived the mean, median, mode, variance and quantiles for each variable. Each of these options, 
+              as well as the raw alpha and beta values, can be selected from the "Select a Statistic" dropdown on the main tab. 
+              <h2>Questions?</h2>
+              If you have any questions, comments, or find any bugs in this application, please:
+              <ul>
+                <li>Send an email to <a href="mailto:colin.brust@mso.umt.edu">colin.brust@mso.umt.edu</a>, </li>
+                <li>Or, open an issue on the <a href="https://github.com/mt-climate-office/mt-normals/issues" target="_blank">GitHub repository</a> for this application.</li>
+              </ul>
+
             </div>
         </div>
     </div>
@@ -477,7 +504,6 @@
           //map.removeControl(slider);
         }
 
-        var loc = document.getElementById('home')
         function setParent(el, newParent){
             console.log(el);
             newParent.appendChild(el);
@@ -489,6 +515,8 @@
         setParent(fgbLayerControl.getContainer(), document.getElementById('over-container'));
         setParent(slider.getContainer(), document.getElementById('slide-container'));
         $("#slide-container").hide()
+        $("#var-outer").hide()
+        $("#stat-outer").hide()
 
         var build_urls = function(variable, ptype, period) {
 
@@ -538,7 +566,6 @@
 
         var build_legend = function(legend, short_name, what, min, max, nquantiles = 12, scalar = 10, location = "bottomleft") {
           
-          console.log(short_name)
           if (what === 'alpha' | what === 'beta') {
               var scale = chroma.scale(colorMap[what]).domain([min, max])
           } else {
@@ -548,6 +575,7 @@
               var scale = chroma.scale(colorMap[short_name]).domain([min, max])
             }
           }
+
           var breaks = calc_legend_breaks(min, max, nquantiles);
           //create new legend "contol" object
           if (location === "")
@@ -592,38 +620,127 @@
             setParent(legend.getContainer(), document.getElementById('legend-container'));
         }
 
-        // get jQuery value $('select').val()
-        //function to call when selector is choosen
+        var update_variable_text = function(v) {
+          switch (v) {
+
+            case 'erc':
+              return `
+                Average daily energy release component. The amount of available energy that a fire could burn at a given area. 
+              `
+            case 'pr':
+              return `
+                Total precipitation for the given time period in inches. Precipitation is the combination of rainfall and snowfall. 
+              `
+            case 'rmax':
+              return `
+                  Average daily maximum relative humidity (%). The amount of water vapor in the air relative to the how much water vapor the air can theoretically hold. 
+                  Relative humidity varies based on air temperature and pressure. 
+                `
+            case 'rmin':
+              return `
+                Average daily minimum relative humidity (%). The amount of water vapor in the air relative to the how much water vapor the air can theoretically hold. 
+                  Relative humidity varies based on air temperature and pressure.
+              `
+            case 'sph':
+              return `
+                Average daily specific humidity (kg/kg). The mass of water vapor in one kilogram of air. Unlike relative humidity, specific humidity does not change
+                with air temperature and pressure. 
+              `
+            case 'srad':
+              return `
+                Average daily incoming shortwave solar radiation (W/m^2). 
+              `
+            case 'tmmn':
+              return `
+                Daily average mainimum temperature (deg F). 
+              `
+            case 'tmmx':
+              return `
+                Daily average maximum temperature (deg F).
+              `
+            case 'vpd':
+              return `
+                Average daily vapor pressure deficit (kPa). The difference between how much moisture is currently in the air versus how much moisture can theoretically 
+                be held in the air.
+              `
+            case 'vs':
+              return `
+                The daily average wind speed (m/s).
+              `
+          }
+        }
+
+        var update_statistic_text = function(s) {
+          switch (s) {
+
+            case 'alpha':
+              return `
+                The alpha parameter of the gamma distribution dictates the shape of the distribution's curve.
+              `
+            case 'beta':
+              return `
+                The beta parameter of the gamma distribution dictates the rate at which the distribution's curve rises and falls. 
+              `
+            case 'mean':
+              return `
+                  The mean is the average value of the selected variable for the 1991 - 2020 record. Because the mean is taken across all values, 
+                  large outliers can skew the value of the mean. 
+                `
+            case 'median':
+              return `
+                   The median is the value that falls in the middle of all values for the 1991 - 2020 record. Unlike the mean, the median is not affected by 
+                   outliers. 
+                `
+            case 'mode':
+              return `
+                  The mode is the value that is most likely to be sampled from a set of data. In the context of the gamma distribution, it is the value that is 
+                  probabalistically most likely to occur (check). 
+                `
+            case 'quantiles':
+              return `
+                  Quantiles are a method of breaking data into equally likely groups. One of the most common uses of quantiles are the median and interquartile range (IQR), 
+                  which measure the center and spread of a set of data. Here, you can adjust the above slider to visualize different quantiles. 
+                `
+            case 'variance':
+              return `
+                The variance quantifies how much each individual data point varies relative to the mean of the distribution. 
+              `
+            }
+          }
+
         $("select[name=feature-select],select[name=time-select],select[name=type-select]").change(function() {
           
-          $("#slider").val(5);
           var short_name = $('select[name=feature-select]').val()
           var time = $('select[name=time-select]').val()
           var what = $('select[name=type-select]').val()
+
+          $("#var-outer").show()
+          $("#stat-outer").show()
 
           cleanUp();
 
           //clear the active layers group to repopulate
           activeLayers = new L.LayerGroup();
 
-          //create new layer control 
-          //add it to the map
           if (what === 'quantiles') {
+            $("#slider").val(5);
             $("#slide-container").show()
-            //$('#over-container').show()
           } else {
             $("#slide-container").hide()
-            //$('#over-container').show()
           }
+
+          $("#var-description").text(update_variable_text(short_name, time));
+          $("#stat-description").text(update_statistic_text(what));
+
 
           var url_names = build_urls(short_name, what, time)
           var urls = url_names['urls']
           var labs = url_names['labs']
           var display = url_names['display']
 
-          var min;
-          var max;
-          var scale;
+          // var min;
+          // var max;
+          // var scale;
           urls.forEach(function(x, i) {
 
             var min_max = legend_data[short_name + '-' + what + '-' + time]

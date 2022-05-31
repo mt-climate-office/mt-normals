@@ -130,9 +130,9 @@ html, body, #map {
     font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
-#sidebar {
+/* #sidebar {
 height: 75% !important;
-}
+} */
 /* @media (max-width: 768px) {
 #sidebar {
 height: 96% !important;
