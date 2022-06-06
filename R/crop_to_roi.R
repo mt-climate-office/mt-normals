@@ -1,5 +1,6 @@
 library(magrittr)
 
+# Functions to crop gridmnet data to Montana 
 
 roi <- urbnmapr::get_urbn_map(sf = TRUE) %>%
   dplyr::filter(state_abbv == "MT") %>%
@@ -8,12 +9,11 @@ roi <- urbnmapr::get_urbn_map(sf = TRUE) %>%
 out_dir <- "~/data/gridmet/processed/montana"
 
 list.files(
-  "~/data/gridmet/raw/pr",
+  "~/data/gridmet/raw/",
   recursive = T,
   full.names = T,
   pattern = ".nc"
 ) %>%
-  tail(1) %>%
   lapply(function(x) {
     print(x)
 

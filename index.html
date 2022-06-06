@@ -32,7 +32,7 @@
                 </h1>
                 <h3>Select a Variable to Get Started</h3>
                 <p>
-                  Welcome to the Montana climate normals web app! To get started, select a variable from the variables dropdown list. A description of 
+                  Welcome to the Montana Climate Atlas web app! To get started, select a variable from the variables dropdown list. A description of 
                   what these maps show and how they were generated can be found on the info tab to the right. 
                 </p>
                 <table>
@@ -92,23 +92,23 @@
                 conventional normals like the <i>mean</i> or <i>median</i> don't tell us anything about the underlying 
                 structure of the data. Ideally, a climate normal should both convey average conditions and allow for further investigation 
                 into the underlying data. This finer-level detail is possible by using a gamma distribution to 
-                summarize historical data. In the following sections, we explain what a gamma distribution is and then use gamma 
-                distribution normals of Montana to contextualize recent precipitation events. 
+                summarize historical data. In the following sections, we explain what a gamma distribution is and how we used the gamma
+                distribution to create Montana's climate normals for the 1991 - 2020 period of record. 
               </p>
               <h2>What is the Gamma Distribution?</h2>
               <p>
                 A gamma distribution is a continuous function that is defined by two parameters, alpha and beta. When fitting a gamma 
                 distribution to a set of data (<b>x</b>), alpha and beta are chosen such that when a value from <b>x</b> is passed
                 into the gamma function, the resulting value is as close to the observed density of <b>x</b> on a 
-                <a href="https://en.wikipedia.org/wiki/Probability_density_function" target="_blank">probability density function</a> as possible (can someone make 
-                sure this makes sense/is correct). For example, the figure below shows a histogram of annual precipitation over a 30 year period with
+                <a href="https://en.wikipedia.org/wiki/Probability_density_function" target="_blank">probability density function</a> as possible. 
+                For example, the figure below shows a histogram of simulated annual precipitation over a 30 year period with
                 a gamma distribution fit to the data:
                 <figure>
                   <img src="./assets/ppt_example.png" alt="Gamma Example" style="width:100%">
                   <!-- This figure was created with the make_synthetic_plot function in ./R/normals_slim.R -->
                 </figure>
                 In this example, the gamma distribution fits the observed data pretty well. In fact, the gamma distribution can 
-                approximate any distribution of data so long as they are greater than zero and approximately normally distributed (check).
+                approximate any distribution of data so long as they are greater than zero and approximately normally distributed.
                 </p>
                 <p>
                 In the gamma distribution, the alpha parameter defines the shape of the distribution, or how spread out the curve is. 
@@ -125,7 +125,7 @@
               <h2>Montana's Climate Normals</h2>
               To create Montana's climate normals, we aggregated daily data for each gridMET variable into monthly and annual averages or totals for each year in the 
               1991 - 2020 reference period. Then, we used the <b>lmomco</b> package in <b>R</b> to derive alpha and beta parameters that best fit the 30-year distribution
-              of monthly or annual data for each pixel across Montana. Using these parameters we then derived the mean, median, mode, variance and quantiles for each variable. Each of these options, 
+              of monthly or annual data for each pixel across Montana. Using these parameters we then derived the mean, median, mode and variance for each variable. Each of these options, 
               as well as the raw alpha and beta values, can be selected from the "Select a Statistic" dropdown on the main tab. 
               <h2>Questions?</h2>
               If you have any questions, comments, or find any bugs in this application, please:
@@ -433,8 +433,10 @@
           if ((short_name === 'tmmn' || short_name === 'tmmx') & (statistic  !== 'alpha') & (statistic  !== 'beta') & (statistic  !== 'variance')) {
             val = (val - 273.15) * (9/5) + 32 
           }
-          if (val < 1) {
+          if (val > 0.0001 & val < 1) {
             val = Math.round(val * 10000) / 10000
+          } else if (val < 0.0001) {
+            val = val
           } else {
             val = Math.round(val)
           }
@@ -550,6 +552,7 @@
 
           var min = legend_data[short_name + '-' + statistic  + '-' + time]['min']
           var max = legend_data[short_name + '-' + statistic  + '-' + time]['max']
+          console.log(min);
           
           build_legend(
             short_name=short_name, 

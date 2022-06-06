@@ -1,5 +1,6 @@
 library(magrittr)
 
+### Functions to aggregate gridMET data to different temporal scales. 
 
 # Converts names of raster layer to dates.
 name_to_date <- function(x, variable) {
@@ -8,7 +9,7 @@ name_to_date <- function(x, variable) {
     lubridate::as_date(format = glue::glue("{variable}_%Y_%j"))
 }
 
-
+# Subset to either annual or monthly time periods. 
 subset_period <- function(r,
                           period = "annual",
                           agg_func = "mean") {
