@@ -151,7 +151,7 @@ var update_statistic_text = function(s) {
     case 'mode':
       return `
           The mode is the value that is most likely to be sampled from a set of data. In the context of the gamma distribution, it is the value that is 
-          probabalistically most likely to occur (check). 
+          probabalistically most likely to occur. 
         `
     case 'quantiles':
       return `
