@@ -16,20 +16,20 @@ stat_map <- function(e) {
     'variance'='Variance'
   )
 }
+
 color_map <- function(e) {
   switch(
     e, 
-    'pr' = 'BrBG',
+    'pr' = 'YlGnBu',
     'tmmn'='Blues',
     'tmmx'='Reds',
-    'rmax'='BrBG',
-    'rmin'='BrBG',
-    'th'='PuRd',
+    'rmax'='PuBuGn',
+    'rmin'='PuBuGn',
     'erc'='PuRd',
-    'vpd'='PuRd',
-    'vs'='PuRd',
-    'sph'='PuOr',
-    'srad'='RdBu'
+    'vpd'='OrRd',
+    'vs'='RdPu',
+    'sph'='Oranges',
+    'srad'='YlOrRd'
   )
 }
 
@@ -52,26 +52,24 @@ time_map <- function(e) {
   )
 }
 
-name_units_map <- function(e) {
+units_map <- function(e) {
   switch(
     e,
-    'rmax'='Relative Humidity [%]',
-    'rmin'='Relative Humidity [%]',
-    'sph'='Specific Humidity [kg/kg]',
-    'th'='Wind Direction [deg.]',
-    'srad'='Solar Radiation [W/m^2]',
-    'vs'='Wind Speed [m/s]',
-    'erc'='Energy Release Index',
-    'vpd'='Vapor Pressure Deficit [kPa]', 
-    'pr'='Precipitation [in]',
-    'tmmx'='Temperature [F]',
-    'tmmn'='Temperature [F]',
-    'alpha'='Alpha Parameter',
-    'beta'='Beta Parameter',
+    'rmax'='[%]',
+    'rmin'='[%]',
+    'sph'='[kg/kg]',
+    'th'='[deg.]',
+    'srad'='[W/m^2]',
+    'vs'='[m/s]',
+    'erc'='',
+    'vpd'='[kPa]', 
+    'pr'='[in]',
+    'tmmx'='[F]',
+    'tmmn'='[F]',
   )
 }
 
-name_unitless_map <- function(e) {
+name_map <- function(e) {
   switch(
     e,
     'rmax'='Relative Humidity',
@@ -90,27 +88,10 @@ name_unitless_map <- function(e) {
   )
 }
 
-
-name_map <- function(e) {
-  switch(
-    e,
-    'erc'='Energy Release Component',
-    'pr'='Precipitation',
-    'rmax'='Max. Relative Humidity',
-    'rmin'='Min. Relative Humidity',
-    'sph'='Specific Humidity',
-    'srad'='Solar Radiation',
-    'tmmn'='Min. Air Temperature',
-    'tmmx'='Max. Air Temperature',
-    'vpd'='Vapor Pressure Deficit',
-    'vs'='Wind Speed'
-  )
-}
-
 statistic_map <- function(e) {
   switch(
     e, 
-    'alpha'='PuOr',
+    'alpha'='YlGnBu',
     'beta'='YlOrRd'
   )
 }
@@ -190,7 +171,7 @@ add_hillshade <- function() {
       na.rm = TRUE
     ),
     scale_alpha(
-      range = c(0.8, 0),
+      range = c(0.5, 0),
       na.value = 0,
       limits = c(0, 255),
       guide = "none"
@@ -207,9 +188,58 @@ mtd_plot <- function(legend = TRUE){
   )
 }
 
-plot_map <- function(f_url, variable, statistic, time, out_dir) {
+calc_lim_func <- function(x) {
   
-  direction = ifelse(variable %in% c('srad', 'tmmx'), 1, -1)
+  tmp <- terra::rast(x$f_url) %>%
+    terra::values() %>%
+    tibble::as_tibble() %>%
+    tidyr::pivot_longer(dplyr::everything()) %>%
+    dplyr::group_by(name) %>%
+    dplyr::summarise(low = quantile(value, 0.025, na.rm = T),
+                     high = quantile(value, 0.975, na.rm = T))
+  x %>% 
+    dplyr::mutate(
+      low = min(tmp$low),
+      high = max(tmp$high),
+      low = ifelse(unique(x$element) == 'pr', low/25.4, low),
+      high = ifelse(unique(x$element) == 'pr', high/25.4, high),
+      low = ifelse(
+        unique(x$element) %in% c("tmmn", "tmmx"), 
+        (low - 273.15) * (9/5) + 32, low
+      ),
+      high = ifelse(
+        unique(x$element) %in% c("tmmn", "tmmx"), 
+        (high - 273.15) * (9/5) + 32, high
+      )
+    ) 
+}
+
+get_limits <- function(dat) {
+  
+  avgs <- dat %>% dplyr::filter(
+    statistic %in% c("mean", "median", "mode")
+  ) %>% dplyr::group_by(
+    element, time
+  ) %>%
+    dplyr::group_split() %>% 
+    purrr::map(calc_lim_func) %>% 
+    dplyr::bind_rows()
+  
+  others <- dat %>% dplyr::filter(
+    !(statistic %in% c("mean", "median", "mode"))
+  ) %>% dplyr::group_by(
+    element, time
+  ) %>%
+    dplyr::group_split() %>% 
+    purrr::map(calc_lim_func) %>% 
+    dplyr::bind_rows()
+  
+  return(dplyr::bind_rows(avgs, others))
+}
+
+plot_map <- function(f_url, variable, statistic, time, low, high, out_dir) {
+  
+  direction = ifelse(variable %in% c('srad', 'tmmx', 'pr'), 1, -1)
   direction = ifelse(statistic %in% c('alpha', 'beta'), 1, direction)
   
   pal <- ifelse(
@@ -218,29 +248,44 @@ plot_map <- function(f_url, variable, statistic, time, out_dir) {
     color_map(variable)
   )
   
-  v <- ifelse(
-    statistic %in% c("alpha", "beta"),
-    name_unitless_map(variable),
-    name_units_map(variable)
-  )
-  
   plot_title <- glue::glue(
-    "{time_map(time)} {v} {stat_map(statistic)} (1991-2020)"
+    "{time_map(time)} {name_map(variable)}\n{stat_map(statistic)} (1991-2020)"
   )
   
-  dat <- terra::rast(f_url) %>% 
-    to_shp(variable, statistic)
+  unit <- units_map(variable)
+  
+  r <- terra::rast(f_url) %>% 
+    to_shp(variable, statistic) %>%
+    magrittr::set_names(c("value", "geometry"))
+  
+  breaks <- (low + (0:8 * (high - low)/8)) %>% 
+    lapply(function(x) {
+      x <- ifelse(
+        (x > 0 & x < 1) | (x > -1 & x < 0),
+        round(x, 5), 
+        round(x)
+      )
+    }) %>% unlist()
+  
+  labs <- paste0(
+    c("<=", "  ", "  ","  ","  ","  ","  ","  ",">="), 
+    breaks
+  ) %>%
+    paste(unit)
+  
+  color_scale <- colorRampPalette(RColorBrewer::brewer.pal(9, pal))(10)
   
   p <- ggplot() + 
     geom_sf(
-      data = dat, 
-      mapping = aes(fill = !!rlang::sym(statistic)),
+      data = r, 
+      mapping = aes(fill = value),
       color = "transparent"
     ) + 
-    scale_fill_distiller(
-      name='',
-      palette = pal, 
-      direction = direction
+    scale_fill_stepsn(
+      colours = color_scale,
+      breaks = breaks,
+      labels = labs,
+      name = plot_title
     ) + 
     mtd_plot() + 
     geom_sf(
@@ -249,7 +294,6 @@ plot_map <- function(f_url, variable, statistic, time, out_dir) {
       color = 'black',
       size = 1
     ) + 
-    labs(title = plot_title) +
     theme(plot.title = element_text(hjust=0.1, colour = "gray15", face = "bold", size=10),
           legend.title =  element_text(hjust= 0.5, colour="gray15", face = "bold",
                                        size = 7),
@@ -274,12 +318,15 @@ plot_map <- function(f_url, variable, statistic, time, out_dir) {
 dat <- tidyr::crossing(
   element = c("erc", "pr", "rmax", "rmin", "sph", "srad", "tmmn", "tmmx", "vpd", "vs"),
   time = c("annual", tolower(month.abb)),
-  statistic = c("alpha", "beta", "mean", "median", "mode", "variance")  
-) %>% 
+  statistic = c("alpha", "beta", "mean", "median", "mode", "variance")
+) %>%
   dplyr::mutate(
     f_url = glue::glue("{base_url}/{element}/{time}_{statistic}.tif"),
-  ) %>% 
-  dplyr::rowwise() %>% 
-  dplyr::mutate(
-    out = plot_map(f_url, element, statistic, time, "~/data/gridmet/processed/montana/normals/maps")
-  )
+  ) %>%
+  get_limits()
+
+#   dplyr::rowwise() %>% 
+#   dplyr::mutate(
+#     out = plot_map(f_url, element, statistic, time, "~/data/gridmet/processed/montana/normals/maps")
+#   )
+
