@@ -225,7 +225,7 @@ plot_map <- function(f_url, variable, statistic, time, out_dir) {
   )
   
   plot_title <- glue::glue(
-    "{time_map(time)} {name_map(variable)} {stat_map(statistic)} (1991-2020)"
+    "{time_map(time)} {v} {stat_map(statistic)} (1991-2020)"
   )
   
   dat <- terra::rast(f_url) %>% 
