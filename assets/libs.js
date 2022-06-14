@@ -43,17 +43,17 @@ var timeHash = {
 var colorMap = {
   'alpha': 'PuOr',
   'beta': 'YlOrRd',
-  'pr': 'BrBG',
+  'pr': 'YlGnBu',
   'tmmn': 'Blues',
   'tmmx': 'Reds',
-  'rmax': 'BrBG',
-  'rmin': 'BrBG',
+  'rmax': 'PuBuGn',
+  'rmin': 'PuBuGn',
   'th': 'PuRd',
   'erc': 'PuRd',
-  'vpd': 'PuRd',
-  'vs': 'PuRd',
-  'sph': 'PuOr',
-  'srad': 'RdBu',
+  'vpd': 'OrRd',
+  'vs': 'RdPu',
+  'sph': 'Oranges',
+  'srad': 'YlOrRd',
 }
 
 var legendMap = {
