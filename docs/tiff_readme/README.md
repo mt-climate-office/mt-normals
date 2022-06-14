@@ -1,5 +1,5 @@
 ## Description of Normals Data
-This directory contains climate normals for the state of Montna for the 1991 - 2020 reference period. All normals are derived from [gridMET](https://www.climatologylab.org/gridmet.html) climate data. The base gridMET units and coordinate system (WGS 84) are maintained to minimize any errors introduced by unit conversion or reprojection. The units and variable names associated with each of the sub-directories are listed in the table below:
+This directory contains GeoTIFFs of climate normals for the state of Montna for the 1991 - 2020 reference period. All normals are derived from [gridMET](https://www.climatologylab.org/gridmet.html) climate data. The base gridMET units and coordinate system (WGS 84) are maintained to minimize any errors introduced by unit conversion or reprojection. The units and variable names associated with each of the sub-directories are listed in the table below:
 
 | Abbreviation | Long Name                 | Units                   |
 |--------------|---------------------------|-------------------------|

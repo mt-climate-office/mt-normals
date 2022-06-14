@@ -52,24 +52,44 @@ time_map <- function(e) {
   )
 }
 
-legend_map <- function(e) {
+name_units_map <- function(e) {
   switch(
     e,
-    'rmax'='Relative\nHumidity (%)',
-    'rmin'='Relative\nHumidity (%)',
-    'sph'='Specific\nHumidity (kg/kg)',
-    'th'='Wind\nDirection (deg.)',
-    'srad'='Solar\nRadiation (W/m^2)',
-    'vs'='Wind\nSpeed (m/s)',
-    'erc'='Energy Release\nIndex',
-    'vpd'='Vapor Pressure\nDeficit (kPa)', 
-    'pr'='Precipitation (in)',
-    'tmmx'='Temperature (F)',
-    'tmmn'='Temperature (F)',
+    'rmax'='Relative Humidity [%]',
+    'rmin'='Relative Humidity [%]',
+    'sph'='Specific Humidity [kg/kg]',
+    'th'='Wind Direction [deg.]',
+    'srad'='Solar Radiation [W/m^2]',
+    'vs'='Wind Speed [m/s]',
+    'erc'='Energy Release Index',
+    'vpd'='Vapor Pressure Deficit [kPa]', 
+    'pr'='Precipitation [in]',
+    'tmmx'='Temperature [F]',
+    'tmmn'='Temperature [F]',
     'alpha'='Alpha Parameter',
     'beta'='Beta Parameter',
   )
 }
+
+name_unitless_map <- function(e) {
+  switch(
+    e,
+    'rmax'='Relative Humidity',
+    'rmin'='Relative Humidity',
+    'sph'='Specific Humidity',
+    'th'='Wind Direction',
+    'srad'='Solar Radiation',
+    'vs'='Wind Speed',
+    'erc'='Energy Release Index',
+    'vpd'='Vapor Pressure Deficit', 
+    'pr'='Precipitation',
+    'tmmx'='Temperature',
+    'tmmn'='Temperature',
+    'alpha'='Alpha Parameter',
+    'beta'='Beta Parameter',
+  )
+}
+
 
 name_map <- function(e) {
   switch(
@@ -198,10 +218,10 @@ plot_map <- function(f_url, variable, statistic, time, out_dir) {
     color_map(variable)
   )
   
-  legend_title <- ifelse(
-    statistic %in% c('alpha', 'beta'), 
-    legend_map(statistic),
-    legend_map(variable)
+  v <- ifelse(
+    statistic %in% c("alpha", "beta"),
+    name_unitless_map(variable),
+    name_units_map(variable)
   )
   
   plot_title <- glue::glue(
@@ -218,7 +238,7 @@ plot_map <- function(f_url, variable, statistic, time, out_dir) {
       color = "transparent"
     ) + 
     scale_fill_distiller(
-      name=legend_title,
+      name='',
       palette = pal, 
       direction = direction
     ) + 
