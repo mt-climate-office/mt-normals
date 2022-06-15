@@ -8,8 +8,8 @@ base_url = "https://data.climate.umt.edu/mt-normals/cog"
 stat_map <- function(e) {
   switch(
     e,
-    'alpha'="Alpha Parameter",
-    'beta'="Beta Parameter",
+    'alpha'="Alpha",
+    'beta'="Beta",
     'mean'="Mean",
     'median'='Median',
     'mode'='Mode',
@@ -55,31 +55,30 @@ time_map <- function(e) {
 units_map <- function(e) {
   switch(
     e,
-    'rmax'='[%]',
-    'rmin'='[%]',
-    'sph'='[kg/kg]',
-    'th'='[deg.]',
-    'srad'='[W/m^2]',
-    'vs'='[m/s]',
+    'rmax'=' [%]',
+    'rmin'=' [%]',
+    'sph'=' [kg/kg]',
+    'th'=' [deg.]',
+    'srad'=' [W/m^2]',
+    'vs'=' [m/s]',
     'erc'='',
-    'vpd'='[kPa]', 
-    'pr'='[in]',
-    'tmmx'='[F]',
-    'tmmn'='[F]',
+    'vpd'=' [kPa]', 
+    'pr'=' [in]',
+    'tmmx'=' [F]',
+    'tmmn'=' [F]',
   )
 }
 
 name_map <- function(e) {
   switch(
     e,
-    'rmax'='Relative Humidity',
-    'rmin'='Relative Humidity',
+    'rmax'='Rel. Humidity',
+    'rmin'='Rel. Humidity',
     'sph'='Specific Humidity',
-    'th'='Wind Direction',
     'srad'='Solar Radiation',
     'vs'='Wind Speed',
-    'erc'='Energy Release Index',
-    'vpd'='Vapor Pressure Deficit', 
+    'erc'='Energy Release',
+    'vpd'='Vapor Pres. Deficit', 
     'pr'='Precipitation',
     'tmmx'='Temperature',
     'tmmn'='Temperature',
@@ -179,12 +178,34 @@ add_hillshade <- function() {
   )
 }
 
+mco_theme_map <- function (base_size = 6.5, base_family = "") 
+{
+  ggplot2::theme_bw(base_size = base_size, base_family = base_family) %+replace% 
+    ggplot2::theme(
+      axis.line = ggplot2::element_blank(), 
+      axis.text = ggplot2::element_blank(), 
+      axis.ticks = ggplot2::element_blank(), 
+      axis.title = ggplot2::element_blank(), 
+      panel.background = ggplot2::element_blank(), 
+      panel.border = ggplot2::element_blank(), 
+      panel.grid = ggplot2::element_blank(), 
+      panel.grid.major = ggplot2::element_line(colour = "transparent"), 
+      panel.grid.minor = ggplot2::element_line(colour = "transparent"), 
+      legend.justification = c(0, 0), 
+      legend.position = c(-0.0075, 0), 
+      legend.background = ggplot2::element_blank(), 
+      legend.key.width = ggplot2::unit(0.15, "in"), 
+      legend.text = ggplot2::element_text(size = ggplot2::rel(1)), 
+      plot.background = ggplot2::element_blank(), 
+      plot.margin = ggplot2::margin(t = 0, r = 0, b = 0, l = 0, unit = "npc"))
+}
+
 mtd_plot <- function(legend = TRUE){
   list(
     add_hillshade(),
     add_counties(),
     ggplot2::labs(x = NULL, y = NULL),
-    mcor::mco_theme_map()
+    mco_theme_map()
   )
 }
 
@@ -228,7 +249,7 @@ get_limits <- function(dat) {
   others <- dat %>% dplyr::filter(
     !(statistic %in% c("mean", "median", "mode"))
   ) %>% dplyr::group_by(
-    element, time
+    element, time, statistic
   ) %>%
     dplyr::group_split() %>% 
     purrr::map(calc_lim_func) %>% 
@@ -248,30 +269,25 @@ plot_map <- function(f_url, variable, statistic, time, low, high, out_dir) {
     color_map(variable)
   )
   
+  unit_name <- units_map(variable)
+  unit_name <- ifelse(statistic %in% c("alpha", "beta"), '', unit_name)
+  
   plot_title <- glue::glue(
-    "{time_map(time)} {name_map(variable)}\n{stat_map(statistic)} (1991-2020)"
+    "{time_map(time)}\n{name_map(variable)}\n{stat_map(statistic)}\n(1991-2020)"
   )
   
-  unit <- units_map(variable)
   
   r <- terra::rast(f_url) %>% 
     to_shp(variable, statistic) %>%
     magrittr::set_names(c("value", "geometry"))
   
-  breaks <- (low + (0:8 * (high - low)/8)) %>% 
-    lapply(function(x) {
-      x <- ifelse(
-        (x > 0 & x < 1) | (x > -1 & x < 0),
-        round(x, 5), 
-        round(x)
-      )
-    }) %>% unlist()
+  breaks <- (low + (0:9 * (high - low)/9)) 
   
-  labs <- paste0(
-    c("<=", "  ", "  ","  ","  ","  ","  ","  ",">="), 
-    breaks
-  ) %>%
-    paste(unit)
+  scale_func <- ifelse(
+    all(abs(breaks) < 1) | all(abs(breaks) > 1000),
+    scales::label_scientific(digits = 3, suffix = unit_name),
+    scales::label_number(accuracy = 0.01, suffix = unit_name)
+  )
   
   color_scale <- colorRampPalette(RColorBrewer::brewer.pal(9, pal))(10)
   
@@ -284,7 +300,7 @@ plot_map <- function(f_url, variable, statistic, time, low, high, out_dir) {
     scale_fill_stepsn(
       colours = color_scale,
       breaks = breaks,
-      labels = labs,
+      labels = scale_func,
       name = plot_title
     ) + 
     mtd_plot() + 
@@ -305,10 +321,10 @@ plot_map <- function(f_url, variable, statistic, time, low, high, out_dir) {
     cowplot::draw_plot(p) + 
     cowplot::draw_image(
       magick::image_read_svg("~/git/mt-normals/assets/MCO_logo.svg"),
-      x = 0.925, y = 0.935, hjust = 1, vjust = 1, halign = 1, valign = 1, width = 0.2
+      x = 0.625, y = 0.175, hjust = 1, vjust = 1, halign = 1, valign = 1, width = 0.2
     ) + 
-    cowplot::draw_label("Montana Forest & Conservation Experiment Station\nUniversity of Montana\n32 Campus Drive\nMissoula, MT 59812\nPhone: (406) 243-6793\nstate.climatologist@umontana.edu",
-               color = "gray26", size = 7, x=0.7, y=0.125)
+    cowplot::draw_label("Montana Climate Office\nUniversity of Montana\n32 Campus Drive\nMissoula, MT 59812\nPhone: (406) 243-6793\nstate.climatologist@umontana.edu",
+               color = "gray26", size = 6.5, x=0.825, y=0.125)
   
   out_name <- file.path(out_dir, variable, glue::glue("{time}_{statistic}.png"))
   cowplot::save_plot(out_name, out, base_width = 6.25, base_height=4.67)
@@ -325,8 +341,9 @@ dat <- tidyr::crossing(
   ) %>%
   get_limits()
 
-#   dplyr::rowwise() %>% 
-#   dplyr::mutate(
-#     out = plot_map(f_url, element, statistic, time, "~/data/gridmet/processed/montana/normals/maps")
-#   )
+dat %>% 
+  dplyr::rowwise() %>%
+  dplyr::mutate(
+    out = plot_map(f_url, element, statistic, time, low, high, "~/data/gridmet/processed/montana/normals/maps")
+  )
 
