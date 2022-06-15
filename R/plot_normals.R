@@ -218,10 +218,20 @@ calc_lim_func <- function(x) {
     dplyr::group_by(name) %>%
     dplyr::summarise(low = quantile(value, 0.025, na.rm = T),
                      high = quantile(value, 0.975, na.rm = T))
-  x %>% 
+  x <- x %>% 
     dplyr::mutate(
       low = min(tmp$low),
-      high = max(tmp$high),
+      high = max(tmp$high)
+    )
+  
+  convert = ifelse(
+    all(x$statistic %in% c("mean", "median", "mode", "variance")),
+    TRUE, FALSE
+  )
+  if (convert) {
+    print('asdf')
+    dplyr::mutate(
+      x,
       low = ifelse(unique(x$element) == 'pr', low/25.4, low),
       high = ifelse(unique(x$element) == 'pr', high/25.4, high),
       low = ifelse(
@@ -232,7 +242,11 @@ calc_lim_func <- function(x) {
         unique(x$element) %in% c("tmmn", "tmmx"), 
         (high - 273.15) * (9/5) + 32, high
       )
-    ) 
+    ) %>%
+      return()
+  }
+  
+  return(x)
 }
 
 get_limits <- function(dat) {
@@ -247,6 +261,7 @@ get_limits <- function(dat) {
     dplyr::bind_rows()
   
   others <- dat %>% dplyr::filter(
+    element == 'pr',
     !(statistic %in% c("mean", "median", "mode"))
   ) %>% dplyr::group_by(
     element, time, statistic
@@ -273,7 +288,7 @@ plot_map <- function(f_url, variable, statistic, time, low, high, out_dir) {
   unit_name <- ifelse(statistic %in% c("alpha", "beta"), '', unit_name)
   
   plot_title <- glue::glue(
-    "{time_map(time)}\n{name_map(variable)}\n{stat_map(statistic)}\n(1991-2020)"
+    "{time_map(time)}\n{name_map(variable)}\n{stat_map(statistic)}\n(1991–2020)"
   )
   
   
@@ -346,4 +361,3 @@ dat %>%
   dplyr::mutate(
     out = plot_map(f_url, element, statistic, time, low, high, "~/data/gridmet/processed/montana/normals/maps")
   )
-
