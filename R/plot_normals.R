@@ -119,11 +119,11 @@ get_df <- function(x) {
 
 to_shp <- function(x, v, s) {
 
-    if (v == 'pr' & !(s %in% c("alpha", "beta"))) {
+    if (v == 'pr' & !(s %in% c("alpha", "beta", "variance"))) {
       x = x/25.4
-    }  else if (v == 'tmmx' & !(s %in% c("alpha", "beta"))) {
+    }  else if (v == 'tmmx' & !(s %in% c("alpha", "beta", "variance"))) {
       x = (x - 273.15) * (9/5) + 32 
-    } else if (v == 'tmmn' & !(s %in% c("alpha", "beta"))) {
+    } else if (v == 'tmmn' & !(s %in% c("alpha", "beta", "variance"))) {
       x = (x - 273.15) * (9/5) + 32 
     } else {
       x = x
@@ -156,7 +156,6 @@ add_counties <- function() {
     size = 0.1
   )
 }
-
 
 add_hillshade <- function() {
   # Plot the hillshade using the "alpha hack"
@@ -218,19 +217,20 @@ calc_lim_func <- function(x) {
     dplyr::group_by(name) %>%
     dplyr::summarise(low = quantile(value, 0.025, na.rm = T),
                      high = quantile(value, 0.975, na.rm = T))
+  
   x <- x %>% 
     dplyr::mutate(
       low = min(tmp$low),
       high = max(tmp$high)
     )
-  
+
   convert = ifelse(
-    all(x$statistic %in% c("mean", "median", "mode", "variance")),
+    all(x$statistic %in% c("mean", "median", "mode")),
     TRUE, FALSE
   )
   if (convert) {
-    print('asdf')
-    dplyr::mutate(
+
+    x <- dplyr::mutate(
       x,
       low = ifelse(unique(x$element) == 'pr', low/25.4, low),
       high = ifelse(unique(x$element) == 'pr', high/25.4, high),
@@ -242,10 +242,8 @@ calc_lim_func <- function(x) {
         unique(x$element) %in% c("tmmn", "tmmx"), 
         (high - 273.15) * (9/5) + 32, high
       )
-    ) %>%
-      return()
+    ) 
   }
-  
   return(x)
 }
 
@@ -261,7 +259,6 @@ get_limits <- function(dat) {
     dplyr::bind_rows()
   
   others <- dat %>% dplyr::filter(
-    element == 'pr',
     !(statistic %in% c("mean", "median", "mode"))
   ) %>% dplyr::group_by(
     element, time, statistic
@@ -275,9 +272,8 @@ get_limits <- function(dat) {
 
 plot_map <- function(f_url, variable, statistic, time, low, high, out_dir) {
   
-  direction = ifelse(variable %in% c('srad', 'tmmx', 'pr'), 1, -1)
-  direction = ifelse(statistic %in% c('alpha', 'beta'), 1, direction)
-  
+  direction = ifelse(variable == 'tmmn', -1, 1)
+
   pal <- ifelse(
     statistic %in% c('alpha', 'beta'), 
     statistic_map(statistic), 
@@ -285,26 +281,27 @@ plot_map <- function(f_url, variable, statistic, time, low, high, out_dir) {
   )
   
   unit_name <- units_map(variable)
-  unit_name <- ifelse(statistic %in% c("alpha", "beta"), '', unit_name)
+  unit_name <- ifelse(statistic %in% c("alpha", "beta", "variance"), '', unit_name)
   
   plot_title <- glue::glue(
     "{time_map(time)}\n{name_map(variable)}\n{stat_map(statistic)}\n(1991–2020)"
   )
   
-  
-  r <- terra::rast(f_url) %>% 
+  r <- terra::rast(f_url) %>%
     to_shp(variable, statistic) %>%
     magrittr::set_names(c("value", "geometry"))
   
   breaks <- (low + (0:9 * (high - low)/9)) 
-  
+
   scale_func <- ifelse(
     all(abs(breaks) < 1) | all(abs(breaks) > 1000),
-    scales::label_scientific(digits = 3, suffix = unit_name),
-    scales::label_number(accuracy = 0.01, suffix = unit_name)
+    scales::label_scientific(digits = 3, suffix = unit_name, big.mark=','),
+    scales::label_number(accuracy = 0.01, suffix = unit_name, big.mark=',')
   )
   
   color_scale <- colorRampPalette(RColorBrewer::brewer.pal(9, pal))(10)
+  if(direction == -1) {color_scale <- rev(color_scale)}
+  color_scale <- ifelse(direction == -1, rev(color_scale), color_scale)
   
   p <- ggplot() + 
     geom_sf(
@@ -342,7 +339,7 @@ plot_map <- function(f_url, variable, statistic, time, low, high, out_dir) {
                color = "gray26", size = 6.5, x=0.825, y=0.125)
   
   out_name <- file.path(out_dir, variable, glue::glue("{time}_{statistic}.png"))
-  cowplot::save_plot(out_name, out, base_width = 6.25, base_height=4.67)
+  cowplot::save_plot(out_name, out, base_width = 6.25, base_height=4.67, bg = 'white')
   return(out_name)
 }
 
