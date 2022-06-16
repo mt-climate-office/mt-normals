@@ -9,8 +9,8 @@ This directory contains maps of climate normals for the state of Montna for the 
 | rmin         | Minimum Relative Humidity | %                       |
 | sph          | Specific Humidity         | kg/kg                   |
 | srad         | Solar Radiation           | W/m^2                   |
-| tmmn         | Minimum Temperature       | deg C                   |
-| tmmx         | Maximum Temperature       | deg C                   |
+| tmmn         | Minimum Temperature       | deg F                   |
+| tmmx         | Maximum Temperature       | deg F                   |
 | vpd          | Vapor Pressure Deficit    | kPa                     |
 | vs           | Wind Speed                | m/s                     |
 
