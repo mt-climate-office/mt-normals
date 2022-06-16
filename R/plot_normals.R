@@ -301,8 +301,7 @@ plot_map <- function(f_url, variable, statistic, time, low, high, out_dir) {
   
   color_scale <- colorRampPalette(RColorBrewer::brewer.pal(9, pal))(10)
   if(direction == -1) {color_scale <- rev(color_scale)}
-  color_scale <- ifelse(direction == -1, rev(color_scale), color_scale)
-  
+
   p <- ggplot() + 
     geom_sf(
       data = r, 
