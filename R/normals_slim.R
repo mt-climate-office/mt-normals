@@ -78,11 +78,11 @@ calc_gamma_from_rast <-
 # Piecewise function to calculate the mode.
 calc_mode <-
   function(a, b) {
-    if (a < 1) {
-      return(0)
-    } else {
-      return((a - 1) / b)
-    }
+    out = terra::deepcopy(a)
+    out[a < 1] <- 0
+    out[a >= 1] <- (a - 1) / b
+    
+    return(out)
   }
 
 calc_and_write <-
@@ -136,106 +136,19 @@ calc_and_write <-
         )
       )
     
-    q <- list(
-      '1th' = terra::lapp(
-        gamma,
-        fun = function(alpha, beta) {
-          qgamma(0.01, shape = alpha, rate = beta)
-        },
-        usenames = TRUE
-      ),
-      '10th' = terra::lapp(
-        gamma,
-        fun = function(alpha, beta) {
-          qgamma(0.1, shape = alpha, rate = beta)
-        },
-        usenames = TRUE
-      ),
-      '20th' = terra::lapp(
-        gamma,
-        fun = function(alpha, beta) {
-          qgamma(0.2, shape = alpha, rate = beta)
-        },
-        usenames = TRUE
-      ),
-      '30th' = terra::lapp(
-        gamma,
-        fun = function(alpha, beta) {
-          qgamma(0.3, shape = alpha, rate = beta)
-        },
-        usenames = TRUE
-      ),
-      '40th' = terra::lapp(
-        gamma,
-        fun = function(alpha, beta) {
-          qgamma(0.4, shape = alpha, rate = beta)
-        },
-        usenames = TRUE
-      ),
-      '50th' = terra::lapp(
-        gamma,
-        fun = function(alpha, beta) {
-          qgamma(0.5, shape = alpha, rate = beta)
-        },
-        usenames = TRUE
-      ),
-      '60th' = terra::lapp(
-        gamma,
-        fun = function(alpha, beta) {
-          qgamma(0.6, shape = alpha, rate = beta)
-        },
-        usenames = TRUE
-      ),
-      '70th' = terra::lapp(
-        gamma,
-        fun = function(alpha, beta) {
-          qgamma(0.7, shape = alpha, rate = beta)
-        },
-        usenames = TRUE
-      ),
-      '80th' = terra::lapp(
-        gamma,
-        fun = function(alpha, beta) {
-          qgamma(0.8, shape = alpha, rate = beta)
-        },
-        usenames = TRUE
-      ),
-      '90th' = terra::lapp(
-        gamma,
-        fun = function(alpha, beta) {
-          qgamma(0.9, shape = alpha, rate = beta)
-        },
-        usenames = TRUE
-      ),
-      '99th' = terra::lapp(
-        gamma,
-        fun = function(alpha, beta) {
-          qgamma(0.99, shape = alpha, rate = beta)
-        },
-        usenames = TRUE
-      )
-    ) %>%
-      purrr::imap( ~ magrittr::set_names(.x, .y)) %>%
-      purrr::iwalk(
-        ~ terra::writeRaster(
-          x = .x,
-          filename = paste0(dir_name, "/quantiles/", period, "_", .y, ".tif"),
-          overwrite = TRUE,
-          gdal = c("COMPRESS=DEFLATE",
-                   "of=COG"),
-          # datatype='INT4S',
-          memfrac = 0.9
-        )
-      )
+    
     return(dir_name)
   }
 
-iterate_options <- function(v, period, out_dir, mask = NA) {
-  out_dir <- file.path(out_dir, v)
+iterate_options <- function(v, period, data_dir, mask = NA) {
+  
+  out_dir <- file.path(data_dir, "normals", v)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir, recursive = TRUE)
+  }
+  
   r <- list.files(
-    glue::glue(
-      "~/data/gridmet/processed/montana/{v}/summarized/{period}"
-    ),
+    file.path(data_dir, v, "summarized", period),
     full.names = T
   ) %>%
     grep(paste(1991:2020, collapse = "|"), ., value = T) %>%
@@ -258,29 +171,8 @@ iterate_options <- function(v, period, out_dir, mask = NA) {
                    period = 'annual')
   }
   
-  return("yay")
 }
 
-mask = mcor::mt_state_simple %>% sf::st_transform(4326) %>% terra::vect()
-
-out_dir = "~/data/gridmet/processed/montana/normals"
-tidyr::crossing(
-  variables = c(
-    "erc",
-    "rmax",
-    "rmin",
-    "sph",
-    "srad",
-    "vpd",
-    "vs",
-    "tmmx",
-    "tmmn",
-    "pr"
-  ),
-  periods = c("monthly", "annual")
-) %>%
-  dplyr::rowwise() %>%
-  dplyr::mutate(complete = iterate_options(variables, periods, out_dir, mask))
 
 make_synthetic_plot <- function() {
   x = rbeta(50, 2, 5) * 15
