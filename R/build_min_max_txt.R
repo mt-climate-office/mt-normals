@@ -16,14 +16,16 @@ build_list <- function(f_list, v, period, what) {
 
 build_legend_txt <- function(normals_dir) {
   
-  f_list <- list.files(normals_dir, full.names = T, recursive = TRUE)
+  f_list <- list.files(normals_dir, full.names = T, recursive = TRUE) %>% 
+    grep("quantiles", ., value = T, invert = T) %>% 
+    grep("/maps/", ., value = T, invert = T)
   
   # Iterate over all possibilities and write a json file with each min/max value. 
   tidyr::crossing(
     variables = unique(basename(dirname(f_list))) %>% 
       grep("quantiles|normals", ., invert=T, value = T),
     period = c('annual', tolower(month.abb)),
-    what = c("quantiles", "alpha", "beta", "mean", "median", "mode", "variance")
+    what = c("alpha", "beta", "mean", "median", "mode", "variance")
   ) %>% 
     dplyr::rowwise() %>% 
     dplyr::mutate(j = build_list(f_list, variables, period, what)) %>%
@@ -31,7 +33,7 @@ build_legend_txt <- function(normals_dir) {
       jsonlite::toJSON(
         .$j, auto_unbox = TRUE, pretty = TRUE
       ) %>%
-        jsonlite::write_json(normals_dir)
+        jsonlite::write_json(file.path(normals_dir, "legend_data.json"))
     }
   
 }
