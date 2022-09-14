@@ -17,7 +17,7 @@ pargam_slim <-
       return(c(alpha = NA,
                beta = NA))
     }
-    
+
     A1 <- -0.308
     A2 <- -0.05812
     A3 <- 0.01765
@@ -81,7 +81,7 @@ calc_mode <-
     out = terra::deepcopy(a)
     out[a < 1] <- 0
     out[a >= 1] <- (a - 1) / b
-    
+
     return(out)
   }
 
@@ -92,14 +92,14 @@ calc_and_write <-
                  recursive = TRUE,
                  showWarnings = FALSE)
     }
-    
+
     gamma <-
       calc_gamma_from_rast(x) %T>%
       {
         list(alpha = .$alpha,
              beta = .$beta) %>%
           purrr::imap(
-            ~ terra::writeRaster(
+            ~terra::writeRaster(
               x = .x,
               filename = paste0(dir_name, "/", period, "_", .y, ".tif"),
               overwrite = TRUE,
@@ -110,7 +110,7 @@ calc_and_write <-
             )
           )
       }
-    
+
     x <- list(
       mode = calc_mode(gamma$alpha, gamma$beta),
       median = terra::lapp(
@@ -135,29 +135,29 @@ calc_and_write <-
           memfrac = 0.9
         )
       )
-    
-    
+
+
     return(dir_name)
   }
 
 iterate_options <- function(v, period, data_dir, mask = NA) {
-  
+
   out_dir <- file.path(data_dir, "normals", v)
   if (!dir.exists(out_dir)) {
     dir.create(out_dir, recursive = TRUE)
   }
-  
+
   r <- list.files(
     file.path(data_dir, v, "summarized", period),
     full.names = T
   ) %>%
     grep(paste(1991:2020, collapse = "|"), ., value = T) %>%
     terra::rast()
-  
+
   if (!is.na(mask)) {
     r <- terra::mask(r, mask)
   }
-  
+
   if (period == "monthly") {
     purrr::map(1:12, function(x) {
       s <- terra::subset(r, which(rep(1:12, 30) == x))
@@ -170,26 +170,26 @@ iterate_options <- function(v, period, data_dir, mask = NA) {
                    dir_name = out_dir,
                    period = 'annual')
   }
-  
+
 }
 
 
 make_synthetic_plot <- function() {
   x = rbeta(50, 2, 5) * 15
   pwm <- lmomco::pwm.ub(x)
-  
+
   #Probability-Weighted Moments to L-moments
   lmoments_x <- lmomco::pwm2lmom(pwm)
-  
+
   #fit gamma
   fit.gam <- lmomco::pargam(lmoments_x)
-  
+
   # Generate synthetic data based on real data.
   rnge <- seq(0, 12, length.out = length(x))
-  
+
   # Find the pdf of synthetic data
   probs <- lmomco::pdfgam(rnge, fit.gam)
-  
+
   png(
     filename = "~/git/mt-normals/assets/ppt_example.png",
     width     = 3.25,
