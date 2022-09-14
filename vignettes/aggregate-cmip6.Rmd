@@ -1,0 +1,49 @@
+---
+title: "Aggregate Daily CMIP6 projections to Monthly and Annual Timescales"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{aggregate-cmip6}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = nzchar(Sys.getenv("CMIP6_DIR"))
+)
+```
+
+```{r setup}
+library(normals)
+library(magrittr)
+f_list <- file.path(Sys.getenv("CMIP6_DIR"), "nexgddp_cmip6") |>
+  list.files(full.names = T, pattern = ".tif") |>
+  grep(pattern = ".json", value = T, invert = T)
+
+out_dir <- file.path(Sys.getenv("CMIP6_DIR"), "nexgddp_cmip6")
+```
+
+```{r aggregate}
+
+dat <- tibble::tibble(f_name = f_list) |>
+  dplyr::mutate(
+    base = basename(f_name) |>
+                  stringr::str_replace(".tif", "")
+  ) |>
+  tidyr::separate(
+    base, c("model", "scenario", "meta", "variable"), remove = FALSE, sep = "_"
+  ) |> 
+  dplyr::mutate(annual = FALSE, monthly = TRUE) |>
+  tidyr::pivot_longer(c(annual, monthly), values_to = "timescale") |>
+  dplyr::mutate(
+    out_name = file.path(dirname(f_name), name, glue::glue("{base}.tif")),
+    agg_func = ifelse(variable == "pr", "sum", "mean")
+  ) |>
+  dplyr::rowwise() |>
+  dplyr::mutate(r = list(aggregate_daily(
+    r = terra::rast(f_name), variable = variable, monthly = timescale, agg_func = agg_func, filename = out_name, overwrite = TRUE
+  )))
+                
+```
