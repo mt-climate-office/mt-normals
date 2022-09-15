@@ -36,7 +36,7 @@ pargam_slim <- function(LL) {
 
 # Gamma distributions are strictly positive
 replace_if_zero <- function(x) {
-    x[x <= 0] <- 0.01
+    x[x <= 0] <- 0.001
     x
   }
 
@@ -80,38 +80,60 @@ calc_median <- function(alpha, beta) {
   }
 
 
-gamma_from_rast <- function(x, out_dir = NULL, descriptor = "annual") {
-    if (!dir.exists(dirname(out_name))) {
-      dir.create(dirname(out_name),
+#' Calculate gamma normals for an input raster timeseries.
+#'
+#' @param x A `terra::rast` monthly or annual timeseries that will be used to
+#' calculate gamma normals.
+#' @param out_dir Optional. The directory to save the results out to.
+#' @param descriptor The prefix to use on the filename as an identifier.
+#'
+#' @importFrom magrittr %>%
+#'
+#' @return A named list of `terra::rast` summarized to the following items:
+#' 'mean', 'median', mode', 'variance', 'alpha', 'beta'.
+#' @export
+#'
+#' @examples
+#' a = 1
+gamma_from_rast <- function(x, out_dir = NULL, descriptor = "annual", rast_out = FALSE) {
+
+  if (!is.null(out_dir)) {
+    if (!dir.exists(out_dir)) {
+      dir.create(out_dir,
                  recursive = TRUE,
                  showWarnings = FALSE)
     }
-
-    gamma <- calc_gamma_from_rast(x) %>%
-      {
-        list(alpha = .$alpha,
-             beta = .$beta)
-      }
-
-    summarized <- list(
-      mode = calc_mode(gamma$alpha, gamma$beta),
-      median = terra::lapp(
-        terra::rast(gamma),
-        fun = calc_median,
-        usenames = TRUE
-      ),
-      mean = gamma$alpha / gamma$beta,
-      variance = gamma$alpha / ((gamma$beta) ^ 2)
-    ) %>%
-      purrr::imap( ~ magrittr::set_names(.x, .y))
-
-    if (!is.null(out_dir)) {
-      c(gamma, summarized) %>%
-        purrr::iwalk(
-          ~ write_as_cog(
-            x = .x,
-            filename = file.path(out_dir, glue::glue("{descriptor}_{.y}.tif")))
-        )
-    }
-    return(dir_name)
   }
+
+  gamma <- calc_gamma_from_rast(x) %>%
+    {
+      list(alpha = .$alpha,
+           beta = .$beta)
+    }
+
+  summarized <- list(
+    mode = calc_mode(gamma$alpha, gamma$beta),
+    median = terra::lapp(
+      terra::rast(gamma),
+      fun = calc_median,
+      usenames = TRUE
+    ),
+    mean = gamma$alpha / gamma$beta,
+    variance = gamma$alpha / ((gamma$beta) ^ 2)
+  ) %>%
+    purrr::imap( ~ magrittr::set_names(.x, .y))
+
+  if (!is.null(out_dir)) {
+    c(gamma, summarized) %>%
+      purrr::iwalk(
+        ~ write_as_cog(
+          x = .x,
+          filename = file.path(out_dir, glue::glue("{descriptor}_{.y}.tif")))
+      )
+  }
+
+  if (rast_out) {
+    return(c(gamma, summarized))
+  }
+  return(out_dir)
+}

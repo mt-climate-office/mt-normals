@@ -1,0 +1,99 @@
+---
+title: "Calculation of Rolling 30-year Gamma Normals"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{aggregate-cmip6}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = nzchar(Sys.getenv("CMIP6_DIR"))
+)
+```
+
+```{r setup}
+library(normals)
+library(magrittr)
+f_list <- file.path(Sys.getenv("CMIP6_DIR"), "nexgddp_cmip6") |>
+  list.files(full.names = T, include.dirs = F, recursive = T) |>
+  grep(pattern = "monthly|annual", value = T, invert = F) |>
+  grep(pattern = ".json", value = T, invert = T)
+
+out_dir <- file.path(Sys.getenv("CMIP6_DIR"), "normals")
+```
+
+```{r gamma}
+
+find_windows <- function(f, out_dir, monthly = TRUE, window = 30) {
+  
+  r <- terra::rast(f)
+  
+  dat <- tibble::tibble(dt = terra::time(r)) |> 
+    dplyr::mutate(
+      month = lubridate::month(dt),
+      year = lubridate::year(dt),
+      idx = 1:dplyr::n()
+    ) 
+  
+  out_dir <- ifelse(
+    monthly, 
+    file.path(out_dir, "monthly"), 
+    file.path(out_dir, "annual")
+  )
+  
+  years <- sort(unique(dat$year))
+  
+  purrr::map(unique(dat$month), function(month) {
+    for (i in 1:(length(years) - window)) {
+      target <- years[i:(i+window-1)]
+      # Make sure it all years are present.
+      checkmate::assert_set_equal(target, min(target):max(target))
+      write_dir <- file.path(out_dir, glue::glue("{min(target)}-{max(target)}"))
+      model_name <- basename(f) %>%
+        stringr::str_split("_") %>% 
+        unlist()
+      
+      metadata <- paste(model_name[1:3], collapse = "_")
+      variable <- stringr::str_replace(model_name[4], ".tif", "")
+      write_dir <- file.path(write_dir, metadata)
+      if (!dir.exists(write_dir)) {
+        dir.create(write_dir, showWarnings = FALSE, recursive = TRUE)
+      } else {
+        fs <- list.files(write_dir, pattern=variable)
+        if (length(fs) != 0) {
+          next
+        }
+      }
+      
+      indices <- dat %>%
+        dplyr::filter(
+          month == !!month,
+          year %in% target
+        )
+      
+      indices <- indices$idx
+      checkmate::assert_numeric(indices, len = 30)
+      
+      tmp <- terra::subset(r, indices)
+      gamma_from_rast(r, out_dir = write_dir, descriptor = variable, rast_out = FALSE)
+    }
+  })
+  
+  
+}
+                
+```
+
+
+```{r calc}
+f_list %>% 
+  purrr::map(function(f) {
+    print(f)
+    monthly <- basename(dirname(f)) == "monthly"
+    suppressWarnings(find_windows(f, out_dir, monthly = monthly, window = 30))
+  })
+```

@@ -70,7 +70,7 @@ aggregate_daily <- function(r, variable, monthly = TRUE, agg_func = "mean", file
       )
     )
 
-  out <- terra::tapp(r, groups$idx, fun = agg_func)
+  out <- terra::tapp(r, groups$idx, fun = agg_func, na.rm = T)
   terra::time(out) <- groups$date
   terra::set.names(out, glue::glue("{1:terra::nlyr(out)}_{variable}"))
   if (!is.null(filename)) {

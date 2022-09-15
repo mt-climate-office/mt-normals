@@ -45,5 +45,4 @@ dat <- tibble::tibble(f_name = f_list) |>
   dplyr::mutate(r = list(aggregate_daily(
     r = terra::rast(f_name), variable = variable, monthly = timescale, agg_func = agg_func, filename = out_name, overwrite = TRUE
   )))
-                
 ```
