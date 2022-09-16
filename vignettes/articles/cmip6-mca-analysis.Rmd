@@ -1,0 +1,23 @@
+---
+title: "Rerunning the Montana Climate Assessment with CMIP6 Data"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = nzchar(Sys.getenv("CMIP6_DIR"))
+)
+```
+
+```{r setup}
+library(magrittr)
+library(terra)
+library(mcor)
+library(sf)
+library(ggplot2)
+
+reference_period <- c(1991, 2020)
+mid_century <- c(2040, 2069)
+end_century <- c(2070, 2099)
+```

@@ -39,7 +39,7 @@ dat <- tibble::tibble(f_name = f_list) |>
   tidyr::pivot_longer(c(annual, monthly), values_to = "timescale") |>
   dplyr::mutate(
     out_name = file.path(dirname(f_name), name, glue::glue("{base}.tif")),
-    agg_func = ifelse(variable == "pr", "sum", "mean")
+    agg_func = "mean"
   ) |>
   dplyr::rowwise() |>
   dplyr::mutate(r = list(aggregate_daily(

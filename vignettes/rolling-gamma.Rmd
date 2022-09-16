@@ -63,7 +63,9 @@ find_windows <- function(f, out_dir, monthly = TRUE, window = 30) {
       if (!dir.exists(write_dir)) {
         dir.create(write_dir, showWarnings = FALSE, recursive = TRUE)
       } else {
-        fs <- list.files(write_dir, pattern=variable)
+        pattern = tolower(month.abb[month])
+        pattern = glue::glue("{pattern}_mean_{variable}.tif")
+        fs <- list.files(write_dir, pattern=pattern)
         if (length(fs) != 0) {
           next
         }
@@ -79,7 +81,9 @@ find_windows <- function(f, out_dir, monthly = TRUE, window = 30) {
       checkmate::assert_numeric(indices, len = 30)
       
       tmp <- terra::subset(r, indices)
-      gamma_from_rast(r, out_dir = write_dir, descriptor = variable, rast_out = FALSE)
+      timescale <- ifelse(monthly, tolower(month.abb[month]), "annual")
+      descriptor <- glue::glue("{timescale}_{variable}")
+      gamma_from_rast(r, out_dir = write_dir, descriptor = descriptor, rast_out = FALSE)
     }
   })
   
