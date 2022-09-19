@@ -47,31 +47,17 @@ library(magrittr)
 #' # Calculate the monthly mean.
 #' aggregate_daily(r, 'example', FALSE, 'mean')
 aggregate_daily <- function(r, variable, monthly = TRUE, agg_func = "mean", filename=NULL, ...) {
-  tm <- terra::time(r)
 
-  if (monthly) {
-    mons <- lubridate::month(tm)
-  } else {
-    mons <- rep(1, terra::nlyr(r))
-  }
+  grp <- ifelse(monthly, "yearmonths", "years")
+  out <- terra::tapp(r, grp, fun = agg_func, na.rm = T)
 
-  groups <- tibble::tibble(date = tm) |>
-    dplyr::mutate(
-      mon = mons,
-      year = lubridate::year(date)
-    ) |>
-    dplyr::group_by(mon, year) |>
-    dplyr::summarise(
-      idx = dplyr::cur_group_id(), .groups = "drop"
-    ) |>
-    dplyr::mutate(
-      date = lubridate::as_date(
-        glue::glue("{year}-{mon}-01", format="%Y-%m-%d")
-      )
-    )
+  terra::time(out) <- names(out) %>%
+    stringr::str_replace("X", "") %>%
+    paste0(
+      ifelse(monthly, "01", "0101")
+    ) %>%
+    lubridate::as_date(format = "%Y%m%d")
 
-  out <- terra::tapp(r, groups$idx, fun = agg_func, na.rm = T)
-  terra::time(out) <- groups$date
   terra::set.names(out, glue::glue("{1:terra::nlyr(out)}_{variable}"))
   if (!is.null(filename)) {
     terra::writeRaster(out, filename, ...)

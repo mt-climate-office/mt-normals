@@ -17,7 +17,34 @@ library(mcor)
 library(sf)
 library(ggplot2)
 
-reference_period <- c(1991, 2020)
-mid_century <- c(2040, 2069)
-end_century <- c(2070, 2099)
+data_dir <- Sys.getenv("CMIP6_DIR")
+mt <- mcor::mt_state_simple
+# reference_period <- c(1991, 2020)
+# mid_century <- c(2040, 2069)
+# end_century <- c(2070, 2099)
+```
+
+```{r agg_func}
+ensemble_average <- function(fs) {
+  
+  r <- terra::rast(fs)
+  dates <- terra::time(r)
+  dates <- unique(terra::time(r))
+}
+
+```
+
+```{r table2.1}
+f_list <- file.path(data_dir, "nexgddp_cmip6", "monthly") %>% 
+  list.files(full.names = T, pattern = "tas") %>% 
+  grep(".json", ., value = T, invert = T) %>% 
+  grep("historical", ., value = T)
+
+
+
+tmin <- grep("tasmin.tif", f_list, value = T) %>% 
+  terra::rast()
+tmax <- grep("tasmax", f_list, value = T)
+tavg <- grep("tas.tif", f_list, value = T)
+
 ```
