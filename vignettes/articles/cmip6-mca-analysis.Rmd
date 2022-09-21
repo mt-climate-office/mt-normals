@@ -61,7 +61,7 @@ season_map <- function(x) {
 
 ensemble_average <- function(fs, transform, fun="mean") {
   stk <- terra::rast(fs) %>% 
-    terra::tapp(index="days", fun=fun)
+    terra::tapp(index="days", fun="mean")
   
   times <- tibble::tibble(
     date = names(stk) %>% 
@@ -76,13 +76,37 @@ ensemble_average <- function(fs, transform, fun="mean") {
         lubridate::month(date) %in% c(9, 10, 11) ~ 4 # 4=fall
       ), 
       idx = 1:dplyr::n()
-    )
+    ) %>% 
+    dplyr::rowwise() %>% 
+    dplyr::mutate(
+      year = ifelse(
+        (season == 1) && (lubridate::month(date)) == 12, 
+        lubridate::year(date) + 1,
+        lubridate::year(date)
+      )
+    ) %>%
+    dplyr::group_by(year, season) %>% 
+    dplyr::mutate(
+      yearly_grp = dplyr::cur_group_id(),
+      group_count = dplyr::n()
+    ) %>% 
+    dplyr::filter(group_count == 3)
   
+  times_by_season <- times %>% 
+    dplyr::select(year, season, yearly_grp) %>% 
+    dplyr::distinct()
+  
+  seasonal_by_year <- terra::subset(stk, times$idx) %>%
     terra::tapp(
       stk, 
-      index = times$season, 
-      fun = "mean"
+      index = times$yearly_grp, 
+      fun = fun
     ) %>% 
+    terra::tapp(
+      index = times_by_season$season,
+      fun = "mean"
+    )
+
       magrittr::set_names(c("Winter", "Spring", "Summer", "Fall")) %>% 
       to_shp() %>% 
       tidyr::pivot_longer(
@@ -112,23 +136,14 @@ tmax <- grep("tasmax", f_list, value = T) %>% ensemble_average(transform = trans
 tavg <- grep("tas.tif", f_list, value = T) %>% ensemble_average(transform = transform)
 ```
 ```{r table2.2}
-r <- file.path(data_dir, "nexgddp_cmip6", "monthly") %>% 
+fs <- file.path(data_dir, "nexgddp_cmip6", "monthly") %>% 
   list.files(full.names = T, pattern = "pr") %>% 
   grep(".json", ., value = T, invert = T) %>% 
-  grep("historical", ., value = T) %>% 
-  terra::rast()
+  grep("historical", ., value = T)
 
-days_in_mons <- lubridate::days_in_month(terra::time(r))
-test <- purrr::map(1:length(days_in_mons), function(x) {
-  print(x)
-  tmp <- terra::subset(r, x)
-  tmp * 24 * days_in_mons[x]
-})
-test <- function(x, y) {
-  print(class(x))
-  x
-}
+tmp <- terra::rast(f_list[[1]])
+mt <- sf::st_transform(mt, crs = sf::st_crs(tmp))
 
 
-terra::app()
+ppt <- ensemble_average(fs, transform = transform, fun = "sum")
 ```

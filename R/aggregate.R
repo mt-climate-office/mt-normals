@@ -12,6 +12,8 @@ library(magrittr)
 #' "mean"
 #' @param filename A path/name to save the file as. If left empty, nothing will
 #' be written to disk.
+#' @param transform A unit transform function to apply to the daily data before
+#' they are aggregated.
 #' @param ... Additional arguments that will be passed to `terra::writeRaster`.
 #'
 #' @return A `terra::rast` with monthly data.
@@ -46,7 +48,11 @@ library(magrittr)
 #'
 #' # Calculate the monthly mean.
 #' aggregate_daily(r, 'example', FALSE, 'mean')
-aggregate_daily <- function(r, variable, monthly = TRUE, agg_func = "mean", filename=NULL, ...) {
+aggregate_daily <- function(r, variable, monthly = TRUE, agg_func = "mean", filename=NULL, transform = NA, ...) {
+
+  if (!is.na(transform)) {
+    r <- transform(r)
+  }
 
   grp <- ifelse(monthly, "yearmonths", "years")
   out <- terra::tapp(r, grp, fun = agg_func, na.rm = T)

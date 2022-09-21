@@ -39,10 +39,12 @@ dat <- tibble::tibble(f_name = f_list) |>
   tidyr::pivot_longer(c(annual, monthly), values_to = "timescale") |>
   dplyr::mutate(
     out_name = file.path(dirname(f_name), name, glue::glue("{base}.tif")),
-    agg_func = "mean"
+    agg_func = ifelse(variable == "pr", "sum", "mean"),
+    transform = ifelse(variable == "pr", list(function(x) x * 86400), list(NA))
   ) |>
+  dplyr::filter(variable == 'pr') |>
   dplyr::rowwise() |>
   dplyr::mutate(r = list(aggregate_daily(
-    r = terra::rast(f_name), variable = variable, monthly = timescale, agg_func = agg_func, filename = out_name, overwrite = TRUE
+    r = terra::rast(f_name), variable = variable, monthly = timescale, agg_func = agg_func, filename = out_name, transform = unlist(transform), overwrite = TRUE
   )))
 ```
