@@ -13,26 +13,56 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(magrittr)
 library(terra)
-library(mcor)
 library(sf)
 library(ggplot2)
 
 data_dir <- Sys.getenv("CMIP6_DIR")
-mt <- mcor::mt_state_simple
+mt <- urbnmapr::get_urbn_map(sf = TRUE) %>% 
+  dplyr::filter(state_abbv == "MT")
 # reference_period <- c(1991, 2020)
 # mid_century <- c(2040, 2069)
 # end_century <- c(2070, 2099)
 ```
 
 ```{r to_shp} 
+mco_mask <- function(rast, mask){
+  raster::mask(rast,
+               fasterize::fasterize(mask %>%
+                                      sf::st_transform(raster::projection(rast)),
+                                    raster::raster(rast))
+  )
+}
+
 to_shp <- function(x) {
   x %>%
     terra::project(
-     mcor::mt_state_plane %>% as.character() %>% magrittr::extract(2)
+     'PROJCS["NAD_1983_HARN_StatePlane_Montana_FIPS_2500 (deprecated)",
+    GEOGCS["NAD83(HARN)",
+        DATUM["NAD83_High_Accuracy_Reference_Network",
+            SPHEROID["GRS 1980",6378137,298.257222101,
+                AUTHORITY["EPSG","7019"]],
+            AUTHORITY["EPSG","6152"]],
+        PRIMEM["Greenwich",0,
+            AUTHORITY["EPSG","8901"]],
+        UNIT["degree",0.0174532925199433,
+            AUTHORITY["EPSG","9122"]],
+        AUTHORITY["EPSG","4152"]],
+    PROJECTION["Lambert_Conformal_Conic_2SP"],
+    PARAMETER["latitude_of_origin",44.25],
+    PARAMETER["central_meridian",-109.5],
+    PARAMETER["standard_parallel_1",45],
+    PARAMETER["standard_parallel_2",49],
+    PARAMETER["false_easting",600000],
+    PARAMETER["false_northing",0],
+    UNIT["metre",1,
+        AUTHORITY["EPSG","9001"]],
+    AXIS["Easting",EAST],
+    AXIS["Northing",NORTH],
+    AUTHORITY["ESRI","102300"]]'
     ) %>%
-    terra::mask(mcor::mt_state %>% terra::vect(), touches=F) %>%
+    terra::mask(mt %>% terra::vect(), touches=F) %>%
     raster::stack() %>%
-    mcor::mco_mask(mask = mcor::mt_state) %>%
+    mco_mask(mask = mt) %>%
     spex::qm_rasterToPolygons(na.rm = T) 
 }
 ```
@@ -42,7 +72,7 @@ plot_seasonal <- function(dat, mt) {
   ggplot(dat) + 
     geom_sf(aes(fill = value), color = NA) + 
     facet_wrap(~season) + 
-    geom_sf(data = mcor::mt_state_simple, fill = NA) + 
+    geom_sf(data = mt, fill = NA) + 
     theme_bw()
 }
 ```
