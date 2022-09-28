@@ -2,7 +2,7 @@
 title: "Rerunning the Montana Climate Assessment with CMIP6 Data"
 ---
 
-```{r, include = FALSE}
+```{r include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -17,8 +17,7 @@ library(sf)
 library(ggplot2)
 
 data_dir <- Sys.getenv("CMIP6_DIR")
-mt <- urbnmapr::get_urbn_map(sf = TRUE) %>% 
-  dplyr::filter(state_abbv == "MT")
+
 mt_state_plane <- 'PROJCS["NAD_1983_HARN_StatePlane_Montana_FIPS_2500 (deprecated)",
     GEOGCS["NAD83(HARN)",
         DATUM["NAD83_High_Accuracy_Reference_Network",
@@ -42,6 +41,10 @@ mt_state_plane <- 'PROJCS["NAD_1983_HARN_StatePlane_Montana_FIPS_2500 (deprecate
     AXIS["Easting",EAST],
     AXIS["Northing",NORTH],
     AUTHORITY["ESRI","102300"]]'
+
+mt <- urbnmapr::get_urbn_map(sf = TRUE) %>% 
+  dplyr::filter(state_abbv == "MT") %>% 
+  sf::st_transform(mt_state_plane)
 reference_period <- c(1981, 2010)
 mid_century <- c(2040, 2069)
 end_century <- c(2070, 2099)
@@ -59,10 +62,11 @@ mco_mask <- function(rast, mask){
 to_shp <- function(x) {
   x %>%
     terra::project(mt_state_plane) %>%
-    terra::mask(mt %>% terra::vect(), touches=F) %>%
+    # terra::mask(mt %>% terra::vect(), touches=F) %>%
     raster::stack() %>%
     mco_mask(mask = mt) %>%
-    spex::qm_rasterToPolygons(na.rm = T) 
+    spex::qm_rasterToPolygons(na.rm = T) %>%
+    tidyr::pivot_longer(-geometry, names_to = "time")
 }
 ```
 
@@ -70,7 +74,7 @@ to_shp <- function(x) {
 plot_seasonal <- function(dat, mt) {
   ggplot(dat) + 
     geom_sf(aes(fill = value), color = NA) + 
-    facet_wrap(~season) + 
+    facet_wrap(~time) + 
     geom_sf(data = mt, fill = NA) + 
     theme_bw()
 }
@@ -116,27 +120,33 @@ time_avg <- function(
     ) %>% 
     dplyr::filter(
       year %in% reference_period[1]:reference_period[2],
-      group_count == 3
     ) %>% 
     dplyr::mutate(
-      yearly_grp = glue::glue("{season} {year}") %>% factor()
+      yearly_grp = glue::glue("{season} {year}")
     )
   
   if (nrow(times) == 0) {
     return(NULL)
   }
 
-  r_filtered <- terra::subset(stk, times$idx) 
 
   if (period == "annual"){
+    r_filtered <- terra::subset(stk, times$idx) 
+
     out <- terra::tapp(
       r_filtered, index = times$year, fun = fun
     )
   } else if (period == "seasonal") {
+    
+    time_tmp <- dplyr::filter(times, group_count == 3)
+    r_filtered <- terra::subset(stk, time_tmp$idx) 
+
     out <- terra::tapp(
-      r_filtered, index = times$yearly_grp, fun = fun
+      r_filtered, index = time_tmp$yearly_grp, fun = fun
     )  
   } else {
+    r_filtered <- terra::subset(stk, times$idx) 
+
     out <- r_filtered
   }
   
@@ -181,9 +191,31 @@ filter_files <- function(f_list, scenario, variable) {
     grep(scenario, ., value = T) %>% 
     grep(variable, ., value = T)
 }
+
+get_global_summary <- function(r, fun = "mean") {
+  
+  terra::global(r, fun) %>%
+    tibble::rownames_to_column() %>% 
+    magrittr::set_names(c("time", "value")) %>% 
+    tibble::as_tibble() 
+}
+
+trend_func <- function(ys, threshold = 0.05) {
+  
+  xs <- 1:length(ys)
+  mod <- lm(ys ~ xs)
+  coeffs <- coef(mod)
+  
+  meta <- summary(mod)
+  if (meta$coefficients[,4][2] > threshold) {
+    return(0)
+  }
+  coeffs[2]
+}
+
 ```
 
-```{r preprocess}
+```{r preprocess, warning=FALSE}
 f_list <- file.path(data_dir, "nexgddp_cmip6", "monthly") %>% 
   list.files(full.names = T)
 
@@ -194,13 +226,17 @@ rast_df <- tidyr::crossing(
   scenario = c("historical", "ssp126", "ssp245", "ssp370", "ssp585"),
   variable = c("tasmin.tif", "tasmax.tif", "tas.tif", "pr.tif"), 
   timescale = c("annual", "monthly", "seasonal"),
-  reference_period = list(c(1950, 2014), reference_period, mid_century, end_century)
+  reference_period = list(
+    "record"=c(1950, 2014), 
+    "reference_period"=reference_period, 
+    "mid_century"=mid_century, 
+    "end_century"=end_century)
 ) %>%
   dplyr::mutate(
     fun = ifelse(variable == "pr.tif", "sum", "mean"),
     tsfm = ifelse(variable == "pr.tif", list(pr_tsfm), list(tas_tsfm))
   ) %>% 
-  dplyr::rowwise() %>% 
+  dplyr::rowwise() %>%
   dplyr::mutate(
     fs = list(filter_files(f_list, scenario, variable)),
     r = list(time_avg(
@@ -214,16 +250,114 @@ rast_df <- tidyr::crossing(
       timeseries_to_summary(r, period = timescale)
     )
   ) %>% 
-  dplyr::filter(!is.null(r))
+  dplyr::filter(!is.null(r)) %>%
+  dplyr::ungroup() %>%
+  dplyr::mutate(period_name = names(.$reference_period)) %>% 
+  # dplyr::select(scenario, variable, timescale, r, r_summarized, period_name) %>% 
+  dplyr::mutate(variable = stringr::str_replace(variable, ".tif", ""))
 ```
 
 
 ```{r table2.1}
-
+rast_df %>% 
+  dplyr::filter(
+    timescale %in% c("annual", "seasonal"),
+    period_name == "reference_period",
+    stringr::str_detect(variable, "tas|pr")
+  ) %>% 
+  dplyr::rowwise() %>% 
+  dplyr::mutate(dat = list(get_global_summary(r_summarized))) %>% 
+  dplyr::select(variable, dat) %>% 
+  tidyr::unnest(dat) %>% 
+  dplyr::mutate(
+    variable = dplyr::recode(
+      variable,
+      "tas" = "Average Temperature",
+      "tasmax" = "Avg. Max Temperature",
+      "tasmin" = "Avg. Min Temperature",
+      "pr" = "Total Precipitation"
+    ),
+    value = round(value)
+  ) %>%
+  tidyr::pivot_wider(names_from = time, values_from = value) %>%
+  dplyr::rename(" " = variable) %>% 
+  knitr::kable(
+    caption = "Table 1: Average temperatures (°F) and Precipitation (in) across Montana from 1981-2010."
+  )
 ```
 
-```{r table2.2}
+```{r fig2.1}
+tmp <- rast_df %>% 
+  dplyr::filter(
+    timescale %in% c("seasonal"),
+    period_name == "reference_period",
+    stringr::str_detect(variable, "tas|pr")
+  ) %>% 
+  dplyr::rowwise() %>% 
+  dplyr::mutate(dat = list(to_shp(r_summarized))) %>% 
+  dplyr::select(variable, dat) %>%
+  dplyr::group_split() %>%
+  purrr::map(function(x) {
+    x$dat[[1]] %>% 
+      dplyr::mutate(variable = x$variable)
+  }) %>% 
+  dplyr::bind_rows()
 
+pr_plt <- plot_seasonal(
+  dplyr::filter(tmp, variable == 'pr'),
+  mt = mt
+)
+
+tavg_plt <- plot_seasonal(
+  dplyr::filter(tmp, variable == 'tas'),
+  mt = mt
+)
+
+tmin_plt <- plot_seasonal(
+  dplyr::filter(tmp, variable == 'tasmin'),
+  mt = mt
+)
+
+tmax_plt <- plot_seasonal(
+  dplyr::filter(tmp, variable == 'tasmax'),
+  mt = mt
+)
 ```
 
 
+```{r table2.3}
+rast_df %>% 
+  dplyr::filter(
+    timescale %in% c("annual", "seasonal"),
+    period_name == "record",
+    stringr::str_detect(variable, "tas")
+  ) %>% 
+  dplyr::rowwise() %>% 
+  dplyr::mutate(dat = list(get_global_summary(r))) %>% 
+  dplyr::select(variable, dat) %>%
+  tidyr::unnest(dat) %>% 
+  dplyr::mutate(
+    time = stringr::str_replace(time, "X", "Annual.")
+  ) %>% 
+  tidyr::separate(time, c("time", "year")) %>% 
+  dplyr::group_by(variable, time) %>% 
+  dplyr::arrange(year) %>% 
+  dplyr::summarise(
+    trend = trend_func(value),
+    .groups = "drop"
+  ) %>% 
+  dplyr::mutate(
+    variable = dplyr::recode(
+      variable,
+      "tas" = "Average Temperature",
+      "tasmax" = "Avg. Max Temperature",
+      "tasmin" = "Avg. Min Temperature",
+    ),
+    trend = round(trend, 3)
+  ) %>% 
+  tidyr::pivot_wider(names_from = time, values_from = trend) %>%
+  dplyr::rename(" " = variable) %>% 
+  knitr::kable(
+    caption = "Table 1: Average temperatures (°F) and Precipitation (in) across Montana from 1981-2010."
+  )
+```
