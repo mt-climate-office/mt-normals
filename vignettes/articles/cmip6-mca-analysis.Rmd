@@ -59,24 +59,54 @@ mco_mask <- function(rast, mask){
   )
 }
 
-to_shp <- function(x) {
-  x %>%
+to_shp <- function(x, mt) {
+  
+  tmp <- x %>%
     terra::project(mt_state_plane) %>%
     # terra::mask(mt %>% terra::vect(), touches=F) %>%
     raster::stack() %>%
-    mco_mask(mask = mt) %>%
+    # mco_mask(mask = mt) %>%
     spex::qm_rasterToPolygons(na.rm = T) %>%
-    tidyr::pivot_longer(-geometry, names_to = "time")
+    tidyr::pivot_longer(-geometry, names_to = "time") 
+  
+  mt_use <- sf::st_transform(mt, sf::st_crs(tmp)) %>% 
+    dplyr::select(geometry)
+  
+  sf::st_intersection(tmp, mt_use) 
 }
 ```
 
 ```{r plot_seasonal} 
 plot_seasonal <- function(dat, mt) {
-  ggplot(dat) + 
+  
+  sf::st_as_sf(dat) %>% 
+  ggplot() + 
     geom_sf(aes(fill = value), color = NA) + 
     facet_wrap(~time) + 
     geom_sf(data = mt, fill = NA) + 
     theme_bw()
+}
+
+plot_timeseries <- function(dat) {
+  dat %>%
+    dplyr::mutate(
+      variable = dplyr::recode(
+        variable,
+        "tas" = "Average Temperature",
+        "tasmax" = "Avg. Max Temperature",
+        "tasmin" = "Avg. Min Temperature",
+        "pr" = "Total Precipitation"
+      ), 
+      year = as.numeric(year)
+    ) %>%
+    dplyr::filter(time != "Annual") %>% 
+    dplyr::mutate(time = factor(time, levels = c("Winter", "Spring", "Summer", "Fall"))) %>% 
+    ggplot(aes(x=year, y=value, color = variable)) + 
+      geom_line() + 
+      geom_smooth(method = "lm") +
+      facet_wrap(~time, scales = "free_y") +
+      theme_minimal() + 
+      labs(x="", y = "Temperature (°F)", color="")
 }
 ```
 
@@ -286,8 +316,8 @@ rast_df %>%
   )
 ```
 
-```{r fig2.1}
-tmp <- rast_df %>% 
+```{r fig2.1, message=FALSE, warning=FALSE}
+plt <- rast_df %>% 
   dplyr::filter(
     timescale %in% c("seasonal"),
     period_name == "reference_period",
@@ -301,51 +331,37 @@ tmp <- rast_df %>%
     x$dat[[1]] %>% 
       dplyr::mutate(variable = x$variable)
   }) %>% 
-  dplyr::bind_rows()
-
-pr_plt <- plot_seasonal(
-  dplyr::filter(tmp, variable == 'pr'),
-  mt = mt
-)
-
-tavg_plt <- plot_seasonal(
-  dplyr::filter(tmp, variable == 'tas'),
-  mt = mt
-)
-
-tmin_plt <- plot_seasonal(
-  dplyr::filter(tmp, variable == 'tasmin'),
-  mt = mt
-)
-
-tmax_plt <- plot_seasonal(
-  dplyr::filter(tmp, variable == 'tasmax'),
-  mt = mt
-)
+  dplyr::bind_rows() %>% 
+  dplyr::group_by(variable) %>% 
+  dplyr::summarise(plt = list(plot_seasonal(dplyr::cur_data_all(), mt)))
 ```
 
 
 ```{r table2.3}
-rast_df %>% 
+tmp <- rast_df %>% 
   dplyr::filter(
     timescale %in% c("annual", "seasonal"),
     period_name == "record",
     stringr::str_detect(variable, "tas")
   ) %>% 
   dplyr::rowwise() %>% 
-  dplyr::mutate(dat = list(get_global_summary(r))) %>% 
+  dplyr::mutate(dat = list(get_global_summary(r))) %>%
   dplyr::select(variable, dat) %>%
   tidyr::unnest(dat) %>% 
   dplyr::mutate(
     time = stringr::str_replace(time, "X", "Annual.")
   ) %>% 
-  tidyr::separate(time, c("time", "year")) %>% 
+  tidyr::separate(time, c("time", "year")) 
+
+trends <- tmp %>%
   dplyr::group_by(variable, time) %>% 
   dplyr::arrange(year) %>% 
   dplyr::summarise(
     trend = trend_func(value),
     .groups = "drop"
-  ) %>% 
+  ) 
+
+table_out <- trends %>%
   dplyr::mutate(
     variable = dplyr::recode(
       variable,
@@ -360,4 +376,90 @@ rast_df %>%
   knitr::kable(
     caption = "Table 1: Average temperatures (°F) and Precipitation (in) across Montana from 1981-2010."
   )
+```
+
+```{r fig2.3, message=FALSE, warning=FALSE}
+trend_spatial <- function(r) {
+  tibble::tibble(time=names(r)) %>% 
+    dplyr::mutate(
+      time = stringr::str_replace(time, "X", "Annual.")
+    ) %>% 
+    tidyr::separate(time, c("time", "year")) %$%
+    terra::tapp(r, time, fun = trend_func) 
+}
+
+trend_plots <- rast_df %>% 
+  dplyr::filter(
+    timescale %in% c("seasonal", "annual"),
+    period_name == "record",
+    stringr::str_detect(variable, "pr|tas")
+  ) %>% 
+  dplyr::rowwise() %>%
+  dplyr::mutate(
+    trends = list(trend_spatial(r)),
+    dat = list(to_shp(trends))
+  ) %>% 
+  dplyr::select(variable, timescale, dat) %>%
+  dplyr::group_split() %>%
+  purrr::map(function(x) {
+    x$dat[[1]] %>% 
+      dplyr::mutate(variable = x$variable)
+  }) %>% 
+  dplyr::bind_rows() %>%
+  dplyr::mutate(seasonal = ifelse(time == "Annual", FALSE, TRUE)) %>%
+  dplyr::group_by(seasonal, variable) %>% 
+  dplyr::summarise(plt = list(plot_seasonal(dplyr::cur_data_all(), mt=mt)))
+
+```
+
+```{r change_maps, message=FALSE, warning=FALSE}
+
+
+
+plot_difference <- function(dat) {
+    sf::st_as_sf(dat) %>% 
+    ggplot() + 
+      geom_sf(aes(fill = value), color = NA) + 
+      facet_wrap(~scenario) + 
+      geom_sf(data = mt, fill = NA) + 
+      theme_bw()
+  
+}
+
+tmp <- rast_df %>% 
+  dplyr::filter(timescale == "annual", period_name != "record") %>%
+  dplyr::select(scenario, variable, r_summarized, period_name) %>% 
+  tidyr::unite(scenario, scenario, period_name, sep = "-")
+
+dat <- dplyr::left_join(
+  dplyr::filter(tmp, stringr::str_detect(scenario, "historical")) %>% 
+    dplyr::select(variable, reference=r_summarized),
+  dplyr::filter(tmp, stringr::str_detect(scenario, "historical", negate = TRUE)) %>% 
+    tidyr::pivot_wider(names_from = scenario, values_from = r_summarized),
+  by="variable"
+) %>% 
+  tidyr::pivot_longer(dplyr::starts_with("ssp"), values_to = "future") %>%
+  tidyr::separate(name, c("scenario", "period"), sep = "-") %>% 
+  dplyr::rowwise() %>% 
+  # TODO: t-test between future and reference to make sure mean is truly different.
+  dplyr::mutate(
+    diff = list(to_shp(future - reference, mt=mt))
+  ) %>% 
+  dplyr::select(variable, scenario, period, diff)  %>% 
+  dplyr::rowwise() %>% 
+  dplyr::group_split() %>%
+  purrr::map(function(x) {
+    x$diff[[1]] %>% 
+      dplyr::mutate(
+        variable = x$variable,
+        scenario = x$scenario,
+        period = x$period
+      )
+  }) %>% 
+  dplyr::bind_rows() %>% 
+  sf::st_as_sf()
+
+change_plots <- dat %>% 
+  dplyr::group_by(variable, period) %>% 
+  dplyr::summarise(plt = list(plot_difference(dplyr::cur_data_all()))) 
 ```
