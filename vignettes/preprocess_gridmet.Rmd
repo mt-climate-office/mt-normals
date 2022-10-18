@@ -1,0 +1,146 @@
+---
+title: "Preprocess Gridmet"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Preprocess Gridmet}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This is a brief tutorial outlining how we aggregated gridMET data for this analysis. First, we will download all relevant gridMET data using a simple bash script. We are saving the data to a directory called `~/data/gridmet/raw` in this example:
+
+````{verbatim, lang = "bash"}
+variables=("pr" "tmmn"  "tmmx")
+for v in ${variables[@]}
+do
+    mkdir -p ~/data/gridmet/raw/"$v"
+    for year in {1979..2020}
+    do
+        wget -nc -c -nd -P ~/data/gridmet/raw/"$v" http://www.northwestknowledge.net/metdata/data/"$v"_"$year".nc
+    done
+done
+````
+
+Next, we define a projection and area of interest that will be used to crop and project the gridMET data. 
+```{r setup, echo=TRUE}
+library(magrittr)
+
+# A string specifying the WKT for Montana State Plane
+mt_state_plane <- 'PROJCS["NAD_1983_HARN_StatePlane_Montana_FIPS_2500 (deprecated)",
+    GEOGCS["NAD83(HARN)",
+        DATUM["NAD83_High_Accuracy_Reference_Network",
+            SPHEROID["GRS 1980",6378137,298.257222101,
+                AUTHORITY["EPSG","7019"]],
+            AUTHORITY["EPSG","6152"]],
+        PRIMEM["Greenwich",0,
+            AUTHORITY["EPSG","8901"]],
+        UNIT["degree",0.0174532925199433,
+            AUTHORITY["EPSG","9122"]],
+        AUTHORITY["EPSG","4152"]],
+    PROJECTION["Lambert_Conformal_Conic_2SP"],
+    PARAMETER["latitude_of_origin",44.25],
+    PARAMETER["central_meridian",-109.5],
+    PARAMETER["standard_parallel_1",45],
+    PARAMETER["standard_parallel_2",49],
+    PARAMETER["false_easting",600000],
+    PARAMETER["false_northing",0],
+    UNIT["metre",1,
+        AUTHORITY["EPSG","9001"]],
+    AXIS["Easting",EAST],
+    AXIS["Northing",NORTH],
+    AUTHORITY["ESRI","102300"]]'
+
+# A shapefile specifying the extent of Montana
+mt <- sf::read_sf("https://data.climate.umt.edu/mt-normals/fgb/states.fgb") %>% 
+  dplyr::filter(state_abbv == "MT")
+```
+
+For all of the analysis in the Montana Climate Assessment, we use monthly data. So for the next step, we will clip the data to Montana, aggregate to a monthly timescale, and project to the Montana State Plane projection. Below is a function that does the bulk of the heavy lifting for these calculations:
+```{r parse_gridmet}
+# Function to clean up gridMET data
+parse_gridmet <- function(f, func="mean") {
+  # Uncomment the print line if you want to see progress as the files are processed.
+  # print(f)
+  # Read file as a raster
+  r <- terra::rast(f) %>% 
+    terra::crop(mt) 
+  
+  # gridMET uses number of days since 1900-01-01 as the layer name. 
+  # We grab this info from the layer name and assign it as the time.
+  terra::time(r) <- names(r) %>%
+    stringr::str_split("=") %>%
+    lapply(magrittr::extract2, 2) %>%
+    unlist() %>% 
+    as.numeric() %>% 
+    lubridate::as_date(origin = as.Date("1900-01-01"))
+  
+  # When the data are output from terra::tapp, the time information is stripped.
+  # We specify monthly time information as the first of each month.
+  new_time <- tibble::tibble(time = terra::time(r)) %>% 
+    dplyr::transmute(
+      year = lubridate::year(time),
+      month = lubridate::month(time)
+    ) %>% 
+    dplyr::distinct() %>% 
+    dplyr::mutate(out = lubridate::as_date(
+        glue::glue("{year}-{month}-01")
+      )
+    ) %$%
+    out
+  
+  # Calculate the monthly average/sum for a given year.
+  terra::tapp(r, "yearmonths", fun=func) %>% 
+    terra::project(mt_state_plane) %>% 
+    magrittr::set_names(tolower(month.abb)) %>% 
+    terra::`time<-`(new_time) 
+}
+```
+
+Using the above function, we read the raw gridMET data from the `data_dir`, crop, project, and aggregate daily to a monthly timescale. For each variable, a file containing all data from 1979 - 2020 is written out in a [Cloud Optimized GeoTIFF](https://www.cogeo.org/) format. 
+```{r wrangle, message=FALSE, warning=FALSE}
+data_dir <- "~/data/gridmet/raw"
+out_dir <- "~/data/gridmet/montana"
+
+if (!dir.exists(out_dir)) {
+  dir.create(out_dir)
+}
+
+list.files(data_dir, full.names = T, recursive = T, pattern = ".nc") %>%
+  # Make sure we are only grabbing relevant variables
+  stringr::str_subset("tmmn|tmmx|pr") %>% 
+  tibble::tibble(f = .) %>% 
+  # If the variable is precipitation, we will calculate monthly sums.
+  # Otherwise, we will calculate monthly averages. 
+  dplyr::mutate(
+    variable = basename(dirname(f)),
+    func = ifelse(variable == 'pr', 'sum', 'mean')
+  ) %>% 
+  dplyr::rowwise() %>% 
+  # For each row (each raster) run the function we specified above.
+  dplyr::mutate(r = list(parse_gridmet(f, func=func))) %>% 
+  dplyr::group_by(variable) %>% 
+  # concatenate all raster objects that are the same variable
+  dplyr::summarise(r = list(terra::rast(r))) %>%
+  # switch to wide format to facilitate writing out the rasters
+  tidyr::pivot_wider(names_from = variable, values_from = r) %>% 
+  as.list() %>% 
+  # Write each variable out as a Cloud Optimized GeoTiff in the out_dir directory.
+  purrr::iwalk(
+    ~   terra::writeRaster(
+      x = .x[[1]],
+      filename = file.path(out_dir, paste0(.y, ".tif")),
+      overwrite = TRUE,
+      gdal = c("COMPRESS=DEFLATE",
+               "of=COG"),
+      memfrac = 0.9
+    )
+  )
+```
+After running the above code, `tmmn.tif`, `tmmx.tif` and `pr.tif` will be saved out to your `out_dir` folder. For ease of access and reproducability, these files are also available on the Montana Climate Office's file server at [https://data.climate.umt.edu/mt-normals/mca](https://data.climate.umt.edu/mt-normals/mca). 

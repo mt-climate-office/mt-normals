@@ -16,7 +16,8 @@ library(terra)
 library(sf)
 library(ggplot2)
 
-data_dir <- Sys.getenv("CMIP6_DIR")
+cmip_dir <- Sys.getenv("CMIP6_DIR")
+gm_dir <- Sys.getenv("GRIDMET_DIR")
 
 mt_state_plane <- 'PROJCS["NAD_1983_HARN_StatePlane_Montana_FIPS_2500 (deprecated)",
     GEOGCS["NAD83(HARN)",
@@ -42,9 +43,23 @@ mt_state_plane <- 'PROJCS["NAD_1983_HARN_StatePlane_Montana_FIPS_2500 (deprecate
     AXIS["Northing",NORTH],
     AUTHORITY["ESRI","102300"]]'
 
-mt <- urbnmapr::get_urbn_map(sf = TRUE) %>% 
+mt <- sf::read_sf("https://data.climate.umt.edu/mt-normals/fgb/states.fgb") %>% 
   dplyr::filter(state_abbv == "MT") %>% 
   sf::st_transform(mt_state_plane)
+
+counties <- sf::read_sf(
+  "https://data.climate.umt.edu/mt-normals/fgb/counties.fgb"
+) %>%
+  dplyr::filter(state_abbv == "MT") %>% 
+  sf::st_transform(mt_state_plane)
+
+climdiv <- sf::read_sf(
+  "https://data.climate.umt.edu/mt-normals/fgb/climdiv.fgb"
+) %>%
+  dplyr::filter(ST_ABBRV == "MT") %>% 
+  sf::st_transform(mt_state_plane)
+
+
 reference_period <- c(1981, 2010)
 mid_century <- c(2040, 2069)
 end_century <- c(2070, 2099)
@@ -243,16 +258,21 @@ trend_func <- function(ys, threshold = 0.05) {
   coeffs[2]
 }
 
+
+
+tas_tsfm <- function(x) (x - 273.15) * 1.8 + 32
+pr_tsfm <- function(x) x/25.4
+
 ```
 
-```{r preprocess, warning=FALSE}
-f_list <- file.path(data_dir, "nexgddp_cmip6", "monthly") %>% 
+```{r preprocess_cmip, warning=FALSE}
+f_list <- file.path(cmip_dir, "nexgddp_cmip6", "monthly") %>% 
   list.files(full.names = T)
 
 tas_tsfm <- function(x) (x - 273.15) * 1.8 + 32
 pr_tsfm <- function(x) x/25.4
 
-rast_df <- tidyr::crossing(
+cmip_df <- tidyr::crossing(
   scenario = c("historical", "ssp126", "ssp245", "ssp370", "ssp585"),
   variable = c("tasmin.tif", "tasmax.tif", "tas.tif", "pr.tif"), 
   timescale = c("annual", "monthly", "seasonal"),
@@ -287,6 +307,43 @@ rast_df <- tidyr::crossing(
   dplyr::mutate(variable = stringr::str_replace(variable, ".tif", ""))
 ```
 
+```{r preprocess_gridmet, warning=FALSE}
+tmmn <- "~/data/gridmet/montana/tmmn.tif"
+tmmx <- "~/data/gridmet/montana/tmmx.tif"
+pr <- "~/data/gridmet/montana/pr.tif"
+
+tidyr::crossing(
+  variable = c("tmmx", "tmmn", "pr"), 
+  timescale = c("annual", "monthly", "seasonal"),
+  reference_period = list(
+    "record"=c(1979, 2020), 
+    "reference_period"=c(1991, 2020)
+  )
+) %>%
+  dplyr::mutate(
+    fun = ifelse(variable == "pr", "sum", "mean"),
+    tsfm = ifelse(variable == "pr", list(pr_tsfm), list(tas_tsfm)),
+    f = dplyr::case_when(
+      variable == "tmmx" ~ tmmx,
+      variable == "tmmn" ~ tmmn,
+      variable == "pr" ~ pr
+    )
+  )
+
+test <- file.path(gm_dir, "raw") %>% 
+  list.files(full.names = T, recursive=TRUE, pattern = ".nc") %>% 
+  grep("tmmx|tmmn|pr", ., value = T) %>% 
+  tibble::tibble(f = .) %>%
+  dplyr::mutate(variable = basename(dirname(f))) %>% 
+  dplyr::group_by(variable) %>% 
+  dplyr::summarise(f = list(f)) 
+
+
+test %>% 
+  dplyr::mutate(variable = basename(dirname(f))) %>% 
+  dplyr::right_join(crossed, by="variable")
+
+```
 
 ```{r table2.1}
 rast_df %>% 
