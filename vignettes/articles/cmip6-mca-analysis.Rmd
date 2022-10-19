@@ -43,20 +43,17 @@ mt_state_plane <- 'PROJCS["NAD_1983_HARN_StatePlane_Montana_FIPS_2500 (deprecate
     AXIS["Northing",NORTH],
     AUTHORITY["ESRI","102300"]]'
 
-mt <- sf::read_sf("https://data.climate.umt.edu/mt-normals/fgb/states.fgb") %>% 
-  dplyr::filter(state_abbv == "MT") %>% 
+mt <- sf::read_sf("https://data.climate.umt.edu/mca/fgb/mt.fgb") %>% 
   sf::st_transform(mt_state_plane)
 
 counties <- sf::read_sf(
-  "https://data.climate.umt.edu/mt-normals/fgb/counties.fgb"
+  "https://data.climate.umt.edu/mca/fgb/mt_counties.fgb"
 ) %>%
-  dplyr::filter(state_abbv == "MT") %>% 
   sf::st_transform(mt_state_plane)
 
 climdiv <- sf::read_sf(
-  "https://data.climate.umt.edu/mt-normals/fgb/climdiv.fgb"
+  "https://data.climate.umt.edu/mca/fgb/mt_climdiv.fgb"
 ) %>%
-  dplyr::filter(ST_ABBRV == "MT") %>% 
   sf::st_transform(mt_state_plane)
 
 
@@ -127,12 +124,13 @@ plot_timeseries <- function(dat) {
 
 ```{r summary_functions}
 time_avg <- function(
-    fs, reference_period, period="annual", fun="mean", transform = NULL
+    fs, reference_period, period="annual", fun="mean", transform = NULL, remote = FALSE
 ) {
   
   checkmate::assert_choice(period, c("annual", "seasonal", "monthly"))
   
-  stk <- terra::rast(fs) %>% 
+  read_func <- ifelse(remote, read_from_server, terra::rast)
+  stk <- read_func(fs) %>% 
     terra::tapp(index="days", fun="mean")
   
   times <- tibble::tibble(
@@ -239,7 +237,7 @@ filter_files <- function(f_list, scenario, variable) {
 
 get_global_summary <- function(r, fun = "mean") {
   
-  terra::global(r, fun) %>%
+  terra::global(r, fun, na.rm = T) %>%
     tibble::rownames_to_column() %>% 
     magrittr::set_names(c("time", "value")) %>% 
     tibble::as_tibble() 
@@ -308,11 +306,11 @@ cmip_df <- tidyr::crossing(
 ```
 
 ```{r preprocess_gridmet, warning=FALSE}
-tmmn <- "~/data/gridmet/montana/tmmn.tif"
-tmmx <- "~/data/gridmet/montana/tmmx.tif"
-pr <- "~/data/gridmet/montana/pr.tif"
+tmmn <- "https://data.climate.umt.edu/mca/gridmet/tmmn.tif"
+tmmx <- "https://data.climate.umt.edu/mca/gridmet/tmmx.tif"
+pr <- "https://data.climate.umt.edu/mca/gridmet/pr.tif"
 
-tidyr::crossing(
+gm_df <- tidyr::crossing(
   variable = c("tmmx", "tmmn", "pr"), 
   timescale = c("annual", "monthly", "seasonal"),
   reference_period = list(
@@ -328,30 +326,34 @@ tidyr::crossing(
       variable == "tmmn" ~ tmmn,
       variable == "pr" ~ pr
     )
-  )
-
-test <- file.path(gm_dir, "raw") %>% 
-  list.files(full.names = T, recursive=TRUE, pattern = ".nc") %>% 
-  grep("tmmx|tmmn|pr", ., value = T) %>% 
-  tibble::tibble(f = .) %>%
-  dplyr::mutate(variable = basename(dirname(f))) %>% 
-  dplyr::group_by(variable) %>% 
-  dplyr::summarise(f = list(f)) 
-
-
-test %>% 
-  dplyr::mutate(variable = basename(dirname(f))) %>% 
-  dplyr::right_join(crossed, by="variable")
-
+  ) %>% 
+  dplyr::rowwise() %>%
+  dplyr::mutate(
+    r = list(time_avg(
+      fs = f, 
+      reference_period = reference_period, 
+      period = timescale,
+      fun = fun,
+      transform = tsfm,
+      remote = TRUE
+    )),
+    r_summarized = list(
+      timeseries_to_summary(r, period = timescale)
+    )
+  ) %>% 
+  dplyr::filter(!is.null(r)) %>%
+  dplyr::ungroup() %>%
+  dplyr::mutate(period_name = names(.$reference_period)) %>% 
+  # dplyr::select(scenario, variable, timescale, r, r_summarized, period_name) %>% 
+  dplyr::mutate(variable = stringr::str_replace(variable, ".tif", "")) 
 ```
 
 ```{r table2.1}
-rast_df %>% 
+gm_df %>% 
   dplyr::filter(
     timescale %in% c("annual", "seasonal"),
     period_name == "reference_period",
-    stringr::str_detect(variable, "tas|pr")
-  ) %>% 
+  ) %>%
   dplyr::rowwise() %>% 
   dplyr::mutate(dat = list(get_global_summary(r_summarized))) %>% 
   dplyr::select(variable, dat) %>% 
@@ -359,9 +361,8 @@ rast_df %>%
   dplyr::mutate(
     variable = dplyr::recode(
       variable,
-      "tas" = "Average Temperature",
-      "tasmax" = "Avg. Max Temperature",
-      "tasmin" = "Avg. Min Temperature",
+      "tmmx" = "Avg. Max Temperature",
+      "tmmn" = "Avg. Min Temperature",
       "pr" = "Total Precipitation"
     ),
     value = round(value)
@@ -369,19 +370,18 @@ rast_df %>%
   tidyr::pivot_wider(names_from = time, values_from = value) %>%
   dplyr::rename(" " = variable) %>% 
   knitr::kable(
-    caption = "Table 1: Average temperatures (°F) and Precipitation (in) across Montana from 1981-2010."
+    caption = "Table 1: Average temperatures (°F) and Precipitation (in) across Montana from 1991-2020."
   )
 ```
 
 ```{r fig2.1, message=FALSE, warning=FALSE}
-plt <- rast_df %>% 
+plt <- gm_df %>% 
   dplyr::filter(
     timescale %in% c("seasonal"),
     period_name == "reference_period",
-    stringr::str_detect(variable, "tas|pr")
   ) %>% 
   dplyr::rowwise() %>% 
-  dplyr::mutate(dat = list(to_shp(r_summarized))) %>% 
+  dplyr::mutate(dat = list(to_shp(r_summarized, mt=mt))) %>% 
   dplyr::select(variable, dat) %>%
   dplyr::group_split() %>%
   purrr::map(function(x) {
