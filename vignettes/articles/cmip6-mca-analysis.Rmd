@@ -130,7 +130,8 @@ time_avg <- function(
   checkmate::assert_choice(period, c("annual", "seasonal", "monthly"))
   
   read_func <- ifelse(remote, read_from_server, terra::rast)
-  stk <- read_func(fs) %>% 
+  print(fs[1])
+  stk <- read_func(fs) %>%  
     terra::tapp(index="days", fun="mean")
   
   times <- tibble::tibble(
@@ -264,259 +265,322 @@ pr_tsfm <- function(x) x/25.4
 ```
 
 ```{r preprocess_cmip, warning=FALSE}
-f_list <- file.path(cmip_dir, "nexgddp_cmip6", "monthly") %>% 
-  list.files(full.names = T)
+f_list <- RCurl::getURL(
+  "https://data.climate.umt.edu/mca/cmip/",
+  ftp.use.epsv = TRUE,
+  dirlistonly = FALSE
+) %>% 
+  XML::getHTMLLinks() %>% 
+  grep(".tif", ., value = T) %>%
+  grep(".json", ., value = T, invert = T) 
 
-tas_tsfm <- function(x) (x - 273.15) * 1.8 + 32
-pr_tsfm <- function(x) x/25.4
-
-cmip_df <- tidyr::crossing(
-  scenario = c("historical", "ssp126", "ssp245", "ssp370", "ssp585"),
-  variable = c("tasmin.tif", "tasmax.tif", "tas.tif", "pr.tif"), 
-  timescale = c("annual", "monthly", "seasonal"),
-  reference_period = list(
-    "record"=c(1950, 2014), 
-    "reference_period"=reference_period, 
-    "mid_century"=mid_century, 
-    "end_century"=end_century)
-) %>%
-  dplyr::mutate(
-    fun = ifelse(variable == "pr.tif", "sum", "mean"),
-    tsfm = ifelse(variable == "pr.tif", list(pr_tsfm), list(tas_tsfm))
-  ) %>% 
-  dplyr::rowwise() %>%
-  dplyr::mutate(
-    fs = list(filter_files(f_list, scenario, variable)),
-    r = list(time_avg(
-      fs = fs, 
-      reference_period = reference_period, 
-      period = timescale,
-      fun = fun,
-      transform = tsfm
-    )),
-    r_summarized = list(
-      timeseries_to_summary(r, period = timescale)
-    )
-  ) %>% 
-  dplyr::filter(!is.null(r)) %>%
-  dplyr::ungroup() %>%
-  dplyr::mutate(period_name = names(.$reference_period)) %>% 
-  # dplyr::select(scenario, variable, timescale, r, r_summarized, period_name) %>% 
-  dplyr::mutate(variable = stringr::str_replace(variable, ".tif", ""))
+cmip_files <- file.path(
+  "https://data.climate.umt.edu/mca/cmip",
+  basename(f_list)
+)
 ```
 
-```{r preprocess_gridmet, warning=FALSE}
-tmmn <- "https://data.climate.umt.edu/mca/gridmet/tmmn.tif"
-tmmx <- "https://data.climate.umt.edu/mca/gridmet/tmmx.tif"
-pr <- "https://data.climate.umt.edu/mca/gridmet/pr.tif"
-
-gm_df <- tidyr::crossing(
-  variable = c("tmmx", "tmmn", "pr"), 
-  timescale = c("annual", "monthly", "seasonal"),
-  reference_period = list(
-    "record"=c(1979, 2020), 
-    "reference_period"=c(1991, 2020)
-  )
-) %>%
-  dplyr::mutate(
-    fun = ifelse(variable == "pr", "sum", "mean"),
-    tsfm = ifelse(variable == "pr", list(pr_tsfm), list(tas_tsfm)),
-    f = dplyr::case_when(
-      variable == "tmmx" ~ tmmx,
-      variable == "tmmn" ~ tmmn,
-      variable == "pr" ~ pr
-    )
-  ) %>% 
-  dplyr::rowwise() %>%
-  dplyr::mutate(
-    r = list(time_avg(
-      fs = f, 
-      reference_period = reference_period, 
-      period = timescale,
-      fun = fun,
-      transform = tsfm,
-      remote = TRUE
-    )),
-    r_summarized = list(
-      timeseries_to_summary(r, period = timescale)
-    )
-  ) %>% 
-  dplyr::filter(!is.null(r)) %>%
-  dplyr::ungroup() %>%
-  dplyr::mutate(period_name = names(.$reference_period)) %>% 
-  # dplyr::select(scenario, variable, timescale, r, r_summarized, period_name) %>% 
-  dplyr::mutate(variable = stringr::str_replace(variable, ".tif", "")) 
-```
 
 ```{r table2.1}
-gm_df %>% 
-  dplyr::filter(
-    timescale %in% c("annual", "seasonal"),
-    period_name == "reference_period",
-  ) %>%
-  dplyr::rowwise() %>% 
-  dplyr::mutate(dat = list(get_global_summary(r_summarized))) %>% 
-  dplyr::select(variable, dat) %>% 
-  tidyr::unnest(dat) %>% 
-  dplyr::mutate(
-    variable = dplyr::recode(
-      variable,
-      "tmmx" = "Avg. Max Temperature",
-      "tmmn" = "Avg. Min Temperature",
-      "pr" = "Total Precipitation"
-    ),
-    value = round(value)
-  ) %>%
-  tidyr::pivot_wider(names_from = time, values_from = value) %>%
-  dplyr::rename(" " = variable) %>% 
-  knitr::kable(
-    caption = "Table 1: Average temperatures (°F) and Precipitation (in) across Montana from 1991-2020."
-  )
-```
-
-```{r fig2.1, message=FALSE, warning=FALSE}
-plt <- gm_df %>% 
-  dplyr::filter(
-    timescale %in% c("seasonal"),
-    period_name == "reference_period",
-  ) %>% 
-  dplyr::rowwise() %>% 
-  dplyr::mutate(dat = list(to_shp(r_summarized, mt=mt))) %>% 
-  dplyr::select(variable, dat) %>%
-  dplyr::group_split() %>%
+dat <- c(
+  "https://data.climate.umt.edu/mca/gridmet/tmmn.tif", 
+  "https://data.climate.umt.edu/mca/gridmet/tmmx.tif"
+) %>% 
   purrr::map(function(x) {
-    x$dat[[1]] %>% 
-      dplyr::mutate(variable = x$variable)
-  }) %>% 
+    time_avg(
+      x,
+      c(1991, 2020),
+      "seasonal", 
+      "mean", 
+      tas_tsfm,
+      TRUE
+    ) %>% 
+      timeseries_to_summary("seasonal") %>%
+      spat_summary(shp = climdiv, "NAME", fun="mean") %>% 
+      dplyr::select(div=NAME, timescale, value) %>% 
+      dplyr::mutate(
+        variable = basename(tools::file_path_sans_ext(x))
+      )
+  }) %>%
   dplyr::bind_rows() %>% 
-  dplyr::group_by(variable) %>% 
-  dplyr::summarise(plt = list(plot_seasonal(dplyr::cur_data_all(), mt)))
-```
-
-
-```{r table2.3}
-tmp <- rast_df %>% 
-  dplyr::filter(
-    timescale %in% c("annual", "seasonal"),
-    period_name == "record",
-    stringr::str_detect(variable, "tas")
-  ) %>% 
-  dplyr::rowwise() %>% 
-  dplyr::mutate(dat = list(get_global_summary(r))) %>%
-  dplyr::select(variable, dat) %>%
-  tidyr::unnest(dat) %>% 
+  tidyr::pivot_wider(names_from = "variable", values_from = "value") %>% 
   dplyr::mutate(
-    time = stringr::str_replace(time, "X", "Annual.")
-  ) %>% 
-  tidyr::separate(time, c("time", "year")) 
-
-trends <- tmp %>%
-  dplyr::group_by(variable, time) %>% 
-  dplyr::arrange(year) %>% 
-  dplyr::summarise(
-    trend = trend_func(value),
-    .groups = "drop"
+    tavg = (tmmn + tmmx)/2,
   ) 
 
-table_out <- trends %>%
-  dplyr::mutate(
-    variable = dplyr::recode(
-      variable,
-      "tas" = "Average Temperature",
-      "tasmax" = "Avg. Max Temperature",
-      "tasmin" = "Avg. Min Temperature",
-    ),
-    trend = round(trend, 3)
-  ) %>% 
-  tidyr::pivot_wider(names_from = time, values_from = trend) %>%
-  dplyr::rename(" " = variable) %>% 
-  knitr::kable(
-    caption = "Table 1: Average temperatures (°F) and Precipitation (in) across Montana from 1981-2010."
-  )
+annual <- tidyr::pivot_longer(dat, c(tmmn, tmmx, tavg)) %>% 
+  dplyr::group_by(div, name) %>% 
+  dplyr::summarise(Annual = mean(value), .groups="drop") %>% 
+  tidyr::pivot_wider(names_from = name, values_from = Annual) %>% 
+  dplyr::mutate(timescale = "Annual")
+
+dplyr::bind_rows(dat, annual) %>% 
+  dplyr::transmute(
+    `Climate Division` = tools::toTitleCase(tolower(div)), 
+    timescale = factor(timescale, levels = c("Annual", "Winter", "Spring", "Summer", "Fall")),
+    meta = paste(round(tmmn, 1), round(tavg, 1), round(tmmx, 1), sep = " / ")
+  ) %>%
+  tidyr::pivot_wider(names_from = 'timescale', values_from='meta', names_sort = T) 
+  # knitr::kable(
+  #   caption = "Table 1: Average temperatures (°F) and Precipitation (in) across Montana from 1991-2020."
+  # )
 ```
-
-```{r fig2.3, message=FALSE, warning=FALSE}
-trend_spatial <- function(r) {
-  tibble::tibble(time=names(r)) %>% 
-    dplyr::mutate(
-      time = stringr::str_replace(time, "X", "Annual.")
-    ) %>% 
-    tidyr::separate(time, c("time", "year")) %$%
-    terra::tapp(r, time, fun = trend_func) 
-}
-
-trend_plots <- rast_df %>% 
-  dplyr::filter(
-    timescale %in% c("seasonal", "annual"),
-    period_name == "record",
-    stringr::str_detect(variable, "pr|tas")
-  ) %>% 
-  dplyr::rowwise() %>%
-  dplyr::mutate(
-    trends = list(trend_spatial(r)),
-    dat = list(to_shp(trends))
-  ) %>% 
-  dplyr::select(variable, timescale, dat) %>%
-  dplyr::group_split() %>%
-  purrr::map(function(x) {
-    x$dat[[1]] %>% 
-      dplyr::mutate(variable = x$variable)
-  }) %>% 
-  dplyr::bind_rows() %>%
-  dplyr::mutate(seasonal = ifelse(time == "Annual", FALSE, TRUE)) %>%
-  dplyr::group_by(seasonal, variable) %>% 
-  dplyr::summarise(plt = list(plot_seasonal(dplyr::cur_data_all(), mt=mt)))
-
-```
-
-```{r change_maps, message=FALSE, warning=FALSE}
-
-
-
-plot_difference <- function(dat) {
-    sf::st_as_sf(dat) %>% 
-    ggplot() + 
-      geom_sf(aes(fill = value), color = NA) + 
-      facet_wrap(~scenario) + 
-      geom_sf(data = mt, fill = NA) + 
-      theme_bw()
-  
-}
-
-tmp <- rast_df %>% 
-  dplyr::filter(timescale == "annual", period_name != "record") %>%
-  dplyr::select(scenario, variable, r_summarized, period_name) %>% 
-  tidyr::unite(scenario, scenario, period_name, sep = "-")
-
-dat <- dplyr::left_join(
-  dplyr::filter(tmp, stringr::str_detect(scenario, "historical")) %>% 
-    dplyr::select(variable, reference=r_summarized),
-  dplyr::filter(tmp, stringr::str_detect(scenario, "historical", negate = TRUE)) %>% 
-    tidyr::pivot_wider(names_from = scenario, values_from = r_summarized),
-  by="variable"
+```{r table2.2}
+dat <- time_avg(
+  "https://data.climate.umt.edu/mca/gridmet/pr.tif",
+  c(1991, 2020),
+  "seasonal", 
+  "sum", 
+  pr_tsfm,
+  TRUE
 ) %>% 
-  tidyr::pivot_longer(dplyr::starts_with("ssp"), values_to = "future") %>%
-  tidyr::separate(name, c("scenario", "period"), sep = "-") %>% 
-  dplyr::rowwise() %>% 
-  # TODO: t-test between future and reference to make sure mean is truly different.
-  dplyr::mutate(
-    diff = list(to_shp(future - reference, mt=mt))
-  ) %>% 
-  dplyr::select(variable, scenario, period, diff)  %>% 
-  dplyr::rowwise() %>% 
-  dplyr::group_split() %>%
+  timeseries_to_summary("seasonal") %>%
+  spat_summary(shp = climdiv, "NAME", fun="mean") %>% 
+  dplyr::select(div=NAME, timescale, value) 
+
+annual <- dplyr::group_by(dat, div) %>% 
+  dplyr::summarise(value = sum(value), .groups="drop") %>% 
+  dplyr::mutate(timescale = "Annual")
+
+dplyr::bind_rows(dat, annual) %>% 
+  dplyr::transmute(
+    `Climate Division` = tools::toTitleCase(tolower(div)), 
+    timescale = factor(timescale, levels = c("Annual", "Winter", "Spring", "Summer", "Fall")),
+    value = value
+  ) %>%
+  tidyr::pivot_wider(names_from = 'timescale', values_from='value', names_sort = T) 
+```
+```{r table 2.3}
+dat <- c(
+  "https://data.climate.umt.edu/mca/gridmet/tmmn.tif", 
+  "https://data.climate.umt.edu/mca/gridmet/tmmx.tif"
+) %>% 
   purrr::map(function(x) {
-    x$diff[[1]] %>% 
+    time_avg(
+      x,
+      c(1979, 2020),
+      "seasonal", 
+      "mean", 
+      tas_tsfm,
+      TRUE
+    ) %>% 
+      spat_summary(
+        shp = climdiv, attr_id = "NAME", fun="mean"
+      ) %>% 
+      dplyr::select(div=NAME, timescale, value) %>% 
       dplyr::mutate(
-        variable = x$variable,
-        scenario = x$scenario,
-        period = x$period
+        variable = basename(tools::file_path_sans_ext(x))
       )
   }) %>% 
-  dplyr::bind_rows() %>% 
-  sf::st_as_sf()
+  dplyr::bind_rows()
 
-change_plots <- dat %>% 
-  dplyr::group_by(variable, period) %>% 
-  dplyr::summarise(plt = list(plot_difference(dplyr::cur_data_all()))) 
+
+# # Just a check to look at the trends. 
+# dat %>% 
+#   tidyr::separate(timescale, c("season", "year")) %>%
+#   dplyr::mutate(year = as.numeric(year)) %>% 
+#   dplyr::filter(variable == 'tmmn') %>%
+#   ggplot(aes(x=year, y=value)) + 
+#     geom_point() +
+#     facet_wrap(season~div, scales="free_y") +
+#     geom_smooth(method='lm')
+
+tidyr::separate(dat, timescale, c("season", "year")) %>%
+  dplyr::group_by(div, year, variable) %>%
+  dplyr::mutate(Annual = mean(value)) %>% 
+  dplyr::ungroup() %>% 
+  tidyr::pivot_wider(names_from = season, values_from = value) %>% 
+  tidyr::pivot_longer(-c(div, year, variable), names_to = "season") %>%
+  tidyr::pivot_wider(names_from = variable, values_from = value) %>% 
+  dplyr::mutate(tavg = (tmmn + tmmx)/2) %>% 
+  tidyr::pivot_longer(-c(div, year, season)) %>%
+  dplyr::group_by(div, season, name) %>% 
+  dplyr::summarise(trend = trend_func(value, threshold=0.05)) %>%
+  dplyr::mutate(trend = round(trend, 3)) %>% 
+  tidyr::pivot_wider(names_from = name, values_from = trend) %>% 
+  dplyr::ungroup() %>% 
+  dplyr::transmute(
+    `Climate Division` = tools::toTitleCase(tolower(div)), 
+    timescale = factor(season, levels = c("Annual", "Winter", "Spring", "Summer", "Fall")),
+    meta = paste(tmmn, tavg, tmmx, sep = " / ")
+  ) %>%
+  tidyr::pivot_wider(names_from = 'timescale', values_from='meta', names_sort = T) 
+```
+
+```{r fig2.4, message=FALSE, warning=FALSE}
+dat <- c(
+  "https://data.climate.umt.edu/mca/gridmet/tmmn.tif", 
+  "https://data.climate.umt.edu/mca/gridmet/tmmx.tif"
+) %>% 
+  purrr::map(function(x) {
+    time_avg(
+      x,
+      c(1979, 2020),
+      "annual", 
+      "mean", 
+      tas_tsfm,
+      TRUE
+    ) %>% 
+      spat_summary(
+        shp = climdiv, attr_id = "NAME", fun="mean"
+      ) %>% 
+      dplyr::select(div=NAME, timescale, value) %>% 
+      dplyr::mutate(
+        variable = basename(tools::file_path_sans_ext(x))
+      )
+  }) %>% 
+  dplyr::bind_rows()
+
+dat %>% 
+  dplyr::mutate(
+    div = tools::toTitleCase(tolower(div)),
+    year = timescale %>% 
+      stringr::str_replace("X", "") %>% 
+      as.numeric()
+  ) %>% 
+  dplyr::group_by(div, year) %>% 
+  dplyr::summarise(value = mean(value)) %>%
+  ggplot(aes(x=year, y=value)) +
+    geom_line() + 
+    geom_smooth(method = "lm") + 
+    facet_wrap(~div)
+```
+
+
+```{r table2.4}
+dat <- time_avg(
+  "https://data.climate.umt.edu/mca/gridmet/pr.tif",
+  c(1979, 2020),
+  "seasonal", 
+  "sum", 
+  pr_tsfm,
+  TRUE
+) %>% 
+  spat_summary(
+    shp = climdiv, attr_id = "NAME", fun="mean"
+  ) %>% 
+  dplyr::select(div=NAME, timescale, value)
+
+
+
+# # Just a check to look at the trends. 
+# dat %>% 
+#   tidyr::separate(timescale, c("season", "year")) %>%
+#   dplyr::mutate(year = as.numeric(year)) %>% 
+#   dplyr::filter(variable == 'tmmn') %>%
+#   ggplot(aes(x=year, y=value)) + 
+#     geom_point() +
+#     facet_wrap(season~div, scales="free_y") +
+#     geom_smooth(method='lm')
+
+tidyr::separate(dat, timescale, c("season", "year")) %>%
+  dplyr::group_by(div, year) %>%
+  dplyr::mutate(Annual = sum(value)) %>% 
+  dplyr::ungroup() %>% 
+  tidyr::pivot_wider(names_from = season, values_from = value) %>% 
+  tidyr::pivot_longer(-c(div, year), names_to = "season") %>%
+  dplyr::group_by(div, season) %>% 
+  dplyr::summarise(trend = trend_func(value, threshold=0.05)) %>%
+  dplyr::mutate(trend = round(trend, 3)) %>% 
+  dplyr::ungroup() %>% 
+  dplyr::transmute(
+    `Climate Division` = tools::toTitleCase(tolower(div)), 
+    timescale = factor(season, levels = c("Annual", "Winter", "Spring", "Summer", "Fall")),
+    meta = trend
+  ) %>%
+  tidyr::pivot_wider(names_from = timescale, values_from = meta) 
+```
+```{r difference_functions, message=FALSE, warning=FALSE}
+filter_and_read <- function(pattern, historical, period, fun="mean", zonal=TRUE) {
+  grep(pattern, cmip_files, value = T) %>%
+  grep("historical", ., value = T, invert=!historical) %>%
+  purrr::map(function(x) {
+      tmp <- time_avg(
+        x,
+        period,
+        "annual", 
+        fun, 
+        tas_tsfm,
+        TRUE
+      ) 
+      
+      if (!zonal) {
+        tmp <- timeseries_to_summary(tmp, "annual")
+        out <- tibble::tibble(f = basename(x)) %>%
+          tidyr::separate(
+            f, c("model", "scenario", "run", "variable"), sep = "_"
+          ) %>%
+          dplyr::mutate(
+            period = paste(period, collapse = "-"),
+            r = list(tmp)
+          )
+        return(out)
+      }
+      
+      out <- spat_summary(
+        tmp, shp = climdiv, attr_id = "NAME", fun="mean"
+      ) %>% 
+        dplyr::select(div = NAME, year = timescale, value) %>% 
+        dplyr::mutate(f = basename(x) %>% tools::file_path_sans_ext())
+      
+      return(out)
+  })
+}
+
+isolate_models <- function(pattern, historical, period, fun="mean") {
+  filter_and_read(pattern, historical, period, fun, TRUE) %>% 
+  dplyr::bind_rows() %>% 
+  dplyr::mutate(
+    div = tolower(div),
+    year = stringr::str_replace(year, "X", "") %>% as.numeric()
+  ) %>% 
+  tidyr::separate(f, c("model", "scenario", "drop1", "drop2"), sep = "_") %>% 
+  dplyr::select(-dplyr::starts_with("drop")) %>%
+  dplyr::mutate(period = paste(period, collapse="-"))
+}
+
+```
+
+```{r fig2.9, message=FALSE, warning=FALSE}
+dat <- dplyr::bind_rows(
+  isolate_models("tas.tif", TRUE, c(1981, 2010), "mean"),
+  isolate_models("tas.tif", FALSE, c(2049, 2069), "mean"),
+  isolate_models("tas.tif", FALSE, c(2070, 2099), "mean")
+)
+
+dat %>% 
+  dplyr::group_by(div, model, scenario, period) %>% 
+  dplyr::summarise(value = mean(value), .groups = "drop") %>%
+  dplyr::left_join(
+    dplyr::filter(., scenario == "historical") %>% 
+        dplyr::rename(historical = value) %>% 
+        dplyr::select(-scenario, -period)
+    ,
+    by = c("div", "model")
+  ) %>% 
+  dplyr::filter(scenario != "historical") %>% 
+  dplyr::mutate(diff = value - historical) %>%
+  ggplot(aes(x=scenario, y=diff, fill=scenario)) + 
+    geom_boxplot(alpha=0.2) + 
+    facet_wrap(div~period, nrow=2) + 
+    theme_minimal()
+```
+```{r fig2.10}
+dat <- dplyr::bind_rows(
+  filter_and_read("tas.tif", TRUE, c(1981, 2010), "mean", FALSE),
+  filter_and_read("tas.tif", FALSE, c(2049, 2069), "mean", FALSE),
+  filter_and_read("tas.tif", FALSE, c(2070, 2099), "mean", FALSE) 
+) 
+
+dat %>% 
+  dplyr::left_join(
+    dplyr::filter(., scenario == "historical") %>% 
+        dplyr::rename(historical = r) %>% 
+        dplyr::select(-scenario, -period)
+    ,
+    by = c("model", "run", "variable")
+  ) %>%
+  dplyr::filter(scenario != "historical") %>%
+  dplyr::rowwise() %>%
+  dplyr::mutate(diff = list(r - historical)) -> test
 ```

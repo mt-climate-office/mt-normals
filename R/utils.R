@@ -27,8 +27,9 @@ read_from_server <- function(f_url) {
 
   # For some reason the date of Jan 1st gets messed up in the metadata so this
   # fixes it.
-  dates <- jsonlite::read_json(paste0(f_url, ".aux.json")) %>%
-    {.$time} %>%
+  dates <- paste0(f_url, ".aux.json") %>%
+    purrr::map(jsonlite::read_json) %>%
+    purrr::map(function(x) x$time) %>%
     unlist() %>%
     tibble::tibble(d = .) %>%
     tidyr::separate(d, c("year", "month", "day")) %>%
@@ -204,7 +205,7 @@ save_daily_heat_index <- function(data_dir) {
 data_dir = "~/MCO_onedrive/General/nexgddp_cmip6_montana/data-derived/nexgddp_cmip6"
 out_dir = "~/MCO_onedrive/General/nexgddp_cmip6_montana/data-derived/nexgddp_cmip6/monthly/derived"
 
-calc_derived_metrics <- function(data_dir, monthly_dir, out_dir) {
+calc_derived_metrics <- function(data_dir, out_dir) {
   tmmx <- list.files(data_dir, full.names = T, pattern = "tasmax.tif") %>%
     grep(".json", ., value = T, invert = TRUE)
   tmmn <- list.files(data_dir, full.names = T, pattern = "tasmin.tif") %>%
@@ -273,3 +274,28 @@ calc_derived_metrics <- function(data_dir, monthly_dir, out_dir) {
       )
   })
 }
+
+spat_summary <- function(rasts, shp, attr_id = NULL, name_to = "timescale", fun, ...) {
+
+  if (is.null(attr_id)) {
+    shp %<>%
+      dplyr::mutate(id = 1:dplyr::n())
+
+    attr_id <- "id"
+  }
+
+  checkmate::assert_true(
+    length(unique(names(rasts))) == terra::nlyr(rasts),
+  )
+
+  shp <- sf::st_transform(shp, crs = sf::st_crs(rasts))
+  shp_as_rast <- shp %>%
+    terra::vect() %>%
+    terra::rasterize(rasts, field=attr_id)
+
+  terra::zonal(rasts, shp_as_rast, fun=fun, na.rm = T, ...) %>%
+    tibble::as_tibble() %>%
+    tidyr::pivot_longer(-!!rlang::sym(attr_id), names_to = name_to) %>%
+    dplyr::full_join(shp, by = attr_id)
+}
+
