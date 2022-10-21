@@ -16,9 +16,6 @@ library(terra)
 library(sf)
 library(ggplot2)
 
-cmip_dir <- Sys.getenv("CMIP6_DIR")
-gm_dir <- Sys.getenv("GRIDMET_DIR")
-
 mt_state_plane <- 'PROJCS["NAD_1983_HARN_StatePlane_Montana_FIPS_2500 (deprecated)",
     GEOGCS["NAD83(HARN)",
         DATUM["NAD83_High_Accuracy_Reference_Network",
@@ -79,7 +76,8 @@ to_shp <- function(x, mt) {
     raster::stack() %>%
     # mco_mask(mask = mt) %>%
     spex::qm_rasterToPolygons(na.rm = T) %>%
-    tidyr::pivot_longer(-geometry, names_to = "time") 
+    tidyr::pivot_longer(-geometry, names_to = "time")  %>%
+    sf::`st_crs<-`(mt_state_plane)
   
   mt_use <- sf::st_transform(mt, sf::st_crs(tmp)) %>% 
     dplyr::select(geometry)
@@ -490,22 +488,23 @@ tidyr::separate(dat, timescale, c("season", "year")) %>%
   ) %>%
   tidyr::pivot_wider(names_from = timescale, values_from = meta) 
 ```
+
 ```{r difference_functions, message=FALSE, warning=FALSE}
-filter_and_read <- function(pattern, historical, period, fun="mean", zonal=TRUE) {
+filter_and_read <- function(pattern, historical, period, fun="mean", zonal=TRUE, timescale="annual") {
   grep(pattern, cmip_files, value = T) %>%
   grep("historical", ., value = T, invert=!historical) %>%
   purrr::map(function(x) {
       tmp <- time_avg(
         x,
         period,
-        "annual", 
+        timescale, 
         fun, 
         tas_tsfm,
         TRUE
       ) 
       
       if (!zonal) {
-        tmp <- timeseries_to_summary(tmp, "annual")
+        tmp <- timeseries_to_summary(tmp, timescale)
         out <- tibble::tibble(f = basename(x)) %>%
           tidyr::separate(
             f, c("model", "scenario", "run", "variable"), sep = "_"
@@ -527,8 +526,8 @@ filter_and_read <- function(pattern, historical, period, fun="mean", zonal=TRUE)
   })
 }
 
-isolate_models <- function(pattern, historical, period, fun="mean") {
-  filter_and_read(pattern, historical, period, fun, TRUE) %>% 
+isolate_models <- function(pattern, historical, period, fun="mean", timescale="annual") {
+  filter_and_read(pattern, historical, period, fun, TRUE, timescale) %>% 
   dplyr::bind_rows() %>% 
   dplyr::mutate(
     div = tolower(div),
@@ -539,13 +538,20 @@ isolate_models <- function(pattern, historical, period, fun="mean") {
   dplyr::mutate(period = paste(period, collapse="-"))
 }
 
+future_boxplot <- function(dat) {
+  ggplot(dat, aes(x=scenario, y=diff, fill=scenario)) + 
+    geom_boxplot(alpha=0.2) + 
+    facet_wrap(div~period, nrow=2) + 
+    theme_minimal()
+}
+
 ```
 
 ```{r fig2.9, message=FALSE, warning=FALSE}
 dat <- dplyr::bind_rows(
-  isolate_models("tas.tif", TRUE, c(1981, 2010), "mean"),
-  isolate_models("tas.tif", FALSE, c(2049, 2069), "mean"),
-  isolate_models("tas.tif", FALSE, c(2070, 2099), "mean")
+  isolate_models("tas.tif", TRUE, c(1981, 2010), "mean", timescale="annual"),
+  isolate_models("tas.tif", FALSE, c(2049, 2069), "mean", timescale="annual"),
+  isolate_models("tas.tif", FALSE, c(2070, 2099), "mean", timescale="annual")
 )
 
 dat %>% 
@@ -560,19 +566,18 @@ dat %>%
   ) %>% 
   dplyr::filter(scenario != "historical") %>% 
   dplyr::mutate(diff = value - historical) %>%
-  ggplot(aes(x=scenario, y=diff, fill=scenario)) + 
-    geom_boxplot(alpha=0.2) + 
-    facet_wrap(div~period, nrow=2) + 
-    theme_minimal()
+  future_boxplot()
 ```
-```{r fig2.10}
+
+
+```{r fig2.10, warning=FALSE}
 dat <- dplyr::bind_rows(
   filter_and_read("tas.tif", TRUE, c(1981, 2010), "mean", FALSE),
   filter_and_read("tas.tif", FALSE, c(2049, 2069), "mean", FALSE),
   filter_and_read("tas.tif", FALSE, c(2070, 2099), "mean", FALSE) 
 ) 
 
-dat %>% 
+test <- dat %>% 
   dplyr::left_join(
     dplyr::filter(., scenario == "historical") %>% 
         dplyr::rename(historical = r) %>% 
@@ -582,5 +587,24 @@ dat %>%
   ) %>%
   dplyr::filter(scenario != "historical") %>%
   dplyr::rowwise() %>%
-  dplyr::mutate(diff = list(r - historical)) -> test
+  dplyr::mutate(
+    diff = list(r - historical),
+  ) %>%
+  dplyr::group_by(scenario, period) %>% 
+  dplyr::summarise(
+    diff = list(terra::app(terra::rast(diff), fun="mean"))
+  ) %>%
+  dplyr::rowwise() %>% 
+  dplyr::mutate(
+    diff = list(to_shp(diff, mt=mt))
+  ) %>%
+  dplyr::select(scenario, period, diff) %>% 
+  tidyr::unnest(diff) %>% 
+  sf::st_as_sf()
+  
+ggplot(test %>% dplyr::filter(scenario == 'ssp126')) + 
+    geom_sf(aes(fill=value), color=NA) + 
+    geom_sf(aes(), data = climdiv, fill=NA) + 
+    facet_wrap(~period) + 
+    theme_minimal()
 ```
