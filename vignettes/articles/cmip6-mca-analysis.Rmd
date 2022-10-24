@@ -82,41 +82,7 @@ to_shp <- function(x, mt) {
   mt_use <- sf::st_transform(mt, sf::st_crs(tmp)) %>% 
     dplyr::select(geometry)
   
-  sf::st_intersection(tmp, mt_use) 
-}
-```
-
-```{r plot_seasonal} 
-plot_seasonal <- function(dat, mt) {
-  
-  sf::st_as_sf(dat) %>% 
-  ggplot() + 
-    geom_sf(aes(fill = value), color = NA) + 
-    facet_wrap(~time) + 
-    geom_sf(data = mt, fill = NA) + 
-    theme_bw()
-}
-
-plot_timeseries <- function(dat) {
-  dat %>%
-    dplyr::mutate(
-      variable = dplyr::recode(
-        variable,
-        "tas" = "Average Temperature",
-        "tasmax" = "Avg. Max Temperature",
-        "tasmin" = "Avg. Min Temperature",
-        "pr" = "Total Precipitation"
-      ), 
-      year = as.numeric(year)
-    ) %>%
-    dplyr::filter(time != "Annual") %>% 
-    dplyr::mutate(time = factor(time, levels = c("Winter", "Spring", "Summer", "Fall"))) %>% 
-    ggplot(aes(x=year, y=value, color = variable)) + 
-      geom_line() + 
-      geom_smooth(method = "lm") +
-      facet_wrap(~time, scales = "free_y") +
-      theme_minimal() + 
-      labs(x="", y = "Temperature (°F)", color="")
+  sf::st_intersection(tmp, mt_use)
 }
 ```
 
@@ -226,20 +192,6 @@ timeseries_to_summary <- function(r, period) {
   terra::tapp(
     r, index = grp, fun = "mean"
   )
-}
-
-filter_files <- function(f_list, scenario, variable) {
-  grep(".json", f_list, value = T, invert = T) %>% 
-    grep(scenario, ., value = T) %>% 
-    grep(variable, ., value = T)
-}
-
-get_global_summary <- function(r, fun = "mean") {
-  
-  terra::global(r, fun, na.rm = T) %>%
-    tibble::rownames_to_column() %>% 
-    magrittr::set_names(c("time", "value")) %>% 
-    tibble::as_tibble() 
 }
 
 trend_func <- function(ys, threshold = 0.05) {
@@ -490,7 +442,7 @@ tidyr::separate(dat, timescale, c("season", "year")) %>%
 ```
 
 ```{r difference_functions, message=FALSE, warning=FALSE}
-filter_and_read <- function(pattern, historical, period, fun="mean", zonal=TRUE, timescale="annual") {
+filter_and_read <- function(pattern, shp, attr_id, historical, period, fun="mean", zonal=TRUE, timescale="annual") {
   grep(pattern, cmip_files, value = T) %>%
   grep("historical", ., value = T, invert=!historical) %>%
   purrr::map(function(x) {
@@ -517,10 +469,13 @@ filter_and_read <- function(pattern, historical, period, fun="mean", zonal=TRUE,
       }
       
       out <- spat_summary(
-        tmp, shp = climdiv, attr_id = "NAME", fun="mean"
+        tmp, shp = shp, attr_id = attr_id, fun="mean"
       ) %>% 
         dplyr::select(div = NAME, year = timescale, value) %>% 
-        dplyr::mutate(f = basename(x) %>% tools::file_path_sans_ext())
+        dplyr::mutate(
+          f = basename(x) %>% tools::file_path_sans_ext(),
+          period = paste(period, collapse = "-")
+        )
       
       return(out)
   })
@@ -545,6 +500,44 @@ future_boxplot <- function(dat) {
     theme_minimal()
 }
 
+make_heatmap_data <- function(pattern, fun) {
+  dat <- dplyr::bind_rows(
+    filter_and_read(pattern=pattern, historical=TRUE, period=c(1981, 2010), fun=fun, TRUE, "monthly"),
+    filter_and_read(pattern=pattern, historical=FALSE, period=c(2049, 2069), fun=fun, TRUE, "monthly"),
+    filter_and_read(pattern=pattern, historicalFALSE, period=c(2070, 2099), fun=fun, TRUE, "monthly") 
+  ) %>%
+    tidyr::separate(
+      f, c("model", "scenario", "run", "variable"), sep = "_"
+    ) %>%
+    dplyr::mutate(date = lubridate::as_date(year, format = "X%Y.%m.%d")) %>%
+    dplyr::group_by(div, month = lubridate::month(date), scenario, period) %>% 
+    dplyr::summarise(value = mean(value), .groups = "drop") %>%
+    dplyr::left_join(
+      dplyr::filter(., scenario == "historical") %>% 
+          dplyr::rename(historical = value) %>% 
+          dplyr::select(-scenario, -period)
+      ,
+      by = c("div", "month")
+    ) %>%
+    dplyr::filter(scenario != "historical") %>%
+    dplyr::mutate(diff = value - historical) %>%
+    dplyr::select(div, month, scenario, diff, period) %>%
+    dplyr::mutate(
+      div = tolower(div) %>% tools::toTitleCase(),
+      month = factor(month.abb[month], levels = month.abb)
+    )
+}
+
+make_heatmap_plot <- function(dat) {
+  
+ggplot(dat) +
+  geom_tile(aes(x=month, y=div, fill=diff), color="black") + 
+  scale_fill_gradientn(colors = RColorBrewer::brewer.pal(9, "Reds")) +
+  # scale_fill_viridis_c() +
+  facet_wrap(scenario~period, ncol = 2) +
+  theme_minimal() + 
+  labs(x="", y = "", fill = "")
+}
 ```
 
 ```{r fig2.9, message=FALSE, warning=FALSE}
@@ -599,12 +592,16 @@ test <- dat %>%
     diff = list(to_shp(diff, mt=mt))
   ) %>%
   dplyr::select(scenario, period, diff) %>% 
-  tidyr::unnest(diff) %>% 
+  tidyr::unnest(diff) %>%
   sf::st_as_sf()
   
-ggplot(test %>% dplyr::filter(scenario == 'ssp126')) + 
+ggplot(test) + 
     geom_sf(aes(fill=value), color=NA) + 
     geom_sf(aes(), data = climdiv, fill=NA) + 
-    facet_wrap(~period) + 
+    facet_wrap(scenario~period, ncol=2) + 
     theme_minimal()
+```
+```{r fig2.11, warning=FALSE, fig.dim=c(8, 6)}
+dat <- make_heatmap_data("tas.tif", "mean")
+make_heatmap_plot(dat)
 ```
