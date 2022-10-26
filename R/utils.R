@@ -298,4 +298,3 @@ spat_summary <- function(rasts, shp, attr_id = NULL, name_to = "timescale", fun,
     tidyr::pivot_longer(-!!rlang::sym(attr_id), names_to = name_to) %>%
     dplyr::full_join(shp, by = attr_id)
 }
-

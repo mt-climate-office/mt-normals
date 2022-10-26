@@ -51,7 +51,8 @@ counties <- sf::read_sf(
 climdiv <- sf::read_sf(
   "https://data.climate.umt.edu/mca/fgb/mt_climdiv.fgb"
 ) %>%
-  sf::st_transform(mt_state_plane)
+  sf::st_transform(mt_state_plane)%>% 
+  dplyr::mutate(NAME = tolower(NAME) %>% tools::toTitleCase())
 
 
 reference_period <- c(1981, 2010)
@@ -60,14 +61,6 @@ end_century <- c(2070, 2099)
 ```
 
 ```{r to_shp} 
-mco_mask <- function(rast, mask){
-  raster::mask(rast,
-               fasterize::fasterize(mask %>%
-                                      sf::st_transform(raster::projection(rast)),
-                                    raster::raster(rast))
-  )
-}
-
 to_shp <- function(x, mt) {
   
   tmp <- x %>%
@@ -442,166 +435,196 @@ tidyr::separate(dat, timescale, c("season", "year")) %>%
 ```
 
 ```{r difference_functions, message=FALSE, warning=FALSE}
-filter_and_read <- function(pattern, shp, attr_id, historical, period, fun="mean", zonal=TRUE, timescale="annual") {
-  grep(pattern, cmip_files, value = T) %>%
-  grep("historical", ., value = T, invert=!historical) %>%
-  purrr::map(function(x) {
-      tmp <- time_avg(
-        x,
-        period,
-        timescale, 
-        fun, 
-        tas_tsfm,
-        TRUE
-      ) 
-      
-      if (!zonal) {
-        tmp <- timeseries_to_summary(tmp, timescale)
-        out <- tibble::tibble(f = basename(x)) %>%
-          tidyr::separate(
-            f, c("model", "scenario", "run", "variable"), sep = "_"
-          ) %>%
-          dplyr::mutate(
-            period = paste(period, collapse = "-"),
-            r = list(tmp)
-          )
-        return(out)
-      }
-      
-      out <- spat_summary(
-        tmp, shp = shp, attr_id = attr_id, fun="mean"
-      ) %>% 
-        dplyr::select(div = NAME, year = timescale, value) %>% 
-        dplyr::mutate(
-          f = basename(x) %>% tools::file_path_sans_ext(),
-          period = paste(period, collapse = "-")
-        )
-      
-      return(out)
-  })
+filter_years <- function(r, start, end) {
+  years <- which(names(r) %in% paste0("X", start:end))
+  if (length(years) == 0) {
+    return(NA)
+  }
+  terra::subset(r, years) %>%
+    terra::app(fun="mean") 
 }
 
-isolate_models <- function(pattern, historical, period, fun="mean", timescale="annual") {
-  filter_and_read(pattern, historical, period, fun, TRUE, timescale) %>% 
-  dplyr::bind_rows() %>% 
-  dplyr::mutate(
-    div = tolower(div),
-    year = stringr::str_replace(year, "X", "") %>% as.numeric()
+summarize_yearmonths <- function(r, start, end) {
+  
+  yearmons <- tidyr::crossing(
+    a="X", b=start:end, c=stringr::str_pad(1:12, 2, "left", "0")
   ) %>% 
-  tidyr::separate(f, c("model", "scenario", "drop1", "drop2"), sep = "_") %>% 
-  dplyr::select(-dplyr::starts_with("drop")) %>%
-  dplyr::mutate(period = paste(period, collapse="-"))
+    dplyr::mutate(out = glue::glue("{a}{b}{c}")) %$%
+    as.character(out)
+  
+  yearmons_idx <- which(names(r) %in% yearmons)
+  if (length(yearmons_idx) == 0) {
+    return(NA)
+  }
+  
+  r <- terra::subset(r, yearmons_idx) 
+  terra::time(r) <- lubridate::as_date(paste0(yearmons, "01"), format = "X%Y%m%d")
+  r <- terra::tapp(r, fun="mean", index = "months")
+  names(r) <- month.name
+  return(r)
 }
 
-future_boxplot <- function(dat) {
-  ggplot(dat, aes(x=scenario, y=diff, fill=scenario)) + 
-    geom_boxplot(alpha=0.2) + 
-    facet_wrap(div~period, nrow=2) + 
-    theme_minimal()
-}
-
-make_heatmap_data <- function(pattern, fun) {
-  dat <- dplyr::bind_rows(
-    filter_and_read(pattern=pattern, historical=TRUE, period=c(1981, 2010), fun=fun, TRUE, "monthly"),
-    filter_and_read(pattern=pattern, historical=FALSE, period=c(2049, 2069), fun=fun, TRUE, "monthly"),
-    filter_and_read(pattern=pattern, historicalFALSE, period=c(2070, 2099), fun=fun, TRUE, "monthly") 
-  ) %>%
-    tidyr::separate(
-      f, c("model", "scenario", "run", "variable"), sep = "_"
-    ) %>%
-    dplyr::mutate(date = lubridate::as_date(year, format = "X%Y.%m.%d")) %>%
-    dplyr::group_by(div, month = lubridate::month(date), scenario, period) %>% 
-    dplyr::summarise(value = mean(value), .groups = "drop") %>%
+join_historical <- function(dat) {
+  dat %>%  
+    dplyr::select(model, scenario, hist, mid_century, end_century) %>%
     dplyr::left_join(
-      dplyr::filter(., scenario == "historical") %>% 
-          dplyr::rename(historical = value) %>% 
-          dplyr::select(-scenario, -period)
-      ,
-      by = c("div", "month")
+      dplyr::filter(., scenario == "historical") %>%
+        dplyr::select(model, historical=hist),
+      by = "model"
     ) %>%
+    dplyr::select(-hist) %>%
     dplyr::filter(scenario != "historical") %>%
-    dplyr::mutate(diff = value - historical) %>%
-    dplyr::select(div, month, scenario, diff, period) %>%
+    tidyr::pivot_longer(
+      c("mid_century", "end_century")
+    ) 
+}
+
+read_and_tapp <- function(pattern, files, fun, idx, tsfm=NULL) {
+  out <- grep(pattern, files, value = T) %>% 
+    purrr::map(function(x) {
+      
+      r <- read_from_server(x) %>% 
+        terra::tapp(index = idx, fun = fun) 
+      tibble::tibble(
+        f = tools::file_path_sans_ext(x) %>% basename(),
+        r = list(r)
+      )
+    }) %>%
+    dplyr::bind_rows() %>%
+    tidyr::separate(f, c("model", "scenario", "run", "variable"), sep = "_")
+  
+  if (!is.null(tsfm)) {
+    out <- 
+      dplyr::rowwise(out) %>% 
+      dplyr::mutate(r = list(tsfm(r))) %>% 
+      dplyr::ungroup()
+  }
+  return(out) 
+}
+
+make_boxplot_data <- function(files, pattern, shp, attr_id, fun, idx="years", tsfm = NULL) {
+
+  read_and_tapp(files = files, pattern = pattern, fun = fun, idx = idx, tsfm = tsfm)  %>%
+    dplyr::rowwise() %>%
     dplyr::mutate(
-      div = tolower(div) %>% tools::toTitleCase(),
-      month = factor(month.abb[month], levels = month.abb)
-    )
+      hist = list(filter_years(r, 1991, 2010)),
+      mid_century = list(filter_years(r, 2040, 2069)),
+      end_century = list(filter_years(r, 2070, 2099))
+    ) %>% 
+    join_historical() %>%
+    dplyr::rowwise() %>%
+    dplyr::transmute(
+      scenario = scenario,
+      period = name,
+      diff = list(round(value - historical)),
+      model=model
+    )  %>%
+    dplyr::mutate(diff = list(spat_summary(diff, shp, attr_id, fun="mean"))) %>% 
+    tidyr::unnest(diff) %>%
+    dplyr::select(scenario, period, area=dplyr::all_of(attr_id), diff=value) 
 }
 
-make_heatmap_plot <- function(dat) {
-  
-ggplot(dat) +
-  geom_tile(aes(x=month, y=div, fill=diff), color="black") + 
-  scale_fill_gradientn(colors = RColorBrewer::brewer.pal(9, "Reds")) +
-  # scale_fill_viridis_c() +
-  facet_wrap(scenario~period, ncol = 2) +
-  theme_minimal() + 
-  labs(x="", y = "", fill = "")
+make_boxplot_plot <- function(dat, ylab) {
+
+  ggplot(dat, aes(x=scenario, y=diff, fill=scenario)) +
+    geom_boxplot(alpha=0.2) +
+    facet_grid(rows = dplyr::vars(period), cols=dplyr::vars(area)) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, vjust = 0.5)) +
+    labs(y=ylab, x = "", fill = "Scenario")
 }
-```
 
-```{r fig2.9, message=FALSE, warning=FALSE}
-dat <- dplyr::bind_rows(
-  isolate_models("tas.tif", TRUE, c(1981, 2010), "mean", timescale="annual"),
-  isolate_models("tas.tif", FALSE, c(2049, 2069), "mean", timescale="annual"),
-  isolate_models("tas.tif", FALSE, c(2070, 2099), "mean", timescale="annual")
-)
+make_map_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL) {
+  read_and_tapp(files = files, pattern = pattern, fun = fun, idx = idx, tsfm = tsfm)  %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(
+      hist = list(filter_years(r, 1991, 2010)),
+      mid_century = list(filter_years(r, 2040, 2069)),
+      end_century = list(filter_years(r, 2070, 2099))
+    ) %>%
+    join_historical() %>%
+    dplyr::rowwise() %>%
+    dplyr::transmute(
+      scenario = scenario,
+      period = name,
+      diff = list(round(value - historical)),
+      model=model
+    ) %>%
+    dplyr::group_by(scenario, period) %>%
+    dplyr::summarise(
+      diff = list(terra::app(terra::rast(diff), fun="mean"))
+    ) %>%
+    dplyr::rowwise() %>% 
+    dplyr::mutate(
+      diff = list(to_shp(diff, mt=mt))
+    ) %>%
+    dplyr::select(scenario, period, diff) %>% 
+    tidyr::unnest(diff) %>%
+    sf::st_as_sf() -> dat
 
-dat %>% 
-  dplyr::group_by(div, model, scenario, period) %>% 
-  dplyr::summarise(value = mean(value), .groups = "drop") %>%
-  dplyr::left_join(
-    dplyr::filter(., scenario == "historical") %>% 
-        dplyr::rename(historical = value) %>% 
-        dplyr::select(-scenario, -period)
-    ,
-    by = c("div", "model")
-  ) %>% 
-  dplyr::filter(scenario != "historical") %>% 
-  dplyr::mutate(diff = value - historical) %>%
-  future_boxplot()
-```
+}
 
-
-```{r fig2.10, warning=FALSE}
-dat <- dplyr::bind_rows(
-  filter_and_read("tas.tif", TRUE, c(1981, 2010), "mean", FALSE),
-  filter_and_read("tas.tif", FALSE, c(2049, 2069), "mean", FALSE),
-  filter_and_read("tas.tif", FALSE, c(2070, 2099), "mean", FALSE) 
-) 
-
-test <- dat %>% 
-  dplyr::left_join(
-    dplyr::filter(., scenario == "historical") %>% 
-        dplyr::rename(historical = r) %>% 
-        dplyr::select(-scenario, -period)
-    ,
-    by = c("model", "run", "variable")
-  ) %>%
-  dplyr::filter(scenario != "historical") %>%
-  dplyr::rowwise() %>%
-  dplyr::mutate(
-    diff = list(r - historical),
-  ) %>%
-  dplyr::group_by(scenario, period) %>% 
-  dplyr::summarise(
-    diff = list(terra::app(terra::rast(diff), fun="mean"))
-  ) %>%
-  dplyr::rowwise() %>% 
-  dplyr::mutate(
-    diff = list(to_shp(diff, mt=mt))
-  ) %>%
-  dplyr::select(scenario, period, diff) %>% 
-  tidyr::unnest(diff) %>%
-  sf::st_as_sf()
-  
-ggplot(test) + 
+make_map_plot <- function(dat) {
+  ggplot(dat) + 
     geom_sf(aes(fill=value), color=NA) + 
     geom_sf(aes(), data = climdiv, fill=NA) + 
     facet_wrap(scenario~period, ncol=2) + 
     theme_minimal()
+}
+
+make_heatmap_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL) {
+  
+   read_and_tapp(
+    files = files, pattern = pattern, fun = fun, idx = "yearmonths", tsfm = tsfm
+  ) %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(
+      hist = list(summarize_yearmonths(r, 1991, 2010)),
+      mid_century = list(summarize_yearmonths(r, 2040, 2069)),
+      end_century = list(summarize_yearmonths(r, 2070, 2099))
+    ) %>%
+    join_historical() %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(diff = list(value - historical)) %>%
+    dplyr::group_by(scenario, name) %>%
+    dplyr::summarise(
+      diff = list(terra::tapp(terra::rast(diff), index = month.name, fun = "mean")),
+      .groups = "drop"
+    ) %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(
+      diff = list(spat_summary(diff, shp, attr_id, "month", "mean"))
+    ) %>%
+    tidyr::unnest(diff) %>%
+    dplyr::select(scenario, period=name, area=dplyr::all_of(attr_id), month, diff=value) %>%
+    dplyr::mutate(month = factor(month, levels=month.name))
+}
+
+make_heatmap_plot <- function(dat) {
+  
+  ggplot(dat) +
+    geom_tile(aes(x=month, y=area, fill=diff), color="black") + 
+    scale_fill_gradientn(colors = RColorBrewer::brewer.pal(9, "Reds")) +
+    # scale_fill_viridis_c() +
+    facet_wrap(scenario~period, ncol = 2) +
+    theme_minimal() + 
+    labs(x="", y = "", fill = "") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 0.5)) 
+
+  }
 ```
+
+```{r fig2.9, message=FALSE, warning=FALSE}
+dat <- make_boxplot_data(files = cmip_files, pattern = "above90.tif",  shp=climdiv, attr_id = "NAME", fun="sum")
+make_boxplot_plot(dat, "test")
+```
+
+```{r fig2.10, warning=FALSE}
+dat <- make_map_data(files = cmip_files, pattern = "tas.tif", fun = "mean", shp = climdiv, attr_id = "NAME", tsfm = tas_tsfm)
+make_map_plot(dat)
+```
+
 ```{r fig2.11, warning=FALSE, fig.dim=c(8, 6)}
-dat <- make_heatmap_data("tas.tif", "mean")
+dat <- make_heatmap_data(pattern = "above90.tif", fun = "sum", shp = climdiv, attr_id = "NAME")
 make_heatmap_plot(dat)
-```
+..```
