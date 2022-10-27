@@ -208,6 +208,10 @@ pr_tsfm <- function(x) x/25.4
 ```
 
 ```{r preprocess_cmip, warning=FALSE}
+scenarios <- "historical|ssp245|ssp585"
+ssp_colors <- c("ssp245"="#1b9e77", "ssp585"="#d95f02")
+# c("ssp126"="#7570b3", "ssp245"="#1b9e77", "ssp370"="#e7298a", "ssp585"="#d95f02")
+
 f_list <- RCurl::getURL(
   "https://data.climate.umt.edu/mca/cmip/",
   ftp.use.epsv = TRUE,
@@ -215,14 +219,14 @@ f_list <- RCurl::getURL(
 ) %>% 
   XML::getHTMLLinks() %>% 
   grep(".tif", ., value = T) %>%
-  grep(".json", ., value = T, invert = T) 
+  grep(".json", ., value = T, invert = T) %>%
+  grep(scenarios, ., value = T)
 
 cmip_files <- file.path(
   "https://data.climate.umt.edu/mca/cmip",
   basename(f_list)
 )
 ```
-
 
 ```{r table2.1}
 dat <- c(
@@ -268,6 +272,7 @@ dplyr::bind_rows(dat, annual) %>%
   #   caption = "Table 1: Average temperatures (°F) and Precipitation (in) across Montana from 1991-2020."
   # )
 ```
+
 ```{r table2.2}
 dat <- time_avg(
   "https://data.climate.umt.edu/mca/gridmet/pr.tif",
@@ -293,6 +298,7 @@ dplyr::bind_rows(dat, annual) %>%
   ) %>%
   tidyr::pivot_wider(names_from = 'timescale', values_from='value', names_sort = T) 
 ```
+
 ```{r table 2.3}
 dat <- c(
   "https://data.climate.umt.edu/mca/gridmet/tmmn.tif", 
@@ -389,7 +395,6 @@ dat %>%
     facet_wrap(~div)
 ```
 
-
 ```{r table2.4}
 dat <- time_avg(
   "https://data.climate.umt.edu/mca/gridmet/pr.tif",
@@ -434,7 +439,7 @@ tidyr::separate(dat, timescale, c("season", "year")) %>%
   tidyr::pivot_wider(names_from = timescale, values_from = meta) 
 ```
 
-```{r difference_functions, message=FALSE, warning=FALSE}
+```{r future_comparison_funcs, message=FALSE, warning=FALSE}
 filter_years <- function(r, start, end) {
   years <- which(names(r) %in% paste0("X", start:end))
   if (length(years) == 0) {
@@ -502,6 +507,18 @@ read_and_tapp <- function(pattern, files, fun, idx, tsfm=NULL) {
   return(out) 
 }
 
+climdiv_to_factor <- function(x) {
+  factor(x, levels = c("Western", "Southwestern", "North Central", "Central", "South Central", "Northeastern", "Southeastern"))
+}
+
+clean_factor_period <- function(x) {
+  x %>% 
+    stringr::str_replace("mid_", "Mid ") %>% 
+    stringr::str_replace("end_", "End of ") %>% 
+    tools::toTitleCase() %>%
+    factor(levels = c("Mid Century", "End of Century"))
+}
+
 make_boxplot_data <- function(files, pattern, shp, attr_id, fun, idx="years", tsfm = NULL) {
 
   read_and_tapp(files = files, pattern = pattern, fun = fun, idx = idx, tsfm = tsfm)  %>%
@@ -521,17 +538,25 @@ make_boxplot_data <- function(files, pattern, shp, attr_id, fun, idx="years", ts
     )  %>%
     dplyr::mutate(diff = list(spat_summary(diff, shp, attr_id, fun="mean"))) %>% 
     tidyr::unnest(diff) %>%
-    dplyr::select(scenario, period, area=dplyr::all_of(attr_id), diff=value) 
+    dplyr::select(scenario, period, area=dplyr::all_of(attr_id), diff=value) %>%
+    dplyr::mutate(
+      period = clean_factor_period(period)
+    )
 }
 
-make_boxplot_plot <- function(dat, ylab) {
+make_boxplot_plot <- function(dat, ylab, title) {
 
   ggplot(dat, aes(x=scenario, y=diff, fill=scenario)) +
-    geom_boxplot(alpha=0.2) +
+    geom_violin(alpha=0.8) +
     facet_grid(rows = dplyr::vars(period), cols=dplyr::vars(area)) +
-    theme_minimal() +
-    theme(axis.text.x = element_text(angle = 45, vjust = 0.5)) +
-    labs(y=ylab, x = "", fill = "Scenario")
+    theme_bw() +
+    scale_fill_manual(values = ssp_colors) +
+    theme(
+      axis.text.x = element_text(angle = 45, vjust = 0.5),
+      plot.title = element_text(hjust = 0.5)
+    ) +
+    labs(y=ylab, x = "", fill = "Scenario", title = title) + 
+    geom_hline(yintercept = 0)
 }
 
 make_map_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL) {
@@ -560,16 +585,69 @@ make_map_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL) {
     ) %>%
     dplyr::select(scenario, period, diff) %>% 
     tidyr::unnest(diff) %>%
-    sf::st_as_sf() -> dat
+    sf::st_as_sf() %>%
+    dplyr::mutate(
+      period = clean_factor_period(period)
+    )
 
 }
 
-make_map_plot <- function(dat) {
-  ggplot(dat) + 
-    geom_sf(aes(fill=value), color=NA) + 
-    geom_sf(aes(), data = climdiv, fill=NA) + 
-    facet_wrap(scenario~period, ncol=2) + 
-    theme_minimal()
+make_map_plot <- function(dat, hot=TRUE) {
+
+  diverging <- any(dat$value < 0)
+  if (hot && diverging) {
+    pal <-  c('#fc8d59','#ffffbf','#91bfdb')
+  } else if (hot && !diverging) {
+    pal <- c('#fee8c8','#fdbb84','#e34a33')
+  } else if (!hot && diverging) {
+    pal <- c('#d8b365','#f5f5f5','#5ab4ac')
+  } else {
+    pal <- c('#ece7f2','#a6bddb','#2b8cbe')
+  }
+
+  midpoint <- ifelse(diverging, 0, mean(dat$value))
+
+  fig <- ggplot(dat) +
+    geom_sf(aes(fill=value), color=NA) +
+    geom_sf(aes(), data = climdiv, fill=NA) +
+    facet_grid(rows = vars(scenario), cols = vars(period)) +
+    scale_fill_gradient2(
+      low = pal[1], mid = pal[2], high =  pal[3],
+      midpoint = midpoint
+    ) +
+    theme_bw() +
+    theme(
+      axis.text.x = element_text(angle = 45, vjust = 0.5),
+      plot.title = element_text(hjust = 0.5)
+    ) +
+    labs(y="", x = "", fill = "")
+  
+  return(fig)
+}
+
+apply_map_by_scenario <- function(dat, hot, title_txt) {
+  plt <- dat %>% 
+    dplyr::group_by(scenario) %>% 
+    dplyr::group_split() %>% 
+    lapply(make_map_plot, hot = hot) %>% 
+    {cowplot::plot_grid(.[[1]], .[[2]], nrow=2)} 
+  
+  title <- cowplot::ggdraw() + 
+    cowplot::draw_label(
+      title_txt,
+      fontface = 'bold',
+    ) +
+    theme(
+      # add margin on the left of the drawing canvas,
+      # so title is aligned with left edge of first plot
+      plot.margin = margin(0, 0, 0, 0)
+    )
+  cowplot::plot_grid(
+    title, plt,
+    ncol = 1,
+    # rel_heights values control vertical title margins
+    rel_heights = c(0.1, 1)
+  )
 }
 
 make_heatmap_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL) {
@@ -597,34 +675,179 @@ make_heatmap_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL) {
     ) %>%
     tidyr::unnest(diff) %>%
     dplyr::select(scenario, period=name, area=dplyr::all_of(attr_id), month, diff=value) %>%
-    dplyr::mutate(month = factor(month, levels=month.name))
+    dplyr::mutate(
+      period = clean_factor_period(period),
+      month = factor(month, levels=month.name)
+    )
 }
 
-make_heatmap_plot <- function(dat) {
+make_heatmap_plot <- function(dat, hot = TRUE) {
+  
+  diverging <- any(dat$diff < 0)
+  if (hot && diverging) {
+    pal <-  c('#fc8d59','#ffffbf','#91bfdb')
+  } else if (hot && !diverging) {
+    pal <- c('#fee8c8','#fdbb84','#e34a33')
+  } else if (!hot && diverging) {
+    pal <- c('#d8b365','#f5f5f5','#5ab4ac')
+  } else {
+    pal <- c('#ece7f2','#a6bddb','#2b8cbe')
+  }
+  
+  midpoint <- ifelse(diverging, 0, mean(dat$diff))
   
   ggplot(dat) +
     geom_tile(aes(x=month, y=area, fill=diff), color="black") + 
-    scale_fill_gradientn(colors = RColorBrewer::brewer.pal(9, "Reds")) +
-    # scale_fill_viridis_c() +
-    facet_wrap(scenario~period, ncol = 2) +
-    theme_minimal() + 
+    scale_fill_gradient2(
+      low = pal[1], mid = pal[2], high =  pal[3],
+      midpoint = midpoint
+    ) +
+    facet_grid(rows = vars(scenario), cols = vars(period)) +
+    theme_bw() + 
     labs(x="", y = "", fill = "") +
     theme(axis.text.x = element_text(angle = 45, vjust = 0.5)) 
+}
 
-  }
+apply_heatmap_by_scenario <- function(dat, hot, title_txt) {
+  plt <- dat %>% 
+    dplyr::group_by(scenario) %>% 
+    dplyr::group_split() %>% 
+    lapply(make_heatmap_plot, hot = hot) %>% 
+    {cowplot::plot_grid(.[[1]], .[[2]], nrow=2)} 
+  
+  title <- cowplot::ggdraw() + 
+    cowplot::draw_label(
+      title_txt,
+      fontface = 'bold',
+    ) +
+    theme(
+      # add margin on the left of the drawing canvas,
+      # so title is aligned with left edge of first plot
+      plot.margin = margin(0, 0, 0, 0)
+    )
+  cowplot::plot_grid(
+    title, plt,
+    ncol = 1,
+    # rel_heights values control vertical title margins
+    rel_heights = c(0.1, 1)
+  )
+}
 ```
 
+
 ```{r fig2.9, message=FALSE, warning=FALSE}
-dat <- make_boxplot_data(files = cmip_files, pattern = "above90.tif",  shp=climdiv, attr_id = "NAME", fun="sum")
-make_boxplot_plot(dat, "test")
+dat <- make_boxplot_data(
+  files = cmip_files, pattern = "above90.tif",  
+  shp=climdiv, attr_id = "NAME", fun="sum"
+) %>% 
+  dplyr::mutate(area = climdiv_to_factor(area))
+
+fig <- make_boxplot_plot(
+  dat, 
+  "# Days Above 90°F", 
+  "Change in # of Days Above 90°F"
+
+  ) 
+ggsave("./figures/above90_box.png", fig, width=10, height=6)
+
+dat <- make_boxplot_data(
+  files = cmip_files, pattern = "pr.tif",  
+  shp=climdiv, attr_id = "NAME", fun="sum",
+  tsfm = pr_tsfm
+) %>% 
+  dplyr::mutate(area = climdiv_to_factor(area))
+
+fig <- make_boxplot_plot(
+  dat, 
+  "Precipitation Difference (in.)", 
+  "Change in Annual Precipitation (in.)"
+
+  ) 
+ggsave("./figures/pr_box.png", fig, width=10, height=6)
+
+dat <- make_boxplot_data(
+  files = cmip_files, pattern = "tas.tif",  
+  shp=climdiv, attr_id = "NAME", fun="mean",
+  tsfm = tas_tsfm
+) %>% 
+  dplyr::mutate(area = climdiv_to_factor(area))
+
+fig <- make_boxplot_plot(
+  dat, 
+  "Temperature Difference (°F)", 
+  "Change in Mean Annual Temperature (°F)"
+
+  ) 
+ggsave("./figures/tas_box.png", fig, width=10, height=6)
 ```
 
 ```{r fig2.10, warning=FALSE}
-dat <- make_map_data(files = cmip_files, pattern = "tas.tif", fun = "mean", shp = climdiv, attr_id = "NAME", tsfm = tas_tsfm)
-make_map_plot(dat)
+dat <- make_map_data(
+  files = cmip_files, pattern = "tas.tif", 
+  fun = "mean", shp = climdiv, attr_id = "NAME", tsfm = tas_tsfm
+)
+
+fig <- apply_map_by_scenario(
+  dat, TRUE, "Change in Mean Annual Temperature (°F)"
+)
+
+ggsave(
+  "./figures/tas_map.png", fig, width=8, height=6, bg = "white"
+)
+
+dat <- make_map_data(
+  files = cmip_files, pattern = "above90.tif", 
+  fun = "sum", shp = climdiv, attr_id = "NAME"
+)
+
+fig <- apply_map_by_scenario(
+  dat, TRUE, "Change in # of Days Above 90°F"
+)
+
+ggsave(
+  "./figures/above90_map.png", fig, width=8, height=6, bg = "white"
+)
+
+dat <- make_map_data(
+  files = cmip_files, pattern = "pr.tif", 
+  fun = "sum", shp = climdiv, attr_id = "NAME", tsfm = pr_tsfm
+)
+
+fig <- apply_map_by_scenario(
+  dat, FALSE, "Change in Total Annual Precipitation (in.)"
+)
+
+ggsave(
+  "./figures/pr_map.png", fig, width=8, height=6, bg = "white"
+)
+
 ```
 
 ```{r fig2.11, warning=FALSE, fig.dim=c(8, 6)}
-dat <- make_heatmap_data(pattern = "above90.tif", fun = "sum", shp = climdiv, attr_id = "NAME")
-make_heatmap_plot(dat)
-..```
+dat <- make_heatmap_data(
+  files = cmip_files,pattern = "above90.tif", fun = "sum", shp = climdiv, attr_id = "NAME", tsfm = NULL
+) %>% 
+  dplyr::mutate(area = climdiv_to_factor(area))
+fig <- apply_heatmap_by_scenario(dat, TRUE, "Change in # of Days Above 90°F")
+ggsave(
+  "./figures/above90_heat.png", fig, width=8, height=6, bg = "white"
+)
+
+dat <- make_heatmap_data(
+  files = cmip_files,pattern = "tas.tif", fun = "mean", shp = climdiv, attr_id = "NAME", tsfm = tas_tsfm
+) %>% 
+  dplyr::mutate(area = climdiv_to_factor(area))
+fig <- apply_heatmap_by_scenario(dat, TRUE, "Change in Mean Monthly Temperature")
+ggsave(
+  "./figures/tas_heat.png", fig, width=8, height=6, bg = "white"
+)
+
+dat <- make_heatmap_data(
+  files = cmip_files,pattern = "pr.tif", fun = "sum", shp = climdiv, attr_id = "NAME", tsfm = pr_tsfm
+) %>% 
+  dplyr::mutate(area = climdiv_to_factor(area))
+fig <- apply_heatmap_by_scenario(dat, FALSE, "Change in Mean Monthly Precipitation (in.)")
+ggsave(
+  "./figures/pr_heat.png", fig, width=8, height=6, bg = "white"
+)
+```
