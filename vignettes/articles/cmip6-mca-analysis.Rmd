@@ -170,8 +170,8 @@ timeseries_to_summary <- function(r, period) {
     grp <- rep("Annual", terra::nlyr(r))
   } else if (period == "seasonal") {
     grp <- meta %>% 
-      tidyr::separate(name, c("season", "year")) %>% 
-      dplyr::mutate(season = factor(season, levels = c("Winter", "Spring", "Summer", "Fall"))) %$%
+      tidyr::separate(name, c("season", "year")) %$% 
+      # dplyr::mutate(season = factor(season, levels = c("Winter", "Spring", "Summer", "Fall"))) %$%
       season
   } else {
     grp <- meta %>% 
@@ -236,38 +236,95 @@ dat <- c(
   purrr::map(function(x) {
     time_avg(
       x,
-      c(1991, 2020),
+      c(1981, 2010),
       "seasonal", 
       "mean", 
       tas_tsfm,
       TRUE
     ) %>% 
-      timeseries_to_summary("seasonal") %>%
-      spat_summary(shp = climdiv, "NAME", fun="mean") %>% 
-      dplyr::select(div=NAME, timescale, value) %>% 
-      dplyr::mutate(
-        variable = basename(tools::file_path_sans_ext(x))
-      )
+      timeseries_to_summary("seasonal") # %>%
+      # spat_summary(shp = climdiv, "NAME", fun="mean") %>% 
+      # dplyr::select(div=NAME, timescale, value) %>% 
+      # dplyr::mutate(
+      #   variable = basename(tools::file_path_sans_ext(x))
+      # )
   }) %>%
-  dplyr::bind_rows() %>% 
-  tidyr::pivot_wider(names_from = "variable", values_from = "value") %>% 
-  dplyr::mutate(
-    tavg = (tmmn + tmmx)/2,
-  ) 
+  {(.[[1]] + .[[2]])/2} %>% 
+  to_shp(mt=mt)
+  # dplyr::bind_rows() %>% 
+  # tidyr::pivot_wider(names_from = "variable", values_from = "value") %>% 
+  # dplyr::mutate(
+  #   tavg = (tmmn + tmmx)/2,
+  # ) 
 
-annual <- tidyr::pivot_longer(dat, c(tmmn, tmmx, tavg)) %>% 
-  dplyr::group_by(div, name) %>% 
-  dplyr::summarise(Annual = mean(value), .groups="drop") %>% 
-  tidyr::pivot_wider(names_from = name, values_from = Annual) %>% 
-  dplyr::mutate(timescale = "Annual")
+fig <- dat %>% 
+  # to_shp(mt=mt) %>%
+  dplyr::mutate(time = factor(time, levels = c("Winter", "Spring", "Summer", "Fall"))) %>% 
+  dplyr::group_by(time) %>% 
+  dplyr::group_split() %>%
+  purrr::map(function(x) {
+    labs <- seq(min(x$value), max(x$value), length.out = 6) %>% 
+          round(1) 
+    
+    ggplot(data = x) + 
+      geom_sf(aes(fill=value), color = NA) + 
+      geom_sf(aes(), data = climdiv, fill=NA) +
+      facet_wrap(~time) +
+      scale_fill_gradientn(
+        colors = viridis::viridis_pal(option="plasma")(9), 
+        limits = c(min(labs)-1, max(labs)+1),
+        breaks = labs,
+        labels = format(labs, nsmall=1)
+      ) +
+      # scale_fill_viridis_c() + 
+      # scale_fill_gradient2(
+      #   low = pal[1], mid = pal[2], high =  pal[3],
+      #   midpoint = midpoint
+      # ) +
+      theme_bw() +
+      theme(
+        axis.text.x = element_text(angle = 45, vjust = 0.5),
+        plot.title = element_text(hjust = 0.5),
+        legend.key.height = unit(0.05, "npc")
+      ) +
+      labs(y="", x = "", fill = "")
+  }) %>%
+  {cowplot::plot_grid(.[[1]], .[[2]], .[[3]], .[[4]], nrow=2)}
 
-dplyr::bind_rows(dat, annual) %>% 
-  dplyr::transmute(
-    `Climate Division` = tools::toTitleCase(tolower(div)), 
-    timescale = factor(timescale, levels = c("Annual", "Winter", "Spring", "Summer", "Fall")),
-    meta = paste(round(tmmn, 1), round(tavg, 1), round(tmmx, 1), sep = " / ")
-  ) %>%
-  tidyr::pivot_wider(names_from = 'timescale', values_from='meta', names_sort = T) 
+title <- cowplot::ggdraw() + 
+  cowplot::draw_label(
+    "Seasonal Average Temperature (°F) Across Montana (1981 - 2010)",
+    fontface = 'bold',
+  ) +
+  theme(
+    # add margin on the left of the drawing canvas,
+    # so title is aligned with left edge of first plot
+    plot.margin = margin(0, 0, 0, 0)
+  )
+fig <- cowplot::plot_grid(
+  title, fig,
+  ncol = 1,
+  # rel_heights values control vertical title margins
+  rel_heights = c(0.1, 1)
+)
+
+png("./figures/historical_tavg.png", width = 10, height=6, units="in", res=320)
+print(fig)
+dev.off()
+
+# annual <- tidyr::pivot_longer(dat, c(tmmn, tmmx, tavg)) %>% 
+#   dplyr::group_by(div, name) %>% 
+#   dplyr::summarise(Annual = mean(value), .groups="drop") %>% 
+#   tidyr::pivot_wider(names_from = name, values_from = Annual) %>% 
+#   dplyr::mutate(timescale = "Annual")
+# 
+# dplyr::bind_rows(dat, annual) %>% 
+#   dplyr::transmute(
+#     `Climate Division` = tools::toTitleCase(tolower(div)), 
+#     timescale = factor(timescale, levels = c("Annual", "Winter", "Spring", "Summer", "Fall")),
+#     meta = paste(round(tmmn, 1), round(tavg, 1), round(tmmx, 1), sep = " / ")
+#   ) %>%
+#   tidyr::pivot_wider(names_from = 'timescale', values_from='meta', names_sort = T) 
   # knitr::kable(
   #   caption = "Table 1: Average temperatures (°F) and Precipitation (in) across Montana from 1991-2020."
   # )
@@ -282,21 +339,79 @@ dat <- time_avg(
   pr_tsfm,
   TRUE
 ) %>% 
-  timeseries_to_summary("seasonal") %>%
-  spat_summary(shp = climdiv, "NAME", fun="mean") %>% 
-  dplyr::select(div=NAME, timescale, value) 
+  timeseries_to_summary("seasonal") 
+  # spat_summary(shp = climdiv, "NAME", fun="mean") %>% 
+  # dplyr::select(div=NAME, timescale, value) 
 
-annual <- dplyr::group_by(dat, div) %>% 
-  dplyr::summarise(value = sum(value), .groups="drop") %>% 
-  dplyr::mutate(timescale = "Annual")
+fig <- dat %>% 
+  to_shp(mt=mt) %>%
+  dplyr::mutate(time = factor(time, levels = c("Winter", "Spring", "Summer", "Fall"))) %>% 
+  dplyr::group_by(time) %>% 
+  dplyr::group_split() %>%
+  purrr::map(function(x) {
+    labs <- seq(min(x$value), max(x$value), length.out = 6) %>% 
+          round(1) 
+    
+    ggplot(data = x) + 
+      geom_sf(aes(fill=value), color = NA) + 
+      geom_sf(aes(), data = climdiv, fill=NA) +
+      facet_wrap(~time) +
+      scale_fill_gradientn(
+        colors = viridis::viridis_pal()(9), 
+        limits = c(min(labs)-1, max(labs)+1),
+        breaks = labs,
+        labels = labs
+      ) +
+      # scale_fill_viridis_c() + 
+      # scale_fill_gradient2(
+      #   low = pal[1], mid = pal[2], high =  pal[3],
+      #   midpoint = midpoint
+      # ) +
+      theme_bw() +
+      theme(
+        axis.text.x = element_text(angle = 45, vjust = 0.5),
+        plot.title = element_text(hjust = 0.5),
+        legend.key.height = unit(0.05, "npc")
+      ) +
+      labs(y="", x = "", fill = "")
+  }) %>%
+  {cowplot::plot_grid(.[[1]], .[[2]], .[[3]], .[[4]], nrow=2)}
 
-dplyr::bind_rows(dat, annual) %>% 
-  dplyr::transmute(
-    `Climate Division` = tools::toTitleCase(tolower(div)), 
-    timescale = factor(timescale, levels = c("Annual", "Winter", "Spring", "Summer", "Fall")),
-    value = value
-  ) %>%
-  tidyr::pivot_wider(names_from = 'timescale', values_from='value', names_sort = T) 
+title <- cowplot::ggdraw() + 
+  cowplot::draw_label(
+    "Seasonal Precipitation (in.) Totals Across Montana (1981 - 2010)",
+    fontface = 'bold',
+  ) +
+  theme(
+    # add margin on the left of the drawing canvas,
+    # so title is aligned with left edge of first plot
+    plot.margin = margin(0, 0, 0, 0)
+  )
+fig <- cowplot::plot_grid(
+  title, fig,
+  ncol = 1,
+  # rel_heights values control vertical title margins
+  rel_heights = c(0.1, 1)
+)
+
+png("./figures/historical_pr.png", width = 10, height=6, units="in", res=320)
+print(fig)
+dev.off()
+# dat %<>% 
+#   spat_summary(shp = climdiv, "NAME", fun="mean") %>%
+#   dplyr::select(div=NAME, timescale, value)
+# 
+# annual <- dplyr::group_by(dat, div) %>% 
+#   dplyr::summarise(value = sum(value), .groups="drop") %>% 
+#   dplyr::mutate(timescale = "Annual")
+# 
+# dplyr::bind_rows(dat, annual) %>% 
+#   dplyr::transmute(
+#     `Climate Division` = tools::toTitleCase(tolower(div)), 
+#     timescale = factor(timescale, levels = c("Annual", "Winter", "Spring", "Summer", "Fall")),
+#     value = value
+#   ) %>%
+#   tidyr::pivot_wider(names_from = 'timescale', values_from='value', names_sort = T) 
 ```
 
 ```{r table 2.3}
@@ -380,9 +495,10 @@ dat <- c(
   }) %>% 
   dplyr::bind_rows()
 
-dat %>% 
+fig <- dat %>% 
   dplyr::mutate(
     div = tools::toTitleCase(tolower(div)),
+    div = climdiv_to_factor(div),
     year = timescale %>% 
       stringr::str_replace("X", "") %>% 
       as.numeric()
@@ -392,7 +508,14 @@ dat %>%
   ggplot(aes(x=year, y=value)) +
     geom_line() + 
     geom_smooth(method = "lm") + 
-    facet_wrap(~div)
+    facet_wrap(~div, nrow=7, scales = "free_y") + 
+    theme_bw() + 
+    labs(title = "Temperature Trend Across Climate Divisions (1979 - 2020)", y = "Mean Annual Temperature (°F)", y="") +
+    theme(
+      plot.title = element_text(hjust=0.5, face="bold")
+    )
+
+ggsave(glue::glue("./figures/hist_trends.png"), fig, width=10, height=8)
 ```
 
 ```{r table2.4}
@@ -408,8 +531,6 @@ dat <- time_avg(
     shp = climdiv, attr_id = "NAME", fun="mean"
   ) %>% 
   dplyr::select(div=NAME, timescale, value)
-
-
 
 # # Just a check to look at the trends. 
 # dat %>% 
@@ -734,17 +855,12 @@ apply_heatmap_by_scenario <- function(dat, hot, title_txt) {
 }
 ```
 
-
-
-
-
-
 ```{r iterate_figures, warning=FALSE}
 make_figures <- function(pattern, title, tsfm, hot, fun) {
   out_base <- stringr::str_replace(pattern, ".tif", "")
   dat <- make_boxplot_data(
     files = cmip_files, pattern = pattern,  
-    shp=climdiv, attr_id = "NAME", fun="mean",
+    shp=climdiv, attr_id = "NAME", fun=fun,
     tsfm = tsfm
   ) %>% 
     dplyr::mutate(area = climdiv_to_factor(area))
@@ -766,28 +882,32 @@ make_figures <- function(pattern, title, tsfm, hot, fun) {
     dat, hot, title
   )
   
-  ggsave(
-   glue::glue("./figures/{out_base}_map.png"), fig, width=8, height=6, bg = "white"
-  )
+  png(glue::glue("./figures/{out_base}_map.png"), width = 8, height=6, units="in", res=320)
+  print(fig)
+  dev.off()
   
-  ### Make Heatmaps
-  dat <- make_heatmap_data(
-    files = cmip_files, pattern = pattern, fun = fun, shp = climdiv, attr_id = "NAME", tsfm = tsfm
-  ) %>% 
-    dplyr::mutate(area = climdiv_to_factor(area))
-  fig <- apply_heatmap_by_scenario(dat, hot, title)
-  ggsave(
-    glue::glue("./figures/{out_base}_heat.png"), fig, width=8, height=6, bg = "white"
-  )
+  if (!(pattern %in% c("con-wet.tif", "con-dry.tif"))) {
+    ### Make Heatmaps
+    dat <- make_heatmap_data(
+      files = cmip_files, pattern = pattern, fun = fun, shp = climdiv, attr_id = "NAME", tsfm = tsfm
+    ) %>% 
+      dplyr::mutate(area = climdiv_to_factor(area))
+    fig <- apply_heatmap_by_scenario(dat, hot, stringr::str_replace(title, "Annual", "Monthly"))
+    ggsave(
+      glue::glue("./figures/{out_base}_heat.png"), fig, width=8, height=6, bg = "white"
+    )
+  }
+
 }
 
 tibble::tribble(
   ~pattern, ~title, ~tsfm, ~hot, ~fun, 
-  # "above90.tif", "Change in # of Days Above 90°F", NULL, TRUE, "sum",
-  # "con-dry.tif", "Change in # of Consecutive Dry Days", NULL, FALSE, "sum",
-  # "con-wet.tif", "Change in # of Consecutive Wet Days", NULL, FALSE, "sum",
+  "above90.tif", "Change in # of Days Above 90°F", NULL, TRUE, "sum",
+  "con-dry.tif", "Change in # of Consecutive Dry Days", NULL, FALSE, "sum",
+  "con-wet.tif", "Change in # of Consecutive Wet Days", NULL, FALSE, "sum",
   "dry-days.tif", "Change in # of Dry Days", NULL, FALSE, "sum",
-  "freeze-free.tif", "Change in # of Freeze-Free Days", NULL, FALSE, "sum",
+  "wet-days.tif", "Change in # of Wet Days", NULL, FALSE, "sum",
+  "freeze-free.tif", "Change in # of Freeze-Free Days", NULL, TRUE, "sum",
   "pr.tif", "Change in Annual Total Precipitation (in.)", pr_tsfm, FALSE, "sum",
   "tas.tif", "Change in Mean Annual Temperature (°F)", tas_tsfm, TRUE, "mean",
   "tasmax.tif", "Change in Mean Annual Maximum Temperature (°F)", tas_tsfm, TRUE, "mean",
