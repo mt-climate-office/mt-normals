@@ -524,7 +524,7 @@ make_boxplot_data <- function(files, pattern, shp, attr_id, fun, idx="years", ts
   read_and_tapp(files = files, pattern = pattern, fun = fun, idx = idx, tsfm = tsfm)  %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
-      hist = list(filter_years(r, 1991, 2010)),
+      hist = list(filter_years(r, 1981, 2010)),
       mid_century = list(filter_years(r, 2040, 2069)),
       end_century = list(filter_years(r, 2070, 2099))
     ) %>% 
@@ -560,10 +560,10 @@ make_boxplot_plot <- function(dat, ylab, title) {
 }
 
 make_map_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL) {
-  read_and_tapp(files = files, pattern = pattern, fun = fun, idx = idx, tsfm = tsfm)  %>%
+  read_and_tapp(files = files, pattern = pattern, fun = fun, idx = "years", tsfm = tsfm)  %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
-      hist = list(filter_years(r, 1991, 2010)),
+      hist = list(filter_years(r, 1981, 2010)),
       mid_century = list(filter_years(r, 2040, 2069)),
       end_century = list(filter_years(r, 2070, 2099))
     ) %>%
@@ -657,7 +657,7 @@ make_heatmap_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL) {
   ) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
-      hist = list(summarize_yearmonths(r, 1991, 2010)),
+      hist = list(summarize_yearmonths(r, 1981, 2010)),
       mid_century = list(summarize_yearmonths(r, 2040, 2069)),
       end_century = list(summarize_yearmonths(r, 2070, 2099))
     ) %>%
@@ -735,119 +735,68 @@ apply_heatmap_by_scenario <- function(dat, hot, title_txt) {
 ```
 
 
-```{r fig2.9, message=FALSE, warning=FALSE}
-dat <- make_boxplot_data(
-  files = cmip_files, pattern = "above90.tif",  
-  shp=climdiv, attr_id = "NAME", fun="sum"
+
+
+
+
+```{r iterate_figures, warning=FALSE}
+make_figures <- function(pattern, title, tsfm, hot, fun) {
+  out_base <- stringr::str_replace(pattern, ".tif", "")
+  dat <- make_boxplot_data(
+    files = cmip_files, pattern = pattern,  
+    shp=climdiv, attr_id = "NAME", fun="mean",
+    tsfm = tsfm
+  ) %>% 
+    dplyr::mutate(area = climdiv_to_factor(area))
+  
+  fig <- make_boxplot_plot(
+      dat, 
+      "Difference", 
+      title
+    ) 
+  ggsave(glue::glue("./figures/{out_base}_box.png"), fig, width=10, height=6)
+  
+  ### Make Maps
+  dat <- make_map_data(
+    files = cmip_files, pattern = pattern, 
+    fun = fun, shp = climdiv, attr_id = "NAME", tsfm = tsfm
+  )
+  
+  fig <- apply_map_by_scenario(
+    dat, hot, title
+  )
+  
+  ggsave(
+   glue::glue("./figures/{out_base}_map.png"), fig, width=8, height=6, bg = "white"
+  )
+  
+  ### Make Heatmaps
+  dat <- make_heatmap_data(
+    files = cmip_files, pattern = pattern, fun = fun, shp = climdiv, attr_id = "NAME", tsfm = tsfm
+  ) %>% 
+    dplyr::mutate(area = climdiv_to_factor(area))
+  fig <- apply_heatmap_by_scenario(dat, hot, title)
+  ggsave(
+    glue::glue("./figures/{out_base}_heat.png"), fig, width=8, height=6, bg = "white"
+  )
+}
+
+tibble::tribble(
+  ~pattern, ~title, ~tsfm, ~hot, ~fun, 
+  # "above90.tif", "Change in # of Days Above 90°F", NULL, TRUE, "sum",
+  # "con-dry.tif", "Change in # of Consecutive Dry Days", NULL, FALSE, "sum",
+  # "con-wet.tif", "Change in # of Consecutive Wet Days", NULL, FALSE, "sum",
+  "dry-days.tif", "Change in # of Dry Days", NULL, FALSE, "sum",
+  "freeze-free.tif", "Change in # of Freeze-Free Days", NULL, FALSE, "sum",
+  "pr.tif", "Change in Annual Total Precipitation (in.)", pr_tsfm, FALSE, "sum",
+  "tas.tif", "Change in Mean Annual Temperature (°F)", tas_tsfm, TRUE, "mean",
+  "tasmax.tif", "Change in Mean Annual Maximum Temperature (°F)", tas_tsfm, TRUE, "mean",
+  "tasmin.tif", "Change in Mean Annual Minimum Temperature (°F)", tas_tsfm, TRUE, "mean"
 ) %>% 
-  dplyr::mutate(area = climdiv_to_factor(area))
-
-fig <- make_boxplot_plot(
-  dat, 
-  "# Days Above 90°F", 
-  "Change in # of Days Above 90°F"
-
-  ) 
-ggsave("./figures/above90_box.png", fig, width=10, height=6)
-
-dat <- make_boxplot_data(
-  files = cmip_files, pattern = "pr.tif",  
-  shp=climdiv, attr_id = "NAME", fun="sum",
-  tsfm = pr_tsfm
-) %>% 
-  dplyr::mutate(area = climdiv_to_factor(area))
-
-fig <- make_boxplot_plot(
-  dat, 
-  "Precipitation Difference (in.)", 
-  "Change in Annual Precipitation (in.)"
-
-  ) 
-ggsave("./figures/pr_box.png", fig, width=10, height=6)
-
-dat <- make_boxplot_data(
-  files = cmip_files, pattern = "tas.tif",  
-  shp=climdiv, attr_id = "NAME", fun="mean",
-  tsfm = tas_tsfm
-) %>% 
-  dplyr::mutate(area = climdiv_to_factor(area))
-
-fig <- make_boxplot_plot(
-  dat, 
-  "Temperature Difference (°F)", 
-  "Change in Mean Annual Temperature (°F)"
-
-  ) 
-ggsave("./figures/tas_box.png", fig, width=10, height=6)
-```
-
-```{r fig2.10, warning=FALSE}
-dat <- make_map_data(
-  files = cmip_files, pattern = "tas.tif", 
-  fun = "mean", shp = climdiv, attr_id = "NAME", tsfm = tas_tsfm
-)
-
-fig <- apply_map_by_scenario(
-  dat, TRUE, "Change in Mean Annual Temperature (°F)"
-)
-
-ggsave(
-  "./figures/tas_map.png", fig, width=8, height=6, bg = "white"
-)
-
-dat <- make_map_data(
-  files = cmip_files, pattern = "above90.tif", 
-  fun = "sum", shp = climdiv, attr_id = "NAME"
-)
-
-fig <- apply_map_by_scenario(
-  dat, TRUE, "Change in # of Days Above 90°F"
-)
-
-ggsave(
-  "./figures/above90_map.png", fig, width=8, height=6, bg = "white"
-)
-
-dat <- make_map_data(
-  files = cmip_files, pattern = "pr.tif", 
-  fun = "sum", shp = climdiv, attr_id = "NAME", tsfm = pr_tsfm
-)
-
-fig <- apply_map_by_scenario(
-  dat, FALSE, "Change in Total Annual Precipitation (in.)"
-)
-
-ggsave(
-  "./figures/pr_map.png", fig, width=8, height=6, bg = "white"
-)
-
-```
-
-```{r fig2.11, warning=FALSE, fig.dim=c(8, 6)}
-dat <- make_heatmap_data(
-  files = cmip_files,pattern = "above90.tif", fun = "sum", shp = climdiv, attr_id = "NAME", tsfm = NULL
-) %>% 
-  dplyr::mutate(area = climdiv_to_factor(area))
-fig <- apply_heatmap_by_scenario(dat, TRUE, "Change in # of Days Above 90°F")
-ggsave(
-  "./figures/above90_heat.png", fig, width=8, height=6, bg = "white"
-)
-
-dat <- make_heatmap_data(
-  files = cmip_files,pattern = "tas.tif", fun = "mean", shp = climdiv, attr_id = "NAME", tsfm = tas_tsfm
-) %>% 
-  dplyr::mutate(area = climdiv_to_factor(area))
-fig <- apply_heatmap_by_scenario(dat, TRUE, "Change in Mean Monthly Temperature")
-ggsave(
-  "./figures/tas_heat.png", fig, width=8, height=6, bg = "white"
-)
-
-dat <- make_heatmap_data(
-  files = cmip_files,pattern = "pr.tif", fun = "sum", shp = climdiv, attr_id = "NAME", tsfm = pr_tsfm
-) %>% 
-  dplyr::mutate(area = climdiv_to_factor(area))
-fig <- apply_heatmap_by_scenario(dat, FALSE, "Change in Mean Monthly Precipitation (in.)")
-ggsave(
-  "./figures/pr_heat.png", fig, width=8, height=6, bg = "white"
-)
+  dplyr::group_by(pattern) %>% 
+  dplyr::group_split() %>%
+  purrr::map(function(x) {
+    print(x)
+    make_figures(pattern=x$pattern, title=x$title, tsfm=x$tsfm[[1]], hot=x$hot, fun=x$fun)
+  })
 ```
