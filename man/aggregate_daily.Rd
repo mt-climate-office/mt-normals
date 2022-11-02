@@ -10,6 +10,7 @@ aggregate_daily(
   monthly = TRUE,
   agg_func = "mean",
   filename = NULL,
+  transform = NA,
   ...
 )
 }
@@ -27,6 +28,9 @@ be computed.}
 
 \item{filename}{A path/name to save the file as. If left empty, nothing will
 be written to disk.}
+
+\item{transform}{A unit transform function to apply to the daily data before
+they are aggregated.}
 
 \item{...}{Additional arguments that will be passed to \code{terra::writeRaster}.}
 }
