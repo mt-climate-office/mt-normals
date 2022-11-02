@@ -2,5 +2,8 @@
 
 export(aggregate_daily)
 export(gamma_from_rast)
+export(read_from_server)
+export(spat_summary)
 export(write_as_cog)
+importFrom(magrittr,"%$%")
 importFrom(magrittr,"%>%")

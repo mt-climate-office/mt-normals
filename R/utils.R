@@ -21,6 +21,20 @@ write_as_cog <- function(x, filename) {
   )
 }
 
+
+#' read_from_server
+#'
+#' @importFrom magrittr %$%
+#' @description Read a cog from the MCO file server and also read in the associated metadata.
+#' Without using this function, the raster will not have a `terra::time` attribute.
+#'
+#' @param f_url The string of the url path to the cog on the file server.
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' read_from_server("https://data.climate.umt.edu/mca/cmip/ACCESS-ESM1-5_historical_r1i1p1f1_above90.tif")
 read_from_server <- function(f_url) {
 
   r <- terra::rast(f_url)
@@ -45,6 +59,7 @@ read_from_server <- function(f_url) {
   terra::time(r) <- dates
   r
 }
+
 
 deg_c_to_f <- function(t) {
   (t * 1.8) + 32
@@ -275,6 +290,19 @@ calc_derived_metrics <- function(data_dir, out_dir) {
   })
 }
 
+#' spat_summary
+#'
+#' @param rasts A `terra::rast` that zonal statistics will be derived from.
+#' @param shp An `sf` object that will be used to derive zonal statistics.
+#' @param attr_id A string of the column name in `shp` describing each subregion.
+#' @param name_to The desired name of the descriptor column in the output dataframe.
+#' @param fun The function to apply in the zonal statistics.
+#' @param ... Any additional arguments that should be passed to fun
+#'
+#' @return A dataframe of the aggregated statistics for each region in `shp`.
+#' @export
+#'
+#' @examples
 spat_summary <- function(rasts, shp, attr_id = NULL, name_to = "timescale", fun, ...) {
 
   if (is.null(attr_id)) {
