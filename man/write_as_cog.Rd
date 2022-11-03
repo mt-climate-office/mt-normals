@@ -7,9 +7,21 @@
 write_as_cog(x, filename)
 }
 \arguments{
-\item{filename}{}
+\item{x}{\code{terra::rast} to write out as a COG.}
+
+\item{filename}{The file path to save raster as}
+}
+\value{
+Returns the input \code{x}. \code{x} is also saved to disk at \code{filename}.
 }
 \description{
 A wrapper around \code{terra::writeRaster} to write a \code{terra::rast}
 to disk as a \href{https://www.cogeo.org/}{Cloud Optimized GeoTIFF}.
+}
+\examples{
+\dontrun{
+
+r <- terra::rast(vals=1:100, nrow=10, ncol=10)
+write_as_cog(r, "~/example_dir/example.tif")
+}
 }

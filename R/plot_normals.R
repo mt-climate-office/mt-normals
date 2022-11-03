@@ -3,8 +3,6 @@
 #
 # base_url = "https://data.climate.umt.edu/mt-normals/cog"
 #
-#
-#
 # stat_map <- function(e) {
 #   switch(
 #     e,
@@ -372,3 +370,53 @@
 # #   dplyr::mutate(
 # #     out = plot_map(f_url, element, statistic, time, low, high, "~/data/gridmet/processed/montana/normals/maps")
 # #   )
+# make_synthetic_plot <- function() {
+#   x = rbeta(50, 2, 5) * 15
+#   pwm <- lmomco::pwm.ub(x)
+#
+#   #Probability-Weighted Moments to L-moments
+#   lmoments_x <- lmomco::pwm2lmom(pwm)
+#
+#   #fit gamma
+#   fit.gam <- lmomco::pargam(lmoments_x)
+#
+#   # Generate synthetic data based on real data.
+#   rnge <- seq(0, 12, length.out = length(x))
+#
+#   # Find the pdf of synthetic data
+#   probs <- lmomco::pdfgam(rnge, fit.gam)
+#
+#   png(
+#     filename = "~/git/mt-normals/assets/ppt_example.png",
+#     width     = 3.25,
+#     height    = 3.25,
+#     units     = "in",
+#     res       = 600,
+#     pointsize = 10
+#   )
+#   # par(
+#   #   mar      = c(5, 5, 2, 2),
+#   #   xaxs     = "i",
+#   #   yaxs     = "i",
+#   #   cex.axis = 2,
+#   #   cex.lab  = 2
+#   # )
+#   hist(
+#     x,
+#     freq = FALSE,
+#     ylim = c(0, 0.2),
+#     main = "Precipitation Histogram vs.\nGamma Distribution",
+#     xlab = "Annual Total Precipitation (in)",
+#     ylab = "Density"
+#   )
+#   lines(x = rnge, y = probs, col = "red")
+#   legend(
+#     5,
+#     0.175,
+#     legend = c("Gamma Dist. Fit"),
+#     col = c("red"),
+#     lty = 1,
+#     cex = 0.8
+#   )
+#   dev.off()
+# }

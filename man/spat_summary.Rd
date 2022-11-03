@@ -25,3 +25,13 @@ A dataframe of the aggregated statistics for each region in \code{shp}.
 \description{
 spat_summary
 }
+\examples{
+\dontrun{
+mt <- normals::mt \%>\% dplyr::mutate(name = "MT")
+r <- normals::read_from_server(
+"https://data.climate.umt.edu/mca/cmip/ACCESS-ESM1-5_historical_r1i1p1f1_above90.tif"
+)
+
+spat_summary(r, shp, "name", "time", "mean")
+}
+}

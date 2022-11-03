@@ -2,7 +2,7 @@
 title: "Calculation of Rolling 30-year Gamma Normals"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{aggregate-cmip6}
+  %\VignetteIndexEntry{rolling-gamma}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -11,7 +11,7 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = nzchar(Sys.getenv("CMIP6_DIR"))
+  eval = FALSE
 )
 ```
 

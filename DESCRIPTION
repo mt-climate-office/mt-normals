@@ -1,5 +1,5 @@
 Package: normals
-Title: An R package for calculating climate normals using Gamma distributions.
+Title: An R package for calculating climate normals using Gamma distributions
 Version: 0.0.0.9000
 Authors@R: 
     person("Colin", "Brust", , "colin.brust@mso.umt.edu", role = c("aut", "cre"))
@@ -15,14 +15,23 @@ Suggests:
     lmomco
 Config/testthat/edition: 3
 Imports: 
+    checkmate,
     dplyr,
     ggplot2,
+    glue,
     jsonlite,
     Lmoments,
+    lubridate,
     magrittr,
     purrr,
+    raster,
+    rlang,
     sf,
     stringr,
     terra,
+    tibble,
     tidyr
 VignetteBuilder: knitr
+Depends: 
+    R (>= 2.10)
+LazyData: true

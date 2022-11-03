@@ -10,7 +10,7 @@ aggregate_daily(
   monthly = TRUE,
   agg_func = "mean",
   filename = NULL,
-  transform = NA,
+  transform = NULL,
   ...
 )
 }

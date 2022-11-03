@@ -6,7 +6,7 @@ title: "Rerunning the Montana Climate Assessment with CMIP6 Data"
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = nzchar(Sys.getenv("CMIP6_DIR"))
+  eval = FALSE
 )
 ```
 
@@ -236,7 +236,7 @@ dat <- c(
   purrr::map(function(x) {
     time_avg(
       x,
-      c(1981, 2010),
+      c(1991, 2020),
       "seasonal", 
       "mean", 
       tas_tsfm,
@@ -259,7 +259,15 @@ dat <- c(
 
 fig <- dat %>% 
   # to_shp(mt=mt) %>%
-  dplyr::mutate(time = factor(time, levels = c("Winter", "Spring", "Summer", "Fall"))) %>% 
+  dplyr::mutate(
+    time = dplyr::case_when(
+      time == "Winter" ~ "Winter (DJF)",
+      time == "Spring" ~ "Spring (MAM)",
+      time == "Summer" ~ "Summer (JJA)",
+      time == "Fall" ~ "Fall (SON)"
+    ),
+    time = factor(time, levels = c("Winter (DJF)", "Spring (MAM)", "Summer (JJA)", "Fall (SON)"))
+  ) %>% 
   dplyr::group_by(time) %>% 
   dplyr::group_split() %>%
   purrr::map(function(x) {
@@ -281,11 +289,12 @@ fig <- dat %>%
       #   low = pal[1], mid = pal[2], high =  pal[3],
       #   midpoint = midpoint
       # ) +
-      theme_bw() +
+      theme_minimal() +
       theme(
         axis.text.x = element_text(angle = 45, vjust = 0.5),
         plot.title = element_text(hjust = 0.5),
-        legend.key.height = unit(0.05, "npc")
+        legend.key.height = unit(0.05, "npc"),
+        strip.text.x = element_text(size = 11, face="bold")
       ) +
       labs(y="", x = "", fill = "")
   }) %>%
@@ -293,7 +302,7 @@ fig <- dat %>%
 
 title <- cowplot::ggdraw() + 
   cowplot::draw_label(
-    "Seasonal Average Temperature (°F) Across Montana (1981 - 2010)",
+    "Seasonal Average Temperature (°F) Across Montana (1991 - 2020)",
     fontface = 'bold',
   ) +
   theme(
@@ -345,7 +354,15 @@ dat <- time_avg(
 
 fig <- dat %>% 
   to_shp(mt=mt) %>%
-  dplyr::mutate(time = factor(time, levels = c("Winter", "Spring", "Summer", "Fall"))) %>% 
+  dplyr::mutate(
+    time = dplyr::case_when(
+      time == "Winter" ~ "Winter (DJF)",
+      time == "Spring" ~ "Spring (MAM)",
+      time == "Summer" ~ "Summer (JJA)",
+      time == "Fall" ~ "Fall (SON)"
+    ),
+    time = factor(time, levels = c("Winter (DJF)", "Spring (MAM)", "Summer (JJA)", "Fall (SON)"))
+  ) %>%
   dplyr::group_by(time) %>% 
   dplyr::group_split() %>%
   purrr::map(function(x) {
@@ -367,11 +384,12 @@ fig <- dat %>%
       #   low = pal[1], mid = pal[2], high =  pal[3],
       #   midpoint = midpoint
       # ) +
-      theme_bw() +
+      theme_minimal() +
       theme(
         axis.text.x = element_text(angle = 45, vjust = 0.5),
         plot.title = element_text(hjust = 0.5),
-        legend.key.height = unit(0.05, "npc")
+        legend.key.height = unit(0.05, "npc"),
+        strip.text.x = element_text(size = 11, face="bold")
       ) +
       labs(y="", x = "", fill = "")
   }) %>%
@@ -379,7 +397,7 @@ fig <- dat %>%
 
 title <- cowplot::ggdraw() + 
   cowplot::draw_label(
-    "Seasonal Precipitation (in.) Totals Across Montana (1981 - 2010)",
+    "Seasonal Precipitation (in.) Totals Across Montana (1991 - 2020)",
     fontface = 'bold',
   ) +
   theme(

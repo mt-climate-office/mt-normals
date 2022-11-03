@@ -45,7 +45,7 @@ replace_if_zero <- function(x) {
 calc_lmoments <- function(x) {
     out <- matrix(nrow = nrow(x),
                   ncol = 2)
-    not_na <- which(complete.cases(x))
+    not_na <- which(stats::complete.cases(x))
     out[not_na,] <-
       Lmoments:::Lmoments_calc(t(x[not_na,]), rmax = 2L)
     out
@@ -86,6 +86,8 @@ calc_median <- function(alpha, beta) {
 #' calculate gamma normals.
 #' @param out_dir Optional. The directory to save the results out to.
 #' @param descriptor The prefix to use on the filename as an identifier.
+#' @param rast_out A boolean specifying whether the `terra::rast` should be
+#' saved to disk or a raster should just be returned.
 #'
 #' @importFrom magrittr %>%
 #'

@@ -13,6 +13,9 @@ calculate gamma normals.}
 \item{out_dir}{Optional. The directory to save the results out to.}
 
 \item{descriptor}{The prefix to use on the filename as an identifier.}
+
+\item{rast_out}{A boolean specifying whether the \code{terra::rast} should be
+saved to disk or a raster should just be returned.}
 }
 \value{
 A named list of \code{terra::rast} summarized to the following items:

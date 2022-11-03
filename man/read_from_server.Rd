@@ -9,10 +9,15 @@ read_from_server(f_url)
 \arguments{
 \item{f_url}{The string of the url path to the cog on the file server.}
 }
+\value{
+A \code{terra::rast} that has been read in with the associated metadata.
+}
 \description{
 Read a cog from the MCO file server and also read in the associated metadata.
 Without using this function, the raster will not have a \code{terra::time} attribute.
 }
 \examples{
-read_from_server("https://data.climate.umt.edu/mca/cmip/ACCESS-ESM1-5_historical_r1i1p1f1_above90.tif")
+read_from_server(
+"https://data.climate.umt.edu/mca/cmip/ACCESS-ESM1-5_historical_r1i1p1f1_above90.tif"
+)
 }

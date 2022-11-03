@@ -48,9 +48,9 @@ library(magrittr)
 #'
 #' # Calculate the monthly mean.
 #' aggregate_daily(r, 'example', FALSE, 'mean')
-aggregate_daily <- function(r, variable, monthly = TRUE, agg_func = "mean", filename=NULL, transform = NA, ...) {
+aggregate_daily <- function(r, variable, monthly = TRUE, agg_func = "mean", filename=NULL, transform = NULL, ...) {
 
-  if (!is.na(transform)) {
+  if (!is.null(transform)) {
     r <- transform(r)
   }
 
