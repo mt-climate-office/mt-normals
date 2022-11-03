@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Colin
+    given-names: Brust
+  - family-names: R. Kyle
+    given-names: Bocinsky
+    orcid: https://orcid.org/0000-0003-1862-3428
+  - family-names: Zachary
+    given-names: Hoylman
+    orcid: https://orcid.org/0000-0001-5532-5871
+  - family-names: Kelsey
+    given-names: Jencso
+title: "Normals: An R Package for Creating Montana's Climate Normals"
+version: 1.0.1
+doi: 10.5281/zenodo.7278427
+date-released: 2021-11-03
