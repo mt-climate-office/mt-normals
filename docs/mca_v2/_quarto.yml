@@ -4,20 +4,22 @@ project:
 book:
   title: "Climate Change in Montana"
   author: "Colin Brust"
+  sidebar:
+    style: docked
+    background: light
   date: "11/2/2022"
   chapters:
     - index.qmd
-    - intro.qmd
-    - summary.qmd
+    - causes.qmd
+    - assessment.qmd
+    - historical.qmd
     - references.qmd
 
 bibliography: references.bib
+csl: apa.csl
 
 format:
   html:
     theme: cosmo
   pdf:
     documentclass: scrreprt
-
-
-

@@ -1,0 +1,2 @@
+# read in paramse with quarto render --execute-params params.yml
+location: Montana

@@ -1,0 +1,23 @@
+---
+params: 
+  location: "Montana"
+  shp: "./assets/climdiv.geojson"
+---
+
+# Historical Climate
+To assess `r params$location`’s current climate, we analyzed climate variable data (see sidebar) provided as 3-decade of gridMET climate data @gridmet. In this section, we review average temperature and precipitation conditions from 1981-2010 as an indicator of current climate conditions. 
+
+## Temperature
+Table 2-1 shows the average seasonal temperature variation across Montana’s seven climate divisions (Figure 2-3) from 1981-2010. Temperatures vary widely across Montana and are strongly dependent on local elevation and proximity to the Continental Divide. Western Montana’s annual average temperatures are generally cooler (approximately 39°F [3.9°C]) relative to the eastern and central parts of the state (approximately 44°F [6.7°C]).
+
+Winters in Montana are cold, with statewide average temperatures of 22°F (-5.6°C). Between cold waves there are often periods of mild, windy weather in central Montana created by persistent, moist Pacific air masses on the west side of the Continental Divide, and the drying and warming effects as air descends on the east side of the Rockies. These surface winds are locally known as chinook winds and can bring rapid temperature increases of 40-50°F (22-28°C) to areas east of the Rockies that can last for days. 
+
+Montana springs are highly variable and bring dramatic temperature changes. As a whole, Montana’s average spring temperature is 42°F (5.5°C), although western Montana is cooler and warming comes later due to persistence of Pacific maritime air. In contrast, warmer continental air contributes to average temperatures up to 45°F (7.2°C) in spring across central and eastern Montana. 
+
+Elevation and proximity to the Continental Divide strongly influence local temperatures in summer. Valleys and the eastern plains are generally warmer than the higher elevations of the Continental Divide. While summer average temperature across Montana is 64°F (17.8°C), temperatures generally peak in
+July and August, with mean daily highs above 90°F (32°C) in the east, as well as in western valleys. 
+
+Fall temperatures in Montana are often highly variable, with an average temperature of 43°F (6.1°C). Days to weeks of warm temperatures are commonly followed by freezing temperatures that bring frosts and snow.
+
+##Precipitation
+In general, Montana is a water-limited, semi-arid landscape where precipitation is depended upon heavily by plants and animals alike. Table 2-2 shows the seasonal variation of precipitation across Montana’s seven climate divisions (Figure 2-3) from 1981-2010. Precipitation amounts and form (rain versus snow) vary widely across the state and are strongly influenced by elevation and proximity to the Continental Divide. The average annual precipitation for Montana is 18.7 inches (0.47 m). Western Montana typically receives twice as much precipitation annually as eastern Montana (22-30 inches [0.56-0.76 m] versus 12-14 inches [0.30-0.36 m], respectively). The combination of moisture-rich maritime air from the Pacific in the winter, spring, and fall, and strong convective systems in the summer create a more evenly distributed year-round precipitation pattern in western Montana. In contrast, 65-75% of the annual precipitation occurs in the late spring and summer months for eastern and central Montana, coming from sources in the subtropical Pacific and Gulf of Mexico. 

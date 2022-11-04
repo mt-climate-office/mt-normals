@@ -1,0 +1,20 @@
+# Climate Change Assessments
+A growing awareness of our changing global climate since the 1950s has led to a substantial body of research. For example, the National Academy of Sciences (NAS 2011) report, American’s Climate Choices, stated:
+
+> Climate change is occurring, is very likely caused primarily by human activities, and poses significant risks to humans and the environment. These risks indicate a pressing need for substantial action to limit the magnitude of climate change and to prepare for adapting to its impacts.
+
+In 1990, the United Nations tasked the Intergovernmental Panel on Climate Change (IPCC, see sidebar) with assessing existing research on climate change. Since then, five IPCC assessments have increased our scientific understanding of, and certainty about, global climate change. As described later in this chapter, the assessments have incorporated increasingly sophisticated models and analyses that consider both natural and human contributions to changes in our climate system.
+
+In its most recent Fifth Assessment Report, the IPCC raised the likelihood of changes in several global climate events to “virtually certain” (i.e., 99-100% likelihood). Examples of these events include: more frequent hot days, less frequent cold days, reductions in permafrost, and sea-level rise (IPCC 2014).
+
+::: {.callout-note icon=false}
+### What is the IPCC {#ipcc}
+
+The Intergovernmental Panel on Climate Change is the leading international body for the assessment of climate change. It was established in 1988 by the United Nations Environment Programme and the World Meteorological Organization, and subsequently endorsed by the United Nations General Assembly. The goal of the IPCC is to provide the world with a clear scientific view on the current state of knowledge in climate change and its potential environmental and socioeconomic impacts.
+
+![The IPCC](assets/ipcc.jpg){#fig-ipcc}
+:::
+
+Recently, the third National Climate Assessment, produced in collaboration with the US Global Change Research Program, provided further insight into the anticipated climate changes for the conterminous US. The National Climate Assessment (NCA 2014) states:
+
+> Evidence for changes in Earth’s climate can be found from the top of the atmosphere to the depths of the oceans. Researchers from around the world have compiled this evidence using satellites, weather balloons, thermometers at surface stations, and many other types of observing systems that monitor the Earth’s weather and climate. The sum total of this evidence tells an unambiguous story: the planet is warming. 
