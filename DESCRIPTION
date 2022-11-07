@@ -27,6 +27,7 @@ Imports:
     raster,
     rlang,
     sf,
+    spex,
     stringr,
     terra,
     tibble,

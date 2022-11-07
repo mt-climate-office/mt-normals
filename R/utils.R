@@ -190,7 +190,7 @@ make_gridmet_tavg <- function(tmmn_dir, tmmx_dir, tavg_dir) {
     basename() %>%
     tools::file_path_sans_ext() %>%
     stringr::str_split("_") %>%
-    lapply(tail, 1) %>%
+    lapply(utils::tail, 1) %>%
     unlist()
 
   tmmn_files <- list.files(tmmn_dir, full.names = T)
@@ -210,6 +210,69 @@ make_gridmet_tavg <- function(tmmn_dir, tmmx_dir, tavg_dir) {
   })
 }
 
+#' to_shp
+#'
+#' @description Convert a `terra::rast` object to `sf` polygons. This allows you
+#' to use [ggplot2::geom_sf][ggplot2::geom_sf()] to nicely plot the data.
+#'
+#' @param x A `terra::sf` that will be converted into polygons.
+#' @param shp The boundaries to intersect the polygonized raster with.
+#' @param proj The projection to transform the `terra::rast` into. Can either be
+#' an `sf::st_crs` object or a string of the WKT.
+#'
+#' @return A polygonized version of the `terra::rast` input.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' r <- "https://data.climate.umt.edu/mca/cmip/ACCESS-ESM1-5_historical_r1i1p1f1_pr.tif"
+#' r <- terra::rast(r)
+#'
+#' to_shp(r, shp=normals::mt, proj=normals::mt_state_plane)
+#' }
+to_shp <- function(x, shp, proj) {
+
+  tmp <- x %>%
+    terra::project(proj) %>%
+    raster::stack() %>%
+    spex::qm_rasterToPolygons(na.rm = T) %>%
+    tidyr::pivot_longer(-geometry, names_to = "time")  %>%
+    sf::`st_crs<-`(proj)
+
+  shp_use <- sf::st_transform(shp, sf::st_crs(tmp)) %>%
+    dplyr::select(geometry)
+
+  sf::st_intersection(tmp, shp_use)
+}
+
+#' filter_to_reference
+#'
+#' @description Filter a timeseries `terra::rast` so that all layers are within
+#' a reference period.
+#'
+#' @param r The `terra::rast` object to filter.
+#' @param start_year An integer representing the year to start the filter.
+#' @param end_year An integer representing the year to end the filter
+#'
+#' @return A `terra::rast` with the years filtered to match the reference period.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' r <- "https://data.climate.umt.edu/mca/cmip/ACCESS-ESM1-5_historical_r1i1p1f1_pr.tif"
+#' r <- terra::rast(r)
+#'
+#' filter_to_reference(r, 1981, 2010)
+#' }
+filter_to_reference <- function(r, start_year, end_year) {
+  years <- terra::time(r) %>%
+    lubridate::year()
+
+  terra::subset(
+    r,
+    which(years %in% start_year:end_year)
+  )
+}
 # deg_c_to_f <- function(t) {
 #   (t * 1.8) + 32
 # }

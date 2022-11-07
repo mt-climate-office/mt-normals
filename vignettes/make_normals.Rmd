@@ -36,8 +36,8 @@ The next step is to download gridMET data to perform the analysis. Here we are g
 normals::fetch_gridmet(
   data_dir = data_dir, 
   variables = variables, 
-  start_year = 1991, 
-  end_year = 2020
+  start_year = 1979, 
+  end_year = 1990
 )
 ```
 
@@ -64,7 +64,8 @@ if (!dir.exists(out_dir)) {
   dir.create(out_dir)
 }
 lapply(variables, function(x) {
-  r <- list.files(mt_dir, recursive = T, pattern = x, full.names = T) %>% 
+  r <- list.files(file.path(mt_dir, x), recursive = T, pattern = x, full.names = T) %>% 
+    grep(".json", ., value = T, invert = T) %>% 
     terra::rast() 
   
   # gridMET specifies date as number of days since 1900-01-01. Here we use this

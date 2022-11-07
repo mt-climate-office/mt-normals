@@ -13,6 +13,9 @@ book:
     - causes.qmd
     - assessment.qmd
     - historical.qmd
+    - future.qmd
+    - gaps.qmd
+    - conclusions.qmd
     - references.qmd
 
 bibliography: references.bib

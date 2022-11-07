@@ -1,8 +1,24 @@
-group_seasonally <- function(r) {
+#' group_seasonally
+#'
+#' @description Create a table giving seasons for each raster layer in a `terra::rast` timeseries.
+#'
+#' @param r The `terra::rast` timeseries to create the table for.
+#' @param start_year The start year to filter the timeseries by. Any years prior
+#' to this year will be removed
+#' @param end_year The end year to filter the timeseries by. Any years after this
+#' year will be removed.
+#'
+#' @return A [tibble::tibble()] giving the seasons of each layer in a raster
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # fill with example
+#' 1+1
+#' }
+group_seasonally <- function(r, start_year, end_year) {
   tibble::tibble(
-    date = names(r) %>%
-      stringr::str_replace("X", "") %>%
-      lubridate::as_date()
+    date = terra::time(r)
   ) %>%
     dplyr::mutate(
       season = dplyr::case_when(
@@ -22,22 +38,62 @@ group_seasonally <- function(r) {
         lubridate::year(date)
       )
     ) %>%
+    dplyr::filter(year >= start_year) %>%
+    dplyr::filter(year <= end_year) %>%
     dplyr::group_by(year, season) %>%
     dplyr::mutate(
       yearly_grp = dplyr::cur_group_id(),
       group_count = dplyr::n()
     ) %>%
-    dplyr::filter(
-      year %in% reference_period[1]:reference_period[2],
-    ) %>%
     dplyr::mutate(
       yearly_grp = glue::glue("{season} {year}")
-    )
+    ) %>%
+    dplyr::filter(group_count == 3)
 }
 
-make_historical_data <- function(raw_dir, shp, variables) {
+#' make_temp_seasonal_rasters
+#'
+#' @param tmmn A `terra::rast` timeseries of minimum temperature.
+#' @param tmmx A `terra::rast` timeseries of maximum temperature.
+#' @param out_dir The directory to save the seasonal rasters out to.
+#' @param start_year The start year of the reference period to filter input data by.
+#' @param end_year The end year of the reference period to filter input data by.
+#'
+#' @return Nothing, results are saved to an output directory.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # fill with example
+#' 1+1
+#' }
+make_temp_seasonal_rasters <- function(tmmn, tmmx, out_dir, start_year, end_year) {
+  tmmx <- filter_to_reference(tmmx, start_year-1, end_year)
+  tmmn <- filter_to_reference(tmmn, start_year-1, end_year)
+  tavg <- (tmmx + tmmn)/2
 
-}
-make_table_by_group <- function(shp, r, attr_id=NULL, fun="mean") {
+  tmmx <- terra::tapp(
+    tmmx,
+    index = group_seasonally(tmmx, start_year, end_year) %$% season,
+    fun = "mean"
+  )
 
+  terra::writeRaster(tmmx, file.path(out_dir, "tmmx_historical_seasonal.tif"), overwrite = T)
+
+  tmmn <- terra::tapp(
+    tmmn,
+    index = group_seasonally(tmmn, start_year, end_year) %$% season,
+    fun = "mean"
+  )
+
+  terra::writeRaster(tmmn, file.path(out_dir, "tmmn_historical_seasonal.tif"), overwrite = T)
+
+  tavg <- terra::tapp(
+    tavg,
+    index = group_seasonally(tavg, start_year, end_year) %$% season,
+    fun = "mean"
+  )
+
+  terra::writeRaster(tmmx, file.path(out_dir, "tavg_historical_seasonal.tif"), overwrite = T)
+  return(NA)
 }

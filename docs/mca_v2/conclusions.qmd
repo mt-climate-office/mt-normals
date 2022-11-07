@@ -1,0 +1,18 @@
+# Conclusions
+The analysis presented in this chapter shows that Montana has warmed—up to 2.7°F (1.5°C) annually as averaged across the state—since 1950. Seasonally, that warming has been greatest in winter (3.9°F [2.2°C]) and spring (2.6°F [1.4°C]). Montana’s number of frost days has decreased by 12 days since 1951. Statewide, average annual precipitation did not change between 1950 and 2015, although variations caused by global climate oscillations, such as El Niño events, explain some of the historical precipitation variability in parts of the state.
+
+With this historical context, we considered Montana’s future under two potential greenhouse gas emission scenarios. Using those scenarios, we employed standard modeling techniques available to climate scientists today—ensembles of general circulation models—and projected Montana’s climate over the next century. Our analyses focused on projecting the possible range of temperature and precipitation amounts in Montana, under our chosen greenhouse gas emission scenarios.
+
+While the model results varied, one message is imminently clear: Montana in the coming century will be a warmer place.
+
+> One thing is clear: Montana in the coming century will be a warmer place.
+
+In Table 2-6 we provide a summary of the work done and described in this chapter (plus in accompanying appendices). In summary, Montana is projected to continue to warm in all geographic locations, seasons, and under all emission scenarios throughout the 21st century. By mid century, Montana temperatures are projected to increase by up to 6°F (3°C); by the end of the century, temperatures will increase by up to 9.8°F (5.4°C) (both projections depend on the particular carbon emission scenario [i.e., RCP], and these numbers are based on the business-as-usual [RCP8.5] scenario). Projections show that we could have up to 70 more frost-free days at the end of the century. Likewise, frequency of extreme heat will increase. In eastern Montana, for example, we may have as many as 54 days/yr in which maximum temperatures exceed 90°F (32°C). 
+
+In mid- and end-of-century projections, average annual precipitation and variability increase across the state, as do winter, spring, and fall precipitation. Summer months, however, show small decreases in precipitation. Current projections suggest little change in the frequency of dry and wet events, although projections in the former case show high uncertainty. 
+
+Montanans must be prepared for projected increases in temperature in the future. Because of its interior location, Montana has warmed more over the last 65 yr than the national average, and it will experience greater warming than most parts of the country in the future, particularly when compared to states in coastal regions. Key to the concern is that coming temperature changes will be larger in magnitude and occur more rapidly than any time since our 1889 declaration of statehood (and, to be sure, well before).
+
+> Montana’s average annual temperature is projected to increase through the end-of-century for all models, all emission scenarios, and in all geographic locations. 
+
+**Summary Table**
