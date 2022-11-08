@@ -59,7 +59,7 @@ group_seasonally <- function(r, start_year, end_year) {
 #' @param start_year The start year of the reference period to filter input data by.
 #' @param end_year The end year of the reference period to filter input data by.
 #'
-#' @return Nothing, results are saved to an output directory.
+#' @return Results are saved to an output directory.
 #' @export
 #'
 #' @examples
@@ -94,6 +94,45 @@ make_temp_seasonal_rasters <- function(tmmn, tmmx, out_dir, start_year, end_year
     fun = "mean"
   )
 
-  terra::writeRaster(tmmx, file.path(out_dir, "tavg_historical_seasonal.tif"), overwrite = T)
+  terra::writeRaster(tavg, file.path(out_dir, "tavg_historical_seasonal.tif"), overwrite = T)
   return(NA)
+}
+
+#' make_pr_seasonal_raster
+#'
+#' @param pr A `terra::rast` timeseries of monthly precipitation totals.
+#' @param out_dir The directory to save the seasonal rasters out to.
+#' @param start_year The start year of the reference period to filter input data by.
+#' @param end_year The end year of the reference period to filter input data by.
+#'
+#' @return Results are saved to an output directory.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # fill with example
+#' 1+1
+#' }
+make_pr_seasonal_raster <- function(pr, out_dir, start_year, end_year) {
+  pr <- filter_to_reference(pr, start_year-1, end_year)
+  indices <- group_seasonally(pr, start_year, end_year)
+
+  pr <- terra::tapp(
+    pr,
+    index = indices$yearly_grp,
+    fun = "sum"
+  )
+
+  new_idx <- names(pr) %>%
+    stringr::str_split(pattern = "[.]") %>%
+    lapply(utils::head, 1) %>%
+    unlist()
+
+  pr <- terra::tapp(
+    pr,
+    index = new_idx,
+    fun = "mean"
+  )
+
+  terra::writeRaster(pr, file.path(out_dir, "pr_historical_seasonal.tif"), overwrite = T)
 }
