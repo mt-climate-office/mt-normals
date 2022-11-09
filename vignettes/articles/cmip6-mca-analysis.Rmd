@@ -86,7 +86,7 @@ time_avg <- function(
   
   checkmate::assert_choice(period, c("annual", "seasonal", "monthly"))
   
-  read_func <- ifelse(remote, read_from_server, terra::rast)
+  read_func <- ifelse(remote, normals::read_from_server, terra::rast)
   print(fs[1])
   stk <- read_func(fs) %>%  
     terra::tapp(index="days", fun="mean")
@@ -208,9 +208,8 @@ pr_tsfm <- function(x) x/25.4
 ```
 
 ```{r preprocess_cmip, warning=FALSE}
-scenarios <- "historical|ssp245|ssp585"
-ssp_colors <- c("ssp245"="#1b9e77", "ssp585"="#d95f02")
-# c("ssp126"="#7570b3", "ssp245"="#1b9e77", "ssp370"="#e7298a", "ssp585"="#d95f02")
+scenarios <- "historical|ssp126|ssp245|ssp370|ssp585"
+ssp_colors <- c("ssp126"="#7570b3", "ssp245"="#1b9e77", "ssp370"="#e7298a", "ssp585"="#d95f02")
 
 f_list <- RCurl::getURL(
   "https://data.climate.umt.edu/mca/cmip/",
@@ -446,7 +445,7 @@ dat <- c(
       tas_tsfm,
       TRUE
     ) %>% 
-      spat_summary(
+      normals::spat_summary(
         shp = climdiv, attr_id = "NAME", fun="mean"
       ) %>% 
       dplyr::select(div=NAME, timescale, value) %>% 
@@ -503,7 +502,7 @@ dat <- c(
       tas_tsfm,
       TRUE
     ) %>% 
-      spat_summary(
+      normals::spat_summary(
         shp = climdiv, attr_id = "NAME", fun="mean"
       ) %>% 
       dplyr::select(div=NAME, timescale, value) %>% 
@@ -545,7 +544,7 @@ dat <- time_avg(
   pr_tsfm,
   TRUE
 ) %>% 
-  spat_summary(
+  normals::spat_summary(
     shp = climdiv, attr_id = "NAME", fun="mean"
   ) %>% 
   dplyr::select(div=NAME, timescale, value)
@@ -627,7 +626,7 @@ read_and_tapp <- function(pattern, files, fun, idx, tsfm=NULL) {
   out <- grep(pattern, files, value = T) %>% 
     purrr::map(function(x) {
       
-      r <- read_from_server(x) %>% 
+      r <- normals::read_from_server(x) %>% 
         terra::tapp(index = idx, fun = fun) 
       tibble::tibble(
         f = tools::file_path_sans_ext(x) %>% basename(),
@@ -675,7 +674,7 @@ make_boxplot_data <- function(files, pattern, shp, attr_id, fun, idx="years", ts
       diff = list(round(value - historical)),
       model=model
     )  %>%
-    dplyr::mutate(diff = list(spat_summary(diff, shp, attr_id, fun="mean"))) %>% 
+    dplyr::mutate(diff = list(normals::spat_summary(diff, shp, attr_id, fun="mean"))) %>% 
     tidyr::unnest(diff) %>%
     dplyr::select(scenario, period, area=dplyr::all_of(attr_id), diff=value) %>%
     dplyr::mutate(
@@ -810,7 +809,7 @@ make_heatmap_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL) {
     ) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
-      diff = list(spat_summary(diff, shp, attr_id, "month", "mean"))
+      diff = list(normals::spat_summary(diff, shp, attr_id, "month", "mean"))
     ) %>%
     tidyr::unnest(diff) %>%
     dplyr::select(scenario, period=name, area=dplyr::all_of(attr_id), month, diff=value) %>%

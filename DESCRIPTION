@@ -17,6 +17,7 @@ Config/testthat/edition: 3
 Imports: 
     checkmate,
     dplyr,
+    FedData,
     ggplot2,
     glue,
     jsonlite,
@@ -36,3 +37,5 @@ VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)
 LazyData: true
+Enhances: 
+    multidplyr

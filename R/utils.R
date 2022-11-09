@@ -161,55 +161,6 @@ crop_to_roi <- function(data_dir, out_dir, roi, variables) {
     })
 }
 
-#' make_gridmet_tavg
-#'
-#' @description This function averages gridMET minimum and maximum temperature
-#' products to create a gridMET average temperature. This function uses the raw
-#' output from `fetch_gridmet` to create the average temperature product.
-#' @param tmmn_dir The directory of data containing the raw gridMET tmmn .nc files.
-#' @param tmmx_dir The directory of data containing the raw gridMET tmmx .nc files.
-#' @param tavg_dir The directory to save the new gridMET tavg .nc files to.
-#'
-#' @return
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' make_gridmet_tavg(
-#'   "~/gridmet_data/raw/tmmn",
-#'   "~/gridmet_data/raw/tmmx",
-#'   "~/gridmet_data/raw/tavg"
-#' )
-#' }
-make_gridmet_tavg <- function(tmmn_dir, tmmx_dir, tavg_dir) {
-
-  if (!dir.exists(tavg_dir)) {
-    dir.create(tavg_dir)
-  }
-  years <- list.files(tmmn_dir, full.names = T, pattern = ".nc") %>%
-    basename() %>%
-    tools::file_path_sans_ext() %>%
-    stringr::str_split("_") %>%
-    lapply(utils::tail, 1) %>%
-    unlist()
-
-  tmmn_files <- list.files(tmmn_dir, full.names = T)
-  tmmx_files <- list.files(tmmx_dir, full.names = T)
-
-  lapply(years, function(year) {
-    print(glue::glue("Creating tavg for {year}..."))
-    tmmn <- stringr::str_subset(tmmn_files, year) %>%
-      terra::rast()
-
-    tmmx <- stringr::str_subset(tmmx_files, year) %>%
-      terra::rast()
-
-    tavg <- (tmmn + tmmx)/2
-    out_name <- file.path(tavg_dir, glue::glue("tavg_{year}.tif"))
-    terra::writeRaster(tavg, out_name)
-  })
-}
-
 #' to_shp
 #'
 #' @description Convert a `terra::rast` object to `sf` polygons. This allows you

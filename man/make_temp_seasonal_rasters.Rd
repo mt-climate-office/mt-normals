@@ -4,12 +4,22 @@
 \alias{make_temp_seasonal_rasters}
 \title{make_temp_seasonal_rasters}
 \usage{
-make_temp_seasonal_rasters(tmmn, tmmx, out_dir, start_year, end_year)
+make_temp_seasonal_rasters(
+  tmmn,
+  tmmx,
+  tavg = NULL,
+  out_dir,
+  start_year,
+  end_year
+)
 }
 \arguments{
-\item{tmmn}{A \code{terra::rast} timeseries of minimum temperature.}
+\item{tmmn}{A \code{terra::rast} timeseries of monthly minimum temperature.}
 
-\item{tmmx}{A \code{terra::rast} timeseries of maximum temperature.}
+\item{tmmx}{A \code{terra::rast} timeseries of monthly maximum temperature.}
+
+\item{tavg}{A \code{terra::rast} timeseries of monthly average temperature. Defaults
+to NULL. If left null, tavg will be calculated as the average of tmmn and tmmx.}
 
 \item{out_dir}{The directory to save the seasonal rasters out to.}
 
@@ -18,7 +28,7 @@ make_temp_seasonal_rasters(tmmn, tmmx, out_dir, start_year, end_year)
 \item{end_year}{The end year of the reference period to filter input data by.}
 }
 \value{
-Nothing, results are saved to an output directory.
+Results are saved to an output directory.
 }
 \description{
 make_temp_seasonal_rasters

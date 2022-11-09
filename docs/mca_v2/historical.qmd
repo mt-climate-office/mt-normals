@@ -13,10 +13,10 @@ library(magrittr)
 
 shp <- sf::read_sf(file.path(params$asset_dir, "agg_regions.geojson"))
 
-rasts <- list.files(params$asset_dir, pattern = "historical_seasonal.tif", full.names = T) %>%
+rasts <- list.files(params$asset_dir, pattern = "nclimgrid_historical_seasonal.tif", full.names = T) %>%
   tibble::tibble(f = .) %>% 
   dplyr::rowwise() %>% 
-  dplyr::mutate(r = list(terra::rast(f))) %>%
+  dplyr::mutate(r = list(terra::rast(f) %>% terra::mask(shp))) %>%
   dplyr::mutate(variable = basename(f) %>% 
                     stringr::str_split("_") %>% 
                     unlist() %>% 
@@ -26,7 +26,7 @@ historical_table <-
   purrr::map(rasts$f, function(x) {
     x %>% 
       terra::rast() %>% 
-      normals::spat_summary(shp, params$attr_id, "season", "mean") %>%
+      normals::spat_summary(shp, params$attr_id, "season", "mean", na.rm = T) %>%
       dplyr::mutate(f = x)
   }) %>% 
     dplyr::bind_rows() %>%
@@ -39,22 +39,35 @@ historical_table <-
     dplyr::ungroup() %>%
     dplyr::select(Division, season, value, variable) %>% 
     dplyr::mutate(
-      value = ifelse(variable == "pr", value / 25.4, (value - 273.15) * 9/5 + 32)
+      value = ifelse(variable == "pr", value / 25.4, (value) * 9/5 + 32)
     )
 
 global_avg <- rasts %>% 
-  dplyr::mutate(r = list(terra::global(r, fun="mean") %>%
+  dplyr::mutate(r = list(terra::global(r, fun="mean", na.rm = T) %>%
                            tibble::rownames_to_column() %>%
                            dplyr::rename(season=rowname))) %>%
   tidyr::unnest(r) %>% dplyr::select(value=mean, variable, season) %>%
   dplyr::mutate(
-    value = ifelse(variable == "pr", value / 25.4, (value - 273.15) * 9/5 + 32)
+    value = ifelse(variable == "pr", value / 25.4, (value) * 9/5 + 32)
   )
+
+annual_tavg <- rasts %>% 
+  dplyr::filter(variable == "tavg") %$% 
+  terra::mean(r[[1]]) %>% 
+  {(.) * 9/5 + 32}
+
+east_west_ppt <- rasts %>% 
+  dplyr::filter(variable == "pr") %$%
+  terra::app(r[[1]], fun = "sum") %>%
+  {./25.4} %>%
+  normals::spat_summary(
+    shp = normals::divide, attr_id = "loc", name_to = "sum", fun = "mean"
+  ) 
 ```
 
 # Historical Climate
 ## Climate Conditions 1981 - 2020
-To assess `r params$location`’s current climate, we analyzed climate variable data (see sidebar) provided as 3-decade of gridMET climate data @gridmet. In this section, we review average temperature and precipitation conditions from 1981-2010 as an indicator of current climate conditions. 
+To assess `r params$location`’s current climate, we analyzed climate variable data (see sidebar) provided as 3-decade of gridMET climate data @gridmet. In this section, we review average temperature and precipitation conditions from 1981-2010 as an indicator of current climate conditions.
 
 ::: {.callout-note icon=false}
 ### Climate Variables {#climate-callout}
@@ -67,7 +80,7 @@ In analyses of climate, scientists employ a suite of 50 essential climate variab
 :::
 
 ### Temperature
-@tbl-historical-temp shows the average seasonal temperature variation across `r params$location`’s `r nrow(shp)` `r params$attr_plural` (Figure 2-3) from 1981-2010. Temperatures vary across `r params$location`, with average annual values ranging from `r min(historical_table$value) %>% round(1)`°F to `r max(historical_table$value) %>% round(1)`°F across the region. 
+@tbl-historical-temp shows the average seasonal temperature variation across `r params$location`’s `r nrow(shp)` `r params$attr_plural` (Figure 2-3) from 1981-2010. Temperatures vary across `r params$location`, with average annual values ranging from `r terra::global(annual_tavg, fun="min", na.rm = T) %>% as.numeric() %>% round(1)`°F to `r terra::global(annual_tavg, fun="max", na.rm = T) %>% as.numeric() %>% round(1)`°F across the region. 
 
 ```{r echo=FALSE}
 #| label: tbl-historical-temp
@@ -86,13 +99,13 @@ Winters in Montana are cold, with statewide average temperatures of `r dplyr::fi
 
 Montana springs are highly variable and bring dramatic temperature changes. As a whole, Montana’s average spring temperature is `r dplyr::filter(global_avg, variable == "tavg", season == "Spring") %$% round(value, 1)`°F, although western Montana is cooler and warming comes later due to persistence of Pacific maritime air. In contrast, warmer continental air contributes to average temperatures up to `r historical_table %>% dplyr::filter(!(Division %in% c("Southwestern", "Western")), season == "Spring", variable == "tavg") %$% mean(value) %>% round(1)`°F in spring across central and eastern Montana. 
 
-Elevation and proximity to the Continental Divide strongly influence local temperatures in summer. Valleys and the eastern plains are generally warmer than the higher elevations of the Continental Divide. While summer average temperature across Montana is `r dplyr::filter(global_avg, variable == "tavg", season == "Summer") %$% round(value, 1)`°F (17.8°C), temperatures generally peak in
+Elevation and proximity to the Continental Divide strongly influence local temperatures in summer. Valleys and the eastern plains are generally warmer than the higher elevations of the Continental Divide. While summer average temperature across Montana is `r dplyr::filter(global_avg, variable == "tavg", season == "Summer") %$% round(value, 1)`°F, temperatures generally peak in
 July and August, with mean daily highs above 90°F in the east, as well as in western valleys. 
 
 Fall temperatures in Montana are often highly variable, with an average temperature of `r dplyr::filter(global_avg, variable == "tavg", season == "Fall") %$% round(value, 1)`°F. Days to weeks of warm temperatures are commonly followed by freezing temperatures that bring frosts and snow.
 
 ### Precipitation
-In general, Montana is a water-limited, semi-arid landscape where precipitation is depended upon heavily by plants and animals alike. @tbl-historical-pr shows the seasonal variation of precipitation across Montana’s seven climate divisions (Figure 2-3) from 1981-2010. Precipitation amounts and form (rain versus snow) vary widely across the state and are strongly influenced by elevation and proximity to the Continental Divide. The average annual precipitation for Montana is 18.7 inches (0.47 m). Western Montana typically receives twice as much precipitation annually as eastern Montana (22-30 inches [0.56-0.76 m] versus 12-14 inches [0.30-0.36 m], respectively). The combination of moisture-rich maritime air from the Pacific in the winter, spring, and fall, and strong convective systems in the summer create a more evenly distributed year-round precipitation pattern in western Montana. In contrast, 65-75% of the annual precipitation occurs in the late spring and summer months for eastern and central Montana, coming from sources in the subtropical Pacific and Gulf of Mexico. 
+In general, Montana is a water-limited, semi-arid landscape where precipitation is depended upon heavily by plants and animals alike. @tbl-historical-pr shows the seasonal variation of precipitation across `r params$location`’s `r nrow(shp)` `r params$attr_plural` from 1981-2010. Precipitation amounts and form (rain versus snow) vary widely across the state and are strongly influenced by elevation and proximity to the Continental Divide. The average annual precipitation for Montana is `r dplyr::filter(global_avg, variable == "pr") %$% sum(value) %>% round(1)`. Western Montana typically receives twice as much precipitation annually as eastern Montana (`r dplyr::filter(east_west_ppt, loc == "West") %$% round(value, 1)` in. versus `r dplyr::filter(east_west_ppt, loc == "East") %$% round(value, 1)` in., respectively). The combination of moisture-rich maritime air from the Pacific in the winter, spring, and fall, and strong convective systems in the summer create a more evenly distributed year-round precipitation pattern in western Montana. In contrast, a majority the annual precipitation occurs in the late spring and summer months for eastern and central Montana, coming from sources in the subtropical Pacific and Gulf of Mexico. 
 
 ```{r echo=FALSE}
 #| label: tbl-historical-pr
@@ -105,7 +118,7 @@ historical_table %>%
   knitr::kable() 
 ```
 ## Historical Trends 1979 - Present
-We evaluated how temperature and precipitation have historically changed, dating back to mid-20th century. This review of historical trends helps us provide context for future climate change scenarios explored in later sections of this chapter. In addition, evaluating these trends can help us better understand a) how Montanans have previously experienced and responded to changing climate, b) if projections of future change reveal a different climate than we have previously experienced, and c) the potential impacts of that projected change. 
+We evaluated how temperature and precipitation have historically changed, dating back to 1979. This review of historical trends helps us provide context for future climate change scenarios explored in later sections of this chapter. In addition, evaluating these trends can help us better understand a) how Montanans have previously experienced and responded to changing climate, b) if projections of future change reveal a different climate than we have previously experienced, and c) the potential impacts of that projected change. 
 
 We used standard statistical methods to analyze records of temperature and precipitation spanning two periods: 1950–2015 and 1900–2015.6 The direction (increase or decrease) and significance of trends were generally similar for the two periods. As such, the presentation of trends that follows is confined to the period from 1950–2015. This is widely acknowledged as the benchmark period in climate analysis (Liebmann et al. 2010; IPCC 2013a), a period when our network of meteorological sensors becomes more accurate and sufficiently dense. It also coincides with an upward inflection of the annual average temperature trend for Montana, demarcating a time period with the highest rate of change and likely the strongest anthropogenic signal (NOAAc undated).
 

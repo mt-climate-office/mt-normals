@@ -53,8 +53,10 @@ group_seasonally <- function(r, start_year, end_year) {
 
 #' make_temp_seasonal_rasters
 #'
-#' @param tmmn A `terra::rast` timeseries of minimum temperature.
-#' @param tmmx A `terra::rast` timeseries of maximum temperature.
+#' @param tmmn A `terra::rast` timeseries of monthly minimum temperature.
+#' @param tmmx A `terra::rast` timeseries of monthly maximum temperature.
+#' @param tavg A `terra::rast` timeseries of monthly average temperature. Defaults
+#' to NULL. If left null, tavg will be calculated as the average of tmmn and tmmx.
 #' @param out_dir The directory to save the seasonal rasters out to.
 #' @param start_year The start year of the reference period to filter input data by.
 #' @param end_year The end year of the reference period to filter input data by.
@@ -67,10 +69,14 @@ group_seasonally <- function(r, start_year, end_year) {
 #' # fill with example
 #' 1+1
 #' }
-make_temp_seasonal_rasters <- function(tmmn, tmmx, out_dir, start_year, end_year) {
+make_temp_seasonal_rasters <- function(tmmn, tmmx, tavg=NULL, out_dir, start_year, end_year) {
   tmmx <- filter_to_reference(tmmx, start_year-1, end_year)
   tmmn <- filter_to_reference(tmmn, start_year-1, end_year)
-  tavg <- (tmmx + tmmn)/2
+  if (!is.null(tavg)) {
+    tavg <- (tmmx + tmmn)/2
+  } else {
+    tavg <- filter_to_reference(tavg, start_year-1, end_year)
+  }
 
   tmmx <- terra::tapp(
     tmmx,

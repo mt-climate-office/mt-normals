@@ -7,8 +7,6 @@
 #' @source \url{http://ftp.geoinfo.msl.mt.gov/Data/Spatial/MSDI/AdministrativeBoundaries/MontanaCounties.zip}
 "mt"
 
-
-
 #' The Montana State Plane Coordinate Reference System
 #' This object was duplicated from the [mcor](https://github.com/mt-climate-office/mcor)
 #' package.
@@ -23,3 +21,8 @@
 #'
 #' @source \url{https://epsg.io/102300}
 "mt_state_plane"
+
+#' An `sf` object that splits Montana east and west of the continental divide.
+#'
+#' @format A geometry set with one feature.
+"divide"
