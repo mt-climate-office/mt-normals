@@ -63,6 +63,13 @@ east_west_ppt <- rasts %>%
   normals::spat_summary(
     shp = normals::divide, attr_id = "loc", name_to = "sum", fun = "mean"
   ) 
+
+monthly_tmp <- terra::rast("./assets/tavg_nclimgrid_monthly.tif") %>% 
+  {(. * 9/5) + 32}
+monthly_ppt <- terra::rast("./assets/pr_nclimgrid_monthly.tif") %>% 
+  {. / 25.4}
+annual_tmp <- terra::rast("./assets/tavg_nclimgrid_annual.tif") %>% 
+  {(. * 9/5) + 32}
 ```
 
 # Historical Climate
@@ -128,23 +135,34 @@ The presentation of trends that follows is confined to the period from 1950–20
 ```{r echo=FALSE}
 #| label: tbl-temp-trends
 #| tbl-cap: "Decadal rate of change for annual average temperatures in °F (°C) for each region in the study area and statewide from 1950-2015. A value of 0 indicates no statistically significant change between decadal averages."
-historical_table %>% 
-  dplyr::mutate(value = round(value, 1)) %>%
-  dplyr::filter(variable == "pr") %>% 
-  dplyr::select(-variable) %>% 
-  tidyr::pivot_wider(names_from = season, values_from = value) %>% 
-  knitr::kable() 
+normals::make_seasonal_trend_table(monthly_tmp, shp, "Division", "mean", 1951, 2015) %>% 
+  dplyr::select(Division, Winter, Spring, Summer, Fall) %>% 
+  dplyr::mutate(dplyr::across(where(is.numeric), ~ round(.x, 2))) %>%
+  knitr::kable()
 ```
-Average annual temperatures increased for the entire state and within all climate divisions (see Figure 2-3). The rate of temperature increase was 0.4°F/decade (0.2°C/decade) across the state, and this rate was relatively constant across all climate divisions (Table 2-3). Similarly, average annual maximum and minimum temperatures increased statewide, and for all seven climate divisions, by 0.3-0.6°F/decade (0.2-0.3°C/decade). Between 1950 and 2015, Montana’s average annual temperature has increased by 2.7°F (1.5°C); annual maximum and minimum temperatures have increased approximately 3.3°F (1.8°C).
+Average annual temperatures increased for the entire state and within all climate divisions (see @fig-temp-trends). The rate of temperature increase was 0.4°F/decade (0.2°C/decade) across the state, and this rate was relatively constant across all climate divisions (Table 2-3). Similarly, average annual maximum and minimum temperatures increased statewide, and for all seven climate divisions, by 0.3-0.6°F/decade (0.2-0.3°C/decade). Between 1950 and 2015, Montana’s average annual temperature has increased by 2.7°F (1.5°C); annual maximum and minimum temperatures have increased approximately 3.3°F (1.8°C).
 
 > Between 1950 and 2015, average annual temperature increased for the entire state of Montana and within all climate divisions. The state average annual temperature increased 2.7°F (1.5°C); annual maximum and minimum temperatures increased approximately 3.3°F (1.8°C).
 
-**Trend Figure**
+```{r echo=FALSE, warning=FALSE}
+#| label: fig-temp-trends
+#| tbl-cap: "Trends in annual average temperature across each climate division (Figure I) in Montana"
+
+normals::make_trend_fig(annual_tmp, shp, "Division", "mean", 1951, 2015, "Temperature °F")
+```
 
 ### Precipitation
 Annual precipitation averaged across the state has not changed significantly since 1950. Some change, however, has occurred within different climate divisions and for different seasons as shown in Table 2-4. We found no significant changes in summer and fall precipitation between 1950-2015 for any climate division. Seasonally, the largest changes—declines—in precipitation (rain and snow combined) have occurred during winter months (Table 2-4). We used a smaller p value (<0.05) to determine statistical significance of trends and to account for potential autocorrelation of time series data. Our analysis suggests that an increase in the number of El Niño events since 1950 has contributed to drier winters and decreased precipitation for Montana’s northwestern, north central, and central climate divisions (see Teleconnections section for more on the El Niño Southern Oscillation). In the eastern portions of the state significant increases in precipitation have occurred during the spring months (Table 2-4).
 
-**table**
+```{r echo=FALSE}
+#| label: tbl-ppt-trends
+#| tbl-cap: "Decadal rate of change in average precipitation in inches/decade for the seven Montana climate divisions from 1950-2015. A value of 0 indicates no significant change."
+
+normals::make_seasonal_trend_table(monthly_ppt, shp, "Division", "sum", 1951, 2015) %>% 
+  dplyr::select(Division, Winter, Spring, Summer, Fall) %>% 
+  dplyr::mutate(dplyr::across(where(is.numeric), ~ round(.x, 2))) %>%
+  knitr::kable()
+```
 
 ### Extreme aspects of Montana’s climate
 Along with analyzing historical trends in temperature and precipitation, we performed an analysis of changes in extreme climate events since the middle of last century. Two examples of climate extremes include periods of intense warm or cool temperatures and significant wet or dry spells across seasons. Because these events affect every aspect of our society, decision makers and stakeholders are increasingly in need of historical evaluations of extreme events and how they are changing from seasons to centuries. The coldest temperature ever observed in the conterminous US was -70°F (-57°C) at Rogers Pass outside of Helena on January 20, 1954 (see sidebar). Since 1950, however, our analysis shows the average winter temperature has increased by 0.4°F/decade (0.2°C/decade) across the state, with an overall average winter temperature increase of 3.6°F (2.0°C). Average spring temperatures have increased by 2.6°F (1.4°C) during the same period, and average summer temperatures have risen by 2.0°F (1.1°C). Montana’s fall average temperatures have increased by 1.6°F (0.9°C) since 1950.
