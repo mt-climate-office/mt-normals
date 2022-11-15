@@ -93,6 +93,8 @@ trend_func <- function(xs, ys, threshold = 0.5) {
 #' @param fun The function to summarise each region in `shp` by. Defaults to "mean".
 #' @param start_year The year to filter the start or the data by.
 #' @param end_year The year to filter the end of the data by.
+#' @param annual A boolean specifying whether data should be aggregated annually.
+#' Defaults to False, which aggregates data seasonally.
 #'
 #' @return A table giving the decadal rate of change of the climate variable.
 #' @export
@@ -101,22 +103,39 @@ trend_func <- function(xs, ys, threshold = 0.5) {
 #' \dontrun{
 #' 1+1
 #' }
-make_seasonal_trend_table <- function(r, shp, attr_id, fun, start_year, end_year) {
+make_seasonal_trend_table <- function(r, shp, attr_id, fun, start_year, end_year, annual=FALSE) {
 
   seasons <- group_seasonally(r, start_year, end_year)
+  if(annual) {
+    idx <- seasons$year
+  } else {
+    idx <- seasons$yearly_grp
+  }
 
   by_season_year <- terra::tapp(
     terra::subset(r, which(terra::time(r) %in% seasons$date)),
-    index = seasons$yearly_grp,
+    index = idx,
     fun = fun
   )
 
   dat <- summarise_by_region(by_season_year, shp, attr_id, "mean", start_year, end_year, FALSE)
 
-  dat %>%
-    tidyr::separate(date, c("season", "year")) %>%
-    dplyr::mutate(year = as.numeric(year)) %>%
-    dplyr::group_by(season, !!rlang::sym(attr_id)) %>%
-    dplyr::summarise(trend = trend_func(year, value) * 10) %>%
-    tidyr::pivot_wider(names_from = season, values_from = trend)
+  if (annual) {
+    out <- dat %>%
+      dplyr::rename(year=date) %>%
+      dplyr::mutate(year = stringr::str_replace(year, "X", "") %>%
+                      as.numeric()) %>%
+      dplyr::group_by(!!rlang::sym(attr_id)) %>%
+      dplyr::summarise(trend = trend_func(year, value) * 10) %>%
+      dplyr::rename(Annual = trend)
+  } else {
+    out <- dat %>%
+      tidyr::separate(date, c("season", "year")) %>%
+      dplyr::mutate(year = as.numeric(year)) %>%
+      dplyr::group_by(season, !!rlang::sym(attr_id)) %>%
+      dplyr::summarise(trend = trend_func(year, value) * 10) %>%
+      tidyr::pivot_wider(names_from = season, values_from = trend)
+  }
+
+  return(out)
 }

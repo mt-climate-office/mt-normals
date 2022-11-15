@@ -4,7 +4,15 @@
 \alias{make_seasonal_trend_table}
 \title{make_seasonal_trend_table}
 \usage{
-make_seasonal_trend_table(r, shp, attr_id, fun, start_year, end_year)
+make_seasonal_trend_table(
+  r,
+  shp,
+  attr_id,
+  fun,
+  start_year,
+  end_year,
+  annual = FALSE
+)
 }
 \arguments{
 \item{r}{A timeseries \code{terra::rast} of an annual climate variable.}
@@ -18,6 +26,9 @@ make_seasonal_trend_table(r, shp, attr_id, fun, start_year, end_year)
 \item{start_year}{The year to filter the start or the data by.}
 
 \item{end_year}{The year to filter the end of the data by.}
+
+\item{annual}{A boolean specifying whether data should be aggregated annually.
+Defaults to False, which aggregates data seasonally.}
 }
 \value{
 A table giving the decadal rate of change of the climate variable.

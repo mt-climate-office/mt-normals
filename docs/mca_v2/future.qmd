@@ -1,3 +1,14 @@
+---
+params: 
+  location: "Montana"
+  asset_dir: "./assets"
+  attr_id: "Division"
+  attr_name: "Climate Division"
+  attr_plural: "Climate Divisions"
+  
+---
+
+
 # Future Projections
 ## Global Climate Modeling
 Projecting future climate on a global scale requires modeling many intricate relationships between the land, ocean, and atmosphere. Many global climate and Earth system models exist, each varying in complexity, capabilities, and limitations.
