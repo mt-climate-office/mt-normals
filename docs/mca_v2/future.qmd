@@ -8,12 +8,60 @@ params:
   
 ---
 
+```{r setup, echo=FALSE}
+library(magrittr)
+library(ggplot2)
+
+shp <- sf::read_sf(file.path(params$asset_dir, "agg_regions.geojson"))
+mt <- normals::mt %>% 
+  dplyr::mutate(state = "MT")
+
+f_list <- RCurl::getURL(
+  "https://data.climate.umt.edu/mca/cmip/",
+  ftp.use.epsv = TRUE,
+  dirlistonly = FALSE
+) %>%
+  XML::getHTMLLinks() %>%
+  grep(".tif", ., value = T) %>%
+  grep(".json", ., value = T, invert = T)
+
+cmip_files <- file.path(
+  "https://data.climate.umt.edu/mca/cmip",
+  basename(f_list)
+)
+
+climdiv_to_factor <- function(x) {
+  factor(x, levels = c("Western", "Southwestern", "North Central", "Central", "South Central", "Northeastern", "Southeastern"))
+}
+
+tas_tsfm <- function(x) (x - 273.15) * 1.8 + 32
+pr_tsfm <- function(x) x/25.4
+
+```
 
 # Future Projections
 ## Global Climate Modeling
 Projecting future climate on a global scale requires modeling many intricate relationships between the land, ocean, and atmosphere. Many global climate and Earth system models exist, each varying in complexity, capabilities, and limitations.
 
 Consider one of the simplest forms of a model used for future projections, a linear regression model (Figure 2-8). With this model, researchers would plot a climate variable (e.g., temperature) over time, draw a best-fit, straight line through the data, and then extend the line into the future. That line, then, provides a means of projecting future conditions. Whether or not those projections are valid is a separate question. For example, the model may be based on false assumptions: the relationship may a) not be constant through time, b) not include outside influences such as human interventions (e.g., policy regulations), and c) not consider system feedbacks that might enhance or dampen the relationship being modeled.
+
+```{r echo=FALSE}
+#| label: fig-lm-example
+#| fig-cap: "Example of fitting a linear model to data to predict future conditions."
+x = 1981:2045
+y = seq(30, 35, length.out = length(x)) + rnorm(length(x), 0, 1)
+
+tibble::tibble(x = x, y = y) %>% 
+  dplyr::mutate(
+    future = ifelse(x > 2022, "Projected", "Observed")
+  ) %>% 
+  ggplot() + 
+    geom_point(aes(x=x, y=y, color=future)) +
+    geom_smooth(aes(x=x, y=y), method = "lm", se = FALSE, color="black") + 
+    theme_minimal() + 
+  geom_vline(aes(xintercept=2022)) + 
+  labs(x="", y="", color="")
+```
 
 While the linear regression model provides an instructive visual aid for considering modeling, it is too simple for looking at climate changes, in which the interactions are complex and often nonlinear. For example, if temperatures rises, evaporation is expected to increase. At the same time, increasing temperatures increase the atmosphere’s capacity to hold water. Water is a greenhouse gas so more water in the atmosphere means the atmosphere can absorb more heat…thus driving more evaporation. What seemed a simple relationship has changed (possibly dramatically) because of this feedback between temperature, evaporation, and the water-holding capacity of the atmosphere. 
 
@@ -67,12 +115,22 @@ We discuss a subset of our modeling results here, including a) temperature proje
 An ensemble minimum, maximum, and percent agreement are also provided parenthetically. The percent agreement represents the number of GCMs that project the same sign of change (i.e., positive or negative) as the median value. For example, if the median value is positive and 18 out of 20 models also project positive change, then the percent agreement would be 100 x 18/20 = 90%. This simple calculation helps convey the uncertainty in the projections. 
 
 ### Average Annual Temperatures
+```{r make_tmp_data}
+tavg_box_dat <- normals::make_boxplot_data(
+  files=cmip_files, pattern="tas.tif", shp=shp, attr_id=params$attr_id, 
+  fun="mean", tsfm = tas_tsfm)
+```
 Average annual temperatures increase in the mid-century and end-of-century projections for both stabilization and business-as-usual emission scenarios (Figures 2-9, 2-10). In the mid-century projection, most of the state has increases of about 4.5°F (2.5°C) for the stabilization emission scenario and 6.0°F (3.3°C) for the business-as-usual emission scenario. For end-of-century, statewide temperature increases by about 5.6°F (3.1°C) for the stabilization emission scenario and 9.8°F (5.4 °C) for the business-as-usual emission scenario. Although small differences exist between climate divisions, the general magnitude of these changes is consistent across the state for both emission scenarios and both time periods.
 
 - Mid-century projection specifics.—Average annual temperatures increase by mid century in both emission scenarios (Figures 2-9 and 2-10). In the stabilization emission scenario, most of the state is projected to have increases of about 4.5°F (2.5°C) (minimum: 2.7°F [1.5°C], maximum: 6.1°F [3.4°C], percent agreement: 100%). The business-as-usual emission scenario projects larger increases in temperature of about 6.0°F (3.3°C) (minimum: 4.0°F [2.2°C], maximum: 8.2°F [4.6°C], model agreement: 100%). While small discrepancies exist between climate divisions, in general the magnitude of these changes is consistent across the state in both emission scenarios.
 - End-of-century projection specifics.—Average annual temperatures increase by about 5.6°F (3.1°C) (minimum: 3.6°F [2.0°C], maximum: 7.7°F [4.3°C], percent agreement: 100%) in the stabilization emission scenario and by about 9.8°F (5.4°C) (minimum: 6.6°F [3.7°C], maximum: 12.9°F [7.2°C], percent agreement: 100%) in the business-as-usual emission scenario (Figure 2-9).
 
-**temperature box**
+```{r temp_box}
+#| label: fig-tavg-box
+#| fig-cap: "Graphs showing the minimum, maximum, and median temperature increases (°F) projected for each climate division in both stabilization (RCP4.5) and business-as-usual (RCP8.5) emission scenarios. The top row shows mid-century (2040-2069) projections and the bottom row shows end-of-century (2070-2099) projections. The outline of each box is determined by model agreement on the sign of the change (positive or negative). A black outline means there is >=80% model agreement and a red outline means that there is <80% model agreement. In this case, all models indicated the direction of the temperature trend at an agreement of greater than 80%."
+
+normals::make_boxplot_plot(tavg_box_dat, "Temperature Change (°F)", "Change in Mean Annual Temperature")
+```
 
 ### Average Daiily Minimum and Maximum Temperatures
 Average daily minimum and maximum temperatures increase in the mid-century and end-of-century projections for both stabilization and business-as-usual emission scenarios (Figure 2-10 shows output for annual average daily maximum temperature). The degree of change is similar to that found for the average annual temperatures. In end-of-century projections, summers have the largest increases in average temperature: 6.5°F (3.6°C) for the stabilization emission scenario, 11.8°F (6.6°C) for the business-as-usual emission scenario.

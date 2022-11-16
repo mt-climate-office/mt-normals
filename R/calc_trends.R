@@ -30,7 +30,7 @@ make_trend_string <- function(r, shp, attr_id, fun="mean", start_year=1951, end_
     dplyr::group_by(!!rlang::sym(attr_id)) %>%
     dplyr::summarise(
       trend = lm(value ~ year) %>%
-        coefficients() %>%
+        stats::coefficients() %>%
         magrittr::extract('year') %>%
         magrittr::multiply_by(10) %>%
         round(2) %>%

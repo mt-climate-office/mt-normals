@@ -1,17 +1,3 @@
-f_list <- RCurl::getURL(
-  "https://data.climate.umt.edu/mca/cmip/",
-  ftp.use.epsv = TRUE,
-  dirlistonly = FALSE
-) %>%
-  XML::getHTMLLinks() %>%
-  grep(".tif", ., value = T) %>%
-  grep(".json", ., value = T, invert = T)
-
-cmip_files <- file.path(
-  "https://data.climate.umt.edu/mca/cmip",
-  basename(f_list)
-)
-
 filter_years <- function(r, start, end) {
   years <- which(names(r) %in% paste0("X", start:end))
   if (length(years) == 0) {
@@ -20,6 +6,8 @@ filter_years <- function(r, start, end) {
   terra::subset(r, years) %>%
     terra::app(fun="mean")
 }
+
+ssp_colors <- c("ssp126"="#7570b3", "ssp245"="#1b9e77", "ssp370"="#e7298a", "ssp585"="#d95f02")
 
 summarize_yearmonths <- function(r, start, end) {
 
@@ -79,10 +67,6 @@ read_and_tapp <- function(pattern, files, fun, idx, tsfm=NULL) {
   return(out)
 }
 
-climdiv_to_factor <- function(x) {
-  factor(x, levels = c("Western", "Southwestern", "North Central", "Central", "South Central", "Northeastern", "Southeastern"))
-}
-
 clean_factor_period <- function(x) {
   x %>%
     stringr::str_replace("mid_", "Mid ") %>%
@@ -91,23 +75,99 @@ clean_factor_period <- function(x) {
     factor(levels = c("Mid Century", "End of Century"))
 }
 
+#' make_boxplot_data
+#'
+#' @param files A list of CMIP6 climate projection files.
+#' @param pattern A string pattern to use to subset the above CMIP6 files.
+#' @param shp An `sf` object that will be used to summarize the CMIP6 data.
+#' @param attr_id The column in `shp` that will be used to aggregate by
+#' @param fun A function used to aggregate monthly CMIP6 data to a seasonal or annual timescale.
+#' @param idx Argument passed to the `indices` argument of [[terra::tapp()]].
+#' @param tsfm A function to apply to the data (e.g., a function that converts from
+#' degrees C to degrees F).
+#'
+#' @return A `tibble` of annual changes in a variable according to mid and end of
+#'century projections, aggregated by `attr_id` columns.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' 1+1
+#' }
+make_boxplot_data <- function(files, pattern, shp, attr_id, fun, idx="years", tsfm = NULL) {
 
-make_boxplot_plot <- function(dat, ylab, title) {
-
-  ggplot(dat, aes(x=scenario, y=diff, fill=scenario)) +
-    geom_violin(alpha=0.8) +
-    facet_grid(rows = dplyr::vars(period), cols=dplyr::vars(area)) +
-    theme_bw() +
-    scale_fill_manual(values = ssp_colors) +
-    theme(
-      axis.text.x = element_text(angle = 45, vjust = 0.5),
-      plot.title = element_text(hjust = 0.5)
-    ) +
-    labs(y=ylab, x = "", fill = "Scenario", title = title) +
-    geom_hline(yintercept = 0)
+  read_and_tapp(files = files, pattern = pattern, fun = fun, idx = idx, tsfm = tsfm)  %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(
+      hist = list(filter_years(r, 1981, 2010)),
+      mid_century = list(filter_years(r, 2040, 2069)),
+      end_century = list(filter_years(r, 2070, 2099))
+    ) %>%
+    join_historical() %>%
+    dplyr::rowwise() %>%
+    dplyr::transmute(
+      scenario = scenario,
+      period = name,
+      diff = list(round(value - historical)),
+      model=model
+    )  %>%
+    dplyr::mutate(diff = list(normals::spat_summary(diff, shp, attr_id, fun="mean"))) %>%
+    tidyr::unnest(diff) %>%
+    dplyr::select(scenario, period, area=dplyr::all_of(attr_id), diff=value) %>%
+    dplyr::mutate(
+      period = clean_factor_period(period)
+    )
 }
 
-make_map_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL) {
+#' make_boxplot_plot
+#'
+#' @param dat A `tibble` returned by [[make_boxplot_data()]].
+#' @param ylab The label to apply to the y axis of the plot.
+#' @param title The title to give the figure.
+#'
+#' @return A `ggplot2` object.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' 1+1
+#' }
+make_boxplot_plot <- function(dat, ylab, title) {
+
+  ggplot2::ggplot(dat, ggplot2::aes(x=scenario, y=diff, fill=scenario)) +
+    ggplot2::geom_violin(alpha=0.8) +
+    ggplot2::facet_grid(rows = dplyr::vars(period), cols=dplyr::vars(area)) +
+    ggplot2::theme_bw() +
+    ggplot2::scale_fill_manual(values = ssp_colors) +
+    ggplot2::theme(
+      axis.text.x = ggplot2::element_text(angle = 45, vjust = 0.5),
+      plot.title = ggplot2::element_text(hjust = 0.5)
+    ) +
+    ggplot2::labs(y=ylab, x = "", fill = "Scenario", title = title) +
+    ggplot2::geom_hline(yintercept = 0)
+}
+
+#' make_map_data
+#'
+#' @param files A list of CMIP6 climate projection files.
+#' @param pattern A string pattern to use to subset the above CMIP6 files.
+#' @param fun A function used to aggregate monthly CMIP6 data to a seasonal or annual timescale.
+#' @param shp An `sf` object that will be used to summarise the CMIP6 data.
+#' @param attr_id The column in `shp` that will be used to aggregate by
+#' @param tsfm A function to apply to the data (e.g., a function that converts from
+#' degrees C to degrees F).
+#' @param proj A WKT string or [[sf::st_crs()]] object giving a projection to use
+#' for the output data.
+#'
+#' @return An `sf` object that will be used to plot a map of projected mid and
+#'  end of century changes in a given climate variable
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' 1+1
+#' }
+make_map_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL, proj=normals::mt_state_plane) {
   read_and_tapp(files = files, pattern = pattern, fun = fun, idx = "years", tsfm = tsfm)  %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
@@ -120,7 +180,7 @@ make_map_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL) {
     dplyr::transmute(
       scenario = scenario,
       period = name,
-      diff = list(value - historical),
+      diff = list(round(value - historical)),
       model=model
     ) %>%
     dplyr::group_by(scenario, period) %>%
@@ -129,7 +189,7 @@ make_map_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL) {
     ) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
-      diff = list(to_shp(diff, mt=mt))
+      diff = list(to_shp(diff, shp=shp, proj=proj))
     ) %>%
     dplyr::select(scenario, period, diff) %>%
     tidyr::unnest(diff) %>%
@@ -140,6 +200,19 @@ make_map_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL) {
 
 }
 
+#' make_map_plot
+#'
+#' @param dat A `tibble` returned by [[make_map_data()]].
+#' @param hot A boolean specifying whether to use a hot or cool colorscale.
+#' Defaults to TRUE.
+#'
+#' @return A `ggplot2` object.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' 1+1
+#' }
 make_map_plot <- function(dat, hot=TRUE) {
 
   diverging <- any(dat$value < 0)
@@ -155,24 +228,43 @@ make_map_plot <- function(dat, hot=TRUE) {
 
   midpoint <- ifelse(diverging, 0, mean(dat$value))
 
-  fig <- ggplot(dat) +
-    geom_sf(aes(fill=value), color=NA) +
-    geom_sf(aes(), data = climdiv, fill=NA) +
-    facet_grid(rows = vars(scenario), cols = vars(period)) +
-    scale_fill_gradient2(
+  fig <- ggplot2::ggplot(dat) +
+    ggplot2::geom_sf(ggplot2::aes(fill=value), color=NA) +
+    ggplot2::geom_sf(ggplot2::aes(), data = climdiv, fill=NA) +
+    ggplot2::facet_grid(rows = dplyr::vars(scenario), cols = dplyr::vars(period)) +
+    ggplot2::scale_fill_gradient2(
       low = pal[1], mid = pal[2], high =  pal[3],
       midpoint = midpoint
     ) +
-    theme_bw() +
-    theme(
-      axis.text.x = element_text(angle = 45, vjust = 0.5),
-      plot.title = element_text(hjust = 0.5)
+    ggplot2::theme_bw() +
+    ggplot2::theme(
+      axis.text.x = ggplot2::element_text(angle = 45, vjust = 0.5),
+      plot.title = ggplot2::element_text(hjust = 0.5)
     ) +
-    labs(y="", x = "", fill = "")
+    ggplot2::labs(y="", x = "", fill = "")
 
   return(fig)
 }
 
+#' apply_map_by_scenario
+#'
+#' @description A workaround to using [[ggplot2::facet_wrap()]]. You can't facet_wrap
+#' with [[ggplot2::geom_sf()]], so this functio  is a workaround allowing you to
+#' effectively facet_wrap with a `geom_sf`.
+#'
+#' @param dat A `tibble` returned by [[make_map_data()]].
+#' @param hot A boolean specifying whether to use a hot or cool colorscale.
+#' Defaults to TRUE.
+#' @param title_txt A string to use as the plot title.
+#'
+#'
+#' @return A `cowplot` object.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' 1+1
+#' }
 apply_map_by_scenario <- function(dat, hot, title_txt) {
   plt <- dat %>%
     dplyr::group_by(scenario) %>%
@@ -185,10 +277,10 @@ apply_map_by_scenario <- function(dat, hot, title_txt) {
       title_txt,
       fontface = 'bold',
     ) +
-    theme(
+   ggplot2::theme(
       # add margin on the left of the drawing canvas,
       # so title is aligned with left edge of first plot
-      plot.margin = margin(0, 0, 0, 0)
+      plot.margin = ggplot2::margin(0, 0, 0, 0)
     )
   cowplot::plot_grid(
     title, plt,
@@ -198,6 +290,24 @@ apply_map_by_scenario <- function(dat, hot, title_txt) {
   )
 }
 
+#' make_heatmap_data
+#'
+#' @param files A list of CMIP6 climate projection files.
+#' @param pattern A string pattern to use to subset the above CMIP6 files.
+#' @param fun A function used to aggregate monthly CMIP6 data to a seasonal or annual timescale.
+#' @param shp An `sf` object that will be used to summarise the CMIP6 data.
+#' @param attr_id The column in `shp` that will be used to aggregate by
+#' @param tsfm A function to apply to the data (e.g., a function that converts from
+#' degrees C to degrees F).
+#'
+#' @return An `tibble` object that will be used to plot a heatmap of projected mid and
+#'  end of century changes in a given climate variable
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' 1+1
+#' }
 make_heatmap_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL) {
 
   read_and_tapp(
@@ -229,6 +339,19 @@ make_heatmap_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL) {
     )
 }
 
+#' make_heatmap_plot
+#'
+#' @param dat A `tibble` returned by [[make_heatmap_data()]].
+#' @param hot A boolean specifying whether to use a hot or cool colorscale.
+#' Defaults to TRUE.
+#'
+#' @return A `ggplot2` object.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' 1+1
+#' }
 make_heatmap_plot <- function(dat, hot = TRUE) {
 
   diverging <- any(dat$diff < 0)
@@ -244,18 +367,36 @@ make_heatmap_plot <- function(dat, hot = TRUE) {
 
   midpoint <- ifelse(diverging, 0, mean(dat$diff))
 
-  ggplot(dat) +
-    geom_tile(aes(x=month, y=area, fill=diff), color="black") +
-    scale_fill_gradient2(
+  ggplot2::ggplot(dat) +
+    ggplot2::geom_tile(ggplot2::aes(x=month, y=area, fill=diff), color="black") +
+    ggplot2::scale_fill_gradient2(
       low = pal[1], mid = pal[2], high =  pal[3],
       midpoint = midpoint
     ) +
-    facet_grid(rows = vars(scenario), cols = vars(period)) +
-    theme_bw() +
-    labs(x="", y = "", fill = "") +
-    theme(axis.text.x = element_text(angle = 45, vjust = 0.5))
+    ggplot2::facet_grid(rows = dplyr::vars(scenario), cols = dplyr::vars(period)) +
+    ggplot2::theme_bw() +
+    ggplot2::labs(x="", y = "", fill = "") +
+    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, vjust = 0.5))
 }
 
+#' apply_map_by_scenario
+#'
+#' @description A workaround to using [[ggplot2::facet_wrap()]]. Using this function
+#' gives plots with unique legends for easier interpretation.
+#'
+#' @param dat A `tibble` returned by [[make_heatmap_data()]].
+#' @param hot A boolean specifying whether to use a hot or cool colorscale.
+#' Defaults to TRUE.
+#' @param title_txt A string to use as the plot title.
+#'
+#'
+#' @return A `cowplot` object.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' 1+1
+#' }
 apply_heatmap_by_scenario <- function(dat, hot, title_txt) {
   plt <- dat %>%
     dplyr::group_by(scenario) %>%
@@ -268,10 +409,10 @@ apply_heatmap_by_scenario <- function(dat, hot, title_txt) {
       title_txt,
       fontface = 'bold',
     ) +
-    theme(
+    ggplot2::theme(
       # add margin on the left of the drawing canvas,
       # so title is aligned with left edge of first plot
-      plot.margin = margin(0, 0, 0, 0)
+      plot.margin = ggplot2::margin(0, 0, 0, 0)
     )
   cowplot::plot_grid(
     title, plt,
@@ -279,29 +420,4 @@ apply_heatmap_by_scenario <- function(dat, hot, title_txt) {
     # rel_heights values control vertical title margins
     rel_heights = c(0.1, 1)
   )
-}
-
-make_summary_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL) {
-  read_and_tapp(files = files, pattern = pattern, fun = fun, idx = "years", tsfm = tsfm)  %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(
-      hist = list(filter_years(r, 1981, 2010)),
-      mid_century = list(filter_years(r, 2040, 2069)),
-      end_century = list(filter_years(r, 2070, 2099))
-    ) %>%
-    join_historical() %>%
-    dplyr::rowwise() %>%
-    dplyr::transmute(
-      scenario = scenario,
-      period = name,
-      diff = list(value - historical),
-      model=model
-    ) %>%
-    dplyr::filter(scenario == "ssp585", period == "mid_century") %>%
-    dplyr::mutate(
-      mn = terra::mask(diff, normals::mt) %>% terra::global("min", na.rm = T),
-      mx = terra::mask(diff, normals::mt) %>% terra::global("max", na.rm = T),
-      avg = terra::mask(diff, normals::mt) %>% terra::global("mean", na.rm = T),
-      med = terra::mask(diff, normals::mt) %>% terra::global(median, na.rm = T),
-    )
 }
