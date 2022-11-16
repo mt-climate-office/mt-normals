@@ -183,15 +183,15 @@ crop_to_roi <- function(data_dir, out_dir, roi, variables) {
 #' }
 to_shp <- function(x, shp, proj) {
 
+  shp_use <- sf::st_transform(shp, proj) %>%
+    dplyr::select(geometry)
+
   tmp <- x %>%
-    terra::project(proj) %>%
+    terra::project(shp_use) %>%
     raster::stack() %>%
     spex::qm_rasterToPolygons(na.rm = T) %>%
     tidyr::pivot_longer(-geometry, names_to = "time")  %>%
     sf::`st_crs<-`(proj)
-
-  shp_use <- sf::st_transform(shp, sf::st_crs(tmp)) %>%
-    dplyr::select(geometry)
 
   sf::st_intersection(tmp, shp_use)
 }

@@ -9,13 +9,25 @@ filter_years <- function(r, start, end) {
 
 ssp_colors <- c("ssp126"="#7570b3", "ssp245"="#1b9e77", "ssp370"="#e7298a", "ssp585"="#d95f02")
 
-summarize_yearmonths <- function(r, start, end) {
+summarize_yearmonths <- function(r, start, end, is.annual=FALSE) {
 
-  yearmons <- tidyr::crossing(
-    a="X", b=start:end, c=stringr::str_pad(1:12, 2, "left", "0")
-  ) %>%
-    dplyr::mutate(out = glue::glue("{a}{b}{c}")) %$%
-    as.character(out)
+  if (is.annual) {
+    yearmons <- tidyr::crossing(
+      a="X", b=start:end, c="01"
+    ) %>%
+      dplyr::mutate(out = glue::glue("{a}{b}{c}")) %$%
+      as.character(out)
+
+    r_names <- "Annual"
+  } else {
+    yearmons <- tidyr::crossing(
+      a="X", b=start:end, c=stringr::str_pad(1:12, 2, "left", "0")
+    ) %>%
+      dplyr::mutate(out = glue::glue("{a}{b}{c}")) %$%
+      as.character(out)
+
+    r_names <- month.name
+  }
 
   yearmons_idx <- which(names(r) %in% yearmons)
   if (length(yearmons_idx) == 0) {
@@ -23,9 +35,10 @@ summarize_yearmonths <- function(r, start, end) {
   }
 
   r <- terra::subset(r, yearmons_idx)
-  terra::time(r) <- lubridate::as_date(paste0(yearmons, "01"), format = "X%Y%m%d")
+  terra::time(r) <- as.Date(paste0(yearmons, "01"), format = "X%Y%m%d")
   r <- terra::tapp(r, fun="mean", index = "months")
-  names(r) <- month.name
+
+  names(r) <- r_names
   return(r)
 }
 
@@ -77,14 +90,9 @@ clean_factor_period <- function(x) {
 
 #' make_boxplot_data
 #'
-#' @param files A list of CMIP6 climate projection files.
-#' @param pattern A string pattern to use to subset the above CMIP6 files.
+#' @param f Preprocessed cmip6 data returned by [[cmip_monthly_to_change]].
 #' @param shp An `sf` object that will be used to summarize the CMIP6 data.
 #' @param attr_id The column in `shp` that will be used to aggregate by
-#' @param fun A function used to aggregate monthly CMIP6 data to a seasonal or annual timescale.
-#' @param idx Argument passed to the `indices` argument of [[terra::tapp()]].
-#' @param tsfm A function to apply to the data (e.g., a function that converts from
-#' degrees C to degrees F).
 #'
 #' @return A `tibble` of annual changes in a variable according to mid and end of
 #'century projections, aggregated by `attr_id` columns.
@@ -94,23 +102,11 @@ clean_factor_period <- function(x) {
 #' \dontrun{
 #' 1+1
 #' }
-make_boxplot_data <- function(files, pattern, shp, attr_id, fun, idx="years", tsfm = NULL) {
+make_boxplot_data <- function(f, shp, attr_id) {
 
-  read_and_tapp(files = files, pattern = pattern, fun = fun, idx = idx, tsfm = tsfm)  %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(
-      hist = list(filter_years(r, 1981, 2010)),
-      mid_century = list(filter_years(r, 2040, 2069)),
-      end_century = list(filter_years(r, 2070, 2099))
-    ) %>%
-    join_historical() %>%
-    dplyr::rowwise() %>%
-    dplyr::transmute(
-      scenario = scenario,
-      period = name,
-      diff = list(round(value - historical)),
-      model=model
-    )  %>%
+  readRDS(f) %>%
+    dplyr::mutate(diff = list(terra::rast(diff))) %>%
+    dplyr::mutate(diff = list(terra::mean(diff))) %>%
     dplyr::mutate(diff = list(normals::spat_summary(diff, shp, attr_id, fun="mean"))) %>%
     tidyr::unnest(diff) %>%
     dplyr::select(scenario, period, area=dplyr::all_of(attr_id), diff=value) %>%
@@ -167,29 +163,17 @@ make_boxplot_plot <- function(dat, ylab, title) {
 #' \dontrun{
 #' 1+1
 #' }
-make_map_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL, proj=normals::mt_state_plane) {
-  read_and_tapp(files = files, pattern = pattern, fun = fun, idx = "years", tsfm = tsfm)  %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(
-      hist = list(filter_years(r, 1981, 2010)),
-      mid_century = list(filter_years(r, 2040, 2069)),
-      end_century = list(filter_years(r, 2070, 2099))
-    ) %>%
-    join_historical() %>%
-    dplyr::rowwise() %>%
-    dplyr::transmute(
-      scenario = scenario,
-      period = name,
-      diff = list(round(value - historical)),
-      model=model
-    ) %>%
+make_map_data <- function(f, shp, proj=normals::mt_state_plane) {
+  readRDS(f) %>%
+    dplyr::mutate(diff = list(terra::rast(diff))) %>%
+    dplyr::mutate(diff = list(terra::mean(diff))) %>%
     dplyr::group_by(scenario, period) %>%
     dplyr::summarise(
       diff = list(terra::app(terra::rast(diff), fun="mean"))
     ) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
-      diff = list(to_shp(diff, shp=shp, proj=proj))
+      diff = list(normals::to_shp(diff, shp=shp, proj=proj))
     ) %>%
     dplyr::select(scenario, period, diff) %>%
     tidyr::unnest(diff) %>%
@@ -421,3 +405,61 @@ apply_heatmap_by_scenario <- function(dat, hot, title_txt) {
     rel_heights = c(0.1, 1)
   )
 }
+
+#' cmip_monthly_to_change
+#'
+#' @param files list of cmip6 files to preprocess.
+#' @param pattern The pattern to use to filter `files`
+#' @param fun The function to use to aggregate rasters with (usually either
+#' "mean" or "sum").
+#' @param tsfm A function to apply to the rasters to convert units (optional).
+#' @param is.annual Boolean of whether the CMIP files are already aggregated to a annual timescale.
+#' @param out_dir The directory to save the files out to.
+#'
+#' @return
+#' @export
+#'
+#' @examples
+cmip_monthly_to_change <- function(files, pattern, fun, tsfm, is.annual, out_dir) {
+
+  out_name = file.path(
+    out_dir,
+    glue::glue("cmip_{stringr::str_replace(pattern, '.tif', '.rds')}")
+  )
+  print(out_name)
+  read_and_tapp(
+    files = files, pattern = pattern, fun = fun, idx = "yearmonths", tsfm = tsfm
+  ) %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(
+      hist = list(summarize_yearmonths(r, 1981, 2010, is.annual)),
+      mid_century = list(summarize_yearmonths(r, 2040, 2069, is.annual)),
+      end_century = list(summarize_yearmonths(r, 2070, 2099, is.annual))
+    ) %>%
+    join_historical() %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(diff = list(terra::wrap(value - historical))) %>%
+    dplyr::select(model, scenario, period=name, diff) %>%
+    saveRDS(out_name)
+
+  return(out_name)
+}
+
+# tibble::tribble(
+#   ~pattern, ~title, ~tsfm, ~hot, ~fun, ~is.annual,
+#   "above90.tif", "Change in # of Days Above 90°F", NULL, TRUE, "sum", FALSE,
+#   "con-dry.tif", "Change in # of Consecutive Dry Days", NULL, FALSE, "sum", TRUE,
+#   "con-wet.tif", "Change in # of Consecutive Wet Days", NULL, FALSE, "sum", TRUE,
+#   "dry-days.tif", "Change in # of Dry Days", NULL, FALSE, "sum", FALSE,
+#   "wet-days.tif", "Change in # of Wet Days", NULL, FALSE, "sum", FALSE,
+#   "freeze-free.tif", "Change in # of Freeze-Free Days", NULL, TRUE, "sum", FALSE,
+#   "pr.tif", "Change in Annual Total Precipitation (in.)", pr_tsfm, FALSE, "sum", FALSE,
+#   "tas.tif", "Change in Mean Annual Temperature (°F)", tas_tsfm, TRUE, "mean", FALSE,
+#   "tasmax.tif", "Change in Mean Annual Maximum Temperature (°F)", tas_tsfm, TRUE, "mean", FALSE,
+#   "tasmin.tif", "Change in Mean Annual Minimum Temperature (°F)", tas_tsfm, TRUE, "mean", FALSE
+# ) %>%
+#   dplyr::rowwise() %>%
+#   dplyr::mutate(new_name = cmip_monthly_to_change(
+#     files=cmip_files, pattern=pattern, fun=fun, tsfm=tsfm,
+#     is.annual = is.annual, out_dir = "./assets")
+#   )
