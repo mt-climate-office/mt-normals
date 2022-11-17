@@ -102,11 +102,11 @@ clean_factor_period <- function(x) {
 #' \dontrun{
 #' 1+1
 #' }
-make_boxplot_data <- function(f, shp, attr_id) {
+make_boxplot_data <- function(f, shp, attr_id, fun="mean") {
 
   readRDS(f) %>%
     dplyr::mutate(diff = list(terra::rast(diff))) %>%
-    dplyr::mutate(diff = list(terra::mean(diff))) %>%
+    dplyr::mutate(diff = list(terra::app(diff, fun=fun))) %>%
     dplyr::mutate(diff = list(normals::spat_summary(diff, shp, attr_id, fun="mean"))) %>%
     tidyr::unnest(diff) %>%
     dplyr::select(scenario, period, area=dplyr::all_of(attr_id), diff=value) %>%
@@ -163,10 +163,10 @@ make_boxplot_plot <- function(dat, ylab, title) {
 #' \dontrun{
 #' 1+1
 #' }
-make_map_data <- function(f, shp, proj=normals::mt_state_plane) {
+make_map_data <- function(f, shp, proj=normals::mt_state_plane, fun="mean") {
   readRDS(f) %>%
     dplyr::mutate(diff = list(terra::rast(diff))) %>%
-    dplyr::mutate(diff = list(terra::mean(diff))) %>%
+    dplyr::mutate(diff = list(terra::app(diff, fun = fun))) %>%
     dplyr::group_by(scenario, period) %>%
     dplyr::summarise(
       diff = list(terra::app(terra::rast(diff), fun="mean"))
@@ -197,13 +197,13 @@ make_map_data <- function(f, shp, proj=normals::mt_state_plane) {
 #' \dontrun{
 #' 1+1
 #' }
-make_map_plot <- function(dat, hot=TRUE) {
+make_map_plot <- function(dat, shp, hot=TRUE) {
 
   diverging <- any(dat$value < 0)
   if (hot && diverging) {
     pal <-  c('#fc8d59','#ffffbf','#91bfdb')
   } else if (hot && !diverging) {
-    pal <- c('#fee8c8','#fdbb84','#e34a33')
+    pal <- c('#fef5ec','#f2b074','#813519')
   } else if (!hot && diverging) {
     pal <- c('#d8b365','#f5f5f5','#5ab4ac')
   } else {
@@ -214,7 +214,7 @@ make_map_plot <- function(dat, hot=TRUE) {
 
   fig <- ggplot2::ggplot(dat) +
     ggplot2::geom_sf(ggplot2::aes(fill=value), color=NA) +
-    ggplot2::geom_sf(ggplot2::aes(), data = climdiv, fill=NA) +
+    ggplot2::geom_sf(ggplot2::aes(), data = shp, fill=NA) +
     ggplot2::facet_grid(rows = dplyr::vars(scenario), cols = dplyr::vars(period)) +
     ggplot2::scale_fill_gradient2(
       low = pal[1], mid = pal[2], high =  pal[3],
@@ -249,12 +249,12 @@ make_map_plot <- function(dat, hot=TRUE) {
 #' \dontrun{
 #' 1+1
 #' }
-apply_map_by_scenario <- function(dat, hot, title_txt) {
+apply_map_by_scenario <- function(dat, shp, hot, title_txt) {
   plt <- dat %>%
     dplyr::group_by(scenario) %>%
     dplyr::group_split() %>%
-    lapply(make_map_plot, hot = hot) %>%
-    {cowplot::plot_grid(.[[1]], .[[2]], nrow=2)}
+    lapply(make_map_plot, shp = shp, hot = hot) %>%
+    cowplot::plot_grid(plotlist=., nrow=length(.))
 
   title <- cowplot::ggdraw() +
     cowplot::draw_label(
@@ -292,21 +292,11 @@ apply_map_by_scenario <- function(dat, hot, title_txt) {
 #' \dontrun{
 #' 1+1
 #' }
-make_heatmap_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL) {
+make_heatmap_data <- function(f, shp, attr_id) {
 
-  read_and_tapp(
-    files = files, pattern = pattern, fun = fun, idx = "yearmonths", tsfm = tsfm
-  ) %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(
-      hist = list(summarize_yearmonths(r, 1981, 2010)),
-      mid_century = list(summarize_yearmonths(r, 2040, 2069)),
-      end_century = list(summarize_yearmonths(r, 2070, 2099))
-    ) %>%
-    join_historical() %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(diff = list(value - historical)) %>%
-    dplyr::group_by(scenario, name) %>%
+  readRDS(f) %>%
+    dplyr::mutate(diff = list(terra::rast(diff))) %>%
+    dplyr::group_by(scenario, period) %>%
     dplyr::summarise(
       diff = list(terra::tapp(terra::rast(diff), index = month.name, fun = "mean")),
       .groups = "drop"
@@ -316,7 +306,7 @@ make_heatmap_data <- function(files, pattern, fun, shp, attr_id, tsfm = NULL) {
       diff = list(normals::spat_summary(diff, shp, attr_id, "month", "mean"))
     ) %>%
     tidyr::unnest(diff) %>%
-    dplyr::select(scenario, period=name, area=dplyr::all_of(attr_id), month, diff=value) %>%
+    dplyr::select(scenario, period, area=dplyr::all_of(attr_id), month, diff=value) %>%
     dplyr::mutate(
       period = clean_factor_period(period),
       month = factor(month, levels=month.name)
@@ -386,7 +376,7 @@ apply_heatmap_by_scenario <- function(dat, hot, title_txt) {
     dplyr::group_by(scenario) %>%
     dplyr::group_split() %>%
     lapply(make_heatmap_plot, hot = hot) %>%
-    {cowplot::plot_grid(.[[1]], .[[2]], nrow=2)}
+    cowplot::plot_grid(plotlist = ., nrow = length(.))
 
   title <- cowplot::ggdraw() +
     cowplot::draw_label(
@@ -426,7 +416,7 @@ cmip_monthly_to_change <- function(files, pattern, fun, tsfm, is.annual, out_dir
     out_dir,
     glue::glue("cmip_{stringr::str_replace(pattern, '.tif', '.rds')}")
   )
-  print(out_name)
+  print(glue::glue("{out_name}: {is.annual}"))
   read_and_tapp(
     files = files, pattern = pattern, fun = fun, idx = "yearmonths", tsfm = tsfm
   ) %>%

@@ -25,10 +25,12 @@ f_list <- RCurl::getURL(
   grep(".tif", ., value = T) %>%
   grep(".json", ., value = T, invert = T)
 
-cmip_files <- file.path(
+cmip_files_full <- file.path(
   "https://data.climate.umt.edu/mca/cmip",
   basename(f_list)
 )
+
+cmip_files <- list.files(params$asset_dir, pattern = ".rds", full.names = T)
 
 climdiv_to_factor <- function(x) {
   factor(x, levels = c("Western", "Southwestern", "North Central", "Central", "South Central", "Northeastern", "Southeastern"))
@@ -45,7 +47,7 @@ Projecting future climate on a global scale requires modeling many intricate rel
 
 Consider one of the simplest forms of a model used for future projections, a linear regression model (@fig-lm-example). With this model, researchers would plot a climate variable (e.g., temperature) over time, draw a best-fit, straight line through the data, and then extend the line into the future. That line, then, provides a means of projecting future conditions. Whether or not those projections are valid is a separate question. For example, the model may be based on false assumptions: the relationship may a) not be constant through time, b) not include outside influences such as human interventions (e.g., policy regulations), and c) not consider system feedbacks that might enhance or dampen the relationship being modeled.
 
-```{r echo=FALSE}
+```{r echo=FALSE, warning=FALSE, message=FALSE}
 #| label: fig-lm-example
 #| fig-cap: "Example of fitting a linear model to data to predict future conditions."
 x = 1981:2045
@@ -115,11 +117,6 @@ We discuss a subset of our modeling results here, including a) temperature proje
 An ensemble minimum, maximum, and percent agreement are also provided parenthetically. The percent agreement represents the number of GCMs that project the same sign of change (i.e., positive or negative) as the median value. For example, if the median value is positive and 18 out of 20 models also project positive change, then the percent agreement would be 100 x 18/20 = 90%. This simple calculation helps convey the uncertainty in the projections. 
 
 ### Average Annual Temperatures
-```{r make_tmp_data}
-tavg_box_dat <- normals::make_boxplot_data(
-  files=cmip_files, pattern="tas.tif", shp=shp, attr_id=params$attr_id, 
-  fun="mean", tsfm = tas_tsfm)
-```
 Average annual temperatures increase in the mid-century and end-of-century projections for both stabilization and business-as-usual emission scenarios (Figures 2-9, 2-10). In the mid-century projection, most of the state has increases of about 4.5°F (2.5°C) for the stabilization emission scenario and 6.0°F (3.3°C) for the business-as-usual emission scenario. For end-of-century, statewide temperature increases by about 5.6°F (3.1°C) for the stabilization emission scenario and 9.8°F (5.4 °C) for the business-as-usual emission scenario. Although small differences exist between climate divisions, the general magnitude of these changes is consistent across the state for both emission scenarios and both time periods.
 
 - Mid-century projection specifics.—Average annual temperatures increase by mid century in both emission scenarios (Figures 2-9 and 2-10). In the stabilization emission scenario, most of the state is projected to have increases of about 4.5°F (2.5°C) (minimum: 2.7°F [1.5°C], maximum: 6.1°F [3.4°C], percent agreement: 100%). The business-as-usual emission scenario projects larger increases in temperature of about 6.0°F (3.3°C) (minimum: 4.0°F [2.2°C], maximum: 8.2°F [4.6°C], model agreement: 100%). While small discrepancies exist between climate divisions, in general the magnitude of these changes is consistent across the state in both emission scenarios.
@@ -127,9 +124,22 @@ Average annual temperatures increase in the mid-century and end-of-century proje
 
 ```{r temp_box}
 #| label: fig-tavg-box
+#| fig-width: 10
+#| fig-height: 7
 #| fig-cap: "Graphs showing the minimum, maximum, and median temperature increases (°F) projected for each climate division in both stabilization (RCP4.5) and business-as-usual (RCP8.5) emission scenarios. The top row shows mid-century (2040-2069) projections and the bottom row shows end-of-century (2070-2099) projections. The outline of each box is determined by model agreement on the sign of the change (positive or negative). A black outline means there is >=80% model agreement and a red outline means that there is <80% model agreement. In this case, all models indicated the direction of the temperature trend at an agreement of greater than 80%."
 
-normals::make_boxplot_plot(tavg_box_dat, "Temperature Change (°F)", "Change in Mean Annual Temperature")
+
+tmp_box_data <- normals::make_boxplot_data(
+    stringr::str_subset(cmip_files, "tas.rds"), 
+    shp = shp, 
+    attr_id = params$attr_id
+) 
+
+normals::make_boxplot_plot(
+  tmp_box_data,
+  "Temperature Change (°F)", 
+  "Change in Mean Annual Temperature"
+)
 ```
 
 ### Average Daiily Minimum and Maximum Temperatures
@@ -138,12 +148,49 @@ Average daily minimum and maximum temperatures increase in the mid-century and e
 - Mid-century projection specifics.—Average daily minimum and maximum temperatures change in a manner similar to the average annual projected increases (again for both RCP scenarios).
 - End-of-century projection specifics.—Average daily minimum and maximum temperatures increase by similar magnitudes to average annual daily temperatures for both emission scenarios. Summer months have the largest projected increase in average temperature. In the stabilization emission scenario, summer temperatures increase by 6.5°F (3.6°C) (minimum: 3.2°F [1.8°C], maximum: 9.1°F [5.1°C], percent agreement: 100%) and in the business-as-usual emission scenario, summer temperatures increase by about 11.8°F (6.6°C) (minimum: 8.0°F [4.4°C], maximum: 15.2°F [8.4°C], percent agreement: 100%).
 
-**max temp map**
+```{r tmmx_map, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-tmmx-map
+#| fig.width: 10
+#| fig.height: 15
+#| fig-cap: "The projected increase in annual average daily maximum temperature (°F) for each climate division in Montana for the periods 2049-2069 and 2070-2099 for (A) stabilization (RCP4.5) and (B) business-as-usual (RCP8.5) emission scenarios."
+
+
+tmmx_map_data <- normals::make_map_data(
+    stringr::str_subset(cmip_files, "tasmax.rds"), 
+    shp = shp, 
+    proj = normals::mt_state_plane
+) 
+
+normals::apply_map_by_scenario(
+  dat = tmmx_map_data,
+  shp = shp,
+  hot = TRUE,
+  title = "Change in Annual Maximum Temperature (°F)"
+)
+```
+
 
 ### Average Monthly Temperatures
 Average monthly temperatures are projected to increase across all climate divisions by mid century (2040-2069) and for both stabilization and business-as-usual emission scenarios (Figure 2-11). Average monthly temperatures in summer and winter generally show larger projected increases than those in spring and fall. In the business-as-usual emission scenario, August has the largest projected change across all climate divisions. 
 
-**temperature heat map**
+```{r tavg_heatmap, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-tavg-heatmap
+#| fig.width: 10
+#| fig.height: 15
+#| fig-cap: " The projected monthly increase in average temperature (°F) for each climate division in Montana in the mid-century projections (2040-2069) for the (A) stabilization (RCP4.5) and (B) business-as-usual (RCP8.5) emission scenarios."
+
+tavg_heat_data <- normals::make_heatmap_data(
+    stringr::str_subset(cmip_files, "tas.rds"), 
+    shp = shp, 
+    attr_id = params$attr_id
+) 
+
+normals::apply_heatmap_by_scenario(
+  dat = tavg_heat_data,
+  hot = TRUE,
+  title = "Monthly Change in Average Temperature (°F)"
+)
+```
 
 ### Number of Days Above 90°F (32°C)
 The number of annual days where maximum temperatures are above 90°F (32°C) increases across all climate divisions in both mid-century and end-of-century projections and for both stabilization and business-as-usual emission scenarios (Figures 2-12, 2-13). Large differences in the magnitude of change exist, however, among the climate divisions. For example, in mid-century projections using the business-as-usual emission scenario, the northwestern part of the state shows increases of about 11 days with temperatures above 90°F (32°C), while the eastern parts of the state have increases of about 33 days. Similarly, in end-of-century projections based on the business-as-usual emission scenario, the northwestern part of the state shows an increase of about 34 days, while the eastern parts of the state have an increase of about 54 days above 90°F (32°C).
@@ -151,7 +198,46 @@ The number of annual days where maximum temperatures are above 90°F (32°C) inc
 - Mid-century projection specifics.—The number of annual days at mid century where maximum temperatures are above 90°F (32°C) increases across all climate divisions and both emission scenarios (Figure 2-12, 2-13). Large differences in the magnitude of change exist, however, among the climate divisions. These differences are likely due, in part, to variability in moisture availability among the climate divisions and the energy it takes to evaporate this moisture (i.e., latent heat). In the stabilization emission scenario, the northwestern and north central climate divisions have increases of about 5.0 days (minimum: 1.5 days, maximum: 12.0 days, percent agreement: 100%); while the number of days in both eastern and south central climate divisions of the state increase by about 25.0 days (minimum: 6.0 days, maximum: 36.0 days, percent agreement: 100%). Similar spatial patterns exist for the business-as-usual emission scenario, but the magnitudes of change increase along with the ranges of the ensemble minimums and maximums. In the northwestern and north central climate divisions of the state, increases of about 11 days are projected (minimum: 1.5 days, maximum: 25.0 days, percent agreement: 100%); in the south central and both eastern climate divisions increases are projected to be about 33.0 days (minimum: 11 days, maximum: 44.0 days, percent agreement: 100%).
 - End-of-century projection specifics.—The number of days where maximum temperatures exceed 90°F (32°C) by the end-of-century continues to increase across the state in both emission scenarios, with 100% model agreement. The spatial pattern in the end-of-century projection is similar to that of the mid-century one (Figures 2-12, 2-13). For the stabilization emission scenario, the number of days/yr exceeding 90°F (32°C) increases in the northwestern and north central regions by about 8.5 days (minimum: 1.7 days, maximum: 22.0 days, percent agreement: 100%), while in the southern and eastern parts of the state, it increases by about 29.0 days (minimum: 11.0 days, maximum: 43.0 days, percent agreement: 100%). For the business-as-usual emission scenario, the number of days exceeding 90°F (32°C) in the northwestern and north central parts of the state increases by about 34.0 days (minimum: 9.5 days, maximum: 58.0 days, percent agreement: 100%), while in the southern and eastern parts of the state, it increases by about 54.0 days (minimum: 26.0 days, maximum: 70.0 days, percent agreement: 100%). 
 
-**90 map, 90 box**
+```{r abv90_map, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-90-map
+#| fig.width: 10
+#| fig.height: 15
+#| fig-cap: "The projected increases in number of days above 90°F (32°C) for each climate division in Montana over two periods 2040-2069 and 2070-2099 for (A) stabilization (RCP4.5) and (B) business-as-usual (RCP8.5) emission scenarios."
+
+abv90_map_data <- normals::make_map_data(
+    stringr::str_subset(cmip_files, "above90.rds"), 
+    shp = shp, 
+    proj = normals::mt_state_plane,
+    fun = "sum"
+) 
+
+normals::apply_map_by_scenario(
+  dat = abv90_map_data,
+  hot = TRUE,
+  shp = shp,
+  title = "Change in Annual Number of Days Above 90°F"
+)
+```
+
+```{r abv90_box, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-90-box
+#| fig.width: 10
+#| fig.height: 7
+#| fig-cap: "Graphs showing the increase in the number of days per year above 90°F (32°C) projected for each climate division in both stabilization (RCP4.5) and business-as-usual (RCP8.5) emission scenarios. The top row shows mid-century projections (2040-2069) and the bottom row shows end-of-century projections (2070-2099). The outline of each box is determined by model agreement on the sign of the change (positive or negative). A black outline means there is ≥80% model agreement and a red outline means that there is <80% model agreement. In this case, all models indicated the direction of the trend for days above 90°F (32°C) at an agreement of greater than 80%."
+
+abv90_box_data <- normals::make_boxplot_data(
+    stringr::str_subset(cmip_files, "above90.rds"), 
+    shp = shp, 
+    attr_id = params$attr_id,
+    fun = "sum"
+) 
+
+normals::make_boxplot_plot(
+  dat = abv90_box_data,
+  ylab = "Number of Days",
+  title = "Change in Number of Days Above 90°F"
+)
+```
 
 ### Number of Days Where Minimum Temperatures are Above 32°F (0°C)
 The number of days/yr where minimum temperatures exceed 32°F (0°C; i.e., frost-free days) also increases across all climate divisions in both mid- and end-of-century projections and for both stabilization and business-as-usual emission scenarios (Figures 2-14, 2-15). While varying considerably across the state, projected changes are substantial. For example, in the mid-century projections with the stabilization emission scenario, frost-free days increase by about 30 days in the western part of the state and by 23 days in the eastern part of the state. Similar patterns exist for end-of-century projections: in the business-as-usual emission scenario, frost-free days increase by about 70 days in the western part of the state and by about 55 days in the eastern part of the state. 
@@ -159,7 +245,46 @@ The number of days/yr where minimum temperatures exceed 32°F (0°C; i.e., frost
 - Mid-century projection specifics.—The number of days/yr where minimum temperatures are above 32°F (0°C; i.e., frost-free days) increases across all climate divisions and both emission scenarios (Figures 2-14, 2-15). In the stabilization emission scenario, frost-free days increase by 30.0 days in the western part of the state (minimum: 9.0 days, maximum: 51.0 days, percent agreement: 100%) and by 23.0 days in the eastern part of the state (minimum: 10.0 days, maximum: 43.0 days, percent agreement: 100%). In the business-as-usual emission scenario, frost-free days increase by 41.0 days in the western part of the state (minimum: 17.0 days, maximum: 68.0 days, percent agreement: 100%) and by 32.0 days in the eastern part of the state (minimum: 15.0 days, maximum: 63.0 days, percent agreement: 100%).
 - End-of-century projection specifics.—The number of days/yr where minimum temperatures are above 32°F (0°C; i.e., frost-free days) continues to increase in the end-of-century projections across all climate divisions and for both emission scenarios, with 100% model agreement. Again, similar spatial patterns exist between the mid-century and end-of-century projections (Figures 2-14, 2-15). In the stabilization emission scenario, frost-free days increase by 41.0 days in the western part of the state (minimum: 18.0 days, maximum: 66.0 days, percent agreement: 100%), and by 30.0 days in the eastern part of the state (minimum: 14.0 days, maximum: 60.0 days, percent agreement: 100%). In the business-as-usual emission scenario, frost-free days increase by 70.0 days in the western part of the state (minimum: 36.0 days, maximum: 110.0 days, percent agreement: 100%), and by 55.0 days in the eastern part of the state (minimum: 26.0 days, maximum: 100.0 days, percent agreement: 100%).
 
-**freeze-free map and box**
+```{r ff_map, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-ff-map
+#| fig.width: 10
+#| fig.height: 15
+#| fig-cap: "The projected change in the number of frost-free days for each climate division in Montana over two periods 2040-2069 and 2070-2099 for (A) stabilization (RCP4.5) and (B) business-as-usual (RCP8.5) emission scenarios."
+
+ff_map_data <- normals::make_map_data(
+    stringr::str_subset(cmip_files, "freeze-free.rds"), 
+    shp = shp, 
+    proj = normals::mt_state_plane,
+    fun = "sum"
+) 
+
+normals::apply_map_by_scenario(
+  dat = ff_map_data,
+  hot = TRUE,
+  shp = shp,
+  title = "Change in Number of Freeze Free Days"
+)
+```
+
+```{r ff_box, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-ff-box
+#| fig.width: 10
+#| fig.height: 7
+#| fig-cap: "Graphs showing the increases in frost-free days/yr projected for each climate division in both stabilization (RCP4.5) and business-as-usual (RCP8.5) emission scenarios. The top row shows mid-century projections (2040-2069) and the bottom row shows end-of-century projections (2070-2099). The outline of each box is determined by model agreement on the sign of the change (positive or negative). A black outline means there is >=80% model agreement and a red outline means that there is <80% model agreement. In this case, all models indicated the direction of the trend of frost-free days at an agreement of greater than 80%."
+
+ff_box_data <- normals::make_boxplot_data(
+    stringr::str_subset(cmip_files, "freeze-free.rds"), 
+    shp = shp, 
+    attr_id = params$attr_id,
+    fun = "sum"
+) 
+
+normals::make_boxplot_plot(
+  dat = ff_box_data,
+  ylab = "Number of Days",
+  title = "Change in Number of Freeze Free"
+)
+```
 
 ### Summary 
 In general, there is high model agreement and low uncertainty that temperatures and associated temperature metrics will increase both by mid century and end-of-century. For both periods, annual and seasonal temperature averages, the number of days/yr with extreme heat, and the overall length of the growing season are projected to increase. Differences exist in projections for the stabilization and business-as-usual emission scenarios, with the former consistently showing lower magnitudes of change than the latter. Many of the trends and spatial patterns seen in the mid-century projections are extended and exacerbated in the end-of-century projections. The range of model outputs also increases for end-of-century projections, suggesting that the magnitude of change becomes more uncertain in the models further out in time.
