@@ -304,17 +304,89 @@ Average annual precipitation increases across the state in both mid-century and 
 - Mid-century projection specifics.—Average annual precipitation increases by mid century across the state for both emission scenarios, with moderately high agreement among models (Figures 2-16, 2-17, 2-18). In the stabilization scenario, increases of about 1.3 inch/yr (3.3 cm/yr) and 5.0% (minimum: -0.5 inch/yr [-1.3 cm/yr], -1.1%; maximum: 3.2 inch/yr [8.1 cm/yr], 14.0%; percent agreement: 85%) are projected in the northwestern parts of the state. In the southern and eastern parts of the state, increases of about 0.9 inch/yr (2.3 cm/yr) and 6.5% are projected (minimum: -1.2 inch/yr [-3.0 cm/yr], -6.0%; maximum: 2.5 inch/yr [6.4 cm/yr], 18.0%; percent agreement: 85%). In the business-as-usual emission scenario, average annual precipitation increase by about 1.6 inch/yr (4.1 cm/yr) and 6.5% in the northwestern parts of the state (minimum: -0.2 inch/yr [-0.51 cm/yr], -1.0%; maximum: 4.4 inch/yr [11.2 cm/yr], 17.0%; percent agreement: 90%), and by about 1.2 inch/yr (3.0 cm/yr) and 10% in the southern and eastern parts of the state (minimum: -0.5 inch/yr [-1.3 cm/yr], -3.5%; maximum: 2.9 inch/yr [7.4 cm/yr], 22.0%; percent agreement: 85%).
 - End-of-century projection specifics.—Average annual precipitation is projected to increase through the end-of-century for both emission scenarios (Figures 2-16, 2-17, 2-18). The GCMs used in the ensemble show large differences in their end-of-century projections, but there is high agreement in the positive direction of change. In the stabilization emission scenario, average annual precipitation increases in the northwestern climate division by about 2.2 inch/yr (5.6 cm/yr) and 7.3% (minimum: -1.2 inch/yr [-3.0 cm/yr], -4.5%; maximum: 3.6 inch/yr [9.1 cm/yr], 12.9%; percent agreement: 85%), and by about 1.1 inch/yr (2.8 cm/yr) and 8.0% in the two eastern climate divisions (minimum: -0.5 inch/yr [-1.3 cm/yr], -4.5%; maximum: 3.0 inch/yr [7.6 cm/yr], 18.0%; percent agreement: 85%). In the business-as-usual emission scenario, average annual precipitation is projected to increase by slightly more than in the stabilization emission scenario, although the range of model projections also increases. In the western half of the state, annual precipitation increases by about 2.0 inch/yr (5.1 cm/yr) and 10.0% (minimum: 0.4 inch/yr [1.0 cm/yr], 1.3%; maximum: 5.5 inch/yr [14.0 cm/yr], 28.0%; percent agreement: 100%), and in the eastern half of the state annual precipitation increases by about 1.8 inch/yr (4.6 cm/yr) and 14.0% (minimum: -0.2 inch/yr [-0.5 cm/yr], -1.0%; maximum: 3.6 inch/yr [9.1 cm/yr], 26.0%; percent agreement: 95%). 
 
-**ppt map and box, (percent change ppt?)**
+```{r pr_map, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-pr-map
+#| fig.width: 10
+#| fig.height: 15
+#| fig-cap: "The projected change in annual precipitation (inches) for each climate division in Montana over two periods 2040-2069 and 2070-2099 for (A) stabilization (RCP4.5) and (B) business-as-usual (RCP8.5) emission scenarios."
 
+pr_map_data <- normals::make_map_data(
+    f = stringr::str_subset(cmip_files, "pr.rds"), 
+    shp = shp, 
+    proj = normals::mt_state_plane,
+    fun = "sum"
+) 
+
+normals::apply_map_by_scenario(
+  dat = pr_map_data,
+  hot = TRUE,
+  shp = shp,
+  title = "Change in Total Annual Precipitation (in.)"
+)
+```
+
+```{r pr_box, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-pr-box
+#| fig.width: 10
+#| fig.height: 7
+#| fig-cap: "Graphs showing annual precipitation change (in inches) projected for each climate division in both stabilization (RCP4.5) and business-as-usual (RCP8.5) emission scenarios. The top row shows mid-century projections (2040-2069) and the bottom row shows end-of-century projections (2070-2099). The outline of each box is determined by model agreement on the sign of the change (positive or negative). A black outline means there is >=80% model agreement and a red outline means that there is <80% model agreement. In this case, all models indicated the direction of the annual precipitation trend at an agreement of greater than 80%."
+
+pr_box_data <- normals::make_boxplot_data(
+    stringr::str_subset(cmip_files, "pr.rds"), 
+    shp = shp, 
+    attr_id = params$attr_id,
+    fun = "sum"
+) 
+
+normals::make_boxplot_plot(
+  dat = pr_box_data,
+  ylab = "Precipitation (in.)",
+  title = "Change in Monthly Precipitation (in.)"
+)
+```
 ### Interannual Variability
 Interannual variability (i.e., the amount precipitation changes from year to year) is also projected to increase slightly across the state by mid century and end-of-century for both emission scenarios (Figure 2-19). The increase could be attributed to wet years getting wetter, dry years getting drier, or some combination of both.
 
-**interannual boxplot**
+```{r iv_box, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-iv-box
+#| fig.width: 10
+#| fig.height: 7
+#| fig-cap: "Graphs showing the interannual variability of precipitation projected for each climate division in both stabilization (RCP4.5) and business-as-usual (RCP8.5) emission scenarios. The top row shows mid-century projections (2040-2069) and the bottom row shows for end-of-century projections (2070-2099). The outline of each box is determined by model agreement on the sign of the change (positive or negative). A black outline means there is ≥80% model agreement and a red outline means that there is <80% model agreement."
 
+iv_box_data <- normals::make_boxplot_data(
+    stringr::str_subset(cmip_files, "iv.rds"), 
+    shp = shp, 
+    attr_id = params$attr_id,
+    fun = "mean"
+) 
+
+normals::make_boxplot_plot(
+  dat = iv_box_data,
+  ylab = "Inches",
+  title = "Change in Interannual Precipitation Variability (in.)"
+)
+```
 ### Monthly and Seasonal Change in Average Precipitation
 While annual increases in precipitation are projected across the state with moderately high model agreement, the monthly and seasonal projections vary. In mid-century projections, winter, spring, and fall increase in monthly precipitation for both emission scenarios, with spring experiencing the largest increases (e.g., 0.4 inch/month [1.0 cm/month] for the business-as-usual emission scenario; Figure 2-23). Summers, however, are projected to decrease by about 0.1 inch/month (0.3 cm/month) in both emission scenarios (model agreement, however, is fairly low for these projections). For end-of-century projections, the same trends are seen for increasing precipitation in winter, spring, and fall and decreasing precipitation in summer. The magnitude of change is similar to that of mid-century projections. 
 
-**ppt heatmap**
+```{r pr_heatmap, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-pr-heatmap
+#| fig.width: 10
+#| fig.height: 15
+#| fig-cap: "Projected monthly change in average precipitation (inches) for each climate division in Montana in the mid-century projections (2040-2069) for (A) stabilization (RCP4.5) and (B) business-as-usual (RCP8.5) emission scenarios."
+
+pr_heat_data <- normals::make_heatmap_data(
+    stringr::str_subset(cmip_files, "pr.rds"), 
+    shp = shp, 
+    attr_id = params$attr_id
+) 
+
+normals::apply_heatmap_by_scenario(
+  dat = pr_heat_data,
+  hot = FALSE,
+  title = "Monthly Change in Total Precipitation (in.)"
+)
+```
 
 - Mid-century projection specifics.—Although annual precipitation increases across the state with moderately high model agreement, the monthly and seasonal projections vary somewhat. Winter, spring, and fall increase in monthly precipitation for both emission scenarios, with the largest increases in spring (Figure 2-20). For the stabilization emission scenario, spring months increase by about 0.2 inch/month (0.5 cm/month) (minimum: -0.1 inch/month [-0.3 cm/month], maximum: 0.8 inch/month [2.0 cm/month], percent agreement: 85%). In the business-as-usual emission scenario, spring months increase by 0.4 inch/month (1.0 cm/month) (minimum: 0.0 inch/month [0 cm/month], maximum: 1.0 inch/month [2.5 cm/month], percent agreement: 95%). Summer months, however, show decreasing precipitation for both scenarios, although model agreement is fairly low in the projections. For the both the stabilization and business-as-usual emission scenarios, summer precipitation decreases by -0.1 inch/month (-0.3 cm/month) (minimum: -0.4 inch/month [-1.0 cm/month], maximum: 0.5 inch/month [1.3 cm/month], percent agreement: 65%). 
 - Mid-century projection specifics.—Although annual precipitation increases across the state with moderately high model agreement, the monthly and seasonal projections vary somewhat. Winter, spring, and fall increase in monthly precipitation for both emission scenarios, with the largest increases in spring (Figure 2-20). For the stabilization emission scenario, spring months increase by about 0.2 inch/month (0.5 cm/month) (minimum: -0.1 inch/month [-0.3 cm/month], maximum: 0.8 inch/month [2.0 cm/month], percent agreement: 85%). In the business-as-usual emission scenario, spring months increase by 0.4 inch/month (1.0 cm/month) (minimum: 0.0 inch/month [0 cm/month], maximum: 1.0 inch/month [2.5 cm/month], percent agreement: 95%). Summer months, however, show decreasing precipitation for both scenarios, although model agreement is fairly low in the projections. For the both the stabilization and business-as-usual emission scenarios, summer precipitation decreases by -0.1 inch/month (-0.3 cm/month) (minimum: -0.4 inch/month [-1.0 cm/month], maximum: 0.5 inch/month [1.3 cm/month], percent agreement: 65%). 
@@ -325,7 +397,46 @@ To assess changes in the frequency of dry events, we determined the annual numbe
 - Mid-century projection specifics.—In general, consecutive dry days show a modest increase (i.e., less than 0.5 days); however, model agreement is low (approximately 60%; where 50% would mean complete disagreement among models) in both emission scenarios. 
 - End-of-century projection specifics.—In end-of-century projections, changes in consecutive dry days/yr remain positive, but the increase is small (generally less than 0.5 days) with low model agreement (approximate 60%). This result is consistent across both emission scenarios. The range of projections from the ensemble of models is wide; however, minimum and maximum values are projected to increase by about -2.5 days and 4.0 days, respectively. This large range, in addition to the low model agreement, suggests high uncertainty in these projections. 
 
-**dry day map and boxplot**
+```{r dd_map, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-dd-map
+#| fig.width: 10
+#| fig.height: 15
+#| fig-cap: "The projected change in the number of consecutive dry days (<0.1 inch [0.3 cm] of precipitation) for each climate division in Montana over two periods 2040-2069 and 2070-2099 for (A) stabilization (RCP4.5) and (B) business-as-usual (RCP8.5) emission scenarios."
+
+dd_map_data <- normals::make_map_data(
+    f = stringr::str_subset(cmip_files, "con-dry.rds"), 
+    shp = shp, 
+    proj = normals::mt_state_plane,
+    fun = "sum"
+) 
+
+normals::apply_map_by_scenario(
+  dat = dd_map_data,
+  hot = FALSE,
+  shp = shp,
+  title = 'Change in Number of Consecutive Dry Days (<0.1in")'
+)
+```
+
+```{r dd_box, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-dd-box
+#| fig.width: 10
+#| fig.height: 7
+#| fig-cap: "Graphs showing the number of consecutive dry days in a year projected for each climate division in both stabilization (RCP4.5) and business-as-usual (RCP8.5) emission scenarios. The top row shows mid-century projections (2040-2069) and the bottom row shows end-of-century projections (2070-2099). The outline of each box is determined by model agreement on the sign of the change (positive or negative). A black outline means there is ≥80% model agreement and a red outline means that there is <80% model agreement. In the case of consecutive dry days, there was less than 80% agreement across the models for all climate divisions."
+
+dd_box_data <- normals::make_boxplot_data(
+    stringr::str_subset(cmip_files, "con-dry.rds"), 
+    shp = shp, 
+    attr_id = params$attr_id,
+    fun = "sum"
+) 
+
+normals::make_boxplot_plot(
+  dat = dd_box_data,
+  ylab = "Nunber of Days",
+  title = 'Change in Number of Consecutive Dry Days (<0.1in")'
+)
+```
 
 ### Projected Change in Wet Days
 To evaluate changes in wet events, we calculated the number of days/yr where precipitation is greater than 1.0 inch (2.5 cm) and average those values over the period of interest (Figures 2-24). 
@@ -333,8 +444,25 @@ To evaluate changes in wet events, we calculated the number of days/yr where pre
 - Mid-century projection specifics.—Very modest changes in the number of wet events (i.e., less than 0.5 days) is projected for both emission scenarios. This time, however, model agreement is high that these small changes will occur (approximately 90%).
 - End-of-century projection specifics.—Very high model agreement (approximately 100%) exists that the number of days/yr with precipitation above 1.0 inch (2.5 cm) will increase, although the magnitude of change is still small (less than 1.0 day). The northwestern climate division is projected to have the largest changes in this metric for both emission scenarios, reaching almost a 1.0 day increase of over 1.0 inch (2.5 cm) of precipitation for the period from 2070 to 2099. The range of model output is higher in the business-as-usual emission scenario.
 
-**Wet days box**
+```{r wd_box, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-wd-box
+#| fig.width: 10
+#| fig.height: 7
+#| fig-cap: "Graphs showing the increase in the number of wet days/yr projected for each climate division in both stabilization (RCP4.5) and business-as-usual (RCP8.5) emission scenarios. The top row shows projections for mid century (2040-2069) and the bottom row shows projections for end-of-century (2070-2099). The outline of each box is determined by model agreement on the sign of the change (positive or negative). A black outline means there is ≥80% model agreement and a red outline indicates <80% model agreement. Model agreement for the trend of wet days each year was greater than 80%, except for the northeastern climate division."
 
+wd_box_data <- normals::make_boxplot_data(
+    stringr::str_subset(cmip_files, "con-wet.rds"), 
+    shp = shp, 
+    attr_id = params$attr_id,
+    fun = "sum"
+) 
+
+normals::make_boxplot_plot(
+  dat = wd_box_data,
+  ylab = "Nunber of Days",
+  title = 'Change in Number of Consecutive Wet Days (>1 in")'
+)
+```
 ### Summary
 In mid-century and end-of-century projections, average annual precipitation and variability increase across the state, as does winter, spring, and fall precipitation. Summers, however, show slight decreases in precipitation. The projections suggest little change in the annual frequency of dry and wet events, although there is high uncertainty in the case of wet events. Similar analysis using different metrics for the larger region surrounding Montana indicates an even larger potential (30%) for more days of extreme precipitation (NCA 2014). Overall, the differences in precipitation resulting from the different emission scenarios (i.e., stabilization versus business-as-usual) are small when compared to the impact of the emission scenarios on the temperature projections. Uncertainty in the projections generally increases the further out in time (i.e., in the end-of-century projections), as well as for the higher business-as-usual emission scenario.
 

@@ -9,7 +9,7 @@ filter_years <- function(r, start, end) {
 
 ssp_colors <- c("ssp126"="#7570b3", "ssp245"="#1b9e77", "ssp370"="#e7298a", "ssp585"="#d95f02")
 
-summarize_yearmonths <- function(r, start, end, is.annual=FALSE) {
+summarize_yearmonths <- function(r, start, end, is.annual=FALSE, fun = "mean", idx = "months") {
 
   if (is.annual) {
     yearmons <- tidyr::crossing(
@@ -36,9 +36,11 @@ summarize_yearmonths <- function(r, start, end, is.annual=FALSE) {
 
   r <- terra::subset(r, yearmons_idx)
   terra::time(r) <- as.Date(paste0(yearmons, "01"), format = "X%Y%m%d")
-  r <- terra::tapp(r, fun="mean", index = "months")
+  r <- terra::tapp(r, fun=fun, index = idx)
 
-  names(r) <- r_names
+  if (idx != "years") {
+    names(r) <- r_names
+  }
   return(r)
 }
 
@@ -433,6 +435,29 @@ cmip_monthly_to_change <- function(files, pattern, fun, tsfm, is.annual, out_dir
     saveRDS(out_name)
 
   return(out_name)
+}
+
+cmip_ppt_interannual_variability <- function(files, tsfm, out_dir) {
+
+  out_name = file.path(
+    out_dir, "cmip_iv.rds"
+  )
+  print(out_name)
+  read_and_tapp(
+    files = files, pattern = "pr.tif", fun = "sum", idx = "yearmonths", tsfm = tsfm
+  )  %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(
+      hist = list(summarize_yearmonths(r, 1981, 2010, FALSE, fun = "sum", idx = "years")),
+      mid_century = list(summarize_yearmonths(r, 2040, 2069, FALSE, fun = "sum", idx = "years")),
+      end_century = list(summarize_yearmonths(r, 2070, 2099, FALSE, fun = "sum", idx = "years"))
+    ) %>%
+    join_historical() %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(diff = list(terra::wrap(value - historical))) %>%
+    dplyr::select(model, scenario, period=name, diff) %>%
+    saveRDS(out_name)
+
 }
 
 # tibble::tribble(
