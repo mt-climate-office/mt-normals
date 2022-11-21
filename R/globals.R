@@ -4,3 +4,5 @@ utils::globalVariables(
     "historical", "model", "ssp_colors", "mid_century", "end_century", "name", "area",
     "trend", "hist")
 )
+
+sum_vars <- c("above90", "con-dry", "con-wet", "dry-days", "freeze-free", "pr", "wet-days")

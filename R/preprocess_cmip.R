@@ -460,6 +460,63 @@ cmip_ppt_interannual_variability <- function(files, tsfm, out_dir) {
 
 }
 
+calc_agreement <- function(x) {
+  x %<>% round(5)
+
+  above <- sum(x >= 0)
+  below <- sum(x < 0)
+
+  if (above > below) {
+    num <- (above / length(x)) * 100
+    txt <- "increase"
+  } else if (above < below) {
+    num <- (below / length(x)) * 100
+    txt <- "decrease"
+  } else if (above == below) {
+    num <- 50
+    txt <- "no change"
+  }
+
+  return(
+    tibble::tibble(
+      "agree"=num,
+      "txt"=txt
+    )
+  )
+}
+
+make_model_agreement_nums <- function(data_dir, shp) {
+
+  dat <- list.files(data_dir, pattern = ".rds", full.names = T) %>%
+    purrr::map(function(x) {
+      readRDS(x) %>%
+        dplyr::mutate(
+          variable = tools::file_path_sans_ext(x) %>%
+            basename() %>%
+            stringr::str_split("_") %>%
+            unlist() %>%
+            magrittr::extract(2)
+        )
+    }) %>%
+    dplyr::bind_rows() %>%
+    dplyr::mutate(
+      fun = ifelse(variable %in% sum_vars, "sum", "mean"),
+      diff = list(terra::rast(diff)),
+      diff = list(terra::mask(diff, shp)),
+      diff = list(terra::app(diff, fun = fun)),
+      diff = list(terra::global(diff, fun="mean", na.rm = T))
+    ) %>%
+    tidyr::unnest(diff) %>%
+    dplyr::group_by(scenario, period, variable) %>%
+    dplyr::summarise(
+      avg = mean(mean),
+      agree = calc_agreement(mean),
+      .groups="drop"
+    ) %>%
+    tidyr::unnest(cols=c(agree)) %>%
+    readr::write_csv(file.path(data_dir, "agreements.csv"))
+}
+
 # tibble::tribble(
 #   ~pattern, ~title, ~tsfm, ~hot, ~fun, ~is.annual,
 #   "above90.tif", "Change in # of Days Above 90°F", NULL, TRUE, "sum", FALSE,
