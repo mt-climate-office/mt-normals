@@ -111,7 +111,7 @@ make_boxplot_data <- function(f, shp, attr_id, fun="mean") {
     dplyr::mutate(diff = list(terra::app(diff, fun=fun))) %>%
     dplyr::mutate(diff = list(normals::spat_summary(diff, shp, attr_id, fun="mean"))) %>%
     tidyr::unnest(diff) %>%
-    dplyr::select(scenario, period, area=dplyr::all_of(attr_id), diff=value) %>%
+    dplyr::select(scenario, model, period, area=dplyr::all_of(attr_id), diff=value) %>%
     dplyr::mutate(
       period = clean_factor_period(period)
     )
