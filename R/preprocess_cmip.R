@@ -9,6 +9,31 @@ filter_years <- function(r, start, end) {
 
 ssp_colors <- c("ssp126"="#7570b3", "ssp245"="#1b9e77", "ssp370"="#e7298a", "ssp585"="#d95f02")
 
+calc_agreement <- function(x) {
+  x %<>% round(5)
+
+  above <- sum(x >= 0)
+  below <- sum(x < 0)
+
+  if (above > below) {
+    num <- (above / length(x)) * 100
+    txt <- "increase"
+  } else if (above < below) {
+    num <- (below / length(x)) * 100
+    txt <- "decrease"
+  } else if (above == below) {
+    num <- 50
+    txt <- "no change"
+  }
+
+  return(
+    tibble::tibble(
+      "agree"=num,
+      "txt"=txt
+    )
+  )
+}
+
 summarize_yearmonths <- function(r, start, end, is.annual=FALSE, fun = "mean", idx = "months") {
 
   if (is.annual) {
@@ -298,7 +323,7 @@ make_heatmap_data <- function(f, shp, attr_id) {
 
   readRDS(f) %>%
     dplyr::mutate(diff = list(terra::rast(diff))) %>%
-    dplyr::group_by(scenario, period) %>%
+    dplyr::group_by(scenario, period, model) %>%
     dplyr::summarise(
       diff = list(terra::tapp(terra::rast(diff), index = month.name, fun = "mean")),
       .groups = "drop"
@@ -308,11 +333,17 @@ make_heatmap_data <- function(f, shp, attr_id) {
       diff = list(normals::spat_summary(diff, shp, attr_id, "month", "mean"))
     ) %>%
     tidyr::unnest(diff) %>%
-    dplyr::select(scenario, period, area=dplyr::all_of(attr_id), month, diff=value) %>%
+    dplyr::select(scenario, model, period, area=dplyr::all_of(attr_id), month, diff=value) %>%
     dplyr::mutate(
       period = clean_factor_period(period),
       month = factor(month, levels=month.name)
-    )
+    ) %>%
+    dplyr::group_by(scenario, period, month, area) %>%
+    dplyr::summarise(
+      agree = calc_agreement(diff),
+      diff = mean(diff),
+    ) %>%
+    tidyr::unnest(cols = agree)
 }
 
 #' make_heatmap_plot
@@ -458,31 +489,6 @@ cmip_ppt_interannual_variability <- function(files, tsfm, out_dir) {
     dplyr::select(model, scenario, period=name, diff) %>%
     saveRDS(out_name)
 
-}
-
-calc_agreement <- function(x) {
-  x %<>% round(5)
-
-  above <- sum(x >= 0)
-  below <- sum(x < 0)
-
-  if (above > below) {
-    num <- (above / length(x)) * 100
-    txt <- "increase"
-  } else if (above < below) {
-    num <- (below / length(x)) * 100
-    txt <- "decrease"
-  } else if (above == below) {
-    num <- 50
-    txt <- "no change"
-  }
-
-  return(
-    tibble::tibble(
-      "agree"=num,
-      "txt"=txt
-    )
-  )
 }
 
 make_model_agreement_nums <- function(data_dir, shp) {
