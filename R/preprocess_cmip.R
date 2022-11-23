@@ -323,7 +323,7 @@ make_heatmap_data <- function(f, shp, attr_id=NULL) {
     shp %<>% dplyr::mutate(domain = "domain")
   }
 
-  dat %>%
+  readRDS(f) %>%
     dplyr::mutate(diff = list(terra::rast(diff))) %>%
     dplyr::group_by(scenario, period, model) %>%
     dplyr::summarise(
