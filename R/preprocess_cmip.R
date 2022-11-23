@@ -303,13 +303,10 @@ apply_map_by_scenario <- function(dat, shp, hot, title_txt) {
 
 #' make_heatmap_data
 #'
-#' @param files A list of CMIP6 climate projection files.
-#' @param pattern A string pattern to use to subset the above CMIP6 files.
-#' @param fun A function used to aggregate monthly CMIP6 data to a seasonal or annual timescale.
+#' @param f An `.rds` file created by [[cmip_monthly_to_change]].
 #' @param shp An `sf` object that will be used to summarise the CMIP6 data.
-#' @param attr_id The column in `shp` that will be used to aggregate by
-#' @param tsfm A function to apply to the data (e.g., a function that converts from
-#' degrees C to degrees F).
+#' @param attr_id The column in `shp` that will be used to aggregate by, defaults to NULL.
+#' If left blank, results will be aggregated across the entire domain.
 #'
 #' @return An `tibble` object that will be used to plot a heatmap of projected mid and
 #'  end of century changes in a given climate variable
@@ -319,9 +316,14 @@ apply_map_by_scenario <- function(dat, shp, hot, title_txt) {
 #' \dontrun{
 #' 1+1
 #' }
-make_heatmap_data <- function(f, shp, attr_id) {
+make_heatmap_data <- function(f, shp, attr_id=NULL) {
 
-  readRDS(f) %>%
+  if (is.null(attr_id)) {
+    attr_id = "domain"
+    shp %<>% dplyr::mutate(domain = "domain")
+  }
+
+  dat %>%
     dplyr::mutate(diff = list(terra::rast(diff))) %>%
     dplyr::group_by(scenario, period, model) %>%
     dplyr::summarise(
