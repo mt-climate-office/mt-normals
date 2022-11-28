@@ -31,8 +31,8 @@ fetch_nclimgrid <- function(
     multidplyr::cluster_library(cluster, c("magrittr", "FedData"))
   }
 
-  dat <- base_url <- "https://noaa-nclimgrid-daily-pds.s3.amazonaws.com/beta/by-month"
-  tidyr::crossing(
+  df <- "https://noaa-nclimgrid-daily-pds.s3.amazonaws.com/beta/by-month"
+  dat <- tidyr::crossing(
     year = start_year:end_year,
     month = 1:12 %>%
       stringr::str_pad(2, "left", "0"),
