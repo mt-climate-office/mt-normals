@@ -74,6 +74,9 @@ make_trend_fig <- function(r, shp, attr_id, fun="mean", start_year=1951, end_yea
 }
 
 trend_func <- function(xs, ys, threshold = 0.5) {
+  if (all(is.na(ys))) {
+    return(NA)
+  }
 
   mod <- lm(ys ~ xs)
   coeffs <- coef(mod)

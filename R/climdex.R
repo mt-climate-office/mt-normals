@@ -117,9 +117,76 @@ calc_heat_index <- function(temp, rh, is.fahrenheit=FALSE) {
   return(hi)
 }
 
-summer_days <- function(r, shp) {
+growing_season <- function(x, dates = NULL) {
+
+  if (all(is.na(x))) {
+    return(NA)
+  }
+
+  if (is.null(dates)) {
+    dates <- lubridate::as_date(names(x))
+  }
+
+  out <- tibble::as_tibble(x) %>%
+    tidyr::pivot_longer(
+      dplyr::everything()
+    ) %>%
+    dplyr::mutate(
+      date = dates,
+      end_date = as.Date(glue::glue("{lubridate::year(date)}-07-01")),
+      gt_5 = ifelse(value > 5, 1, 0),
+      gt_5_cnt = sequence(rle(gt_5)$lengths),
+      start_criteria = ifelse(gt_5 == 1 & gt_5_cnt >= 6, 1, 0),
+      end_criteria = ifelse(gt_5 == 0 & gt_5_cnt >= 6 & date >= end_date, 1, 0)
+    )  %>%
+    dplyr::summarise(
+      start =  purrr::detect_index(start_criteria, ~ .x == 1) + 1,
+      end =  purrr::detect_index(end_criteria, ~ .x == 1) - 5
+    ) %$%
+    magrittr::subtract(end, start)
+
+  return(out)
 
 }
+
+calc_growing_season <- function(r, shp) {
+
+  names(r) <- terra::time(r)
+  r %>%
+    terra::crop(shp, mask=TRUE) %>%
+    terra::mask(shp) %>%
+    terra::global(fun = "mean", na.rm = T) %>%
+    tibble::rownames_to_column() %>%
+    magrittr::set_colnames(c("date", "value")) %>%
+    dplyr::mutate(date = as.Date(date)) %>%
+    dplyr::group_by(year = lubridate::year(date)) %>%
+    dplyr::summarise(growing_season = growing_season(x = value, dates=date))
+
+  # terra::as.points(r) %>%
+  #   data.frame(terra::values(.), terra::geom(.)) %>%
+  #   dplyr::select(-c(geom, part, hole)) %>%
+  #   tibble::as_tibble() %>%
+  #   tidyr::pivot_longer(-c(x, y)) %>%
+  #   dplyr::mutate(date = as.Date(name, format = "X%Y.%m.%d")) %>%
+  #   dplyr::group_by(x, y) -> test
+  #
+  # dplyr::summarise(test, out = growing_season(x = value, dates = date)) -> a
+  #
+  # terra::app(r, fun = growing_season) -> test
+  # terra::tapp(r, fun = growing_season, index = "years") -> test
+}
+
+warm_days <- function(x) {
+  sum(ifelse(x > 25, 1, 0))
+}
+
+cool_days <- function(x) {
+  # Use minimum temperature as input for 'cool days', max temp for 'icing days'
+  sum(ifelse(x < 0, 1, 0))
+}
+
+
+
 
 temp_vars = c("FD", "SU", "ID", "TR", "GSL", "TXx", "TNx", "TXn", "TNn")
 pr_vars = c("Rx1day", "Rx5day", "R10mm", "R20mm", "CDD", "CWD")

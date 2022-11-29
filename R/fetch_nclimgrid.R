@@ -63,3 +63,12 @@ fetch_nclimgrid <- function(
 
   return(dat)
 }
+
+stack_nclimgrid <- function(data_dir, out_dir, pattern) {
+
+  list.files(data_dir, full.names = T, pattern = pattern) %>%
+    terra::rast() %>%
+    terra::writeRaster(
+      file.path(out_dir, glue::glue("{pattern}_nclimgrid_daily.tif"))
+    )
+}
