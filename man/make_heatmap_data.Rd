@@ -4,21 +4,15 @@
 \alias{make_heatmap_data}
 \title{make_heatmap_data}
 \usage{
-make_heatmap_data(files, pattern, fun, shp, attr_id, tsfm = NULL)
+make_heatmap_data(f, shp, attr_id = NULL)
 }
 \arguments{
-\item{files}{A list of CMIP6 climate projection files.}
-
-\item{pattern}{A string pattern to use to subset the above CMIP6 files.}
-
-\item{fun}{A function used to aggregate monthly CMIP6 data to a seasonal or annual timescale.}
+\item{f}{An \code{.rds} file created by [\link{cmip_monthly_to_change}].}
 
 \item{shp}{An \code{sf} object that will be used to summarise the CMIP6 data.}
 
-\item{attr_id}{The column in \code{shp} that will be used to aggregate by}
-
-\item{tsfm}{A function to apply to the data (e.g., a function that converts from
-degrees C to degrees F).}
+\item{attr_id}{The column in \code{shp} that will be used to aggregate by, defaults to NULL.
+If left blank, results will be aggregated across the entire domain.}
 }
 \value{
 An \code{tibble} object that will be used to plot a heatmap of projected mid and

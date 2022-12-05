@@ -4,31 +4,14 @@
 \alias{make_boxplot_data}
 \title{make_boxplot_data}
 \usage{
-make_boxplot_data(
-  files,
-  pattern,
-  shp,
-  attr_id,
-  fun,
-  idx = "years",
-  tsfm = NULL
-)
+make_boxplot_data(f, shp, attr_id, fun = "mean")
 }
 \arguments{
-\item{files}{A list of CMIP6 climate projection files.}
-
-\item{pattern}{A string pattern to use to subset the above CMIP6 files.}
+\item{f}{Preprocessed cmip6 data returned by [\link{cmip_monthly_to_change}].}
 
 \item{shp}{An \code{sf} object that will be used to summarize the CMIP6 data.}
 
 \item{attr_id}{The column in \code{shp} that will be used to aggregate by}
-
-\item{fun}{A function used to aggregate monthly CMIP6 data to a seasonal or annual timescale.}
-
-\item{idx}{Argument passed to the \code{indices} argument of [\code{\link[terra:tapp]{terra::tapp()}}].}
-
-\item{tsfm}{A function to apply to the data (e.g., a function that converts from
-degrees C to degrees F).}
 }
 \value{
 A \code{tibble} of annual changes in a variable according to mid and end of

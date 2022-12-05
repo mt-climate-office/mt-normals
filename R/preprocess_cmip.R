@@ -88,7 +88,7 @@ read_and_tapp <- function(pattern, files, fun, idx, tsfm=NULL) {
   out <- grep(pattern, files, value = T) %>%
     purrr::map(function(x) {
 
-      r <- normals::read_from_server(x) %>%
+      r <- read_from_server(x) %>%
         terra::tapp(index = idx, fun = fun)
       tibble::tibble(
         f = tools::file_path_sans_ext(x) %>% basename(),
@@ -115,6 +115,17 @@ clean_factor_period <- function(x) {
     factor(levels = c("Mid Century", "End of Century"))
 }
 
+
+clean_factor_scenario <- function(x) {
+  forcats::as_factor(x) %>%
+    forcats::fct_recode(
+      "Moderating Emissions\n(SSP1-2.6)" = "ssp126",
+      "Middle of the Road\n(SSP2-4.5)" = "ssp245",
+      "High Emissions\n(SSP3-7.0)" = "ssp370",
+      "Accelerating Emissions\n(SSP5-8.5)" = "ssp585",
+    )
+}
+
 #' make_boxplot_data
 #'
 #' @param f Preprocessed cmip6 data returned by [[cmip_monthly_to_change]].
@@ -134,11 +145,12 @@ make_boxplot_data <- function(f, shp, attr_id, fun="mean") {
   readRDS(f) %>%
     dplyr::mutate(diff = list(terra::rast(diff))) %>%
     dplyr::mutate(diff = list(terra::app(diff, fun=fun))) %>%
-    dplyr::mutate(diff = list(normals::spat_summary(diff, shp, attr_id, fun="mean"))) %>%
+    dplyr::mutate(diff = list(spat_summary(diff, shp, attr_id, fun="mean"))) %>%
     tidyr::unnest(diff) %>%
     dplyr::select(scenario, model, period, area=dplyr::all_of(attr_id), diff=value) %>%
     dplyr::mutate(
-      period = clean_factor_period(period)
+      period = clean_factor_period(period),
+      scenario = clean_factor_scenario(scenario)
     )
 }
 
@@ -172,15 +184,13 @@ make_boxplot_plot <- function(dat, ylab, title) {
 
 #' make_map_data
 #'
-#' @param files A list of CMIP6 climate projection files.
-#' @param pattern A string pattern to use to subset the above CMIP6 files.
-#' @param fun A function used to aggregate monthly CMIP6 data to a seasonal or annual timescale.
-#' @param shp An `sf` object that will be used to summarise the CMIP6 data.
-#' @param attr_id The column in `shp` that will be used to aggregate by
-#' @param tsfm A function to apply to the data (e.g., a function that converts from
-#' degrees C to degrees F).
+#' @param f The preprocessed .Rds file to read from.
+#' @param shp The [[sf]] object to use to aggregate data by.
+#' @param attr_id The column name in `shp` to aggregate data by.
 #' @param proj A WKT string or [[sf::st_crs()]] object giving a projection to use
 #' for the output data.
+#' @param attr_id The column in `shp` that will be used to aggregate by
+#' @param fun A function to aggreagte each region in `shp` by.
 #'
 #' @return An `sf` object that will be used to plot a map of projected mid and
 #'  end of century changes in a given climate variable
@@ -190,7 +200,8 @@ make_boxplot_plot <- function(dat, ylab, title) {
 #' \dontrun{
 #' 1+1
 #' }
-make_map_data <- function(f, shp, attr_id, proj=normals::mt_state_plane, fun="mean") {
+make_map_data <- function(f, shp, attr_id, proj=mt_state_plane, fun="mean") {
+
   readRDS(f) %>%
     dplyr::mutate(diff = list(terra::rast(diff))) %>%
     dplyr::mutate(diff = list(terra::app(diff, fun = fun))) %>%
@@ -208,23 +219,16 @@ make_map_data <- function(f, shp, attr_id, proj=normals::mt_state_plane, fun="me
     sf::st_as_sf() %>%
     sf::st_transform(proj) %>%
     dplyr::mutate(
-      period = clean_factor_period(period)
-    ) %>%
-    dplyr::mutate(
-      scenario = scenario %>%
-        forcats::as_factor() %>%
-        forcats::fct_recode(
-          "Moderating Emissions\n(SSP1-2.6)" = "ssp126",
-          "Middle of the Road\n(SSP2-4.5)" = "ssp245",
-          "High Emissions\n(SSP3-7.0)" = "ssp370",
-          "Accelerating Emissions\n(SSP5-8.5)" = "ssp585",
-        )
+      period = clean_factor_period(period),
+      scenario = clean_factor_scenario(scenario)
     )
 }
 
 #' make_map_plot
 #'
 #' @param dat A `tibble` returned by [[make_map_data()]].
+#' @param shp The [[sf]] object to use as an outline of the map.
+#' @param title_txt The title to use for the map.
 #' @param hot A boolean specifying whether to use a hot or cool colorscale.
 #' Defaults to TRUE.
 #'
@@ -260,7 +264,7 @@ make_map_plot <- function(dat, shp, title_txt, hot=TRUE) {
 
   ggplot2::ggplot(dat) +
     ggplot2::geom_sf(ggplot2::aes(fill=value), color="white") +
-    ggplot2::geom_sf(data = normals::mt, mapping = ggplot2::aes(), fill = NA, color="black") +
+    ggplot2::geom_sf(data = shp, mapping = ggplot2::aes(), fill = NA, color="black") +
     ggplot2::facet_grid(rows = dplyr::vars(scenario), cols = dplyr::vars(period)) +
     pal +
     ggplot2::theme_minimal() +
@@ -268,7 +272,7 @@ make_map_plot <- function(dat, shp, title_txt, hot=TRUE) {
       axis.text.x = ggplot2::element_text(angle = 45, vjust = 0.5),
       plot.title = ggplot2::element_text(hjust = 0.5)
     ) +
-    ggplot2::labs(y="", x = "", fill = "")
+    ggplot2::labs(y="", x = "", fill = "", title = title_txt)
 }
 
 #' apply_map_by_scenario
@@ -346,7 +350,7 @@ make_heatmap_data <- function(f, shp, attr_id=NULL) {
     ) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
-      diff = list(normals::spat_summary(diff, shp, attr_id, "month", "mean"))
+      diff = list(spat_summary(diff, shp, attr_id, "month", "mean"))
     ) %>%
     tidyr::unnest(diff) %>%
     dplyr::select(scenario, model, period, area=dplyr::all_of(attr_id), month, diff=value) %>%
@@ -359,7 +363,8 @@ make_heatmap_data <- function(f, shp, attr_id=NULL) {
       agree = calc_agreement(diff),
       diff = mean(diff),
     ) %>%
-    tidyr::unnest(cols = agree)
+    tidyr::unnest(cols = agree) %>%
+    dplyr::mutate(scenario = clean_factor_scenario(scenario))
 }
 
 #' make_heatmap_plot
@@ -367,6 +372,7 @@ make_heatmap_data <- function(f, shp, attr_id=NULL) {
 #' @param dat A `tibble` returned by [[make_heatmap_data()]].
 #' @param hot A boolean specifying whether to use a hot or cool colorscale.
 #' Defaults to TRUE.
+#' @param title_txt The title to give to the plot.
 #'
 #' @return A `ggplot2` object.
 #' @export
@@ -375,30 +381,36 @@ make_heatmap_data <- function(f, shp, attr_id=NULL) {
 #' \dontrun{
 #' 1+1
 #' }
-make_heatmap_plot <- function(dat, hot = TRUE) {
+make_heatmap_plot <- function(dat, hot = TRUE, title_txt) {
 
   diverging <- any(dat$diff < 0)
+  midpoint <- ifelse(diverging, 0, mean(dat$diff))
+
   if (hot && diverging) {
     pal <-  c('#fc8d59','#ffffbf','#91bfdb')
+    pal <- ggplot2::scale_fill_gradient2(
+      low = pal[1], mid = pal[2], high =  pal[3],
+      midpoint = midpoint
+    )
   } else if (hot && !diverging) {
-    pal <- c('#fee8c8','#fdbb84','#e34a33')
+    pal <- viridis::scale_fill_viridis(option = "magma")
   } else if (!hot && diverging) {
     pal <- c('#d8b365','#f5f5f5','#5ab4ac')
+    pal <- ggplot2::scale_fill_gradient2(
+      low = pal[1], mid = pal[2], high =  pal[3],
+      midpoint = midpoint
+    )
   } else {
-    pal <- c('#ece7f2','#a6bddb','#2b8cbe')
+    pal <- viridis::scale_fill_viridis(option = "viridis")
   }
 
-  midpoint <- ifelse(diverging, 0, mean(dat$diff))
 
   ggplot2::ggplot(dat) +
     ggplot2::geom_tile(ggplot2::aes(x=month, y=area, fill=diff), color="black") +
-    ggplot2::scale_fill_gradient2(
-      low = pal[1], mid = pal[2], high =  pal[3],
-      midpoint = midpoint
-    ) +
+    pal +
     ggplot2::facet_grid(rows = dplyr::vars(scenario), cols = dplyr::vars(period)) +
     ggplot2::theme_bw() +
-    ggplot2::labs(x="", y = "", fill = "") +
+    ggplot2::labs(x="", y = "", fill = "", title = title_txt) +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, vjust = 0.5))
 }
 

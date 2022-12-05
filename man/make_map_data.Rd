@@ -4,32 +4,19 @@
 \alias{make_map_data}
 \title{make_map_data}
 \usage{
-make_map_data(
-  files,
-  pattern,
-  fun,
-  shp,
-  attr_id,
-  tsfm = NULL,
-  proj = normals::mt_state_plane
-)
+make_map_data(f, shp, attr_id, proj = normals::mt_state_plane, fun = "mean")
 }
 \arguments{
-\item{files}{A list of CMIP6 climate projection files.}
+\item{f}{The preprocessed .Rds file to read from.}
 
-\item{pattern}{A string pattern to use to subset the above CMIP6 files.}
-
-\item{fun}{A function used to aggregate monthly CMIP6 data to a seasonal or annual timescale.}
-
-\item{shp}{An \code{sf} object that will be used to summarise the CMIP6 data.}
+\item{shp}{The [\link{sf}] object to use to aggregate data by.}
 
 \item{attr_id}{The column in \code{shp} that will be used to aggregate by}
 
-\item{tsfm}{A function to apply to the data (e.g., a function that converts from
-degrees C to degrees F).}
-
 \item{proj}{A WKT string or [\code{\link[sf:st_crs]{sf::st_crs()}}] object giving a projection to use
 for the output data.}
+
+\item{fun}{A function to aggreagte each region in \code{shp} by.}
 }
 \value{
 An \code{sf} object that will be used to plot a map of projected mid and

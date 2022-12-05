@@ -4,13 +4,15 @@
 \alias{make_heatmap_plot}
 \title{make_heatmap_plot}
 \usage{
-make_heatmap_plot(dat, hot = TRUE)
+make_heatmap_plot(dat, hot = TRUE, title_txt)
 }
 \arguments{
 \item{dat}{A \code{tibble} returned by [\code{\link[=make_heatmap_data]{make_heatmap_data()}}].}
 
 \item{hot}{A boolean specifying whether to use a hot or cool colorscale.
 Defaults to TRUE.}
+
+\item{title_txt}{The title to give to the plot.}
 }
 \value{
 A \code{ggplot2} object.

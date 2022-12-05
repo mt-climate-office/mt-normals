@@ -4,7 +4,7 @@
 \alias{apply_map_by_scenario}
 \title{apply_map_by_scenario}
 \usage{
-apply_map_by_scenario(dat, hot, title_txt)
+apply_map_by_scenario(dat, shp, hot, title_txt)
 }
 \arguments{
 \item{dat}{A \code{tibble} returned by [\code{\link[=make_map_data]{make_map_data()}}].}

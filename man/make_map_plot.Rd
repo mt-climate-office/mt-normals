@@ -4,10 +4,14 @@
 \alias{make_map_plot}
 \title{make_map_plot}
 \usage{
-make_map_plot(dat, hot = TRUE)
+make_map_plot(dat, shp, title_txt, hot = TRUE)
 }
 \arguments{
 \item{dat}{A \code{tibble} returned by [\code{\link[=make_map_data]{make_map_data()}}].}
+
+\item{shp}{The [\link{sf}] object to use as an outline of the map.}
+
+\item{title_txt}{The title to use for the map.}
 
 \item{hot}{A boolean specifying whether to use a hot or cool colorscale.
 Defaults to TRUE.}
