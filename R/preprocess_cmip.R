@@ -190,7 +190,7 @@ make_boxplot_plot <- function(dat, ylab, title) {
 #' \dontrun{
 #' 1+1
 #' }
-make_map_data <- function(f, shp, proj=normals::mt_state_plane, fun="mean") {
+make_map_data <- function(f, shp, attr_id, proj=normals::mt_state_plane, fun="mean") {
   readRDS(f) %>%
     dplyr::mutate(diff = list(terra::rast(diff))) %>%
     dplyr::mutate(diff = list(terra::app(diff, fun = fun))) %>%
@@ -200,15 +200,26 @@ make_map_data <- function(f, shp, proj=normals::mt_state_plane, fun="mean") {
     ) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
-      diff = list(normals::to_shp(diff, shp=shp, proj=proj))
+      diff = list(spat_summary(diff, shp, attr_id, fun = fun))
     ) %>%
-    dplyr::select(scenario, period, diff) %>%
     tidyr::unnest(diff) %>%
     sf::st_as_sf() %>%
+    dplyr::select(scenario, period, value) %>%
+    sf::st_as_sf() %>%
+    sf::st_transform(proj) %>%
     dplyr::mutate(
       period = clean_factor_period(period)
+    ) %>%
+    dplyr::mutate(
+      scenario = scenario %>%
+        forcats::as_factor() %>%
+        forcats::fct_recode(
+          "Moderating Emissions\n(SSP1-2.6)" = "ssp126",
+          "Middle of the Road\n(SSP2-4.5)" = "ssp245",
+          "High Emissions\n(SSP3-7.0)" = "ssp370",
+          "Accelerating Emissions\n(SSP5-8.5)" = "ssp585",
+        )
     )
-
 }
 
 #' make_map_plot
@@ -224,37 +235,40 @@ make_map_data <- function(f, shp, proj=normals::mt_state_plane, fun="mean") {
 #' \dontrun{
 #' 1+1
 #' }
-make_map_plot <- function(dat, shp, hot=TRUE) {
+make_map_plot <- function(dat, shp, title_txt, hot=TRUE) {
 
   diverging <- any(dat$value < 0)
-  if (hot && diverging) {
-    pal <-  c('#fc8d59','#ffffbf','#91bfdb')
-  } else if (hot && !diverging) {
-    pal <- c('#fef5ec','#f2b074','#813519')
-  } else if (!hot && diverging) {
-    pal <- c('#d8b365','#f5f5f5','#5ab4ac')
-  } else {
-    pal <- c('#ece7f2','#a6bddb','#2b8cbe')
-  }
-
   midpoint <- ifelse(diverging, 0, mean(dat$value))
 
-  fig <- ggplot2::ggplot(dat) +
-    ggplot2::geom_sf(ggplot2::aes(fill=value), color=NA) +
-    ggplot2::geom_sf(ggplot2::aes(), data = shp, fill=NA) +
-    ggplot2::facet_grid(rows = dplyr::vars(scenario), cols = dplyr::vars(period)) +
-    ggplot2::scale_fill_gradient2(
+  if (hot && diverging) {
+    pal <-  c('#fc8d59','#ffffbf','#91bfdb')
+    pal <- ggplot2::scale_fill_gradient2(
       low = pal[1], mid = pal[2], high =  pal[3],
       midpoint = midpoint
-    ) +
-    ggplot2::theme_bw() +
+    )
+  } else if (hot && !diverging) {
+    pal <- viridis::scale_fill_viridis(option = "magma")
+  } else if (!hot && diverging) {
+    pal <- c('#d8b365','#f5f5f5','#5ab4ac')
+    pal <- ggplot2::scale_fill_gradient2(
+      low = pal[1], mid = pal[2], high =  pal[3],
+      midpoint = midpoint
+    )
+  } else {
+    pal <- viridis::scale_fill_viridis(option = "viridis")
+  }
+
+  ggplot2::ggplot(dat) +
+    ggplot2::geom_sf(ggplot2::aes(fill=value), color="white") +
+    ggplot2::geom_sf(data = normals::mt, mapping = ggplot2::aes(), fill = NA, color="black") +
+    ggplot2::facet_grid(rows = dplyr::vars(scenario), cols = dplyr::vars(period)) +
+    pal +
+    ggplot2::theme_minimal() +
     ggplot2::theme(
       axis.text.x = ggplot2::element_text(angle = 45, vjust = 0.5),
       plot.title = ggplot2::element_text(hjust = 0.5)
     ) +
     ggplot2::labs(y="", x = "", fill = "")
-
-  return(fig)
 }
 
 #' apply_map_by_scenario
