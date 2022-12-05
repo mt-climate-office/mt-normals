@@ -211,7 +211,7 @@ make_map_data <- function(f, shp, attr_id, proj=mt_state_plane, fun="mean") {
     ) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
-      diff = list(spat_summary(diff, shp, attr_id, fun = fun))
+      diff = list(spat_summary(diff, shp, attr_id, fun = "mean"))
     ) %>%
     tidyr::unnest(diff) %>%
     sf::st_as_sf() %>%
