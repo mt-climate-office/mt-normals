@@ -7,7 +7,7 @@ filter_years <- function(r, start, end) {
     terra::app(fun="mean")
 }
 
-ssp_colors <- c("ssp126"="#7570b3", "ssp245"="#1b9e77", "ssp370"="#e7298a", "ssp585"="#d95f02")
+ssp_colors <- c("SSP1-2.6"="#7570b3", "SSP2-4.5"="#1b9e77", "SSP3-7.0"="#e7298a", "SSP5-8.5"="#d95f02")
 
 calc_agreement <- function(x) {
   x %<>% round(5)
@@ -116,14 +116,27 @@ clean_factor_period <- function(x) {
 }
 
 
-clean_factor_scenario <- function(x) {
-  forcats::as_factor(x) %>%
-    forcats::fct_recode(
-      "Moderating Emissions\n(SSP1-2.6)" = "ssp126",
-      "Middle of the Road\n(SSP2-4.5)" = "ssp245",
-      "High Emissions\n(SSP3-7.0)" = "ssp370",
-      "Accelerating Emissions\n(SSP5-8.5)" = "ssp585",
-    )
+clean_factor_scenario <- function(x, short=FALSE) {
+
+  if (short) {
+    out <- forcats::as_factor(x) %>%
+      forcats::fct_recode(
+        "SSP1-2.6" = "ssp126",
+        "SSP2-4.5" = "ssp245",
+        "SSP3-7.0" = "ssp370",
+        "SSP5-8.5" = "ssp585",
+      )
+  } else {
+    out <- forcats::as_factor(x) %>%
+      forcats::fct_recode(
+        "Moderating Emissions\n(SSP1-2.6)" = "ssp126",
+        "Middle of the Road\n(SSP2-4.5)" = "ssp245",
+        "High Emissions\n(SSP3-7.0)" = "ssp370",
+        "Accelerating Emissions\n(SSP5-8.5)" = "ssp585",
+      )
+  }
+
+  return(out)
 }
 
 #' make_boxplot_data
@@ -150,7 +163,7 @@ make_boxplot_data <- function(f, shp, attr_id, fun="mean") {
     dplyr::select(scenario, model, period, area=dplyr::all_of(attr_id), diff=value) %>%
     dplyr::mutate(
       period = clean_factor_period(period),
-      scenario = clean_factor_scenario(scenario)
+      scenario = clean_factor_scenario(scenario, short = TRUE)
     )
 }
 
@@ -270,9 +283,11 @@ make_map_plot <- function(dat, shp, title_txt, hot=TRUE) {
     ggplot2::theme_minimal() +
     ggplot2::theme(
       axis.text.x = ggplot2::element_text(angle = 45, vjust = 0.5),
-      plot.title = ggplot2::element_text(hjust = 0.5)
+      plot.title = ggplot2::element_text(hjust = 0.5),
+      legend.key.height = unit(0.10, "npc")
     ) +
     ggplot2::labs(y="", x = "", fill = "", title = title_txt)
+
 }
 
 #' apply_map_by_scenario
@@ -404,14 +419,16 @@ make_heatmap_plot <- function(dat, hot = TRUE, title_txt) {
     pal <- viridis::scale_fill_viridis(option = "viridis")
   }
 
-
   ggplot2::ggplot(dat) +
     ggplot2::geom_tile(ggplot2::aes(x=month, y=area, fill=diff), color="black") +
     pal +
     ggplot2::facet_grid(rows = dplyr::vars(scenario), cols = dplyr::vars(period)) +
     ggplot2::theme_bw() +
     ggplot2::labs(x="", y = "", fill = "", title = title_txt) +
-    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, vjust = 0.5))
+    ggplot2::theme(
+      axis.text.x = ggplot2::element_text(angle = 45, vjust = 0.5),
+      legend.key.height = unit(0.10, "npc")
+    )
 }
 
 #' apply_map_by_scenario

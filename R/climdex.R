@@ -117,66 +117,69 @@ calc_heat_index <- function(temp, rh, is.fahrenheit=FALSE) {
   return(hi)
 }
 
-growing_season <- function(x, dates = NULL) {
-
-  if (all(is.na(x))) {
-    return(NA)
-  }
-
-  if (is.null(dates)) {
-    dates <- lubridate::as_date(names(x))
-  }
-
-  out <- tibble::as_tibble(x) %>%
-    tidyr::pivot_longer(
-      dplyr::everything()
-    ) %>%
-    dplyr::mutate(
-      date = dates,
-      end_date = as.Date(glue::glue("{lubridate::year(date)}-07-01")),
-      gt_5 = ifelse(value > 5, 1, 0),
-      gt_5_cnt = sequence(rle(gt_5)$lengths),
-      start_criteria = ifelse(gt_5 == 1 & gt_5_cnt >= 6, 1, 0),
-      end_criteria = ifelse(gt_5 == 0 & gt_5_cnt >= 6 & date >= end_date, 1, 0)
-    )  %>%
-    dplyr::summarise(
-      start =  purrr::detect_index(start_criteria, ~ .x == 1) + 1,
-      end =  purrr::detect_index(end_criteria, ~ .x == 1) - 5
-    ) %$%
-    magrittr::subtract(end, start)
-
-  return(out)
-
-}
-
 calc_growing_season <- function(r, shp) {
 
-  names(r) <- terra::time(r)
-  r %>%
-    terra::crop(shp, mask=TRUE) %>%
-    terra::mask(shp) %>%
-    terra::global(fun = "mean", na.rm = T) %>%
-    tibble::rownames_to_column() %>%
-    magrittr::set_colnames(c("date", "value")) %>%
-    dplyr::mutate(date = as.Date(date)) %>%
-    dplyr::group_by(year = lubridate::year(date)) %>%
-    dplyr::summarise(growing_season = growing_season(x = value, dates=date))
+  # Crop to ROI
+  r %<>%
+    terra::crop(normals::mt) %>%
+    terra::mask(normals::mt)
 
-  # terra::as.points(r) %>%
-  #   data.frame(terra::values(.), terra::geom(.)) %>%
-  #   dplyr::select(-c(geom, part, hole)) %>%
-  #   tibble::as_tibble() %>%
-  #   tidyr::pivot_longer(-c(x, y)) %>%
-  #   dplyr::mutate(date = as.Date(name, format = "X%Y.%m.%d")) %>%
-  #   dplyr::group_by(x, y) -> test
-  #
-  # dplyr::summarise(test, out = growing_season(x = value, dates = date)) -> a
-  #
-  # terra::app(r, fun = growing_season) -> test
-  # terra::tapp(r, fun = growing_season, index = "years") -> test
+  # Make a raster that is the Julian day of the year.
+  day <- terra::deepcopy(r)
+  terra::values(day) <- terra::time(r) %>%
+    lubridate::yday() %>%
+    rep(each = terra::ncell(r))
+
+  # If before July 1st, set to 0
+  day <- terra::classify(
+    day,
+    matrix(
+      c(-Inf, 182, 0,
+        182, Inf, 1),
+      ncol=3, byrow=TRUE
+    ),
+    include.lowest=TRUE)
+
+  lt_5 <- terra::classify(
+    r,
+    matrix(
+      c(-Inf, 5, 1,
+        5, Inf, 0),
+      ncol=3, byrow=TRUE
+    ),
+    include.lowest=FALSE) %>%
+    terra::roll(n = 6, fun = "prod", type="from", circular = TRUE, na.rm = T)
+
+  lt_5 <- terra::app(lt_5 * day, fun = "which.max")
+
+  gt_5 <- terra::classify(
+    r,
+    matrix(
+      c(-Inf, 5, 0,
+        5, Inf, 1),
+      ncol=3, byrow=TRUE
+    ),
+    include.lowest=FALSE) %>%
+    terra::roll(n = 6, fun = "prod", type="from", circular = TRUE, na.rm = T) %>%
+    terra::app(fun = "which.max")
+
+  growing_season <- lt_5 - gt_5
+  names(growing_season) <- "Growing Season"
+
+  year <- r %>%
+    terra::time() %>%
+    lubridate::year() %>%
+    unique() %>%
+    head(1) %>%
+    paste("-01-01") %>%
+    lubridate::as_date()
+
+  terra::time(growing_season) <- year
+  return(growing_season)
 }
 
 warm_days <- function(x) {
+
   sum(ifelse(x > 25, 1, 0))
 }
 
@@ -185,8 +188,26 @@ cool_days <- function(x) {
   sum(ifelse(x < 0, 1, 0))
 }
 
+climdex_from_raw <- function(raw_dir, out_dir) {
 
+  dat <- list.files(raw_dir, full.names = T) %>%
+    tibble::tibble(f = .) %>%
+    dplyr::mutate(name = basename(f)) %>%
+    tidyr::separate(name, c("variable", "date", "drop1", "drop2"), sep = "-") %>%
+    dplyr::mutate(date = paste0(date, "01") %>%
+                    as.Date(format = "%Y%m%d")) %>%
+    dplyr::select(-dplyr::starts_with("drop")) %>%
+    dplyr::filter(lubridate::year(date) <= 1953)
 
+  growing_season <- dat %>%
+    dplyr::filter(variable == "tavg") %>%
+    dplyr::group_by(year = lubridate::year(date)) %>%
+    dplyr::summarise(r = list(
+      calc_growing_season(r = terra::rast(f), shp = normals::mt)
+    )) %>%
+    dplyr::summarise(r = list(terra::rast(r)), name = "growing_season_annual.tif")
+}
+list.files("~/data/nclimgrid/", pattern = "")
 
 temp_vars = c("FD", "SU", "ID", "TR", "GSL", "TXx", "TNx", "TXn", "TNn")
 pr_vars = c("Rx1day", "Rx5day", "R10mm", "R20mm", "CDD", "CWD")
