@@ -222,7 +222,7 @@ apply_func_from_dat <- function(dat, fun, filt, out_name, ...) {
     dplyr::summarise(r = list(terra::rast(r)), name = out_name)
 }
 
-climdex_from_raw <- function(raw_dir, out_dir, shp, reference_period = c(1951, 1980)) {
+climdex_from_raw <- function(raw_dir, out_dir, shp) {
 
   dat <- list.files(raw_dir, full.names = T) %>%
     tibble::tibble(f = .) %>%
@@ -260,41 +260,51 @@ climdex_from_raw <- function(raw_dir, out_dir, shp, reference_period = c(1951, 1
     )) %>%
     dplyr::summarise(r = list(terra::rast(r)), name = "warm_days.tif")
 
-  monthly_max <- dat %>%
-    dplyr::filter(
-      lubridate::year(date) %in% reference_period[1]:reference_period[2],
-      # change to tmax
-      variable == "tavg"
-    ) %>%
+  # monthly_max <- dat %>%
+  #   dplyr::filter(
+  #     lubridate::year(date) %in% reference_period[1]:reference_period[2],
+  #     # change to tmax
+  #     variable == "tavg"
+  #   ) %>%
+  #   dplyr::rowwise() %>%
+  #   dplyr::mutate(
+  #     r = list(terra::rast(f) %>%
+  #                terra::crop(shp) %>%
+  #                terra::mask(shp))
+  #   ) %>%
+  #   dplyr::ungroup() %>%
+  #   dplyr::summarise(
+  #     mx = list(terra::app(r, fun = "max")),
+  #     name = "monthly_tmax.tif"
+  #   )
+  #
+  # monthly_min <- dat %>%
+  #   dplyr::filter(
+  #     lubridate::year(date) %in% reference_period[1]:reference_period[2],
+  #     # change to tmin
+  #     variable == "tavg"
+  #   ) %>%
+  #   dplyr::rowwise() %>%
+  #   dplyr::mutate(
+  #     r = list(terra::rast(f) %>%
+  #                terra::crop(shp) %>%
+  #                terra::mask(shp))
+    # ) %>%
+    # dplyr::ungroup() %>%
+    # dplyr::summarise(
+    #   mx = list(terra::app(r, fun = "min")),
+    #   name = "monthly_tmin.tif"
+    # )
+
+  dplyr::bind_rows(
+    growing_season, warm_days#, cool_day, icing_days, monthly_max, monthly_min
+  ) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
-      r = list(terra::rast(f) %>%
-                 terra::crop(shp) %>%
-                 terra::mask(shp))
-    ) %>%
-    dplyr::ungroup() %>%
-    dplyr::summarise(
-      mx = list(terra::app(r, fun = "max")),
-      name = "monthly_tmax.tif"
+      out = file.path(out_dir, name),
+      r = list(terra::writeRaster(r, out))
     )
 
-  monthly_min <- dat %>%
-    dplyr::filter(
-      lubridate::year(date) %in% reference_period[1]:reference_period[2],
-      # change to tmin
-      variable == "tavg"
-    ) %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(
-      r = list(terra::rast(f) %>%
-                 terra::crop(shp) %>%
-                 terra::mask(shp))
-    ) %>%
-    dplyr::ungroup() %>%
-    dplyr::summarise(
-      mx = list(terra::app(r, fun = "min")),
-      name = "monthly_tmin.tif"
-    )
 
 
 }
