@@ -69,7 +69,7 @@ group_seasonally <- function(r, start_year, end_year) {
 #' # fill with example
 #' 1+1
 #' }
-make_temp_seasonal_rasters <- function(tmmn, tmmx, tavg=NULL, out_dir, start_year, end_year) {
+make_temp_seasonal_rasters <- function(tmmn, tmmx, tavg=NULL, out_dir, start_year, end_year, dataset = "nclimgrid") {
   tmmx <- filter_to_reference(tmmx, start_year-1, end_year)
   tmmn <- filter_to_reference(tmmn, start_year-1, end_year)
   if (!is.null(tavg)) {
@@ -84,7 +84,7 @@ make_temp_seasonal_rasters <- function(tmmn, tmmx, tavg=NULL, out_dir, start_yea
     fun = "mean"
   )
 
-  terra::writeRaster(tmmx, file.path(out_dir, "tmmx_historical_seasonal.tif"), overwrite = T)
+  terra::writeRaster(tmmx, file.path(out_dir, glue::glue("tmmx_{dataset}_historical_seasonal.tif")), overwrite = T)
 
   tmmn <- terra::tapp(
     tmmn,
@@ -92,7 +92,7 @@ make_temp_seasonal_rasters <- function(tmmn, tmmx, tavg=NULL, out_dir, start_yea
     fun = "mean"
   )
 
-  terra::writeRaster(tmmn, file.path(out_dir, "tmmn_historical_seasonal.tif"), overwrite = T)
+  terra::writeRaster(tmmn, file.path(out_dir, glue::glue("tmmn_{dataset}_historical_seasonal.tif")), overwrite = T)
 
   tavg <- terra::tapp(
     tavg,
@@ -100,7 +100,7 @@ make_temp_seasonal_rasters <- function(tmmn, tmmx, tavg=NULL, out_dir, start_yea
     fun = "mean"
   )
 
-  terra::writeRaster(tavg, file.path(out_dir, "tavg_historical_seasonal.tif"), overwrite = T)
+  terra::writeRaster(tavg, file.path(out_dir, glue::glue("tavg_{dataset}_historical_seasonal.tif")), overwrite = T)
   return(NA)
 }
 
@@ -119,7 +119,7 @@ make_temp_seasonal_rasters <- function(tmmn, tmmx, tavg=NULL, out_dir, start_yea
 #' # fill with example
 #' 1+1
 #' }
-make_pr_seasonal_raster <- function(pr, out_dir, start_year, end_year) {
+make_pr_seasonal_raster <- function(pr, out_dir, start_year, end_year, dataset = "nclimgrid") {
   pr <- filter_to_reference(pr, start_year-1, end_year)
   indices <- group_seasonally(pr, start_year, end_year)
 
@@ -140,5 +140,5 @@ make_pr_seasonal_raster <- function(pr, out_dir, start_year, end_year) {
     fun = "mean"
   )
 
-  terra::writeRaster(pr, file.path(out_dir, "pr_historical_seasonal.tif"), overwrite = T)
+  terra::writeRaster(pr, file.path(out_dir, glue::glue("pr_{dataset}_historical_seasonal.tif")), overwrite = T)
 }

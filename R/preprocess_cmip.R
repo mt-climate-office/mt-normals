@@ -9,6 +9,9 @@ filter_years <- function(r, start, end) {
 
 ssp_colors <- c("SSP1-2.6"="#7570b3", "SSP2-4.5"="#1b9e77", "SSP3-7.0"="#e7298a", "SSP5-8.5"="#d95f02")
 
+tas_tsfm <- function(x) (x - 273.15) * 1.8 + 32
+pr_tsfm <- function(x) x/25.4
+
 calc_agreement <- function(x) {
   x %<>% round(5)
 
@@ -69,21 +72,6 @@ summarize_yearmonths <- function(r, start, end, is.annual=FALSE, fun = "mean", i
   return(r)
 }
 
-join_historical <- function(dat) {
-  dat %>%
-    dplyr::select(model, scenario, hist, mid_century, end_century) %>%
-    dplyr::left_join(
-      dplyr::filter(., scenario == "historical") %>%
-        dplyr::select(model, historical=hist),
-      by = "model"
-    ) %>%
-    dplyr::select(-hist) %>%
-    dplyr::filter(scenario != "historical") %>%
-    tidyr::pivot_longer(
-      c("mid_century", "end_century")
-    )
-}
-
 read_and_tapp <- function(pattern, files, fun, idx, tsfm=NULL) {
   out <- grep(pattern, files, value = T) %>%
     purrr::map(function(x) {
@@ -96,7 +84,12 @@ read_and_tapp <- function(pattern, files, fun, idx, tsfm=NULL) {
       )
     }) %>%
     dplyr::bind_rows() %>%
-    tidyr::separate(f, c("model", "scenario", "run", "variable"), sep = "_")
+    tidyr::separate(f, c("model", "scenario", "run", "variable"), sep = "_") %>%
+    tidyr::pivot_wider(names_from=scenario, values_from = r) %>%
+    tidyr::pivot_longer(dplyr::starts_with("ssp"), names_to = "scenario") %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(r = list(c(historical, value))) %>%
+    dplyr::select(model, run, variable, scenario, r)
 
   if (!is.null(tsfm)) {
     out <-
@@ -500,74 +493,60 @@ cmip_monthly_to_change <- function(files, pattern, fun, tsfm, is.annual, out_dir
   ) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
-      hist = list(summarize_yearmonths(r, 1981, 2010, is.annual)),
+      hist = list(summarize_yearmonths(r, 1991, 2020, is.annual)),
       mid_century = list(summarize_yearmonths(r, 2040, 2069, is.annual)),
       end_century = list(summarize_yearmonths(r, 2070, 2099, is.annual))
     ) %>%
-    join_historical() %>%
+    dplyr::select(model, scenario, hist, mid_century, end_century) %>%
+    tidyr::pivot_longer(dplyr::ends_with("century"), names_to = "period") %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(diff = list(terra::wrap(value - historical))) %>%
-    dplyr::select(model, scenario, period=name, diff) %>%
+    dplyr::mutate(diff = list(terra::wrap(value - hist))) %>%
+    dplyr::select(model, scenario, period, diff) %>%
     saveRDS(out_name)
 
   return(out_name)
 }
 
-cmip_ppt_interannual_variability <- function(files, tsfm, out_dir) {
+#' cmip_ppt_interannual_variability
+#'
+#' @description Calculate interannual precipitation variability
+#'
+#' @param files List of CMIP6 files to be filtered.
+#' @param out_dir The directory to save the results out to.
+#'
+#' @return Save out an `rds` file of interannual variability
+#' @export
+#'
+#' @examples
+#' \notrun{
+#' 1+1
+#' }
+cmip_ppt_interannual_variability <- function(files, out_dir) {
 
   out_name = file.path(
     out_dir, "cmip_iv.rds"
   )
-  print(out_name)
   read_and_tapp(
-    files = files, pattern = "pr.tif", fun = "sum", idx = "yearmonths", tsfm = tsfm
-  )  %>%
+    files = files, pattern = "pr.tif", fun = "sum", idx = "yearmonths", tsfm = pr_tsfm
+  ) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
-      hist = list(summarize_yearmonths(r, 1981, 2010, FALSE, fun = "sum", idx = "years")),
-      mid_century = list(summarize_yearmonths(r, 2040, 2069, FALSE, fun = "sum", idx = "years")),
-      end_century = list(summarize_yearmonths(r, 2070, 2099, FALSE, fun = "sum", idx = "years"))
+      hist = list(summarize_yearmonths(r, 1991, 2020, TRUE, fun = "sd", idx = "years")),
+      mid_century = list(summarize_yearmonths(r, 2040, 2069, TRUE, fun = "sd", idx = "years")),
+      end_century = list(summarize_yearmonths(r, 2070, 2099, TRUE, fun = "sd", idx = "years"))
     ) %>%
-    join_historical() %>%
+    dplyr::select(model, scenario, hist, mid_century, end_century) %>%
+    tidyr::pivot_longer(dplyr::ends_with("century"), names_to = "period") %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(diff = list(terra::wrap(value - historical))) %>%
-    dplyr::select(model, scenario, period=name, diff) %>%
+    dplyr::mutate(diff = list(terra::wrap(value - hist))) %>%
+    dplyr::select(model, scenario, period, diff) %>%
     saveRDS(out_name)
 
 }
 
-make_model_agreement_nums <- function(data_dir, shp) {
-
-  dat <- list.files(data_dir, pattern = ".rds", full.names = T) %>%
-    purrr::map(function(x) {
-      readRDS(x) %>%
-        dplyr::mutate(
-          variable = tools::file_path_sans_ext(x) %>%
-            basename() %>%
-            stringr::str_split("_") %>%
-            unlist() %>%
-            magrittr::extract(2)
-        )
-    }) %>%
-    dplyr::bind_rows() %>%
-    dplyr::mutate(
-      fun = ifelse(variable %in% sum_vars, "sum", "mean"),
-      diff = list(terra::rast(diff)),
-      diff = list(terra::mask(diff, shp)),
-      diff = list(terra::app(diff, fun = fun)),
-      diff = list(terra::global(diff, fun="mean", na.rm = T))
-    ) %>%
-    tidyr::unnest(diff) %>%
-    dplyr::group_by(scenario, period, variable) %>%
-    dplyr::summarise(
-      avg = mean(mean),
-      agree = calc_agreement(mean),
-      .groups="drop"
-    ) %>%
-    tidyr::unnest(cols=c(agree)) %>%
-    readr::write_csv(file.path(data_dir, "agreements.csv"))
-}
-
+# cmip_files <- list.files("~/data/cmip/monthly", full.names = T) %>%
+#   grep(".json", ., value = T, invert = T)
+#
 # tibble::tribble(
 #   ~pattern, ~title, ~tsfm, ~hot, ~fun, ~is.annual,
 #   "above90.tif", "Change in # of Days Above 90°F", NULL, TRUE, "sum", FALSE,
@@ -584,5 +563,5 @@ make_model_agreement_nums <- function(data_dir, shp) {
 #   dplyr::rowwise() %>%
 #   dplyr::mutate(new_name = cmip_monthly_to_change(
 #     files=cmip_files, pattern=pattern, fun=fun, tsfm=tsfm,
-#     is.annual = is.annual, out_dir = "./assets")
+#     is.annual = is.annual, out_dir = "~/git/mco/MCA/assets")
 #   )

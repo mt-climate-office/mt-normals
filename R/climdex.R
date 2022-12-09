@@ -3,7 +3,7 @@ assign_time_and_name <- function(r, annual, descriptor) {
   date_fmt <- ifelse(annual, "0101", "01")
   terra::time(r) <- names(r) %>%
     paste0(date_fmt) %>%
-    lubridate::as_date(format = "X%Y%m%d")
+    as.Date(format = "X%Y%m%d")
 
   names(r) <- paste(descriptor, 1:terra::nlyr(r), sep = "_")
   return(r)
@@ -242,62 +242,44 @@ climdex_from_raw <- function(raw_dir, out_dir, shp) {
 
   cool_days <-  apply_func_from_dat(
     # Change to tmin
-    dat, calc_cool_days, "tavg", "cool_days.tif", name="cool_days"
+    dat, calc_cool_days, "tmin", "cool_days.tif", name="cool_days"
   )
 
   icing_days <- apply_func_from_dat(
     # change to tmax
-    dat, calc_cool_days, "tavg", "icing_days.tif", name="icing_days"
+    dat, calc_cool_days, "tmax", "icing_days.tif", name="icing_days"
   )
 
-  warm_days <- dat %>%
-    # Change to min temp.
-    dplyr::filter(variable == "tavg") %>%
-    dplyr::group_by(year = lubridate::year(date)) %>%
-    dplyr::summarise(r = list(terra::rast(f)))
-    dplyr::summarise(r = list(
-      calc_warm(r = terra::rast(f), shp = shp)
-    )) %>%
-    dplyr::summarise(r = list(terra::rast(r)), name = "warm_days.tif")
+  monthly_max <- dat %>%
+    dplyr::filter(
+      variable == "tmax"
+    ) %>%
+    dplyr::pull(f) %>%
+    terra::rast() %>%
+    terra::crop(shp) %>%
+    terra::mask(shp) %>%
+    terra::tapp(fun = "mean", index = "yearmonths") %>%
+    assign_time_and_name(FALSE, "monthly_max") %>%
+    terra::tapp(fun = "max", index = "years") %>%
+    assign_time_and_name(TRUE, "monthly_max") %>%
+    {tibble::tibble(r = list(.), name = "monthly_max.tif")}
 
-  # monthly_max <- dat %>%
-  #   dplyr::filter(
-  #     lubridate::year(date) %in% reference_period[1]:reference_period[2],
-  #     # change to tmax
-  #     variable == "tavg"
-  #   ) %>%
-  #   dplyr::rowwise() %>%
-  #   dplyr::mutate(
-  #     r = list(terra::rast(f) %>%
-  #                terra::crop(shp) %>%
-  #                terra::mask(shp))
-  #   ) %>%
-  #   dplyr::ungroup() %>%
-  #   dplyr::summarise(
-  #     mx = list(terra::app(r, fun = "max")),
-  #     name = "monthly_tmax.tif"
-  #   )
-  #
-  # monthly_min <- dat %>%
-  #   dplyr::filter(
-  #     lubridate::year(date) %in% reference_period[1]:reference_period[2],
-  #     # change to tmin
-  #     variable == "tavg"
-  #   ) %>%
-  #   dplyr::rowwise() %>%
-  #   dplyr::mutate(
-  #     r = list(terra::rast(f) %>%
-  #                terra::crop(shp) %>%
-  #                terra::mask(shp))
-    # ) %>%
-    # dplyr::ungroup() %>%
-    # dplyr::summarise(
-    #   mx = list(terra::app(r, fun = "min")),
-    #   name = "monthly_tmin.tif"
-    # )
+  monthly_min <- dat %>%
+    dplyr::filter(
+      variable == "tmin"
+    ) %>%
+    dplyr::pull(f) %>%
+    terra::rast() %>%
+    terra::crop(shp) %>%
+    terra::mask(shp) %>%
+    terra::tapp(fun = "mean", index = "yearmonths") %>%
+    assign_time_and_name(FALSE, "monthly_min") %>%
+    terra::tapp(fun = "min", index = "years") %>%
+    assign_time_and_name(TRUE, "monthly_min") %>%
+    {tibble::tibble(r = list(.), name = "monthly_min.tif")}
 
   dplyr::bind_rows(
-    growing_season, warm_days#, cool_day, icing_days, monthly_max, monthly_min
+    growing_season, warm_days, cool_days, icing_days, monthly_max, monthly_min
   ) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
@@ -308,7 +290,3 @@ climdex_from_raw <- function(raw_dir, out_dir, shp) {
 
 
 }
-list.files("~/data/nclimgrid/", pattern = "")
-
-temp_vars = c("FD", "SU", "ID", "TR", "GSL", "TXx", "TNx", "TXn", "TNn")
-pr_vars = c("Rx1day", "Rx5day", "R10mm", "R20mm", "CDD", "CWD")
