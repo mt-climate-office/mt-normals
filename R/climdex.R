@@ -254,39 +254,38 @@ climdex_from_raw <- function(raw_dir, out_dir, shp) {
     dplyr::filter(
       variable == "tmax"
     ) %>%
-    dplyr::pull(f) %>%
-    terra::rast() %>%
-    terra::crop(shp) %>%
-    terra::mask(shp) %>%
-    terra::tapp(fun = "mean", index = "yearmonths") %>%
-    assign_time_and_name(FALSE, "monthly_max") %>%
-    terra::tapp(fun = "max", index = "years") %>%
-    assign_time_and_name(TRUE, "monthly_max") %>%
-    {tibble::tibble(r = list(.), name = "monthly_max.tif")}
+    dplyr::rowwise() %>%
+    dplyr::mutate(r = terra::rast(f) %>%
+                    terra::crop(shp) %>%
+                    terra::mask(shp) %>%
+                    terra::app(fun="mean") %>%
+                    list()) %>%
+    dplyr::group_by(year = lubridate::year(date)) %>%
+    dplyr::summarise(r = terra::rast(r) %>%
+                       terra::app(fun="max") %>%
+                       terra::`time<-`(glue::glue("{dplyr::cur_group()}-01-01") %>% as.Date()) %>%
+                       list()) %>%
+    dplyr::ungroup() %>%
+    dplyr::summarise(r = list(terra::rast(r))) %>%
+    dplyr::mutate(name = "monthly_max.tif")
 
   monthly_min <- dat %>%
     dplyr::filter(
       variable == "tmin"
     ) %>%
-    dplyr::pull(f) %>%
-    terra::rast() %>%
-    terra::crop(shp) %>%
-    terra::mask(shp) %>%
-    terra::tapp(fun = "mean", index = "yearmonths") %>%
-    assign_time_and_name(FALSE, "monthly_min") %>%
-    terra::tapp(fun = "min", index = "years") %>%
-    assign_time_and_name(TRUE, "monthly_min") %>%
-    {tibble::tibble(r = list(.), name = "monthly_min.tif")}
-
-  dplyr::bind_rows(
-    growing_season, warm_days, cool_days, icing_days, monthly_max, monthly_min
-  ) %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(
-      out = file.path(out_dir, name),
-      r = list(terra::writeRaster(r, out))
-    )
-
-
+    dplyr::mutate(r = terra::rast(f) %>%
+                    terra::crop(shp) %>%
+                    terra::mask(shp) %>%
+                    terra::app(fun="mean") %>%
+                    list()) %>%
+    dplyr::group_by(year = lubridate::year(date)) %>%
+    dplyr::summarise(r = terra::rast(r) %>%
+                       terra::app(fun="min") %>%
+                       terra::`time<-`(glue::glue("{dplyr::cur_group()}-01-01") %>% as.Date()) %>%
+                       list()) %>%
+    dplyr::ungroup() %>%
+    dplyr::summarise(r = list(terra::rast(r))) %>%
+    dplyr::mutate(name = "monthly_min.tif")
 
 }
