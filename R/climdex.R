@@ -118,7 +118,7 @@ calc_heat_index <- function(temp, rh, is.fahrenheit=FALSE) {
 }
 
 calc_growing_season <- function(r, shp, year) {
-
+  print(glue::glue("Processing Growing Season for {year}"))
   # Crop to ROI
   r %<>%
     terra::crop(shp) %>%
@@ -175,6 +175,7 @@ calc_growing_season <- function(r, shp, year) {
 }
 
 calc_warm_days <- function(r, shp, year) {
+  print(glue::glue("Processing Warm Days for {year}"))
   r %<>%
     terra::crop(shp) %>%
     terra::mask(shp)
@@ -193,7 +194,7 @@ calc_warm_days <- function(r, shp, year) {
 }
 
 calc_cool_days <- function(r, shp, year, name) {
-
+  print(glue::glue("Processing Cool Days for {year}"))
   # Use minimum temperature as input for 'cool days', max temp for 'icing days'
   r %<>%
     terra::crop(shp) %>%
@@ -288,4 +289,13 @@ climdex_from_raw <- function(raw_dir, out_dir, shp) {
     dplyr::summarise(r = list(terra::rast(r))) %>%
     dplyr::mutate(name = "monthly_min.tif")
 
+
+  dplyr::bind_rows(
+    growing_season, warm_days, cool_days, icing_days, monthly_max, monthly_min
+  ) %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(
+      out = file.path(out_dir, name),
+      r = list(terra::writeRaster(r, out, overwrite=TRUE))
+    )
 }
