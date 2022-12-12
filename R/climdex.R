@@ -342,8 +342,3 @@ climdex_from_raw <- function(raw_dir, out_dir, shp) {
     make_extremes_table() %>%
     saveRDS(file.path(out_dir, "climdex.rds"))
 }
-
-extremes <- readRDS("~/git/mco/MCA/assets/climdex.rds")
-extremes %<>%
-  dplyr::rowwise() %>%
-  dplyr::mutate(r = list(terra::rast(r)))
