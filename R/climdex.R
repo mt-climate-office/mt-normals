@@ -213,6 +213,51 @@ calc_cool_days <- function(r, shp, year, name) {
     `names<-`(name)
 }
 
+calc_period_differences <- function(r, start, end, fun=median) {
+
+  years <- terra::time(r)
+  start_r <- terra::subset(
+    r, which(lubridate::year(years) %in% start[1]:start[2])
+  ) %>%
+    terra::app(fun = "median")
+
+  end_r <- terra::subset(
+    r, which(lubridate::year(years) %in% end[1]:end[2])
+  ) %>%
+    terra::app(fun = "median")
+
+
+  diff <- end_r - start_r
+
+  tibble::tibble(
+    period = c("start", "end", "diff"),
+    r = list(start_r, end_r, diff)
+  ) %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(
+      val = terra::global(r, fun = fun, na.rm = T),
+      start_r = list(start_r),
+      end_r = list(end_r),
+      diff = list(diff)
+    ) %>%
+    tidyr::unnest(cols = c(val)) %>%
+    dplyr::select(period, value=global, start_r, end_r, diff)
+}
+
+
+make_extremes_table <- function(dat) {
+  dat %>%
+    dplyr::mutate(xtreme = list(calc_period_differences(r, c(1951, 1980), c(1991, 2020)))) %>%
+    dplyr::select(name, xtreme) %>%
+    tidyr::unnest(cols = xtreme) %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(
+      start_r = list(terra::wrap(start_r)),
+      end_r = list(terra::wrap(end_r)),
+      diff = list(terra::wrap(diff))
+    )
+}
+
 apply_func_from_dat <- function(dat, fun, filt, out_name, ...) {
   dat %>%
     dplyr::filter(variable == filt) %>%
@@ -238,7 +283,7 @@ climdex_from_raw <- function(raw_dir, out_dir, shp) {
   )
 
   warm_days <- apply_func_from_dat(
-    dat, calc_warm_days, "tavg", "warm_days.tif"
+    dat, calc_warm_days, "tmax", "warm_days.tif"
   )
 
   cool_days <-  apply_func_from_dat(
@@ -294,9 +339,11 @@ climdex_from_raw <- function(raw_dir, out_dir, shp) {
     growing_season, warm_days, cool_days, icing_days, monthly_max, monthly_min
   ) %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(
-      r = list(terra::wrap(r)),
-      name = tools::file_path_sans_ext(name)
-    ) %>%
+    make_extremes_table() %>%
     saveRDS(file.path(out_dir, "climdex.rds"))
 }
+
+extremes <- readRDS("~/git/mco/MCA/assets/climdex.rds")
+extremes %<>%
+  dplyr::rowwise() %>%
+  dplyr::mutate(r = list(terra::rast(r)))
