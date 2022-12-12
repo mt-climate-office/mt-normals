@@ -4,7 +4,13 @@
 \alias{make_pr_seasonal_raster}
 \title{make_pr_seasonal_raster}
 \usage{
-make_pr_seasonal_raster(pr, out_dir, start_year, end_year)
+make_pr_seasonal_raster(
+  pr,
+  out_dir,
+  start_year,
+  end_year,
+  dataset = "nclimgrid"
+)
 }
 \arguments{
 \item{pr}{A \code{terra::rast} timeseries of monthly precipitation totals.}

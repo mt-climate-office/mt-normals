@@ -10,7 +10,8 @@ make_temp_seasonal_rasters(
   tavg = NULL,
   out_dir,
   start_year,
-  end_year
+  end_year,
+  dataset = "nclimgrid"
 )
 }
 \arguments{

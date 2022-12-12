@@ -4,7 +4,7 @@
 \alias{make_map_data}
 \title{make_map_data}
 \usage{
-make_map_data(f, shp, attr_id, proj = normals::mt_state_plane, fun = "mean")
+make_map_data(f, shp, attr_id, proj = mt_state_plane, fun = "mean")
 }
 \arguments{
 \item{f}{The preprocessed .Rds file to read from.}
