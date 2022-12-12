@@ -295,7 +295,8 @@ climdex_from_raw <- function(raw_dir, out_dir, shp) {
   ) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
-      out = file.path(out_dir, name),
-      r = list(terra::writeRaster(r, out, overwrite=TRUE))
-    )
+      r = list(terra::wrap(r)),
+      name = tools::file_path_sans_ext(name)
+    ) %>%
+    saveRDS(file.path(out_dir, "climdex.rds"))
 }
