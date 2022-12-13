@@ -70,3 +70,31 @@ aggregate_daily <- function(r, variable, monthly = TRUE, agg_func = "mean", file
   }
   return(out)
 }
+
+# test <- function(f) {
+#   print(f)
+#   terra::rast(f) %>%
+#     terra::app(fun="mean", na.rm = T)
+# }
+#
+# monthly <- list.files("~/data/nclimgrid/", pattern = "tmin", full.names = T) %>%
+#   tibble::tibble(f = .) %>%
+#   dplyr::mutate(n = basename(f) %>% tools::file_path_sans_ext()) %>%
+#   tidyr::separate(n, c("v", "date", "drop1", "drop2")) %>%
+#   dplyr::mutate(date = as.Date(paste0(date, "01"), format = "%Y%m%d")) %>%
+#   dplyr::rowwise() %>%
+#   dplyr::mutate(
+#     r = list(test(f))
+#   )
+#
+# monthly %>%
+#   dplyr::mutate(
+#     r = list(r %>%
+#                terra::`time<-`(date) %>%
+#                terra::crop(normals::mt) %>%
+#                terra::mask(normals::mt)
+#              )
+#   ) -> out
+#
+# terra::rast(out$r) %>%
+#   terra::writeRaster("~/git/mco/MCA/assets/tmmn_nclimgrid_monthly.tif", overwrite=TRUE)

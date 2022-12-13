@@ -37,6 +37,39 @@ calc_agreement <- function(x) {
   )
 }
 
+make_model_agreement_nums <- function(data_dir, shp) {
+
+  dat <- list.files(data_dir, pattern = ".rds", full.names = T) %>%
+    grep("cmip_", ., value = T) %>%
+    purrr::map(function(x) {
+      readRDS(x) %>%
+        dplyr::mutate(
+          variable = tools::file_path_sans_ext(x) %>%
+            basename() %>%
+            stringr::str_split("_") %>%
+            unlist() %>%
+            magrittr::extract(2)
+        )
+    }) %>%
+    dplyr::bind_rows() %>%
+    dplyr::mutate(
+      fun = ifelse(variable %in% sum_vars, "sum", "mean"),
+      diff = list(terra::rast(diff)),
+      diff = list(terra::mask(diff, shp)),
+      diff = list(terra::app(diff, fun = fun)),
+      diff = list(terra::global(diff, fun="mean", na.rm = T))
+    ) %>%
+    tidyr::unnest(diff) %>%
+    dplyr::group_by(scenario, period, variable) %>%
+    dplyr::summarise(
+      avg = mean(mean),
+      agree = calc_agreement(mean),
+      .groups="drop"
+    ) %>%
+    tidyr::unnest(cols=c(agree)) %>%
+    readr::write_csv(file.path(data_dir, "agreements.csv"))
+}
+
 summarize_yearmonths <- function(r, start, end, is.annual=FALSE, fun = "mean", idx = "months") {
 
   if (is.annual) {
@@ -544,6 +577,7 @@ cmip_ppt_interannual_variability <- function(files, out_dir) {
 
 }
 
+
 # cmip_files <- list.files("~/data/cmip/monthly", full.names = T) %>%
 #   grep(".json", ., value = T, invert = T)
 #
@@ -565,3 +599,8 @@ cmip_ppt_interannual_variability <- function(files, out_dir) {
 #     files=cmip_files, pattern=pattern, fun=fun, tsfm=tsfm,
 #     is.annual = is.annual, out_dir = "~/git/mco/MCA/assets")
 #   )
+
+
+# list.files("~/git/mco/MCA/assets/", pattern = "rds", full.names = T) %>%
+#   grep("cmip_", ., value = T) %>%
+#   lapply(function(x) )
