@@ -64,7 +64,7 @@ summarize_yearmonths <- function(r, start, end, is.annual=FALSE, fun = "mean", i
 
   r <- terra::subset(r, yearmons_idx)
   terra::time(r) <- as.Date(paste0(yearmons, "01"), format = "X%Y%m%d")
-  r <- terra::tapp(r, fun=fun, index = idx)
+  r <- terra::tapp(r, fun=fun, index = idx, na.rm  = T)
 
   if (idx != "years") {
     names(r) <- r_names
@@ -531,9 +531,9 @@ cmip_ppt_interannual_variability <- function(files, out_dir) {
   ) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
-      hist = list(summarize_yearmonths(r, 1991, 2020, TRUE, fun = "sd", idx = "years")),
-      mid_century = list(summarize_yearmonths(r, 2040, 2069, TRUE, fun = "sd", idx = "years")),
-      end_century = list(summarize_yearmonths(r, 2070, 2099, TRUE, fun = "sd", idx = "years"))
+      hist = list(summarize_yearmonths(r, 1991, 2020, FALSE, fun = "sd", idx = "years")),
+      mid_century = list(summarize_yearmonths(r, 2040, 2069, FALSE, fun = "sd", idx = "years")),
+      end_century = list(summarize_yearmonths(r, 2070, 2099, FALSE, fun = "sd", idx = "years"))
     ) %>%
     dplyr::select(model, scenario, hist, mid_century, end_century) %>%
     tidyr::pivot_longer(dplyr::ends_with("century"), names_to = "period") %>%
