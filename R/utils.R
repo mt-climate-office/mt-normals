@@ -109,10 +109,11 @@ spat_summary <- function(rasts, shp, attr_id = NULL, name_to = "timescale", fun,
     terra::vect() %>%
     terra::rasterize(rasts, field=attr_id)
 
-  terra::zonal(rasts, shp_as_rast, fun=fun, na.rm = T, ...) %>%
+  terra::zonal(rasts, shp_as_rast, fun=fun, na.rm = T) %>%
     tibble::as_tibble() %>%
-    tidyr::pivot_longer(-!!rlang::sym(attr_id), names_to = name_to) %>%
-    dplyr::full_join(shp, by = attr_id)
+    tidyr::pivot_longer(-zone, names_to = name_to) %>%
+    dplyr::full_join(shp, by = c("zone"=attr_id))
+
 }
 
 
