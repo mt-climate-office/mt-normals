@@ -91,7 +91,7 @@ read_from_server <- function(f_url) {
 #'
 #' spat_summary(r, shp, "name", "time", "mean")
 #' }
-spat_summary <- function(rasts, shp, attr_id = NULL, name_to = "timescale", fun, ...) {
+spat_summary <- function(rasts, shp, attr_id = NULL, name_to = "timescale", fun, as_spatial=FALSE, ...) {
 
   if (is.null(attr_id)) {
     shp %<>%
@@ -109,13 +109,20 @@ spat_summary <- function(rasts, shp, attr_id = NULL, name_to = "timescale", fun,
     terra::vect() %>%
     terra::rasterize(rasts, field=attr_id)
 
-  terra::zonal(rasts, shp_as_rast, fun=fun, na.rm = T) %>%
+  out <- terra::zonal(rasts, shp_as_rast, fun=fun, na.rm = T) %>%
     tibble::as_tibble() %>%
-    tidyr::pivot_longer(-zone, names_to = name_to) %>%
-    dplyr::full_join(shp, by = c("zone"=attr_id))
+    tidyr::pivot_longer(-dplyr::all_of(attr_id), names_to = name_to) %>%
+    dplyr::full_join(shp, by = attr_id)
+
+  if (as_spatial) {
+    out <- sf::st_as_sf(out)
+  } else {
+    out <- dplyr::select(out, -geometry)
+  }
+
+  return(out)
 
 }
-
 
 
 #' crop_to_roi

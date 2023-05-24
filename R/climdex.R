@@ -117,6 +117,55 @@ calc_heat_index <- function(temp, rh, is.fahrenheit=FALSE) {
   return(hi)
 }
 
+
+
+convert_reclassify_gdd <-function(x, low, high) {
+  x <- ((x - 273.15) * (9/5) + 32)
+  terra::clamp(x, low, high)
+}
+
+calc_gdds <- function(tmmx, tmmn, shp, low_thresh=50, high_thresh=86) {
+  print('calculating gdd')
+  tmmx <- convert_reclassify_gdd(tmmx, low_thresh, high_thresh)
+  tmmn <- convert_reclassify_gdd(tmmn, low_thresh, high_thresh)
+
+  tavg <- (tmmx + tmmn) / 2
+  gdds <- tavg - low_thresh
+
+  return(gdds)
+}
+
+write_gdd_data <- function(daily_dir="~/data/cmip6/daily/", monthly_dir="~/data/cmip6/monthly/") {
+  gdds <- list.files(daily_dir, full.names = T) %>%
+    stringr::str_subset(".json", negate = T) %>%
+    stringr::str_subset("tasmax|tasmin") %>%
+    tibble::tibble(r = .) %>%
+    dplyr::mutate(base = basename(r) %>%
+                    tools::file_path_sans_ext()) %>%
+    tidyr::separate(base, c("model", "period", "conditions", "variable"), sep = "_") %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(r = list(terra::rast(r))) %>%
+    tidyr::pivot_wider(names_from = variable, values_from = r)
+
+  gdds %<>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(gdd = list(calc_gdds(tasmax, tasmin)))
+
+  gdds %>%
+    dplyr::mutate(
+      name = file.path(
+        paste(c(model, period, conditions, "gdd.tif"), collapse = "_")
+      ),
+      gdd = list(normals::write_as_cog(gdd, file.path(daily_dir, name))),
+      monthly = list(
+        terra::tapp(gdd, index = "yearmonths", fun = "sum") %>%
+          normals::write_as_cog(file.path(monthly_dir, name))
+      )
+    )
+
+}
+
+
 calc_growing_season <- function(r, shp, year) {
   print(glue::glue("Processing Growing Season for {year}"))
   # Crop to ROI

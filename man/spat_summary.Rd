@@ -4,7 +4,15 @@
 \alias{spat_summary}
 \title{spat_summary}
 \usage{
-spat_summary(rasts, shp, attr_id = NULL, name_to = "timescale", fun, ...)
+spat_summary(
+  rasts,
+  shp,
+  attr_id = NULL,
+  name_to = "timescale",
+  fun,
+  as_spatial = FALSE,
+  ...
+)
 }
 \arguments{
 \item{rasts}{A \code{terra::rast} that zonal statistics will be derived from.}
