@@ -22,7 +22,8 @@ fetch_gridmet <-
   function(data_dir,
            variables,
            start_year = 1991,
-           end_year = 2020) {
+           end_year = 2020,
+           force_dl = FALSE) {
     data_dir <- file.path(data_dir, "raw")
     if (!dir.exists(data_dir)) {
       dir.create(data_dir, recursive = T)
@@ -39,6 +40,9 @@ fetch_gridmet <-
         url_pth <-
           file.path("http://www.northwestknowledge.net/metdata/data", f)
         f_pth <- file.path(tmp, f)
+        if (file.exists(f_pth) & !force_dl) {
+          print(glue::glue("Skipping {f_pth} as it already exists. Run this command with force_dl=True to force redownload"))
+        }
         system(glue::glue('wget -nc -c -nd --quiet --no-verbose -P {tmp} {url_pth}'))
       }
     }

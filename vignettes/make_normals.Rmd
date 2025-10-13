@@ -27,7 +27,7 @@ library(magrittr)
 data_dir = "~/data/mt_normals"
 # You can specify more or fewer variables here. See ?normals::fetch_gridmet
 # for other options.
-variables = c("pr", "tmmn", "tmmx")
+variables = c("erc", "etr", "pet", "pr", "rmax", "rmin", "sph", "srad", "th", "tmmn", "tmmx", "vpd", "vs")
 ```
 
 The next step is to download gridMET data to perform the analysis. Here we are going to specify a `data_dir` directory that will be used for the entire analysis. This directory will have several sub-directories that store data at different stages of analysis. We recommend using a new directory without any existing data to keep things tidy. The `normals::fetch_gridmet` function will create the specified directory and save data to `your-data-dir/raw`.
@@ -37,7 +37,7 @@ normals::fetch_gridmet(
   data_dir = data_dir, 
   variables = variables, 
   start_year = 1979, 
-  end_year = 1990
+  end_year = 2025
 )
 ```
 
