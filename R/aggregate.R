@@ -58,7 +58,7 @@ aggregate_daily <- function(r, variable, monthly = TRUE, agg_func = "mean", file
   out <- terra::tapp(r, grp, fun = agg_func, na.rm = T)
 
   terra::time(out) <- names(out) %>%
-    stringr::str_replace("X", "") %>%
+    stringr::str_replace("ym_", "") %>%
     paste0(
       ifelse(monthly, "01", "0101")
     ) %>%

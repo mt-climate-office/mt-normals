@@ -19,12 +19,13 @@ knitr::opts_chunk$set(
 ```
 
 This is an overview on how to use the `normals` package to create climate normals for the state of Montana. However, this process will work for any region within the contiguous U.S. that overlaps with the [gridMET](https://www.climatologylab.org/gridmet.html) data we are using to create normals. First, we will load the `normals` and `magrittr` packages:
+
 ```{r setup}
 library(normals)
 library(magrittr)
 
 # You can change this directory as needed.
-data_dir = "~/data/mt_normals"
+data_dir = "~/data/gridmet"
 # You can specify more or fewer variables here. See ?normals::fetch_gridmet
 # for other options.
 variables = c("erc", "etr", "pet", "pr", "rmax", "rmin", "sph", "srad", "th", "tmmn", "tmmx", "vpd", "vs")
@@ -46,17 +47,21 @@ The next important step is to crop the gridMET data to our area of interest (the
 ```{r crop, echo = T, results = 'hide', eval=FALSE}
 # Choose a new directory to save the data for Montana out to. 
 mt_dir <- file.path(data_dir, "processed", "montana")
+mt <- tigris::states() %>%
+  dplyr::filter(STUSPS == "MT") %>% 
+  dplyr::select(STUSPS)
 
 normals::crop_to_roi(
   # The previous function saved data to the `raw` subdirectory.
   data_dir = file.path(data_dir, "raw"),
   out_dir = mt_dir,
-  roi = normals::mt,
+  roi = mt,
   variables = variables
 )
 ```
 
 The data that we just downloaded and cropped are provided at a daily timestep, but we want to calculate monthly and annual normals for all of our data. To simplify this process, we will now aggregate the daily data to monthly and annual timescales using the `normals::aggregate_daily` function:
+
 ```{r aggregate, eval = FALSE, echo = T, results = 'hide'}
 
 out_dir <- file.path(data_dir, "processed", "montana", "summarized")
@@ -100,7 +105,8 @@ lapply(variables, function(x) {
   )
 })
 ```
-Now that the monthly data are created, we can apply fit a gamma distribution to the monthly (or annual) data and create our climate normals! For more information on what is going on behind the hood here, read our information sidebar on the [Montana Climate Normals Dashboard](https://mt-climate-office.github.io/mt-normals/). 
+
+Now that the monthly data are created, we can apply fit a gamma distribution to the monthly (or annual) data and create our climate normals! For more information on what is going on behind the hood here, read our information sidebar on the [Montana Climate Normals Dashboard](https://mt-climate-office.github.io/mt-normals/).
 
 ```{r normals, eval = FALSE, echo = T, results = 'hide'}
 summarized_dir <- file.path(data_dir, "processed", "montana", "summarized")
@@ -133,7 +139,9 @@ list.files(summarized_dir, full.names = T) %>%
     }
   })
 ```
-After running the above snippet of code, all the data will be saved out to the specified `out_dir` folder. For each variable and each timescale, there will be a file that gives the mean, median, variance, mode, alpha parameter and beta parameter. For example here is the mean annual precipitation for the Montana that was saved out to the folder (in inches): 
+
+After running the above snippet of code, all the data will be saved out to the specified `out_dir` folder. For each variable and each timescale, there will be a file that gives the mean, median, variance, mode, alpha parameter and beta parameter. For example here is the mean annual precipitation for the Montana that was saved out to the folder (in inches):
+
 ```{r plot, eval = TRUE, echo = T}
 r <- terra::rast(
   "~/data/mt_normals/processed/montana/normals/pr_annual_mean.tif"
