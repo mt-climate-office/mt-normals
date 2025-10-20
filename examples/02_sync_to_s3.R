@@ -5,9 +5,9 @@ library(furrr)
 library(future.callr)
 library(qs2)
 
-
+Sys.setenv(AWS_PROFILE = "my-dev-profile")
 aws_s3 <- paws::s3()
-
+aws_s3$list_buckets()
 #' Upload a file to S3 using multipart upload
 #'
 #' @param client A Paws S3 client object, e.g. from `paws::s3()`.
@@ -74,6 +74,8 @@ setwd("~/data/gridmet/montana")
 plan(future.callr::callr,
      workers = parallel::detectCores() - 2)
 
+
+aws_s3$list_buckets()
 uploads <-
   list.files(".",
              full.names = TRUE,
