@@ -66,6 +66,10 @@ aggregate_daily <- function(r, variable, monthly = TRUE, agg_func = "mean", file
 
   terra::set.names(out, glue::glue("{1:terra::nlyr(out)}_{variable}"))
   if (!is.null(filename)) {
+    if (!dir.exists(dirname(filename))) {
+      dir.create(dirname(filename))
+    }
+    print(glue::glue("Writing out {basename(filename)}..."))
     write_as_cog(out, filename, ...)
   }
   return(out)
