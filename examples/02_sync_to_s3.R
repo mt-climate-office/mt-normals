@@ -5,9 +5,16 @@ library(furrr)
 library(future.callr)
 library(qs2)
 
-Sys.setenv(AWS_PROFILE = "my-dev-profile")
-aws_s3 <- paws::s3()
-aws_s3$list_buckets()
+# Sys.setenv(AWS_PROFILE = "my-dev-profile")
+# aws sso login --profile my-dev-profile
+s3 <- paws::s3(
+  config = list(
+    credentials = list(
+      profile = "my-dev-profile"
+    )
+  )
+)
+
 #' Upload a file to S3 using multipart upload
 #'
 #' @param client A Paws S3 client object, e.g. from `paws::s3()`.
@@ -69,21 +76,44 @@ upload_multipart_parts <- function(client, file, bucket, key, upload_id) {
   return(parts)
 }
 
+find_existing_files <- function(s3) {
+  all_files <- character()
+  continuation_token <- NULL
+
+  repeat {
+    response <- s3$list_objects_v2(
+      Bucket = "mco-normals",
+      Prefix = "cog/",
+      ContinuationToken = continuation_token
+    )
+
+    all_files <- c(all_files, sapply(response$Contents, function(x) x$Key))
+
+    if (!response$IsTruncated) break
+    continuation_token <- response$NextContinuationToken
+  }
+  return(basename(all_files))
+}
+
 setwd("~/data/gridmet/montana")
+
+existing_files <- find_existing_files(s3)
 
 plan(future.callr::callr,
      workers = parallel::detectCores() - 2)
 
-
-aws_s3$list_buckets()
 uploads <-
   list.files(".",
              full.names = TRUE,
-             recursive = TRUE) |>
+             recursive = TRUE, pattern = ".tif") %>%
   stringr::str_subset("normals|aggregated")  %>%
+  stringr::str_subset(
+    existing_files %>%
+      paste(collapse = "|"), negate = T
+  ) %>%
   furrr::future_map(\(x){
     tryCatch(
-      upload(aws_s3,
+      upload(s3,
              file = x,
              bucket = "mco-normals",
              key = file.path("cog", gsub("^\\./", "", x))),
