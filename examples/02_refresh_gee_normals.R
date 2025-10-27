@@ -128,10 +128,10 @@ mod13 = process_normals(
   rgee::ee_as_rast(region = shp$geometry(), via="drive", scale=500) %>%
   normals::write_as_cog("./mod13.tif")
 
-cover = ee$ImageCollection("projects/rangeland-analysis-platform/vegetation-cover-v3")$filterDate("1991-01-01", "2024-12-31")$mean() %>%
+cover = ee$ImageCollection("projects/rap-data-365417/assets/vegetation-cover-v3")$filterDate("1991-01-01", "2024-12-31")$mean() %>%
   rgee::ee_as_rast(region = shp$geometry(), via="drive", scale=100)%>%
   normals::write_as_cog("./cover.tif")
-npp = ee$ImageCollection("projects/rangeland-analysis-platform/npp-partitioned-v3")$filterDate("1991-01-01", "2024-12-31")$mean() %>%
+npp = ee$ImageCollection("projects/rap-data-365417/assets/npp-partitioned-16day-v3")$filterDate("1991-01-01", "2024-12-31")$mean() %>%
   rgee::ee_as_rast(region = shp$geometry(), via="drive", scale=100) %>%
   normals::write_as_cog("./npp.tif")
 
@@ -195,47 +195,71 @@ make_modis_annual_normals <- function(data_dir, func="sum") {
 }
 
 
-ee_zonal_mean <- function(ee_raster, zones, scale = 30, max_pixels = 1e9,
-                          geometry_col = "geometry", id_col = NULL) {
-
-  # Convert to ee.Image if it's an ImageCollection
-  if (inherits(ee_raster, "ee.imagecollection.ImageCollection")) {
-    ee_raster <- ee_raster$toBands()
-  }
-
-  # Get band names
-  band_names <- ee_raster$bandNames()$getInfo()
-
-  # Function to calculate zonal statistics for each feature
-  zonal_stats <- function(feature) {
-    # Calculate mean for all bands within the feature geometry
-    stats <- ee_raster$reduceRegion(
+reduce_to_region <- function(shp, r, out_name, resolution=500) {
+  print(glue::glue("Working on {out_name}..."))
+  reduced <- r$map(function(image) {
+    image$reduceRegions(
+      collection = shp,
       reducer = ee$Reducer$mean(),
-      geometry = feature$geometry(),
-      scale = scale,
-      maxPixels = max_pixels
-    )
+      scale = resolution
+    )$map(function(f) {
+      f$set(
+        list(
+          date = image$date()$format()
+        )
+      )
+    })
+  })$flatten()$map(
+    function(x) {
+      ee$Feature(NULL, x$toDictionary())
+    }
+  )
 
-    # Add the statistics as properties to the feature
-    feature$set(stats)
-  }
+  dat <- rgee::ee_as_sf(reduced, maxFeatures=75000, via="drive")
 
-  # Map the zonal statistics function over all features
-  zones_with_stats <- zones$map(rgee::ee_utils_pyfunc(zonal_stats))
-
-  # Convert to R data frame
-  result <- rgee::ee_as_sf(zones_with_stats)
-
-  # Clean up the result - remove geometry and reshape if needed
-  result_clean <- result %>%
+  dat %>%
     sf::st_drop_geometry() %>%
-    tibble::as_tibble()
-
-  # If id_col is specified, make sure it's included
-  if (!is.null(id_col) && id_col %in% names(result_clean)) {
-    result_clean <- result_clean %>%
-      dplyr::select(!!id_col, dplyr::everything())
-  }
-
-  return(result_clean)
+    tidyr::pivot_longer(-c(date, id, name), names_to = "variable") %>%
+    readr::write_csv(out_name)
 }
+
+blm = sf::read_sf("https://mco-normals.s3.us-east-2.amazonaws.com/fgb/blm.fgb")
+county = sf::read_sf("https://mco-normals.s3.us-east-2.amazonaws.com/fgb/counties.fgb")
+huc = sf::read_sf("https://mco-normals.s3.us-east-2.amazonaws.com/fgb/hucs.fgb")
+tribes = sf::read_sf("https://mco-normals.s3.us-east-2.amazonaws.com/fgb/tribes.fgb")
+
+tidyr::crossing(
+  product = c("mod16", "mod17", "npp", "mod13", "myd13", "cover"),
+  # product = c("mod16"),
+  loc_type = c("huc", "tribe", "blm")
+) %>%
+  dplyr::mutate(
+    resolution = dplyr::case_when(
+      product %in% c("mod13", "mod16", "mod17") ~ 500,
+      TRUE ~ 30
+    ),
+    shp =
+      dplyr::case_when(
+        # loc_type == "county" ~ list(county %>%
+        #                               rgee::sf_as_ee()),
+        loc_type == "huc" ~ list(huc %>%
+                                   rgee::sf_as_ee()),
+        loc_type == "tribe" ~ list(tribes %>%
+                                     rgee::sf_as_ee()),
+        loc_type == "blm" ~ list(blm %>%
+                                   rgee::sf_as_ee())
+
+      ),
+    coll =
+      dplyr::case_when(
+        product == "mod16" ~ list(ee$ImageCollection("MODIS/061/MOD16A2GF")$map(clean_mod16)),
+        product == "mod17" ~ list(ee$ImageCollection("MODIS/061/MOD17A2HGF")$map(clean_mod17)),
+        product == "mod13" ~ list(ee$ImageCollection("MODIS/061/MOD13A1")$map(clean_mod13)),
+        product == "myd13" ~ list(ee$ImageCollection("MODIS/061/MYD13A1")$map(clean_mod13)),
+        product == "cover" ~ list(ee$ImageCollection("projects/rap-data-365417/assets/vegetation-cover-v3")),
+        product == "npp" ~ list(ee$ImageCollection("projects/rap-data-365417/assets/npp-partitioned-16day-v3"))
+      ),
+    out_name = glue::glue("./data/ee_extract/{loc_type}_{product}.csv")
+  ) %>%
+  dplyr::rowwise() %>%
+  dplyr::mutate(extracted = list(reduce_to_region(shp, coll, out_name, resolution)))
