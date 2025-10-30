@@ -1,0 +1,1639 @@
+date,id,name,variable,value
+1986-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,9.480488883091082
+1986-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,9.67124756453335
+1986-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,8.671354762437124
+1986-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,47.261886126911826
+1986-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,9.017644644880846
+1986-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,8.075530302670312
+1986-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,12.188645745389353
+1986-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,10.969214823355346
+1986-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,8.221199236279979
+1986-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,42.942360939900226
+1986-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,9.212149749348553
+1986-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,3.81386280437773
+1986-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,4.411602041846263
+1986-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,21.2772691399192
+1986-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,4.4485376436365724
+1986-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,35.609848313076235
+1986-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,5.920893333493959
+1986-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.20520839236220723
+1986-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,7.180942012133212
+1986-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,10.922948260416172
+1986-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,5.414937864442449
+1986-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,52.701451903961676
+1986-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,6.641194511587958
+1986-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,1.8685291530169927
+1986-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,10.169972122743417
+1986-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,7.259744860798841
+1986-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,4.947399980501036
+1986-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,46.84118818008554
+1986-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,7.817321671842966
+1986-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,8.21621238955594
+1986-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,6.1792839550893275
+1986-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,10.415000119877936
+1986-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,6.382502962724785
+1986-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,52.83873471596273
+1986-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,6.294958280023822
+1986-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,4.164245547213211
+1986-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,4.370168409324854
+1986-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,3.6708394608170463
+1986-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,6.795588546549889
+1986-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,37.304302997597844
+1986-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,3.8376577377030645
+1986-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,18.043754630009378
+1987-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,9.563868695080679
+1987-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,9.720224989111468
+1987-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,9.685685642838047
+1987-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,44.20523464531362
+1987-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,8.841616058367007
+1987-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,9.532867296771188
+1987-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,11.078563888842549
+1987-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,11.528451711474457
+1987-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,9.33979950108101
+1987-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,40.51872130776127
+1987-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,9.859534920924567
+1987-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,4.279378383246195
+1987-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,5.747096838594375
+1987-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,16.372607060831008
+1987-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,4.202843330053837
+1987-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,40.710964488700014
+1987-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,5.730566865892705
+1987-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.33844903562374457
+1987-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,6.530801955234172
+1987-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,10.911878270325323
+1987-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,6.741958162635672
+1987-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,51.37115630435264
+1987-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,6.4142942662089775
+1987-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.2682492119576034
+1987-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,7.235519363145215
+1987-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,7.009855853676495
+1987-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,6.015430210145577
+1987-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,46.886160425349075
+1987-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,7.99879344709814
+1987-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,8.792203710954587
+1987-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,5.324839461850866
+1987-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,9.268874874320055
+1987-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,6.8707624698587315
+1987-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,51.440307020868076
+1987-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,7.061650195594545
+1987-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,3.7489358059875904
+1987-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,4.467663834703187
+1987-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,3.8442182066023407
+1987-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,6.962896817065833
+1987-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,37.04260443970051
+1987-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.500923828635466
+1987-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,15.89055480621794
+1988-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,6.389957845878497
+1988-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,10.389807535819013
+1988-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,11.041854321944347
+1988-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,45.17408451356604
+1988-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,7.839917875233506
+1988-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,10.134176407896362
+1988-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,9.152607902120163
+1988-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,11.262109009025654
+1988-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,8.892059140319128
+1988-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,43.857160749099485
+1988-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,9.096964872006966
+1988-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,4.069092407878109
+1988-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,2.84281252494932
+1988-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,18.626717048575877
+1988-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,5.7743464325537435
+1988-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,41.935125121639174
+1988-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,5.895643018442486
+1988-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.4127683271025441
+1988-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,3.198636091629401
+1988-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,13.93250041276622
+1988-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,9.180247702962047
+1988-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,51.7346771742129
+1988-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,5.741851907264227
+1988-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,1.724976289461633
+1988-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,4.602217683471413
+1988-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,9.795730301227616
+1988-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,8.693989487245208
+1988-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,48.56053816087328
+1988-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,6.583929525335905
+1988-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,7.44698640964194
+1988-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,3.5048673433557456
+1988-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,9.144542004572703
+1988-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,7.8208286756709144
+1988-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,54.94417978018661
+1988-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,6.04158949283935
+1988-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,3.2703830793383495
+1988-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,4.286308171505677
+1988-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,4.705894175144088
+1988-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,7.512543270573696
+1988-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,34.93892722161832
+1988-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,5.172457267138784
+1988-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,17.688606005977427
+1989-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,9.872779192781351
+1989-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,11.023085845157938
+1989-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,8.858085273697881
+1989-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,46.03993621728156
+1989-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,9.054420389463647
+1989-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,6.427076638023943
+1989-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,10.72892297585942
+1989-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,11.986943735172089
+1989-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,7.745208922699591
+1989-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,43.040328376603874
+1989-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,8.904664626288307
+1989-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,2.846852371362112
+1989-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,4.068140164493826
+1989-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,19.479836491229747
+1989-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,4.570510662918462
+1989-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,41.930733667657194
+1989-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,5.484539512709775
+1989-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.2121662720609875
+1989-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,4.864177718733826
+1989-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,12.149830969492697
+1989-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,5.434768193621127
+1989-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,55.24498958338477
+1989-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,6.6214747754615315
+1989-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,1.6874920230795225
+1989-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,6.333407354653215
+1989-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,7.6344481559666635
+1989-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,4.786941655878845
+1989-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,53.81219244952348
+1989-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,7.652794993459546
+1989-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,6.38378227169148
+1989-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,3.4903726434131332
+1989-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,9.832773481231841
+1989-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,6.495380473237885
+1989-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,54.27191616438532
+1989-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,6.882889067784263
+1989-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,4.6230867696578475
+1989-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,3.610091916698449
+1989-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,4.406379329860869
+1989-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,7.104632326845975
+1989-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,35.500218641208576
+1989-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,5.007131350326726
+1989-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,19.800514586822953
+1990-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,7.766888363004165
+1990-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,7.996344215711466
+1990-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,7.505182290643931
+1990-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,52.72344603069098
+1990-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,8.990336294834304
+1990-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,6.315430286750277
+1990-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,8.835874890434505
+1990-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,8.25243034954576
+1990-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,6.795141692880133
+1990-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,48.959750028125185
+1990-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,8.064132072994479
+1990-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,3.319014691933725
+1990-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,2.84054715929928
+1990-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,18.67661889485349
+1990-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,5.50236715056164
+1990-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,41.23670608496972
+1990-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,5.515003169315345
+1990-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.18664661924452075
+1990-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,5.391056769368385
+1990-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,9.59398230618575
+1990-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,6.259200023443712
+1990-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,55.097210179448396
+1990-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,7.104669735418353
+1990-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.128871407410426
+1990-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,4.637284321428365
+1990-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,4.663856727480103
+1990-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,4.653479375678776
+1990-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,53.399346930817494
+1990-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,7.400090748369053
+1990-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,9.537924872696374
+1990-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,3.1389663267150927
+1990-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,7.600472081500721
+1990-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,5.956642460383084
+1990-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,58.89984562592199
+1990-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,6.921169509677657
+1990-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,5.1742342809483475
+1990-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,3.369964382732748
+1990-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,3.2323029339858613
+1990-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,5.554546488311024
+1990-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,36.10542764889747
+1990-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.2766567590174
+1990-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,20.047495796312564
+1991-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,7.156766109930548
+1991-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,7.828935831934156
+1991-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,6.904219167638067
+1991-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,55.00341623526392
+1991-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,8.280839024489381
+1991-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,5.925757215191244
+1991-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,8.655066487325284
+1991-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,8.66990584841425
+1991-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,7.258379840957544
+1991-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,48.002296334079965
+1991-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,7.736587254421496
+1991-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,3.732292848732778
+1991-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,2.850727599642459
+1991-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,13.004079911794403
+1991-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,3.1683237725085447
+1991-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,48.70579306407431
+1991-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,4.692818018963338
+1991-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.23660497917717668
+1991-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,4.460623273687039
+1991-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,9.94999475649559
+1991-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,6.088079376364386
+1991-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,55.622153017967996
+1991-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,6.31325510119814
+1991-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.2045747440516874
+1991-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,3.1688479607684976
+1991-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,4.49587099613095
+1991-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,3.931546220616646
+1991-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,58.523120975407785
+1991-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,6.886611852343868
+1991-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,9.789204760457451
+1991-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,3.0672643437659173
+1991-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,7.493337448076387
+1991-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,6.343397022281655
+1991-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,58.44678018601065
+1991-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,6.1572715276868575
+1991-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,5.172042275718294
+1991-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,3.720892857773458
+1991-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,3.5087107020801707
+1991-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,5.795456408083385
+1991-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,35.64405236942401
+1991-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,5.557100132233431
+1991-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,16.17719059085518
+1992-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,7.025710224053002
+1992-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,8.471763450140118
+1992-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,8.55369953662933
+1992-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,53.60975053542659
+1992-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,8.005055555121864
+1992-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,6.200990580916759
+1992-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,10.614924425437271
+1992-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,8.416175912842967
+1992-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,6.818640981721171
+1992-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,49.87823525079806
+1992-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,8.47693588810918
+1992-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,3.4212723513540917
+1992-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,3.976579428393554
+1992-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,11.41604107047725
+1992-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,4.120585365973422
+1992-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,49.61048128972761
+1992-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,4.737763571556562
+1992-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.2711414840236673
+1992-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,2.74829246909508
+1992-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,9.949747360601581
+1992-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,6.081970460598079
+1992-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,60.17855358835948
+1992-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,5.426199476362625
+1992-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,1.5031554476775246
+1992-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,3.1422202642161623
+1992-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,6.863059897781639
+1992-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,5.723815498128023
+1992-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,58.07954995982991
+1992-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,7.549785422806812
+1992-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,6.6897151587732155
+1992-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,2.7249867717825698
+1992-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,7.738131155599277
+1992-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,7.171912850065446
+1992-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,60.26658244979233
+1992-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,5.417287518144858
+1992-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,3.5155542311797703
+1992-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,2.802617526280157
+1992-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,4.1288969427326
+1992-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,7.133338908562921
+1992-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,38.25262560626169
+1992-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,5.398950726191337
+1992-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,17.502719427953405
+1993-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,5.916969251158859
+1993-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,8.480982023910608
+1993-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,8.268642528545895
+1993-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,56.62456527255637
+1993-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,8.15441445085648
+1993-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,6.158153141553441
+1993-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,9.5767813757881175
+1993-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,8.78717900265431
+1993-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,7.274903249445383
+1993-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,49.95654980642642
+1993-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,9.029807184282259
+1993-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,3.2124897338341327
+1993-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,2.172102748587733
+1993-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,10.819076789553822
+1993-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,4.105393534302876
+1993-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,53.94604315845815
+1993-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.9180697583903443
+1993-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.19496041922054302
+1993-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,4.085561050860376
+1993-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,10.60318534552668
+1993-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,5.8738987866351
+1993-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,60.23574907203029
+1993-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,5.691514361607011
+1993-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,1.2672927495925055
+1993-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,4.706747599516397
+1993-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,6.627988468502653
+1993-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,4.785526318121875
+1993-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,58.94874467363045
+1993-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,8.221577231262396
+1993-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,5.7815508451027124
+1993-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,3.598820535276054
+1993-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,7.123344881973235
+1993-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,5.593861107719548
+1993-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,59.167803277502856
+1993-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,5.294095425937048
+1993-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,2.1455733533302945
+1993-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,2.511207486881335
+1993-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,3.2580905236065485
+1993-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,6.065983942779092
+1993-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,37.1872017556019
+1993-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.655768267248958
+1993-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,12.960608149453925
+1994-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,8.423565756079633
+1994-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,7.532153413865734
+1994-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,8.799922372048554
+1994-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,54.15485231250406
+1994-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,8.65298573481901
+1994-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,5.642426350914675
+1994-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,9.707880441491788
+1994-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,7.737215839242317
+1994-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,8.209699670503799
+1994-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,49.96047112872346
+1994-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,8.186432206177923
+1994-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,3.2551727032203086
+1994-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,3.0104342902870616
+1994-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,8.58743557478333
+1994-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,3.138797061402075
+1994-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,53.87752286171495
+1994-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.5587194737734484
+1994-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.15709676774425357
+1994-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,5.386468929607194
+1994-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,7.178428820051347
+1994-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,5.755686558701882
+1994-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,61.54954726623565
+1994-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,5.098388206574724
+1994-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,1.7437170875130383
+1994-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,4.457592733457054
+1994-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,4.873968570178739
+1994-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,5.225984418558184
+1994-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,58.794158085473775
+1994-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,7.872918102803328
+1994-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,7.051654883003699
+1994-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,4.062782075202613
+1994-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,6.251923263191825
+1994-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,6.989559363650125
+1994-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,62.171865944182116
+1994-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,4.7139686439050905
+1994-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,2.8378467673805
+1994-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,4.751426446767857
+1994-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,3.652265809855633
+1994-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,7.388372757629706
+1994-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,39.04859409925926
+1994-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.726738371243733
+1994-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,13.530376033618646
+1995-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,13.375778988003063
+1995-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,7.768318381915425
+1995-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,7.507370674040305
+1995-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,50.25895759730888
+1995-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,7.925928205199105
+1995-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,6.194338070260911
+1995-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,15.97686818427804
+1995-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,6.62174013538081
+1995-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,6.54159345370886
+1995-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,48.30093855461396
+1995-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,6.5299654973662085
+1995-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,3.8158598760516074
+1995-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,4.508283271256594
+1995-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,6.56627240510023
+1995-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,3.728427043591797
+1995-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,50.392398989134875
+1995-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.5932037457396606
+1995-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.31395953667472265
+1995-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,6.796422107107908
+1995-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,6.518461069658333
+1995-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,6.500227100740334
+1995-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,59.80576501509742
+1995-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,4.2952024778924605
+1995-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,1.9977431631662323
+1995-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,6.222760990192703
+1995-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,4.328109742650163
+1995-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,5.552306205622293
+1995-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,56.974728810652685
+1995-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,6.952779540272951
+1995-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,7.264596285500294
+1995-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,6.094855955614778
+1995-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,4.475629150696057
+1995-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,5.619780725754498
+1995-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,62.13167031737828
+1995-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,4.263960401787601
+1995-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,3.926653091127554
+1995-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,7.51081649591094
+1995-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,3.5953809486551367
+1995-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,9.320201573093483
+1995-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,35.93310586129739
+1995-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.8290919605635665
+1995-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,19.121179258407402
+1996-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,9.139592485144131
+1996-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,7.374895669756433
+1996-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,8.041004704151046
+1996-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,54.38809781686672
+1996-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,6.727362801389372
+1996-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,7.24537025511458
+1996-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,10.147827945105476
+1996-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,6.842883398979843
+1996-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,8.45191194892508
+1996-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,51.58205402036555
+1996-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,6.045022292419096
+1996-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,4.234536773463393
+1996-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,1.710875478297107
+1996-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,5.690594346849059
+1996-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,3.983886328518035
+1996-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,52.98152051322247
+1996-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.3734598943330427
+1996-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.2728836754454204
+1996-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,4.3578643335237635
+1996-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,6.040944638117167
+1996-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,6.063503244798455
+1996-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,63.551711007891576
+1996-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,4.860966166604325
+1996-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.308447788660122
+1996-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,4.25014876038231
+1996-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,3.3760343025289523
+1996-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,4.83964360697394
+1996-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,60.69572036927137
+1996-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,7.013095642399528
+1996-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,8.817928892401799
+1996-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,3.6337579364257477
+1996-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,3.11574740478373
+1996-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,6.030478988357581
+1996-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,61.83640406788954
+1996-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,4.687408859702068
+1996-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,5.753234959703519
+1996-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,6.379028034259656
+1996-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,2.633324310513004
+1996-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,7.551805623452515
+1996-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,35.239237028966166
+1996-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.656125529598174
+1996-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,21.94831195278366
+1997-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,7.593718424306378
+1997-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,7.687592108769351
+1997-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,8.39204567952648
+1997-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,54.51975017881378
+1997-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,7.832071860826886
+1997-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,6.400611124514978
+1997-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,10.362707799724916
+1997-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,8.131330183881875
+1997-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,7.784942105391111
+1997-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,48.86359942723846
+1997-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,7.504346024398183
+1997-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,4.061381761859989
+1997-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,1.4457072792681915
+1997-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,9.461108881832844
+1997-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,3.4710873394858344
+1997-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,53.12917468552737
+1997-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,2.972126318874759
+1997-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.19193222583404593
+1997-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,5.652340935026136
+1997-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,10.741970128748621
+1997-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,7.074538485642201
+1997-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,58.58031238258155
+1997-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,4.923906782898469
+1997-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,1.805518639889333
+1997-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,4.439661004842957
+1997-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,5.2272300736528745
+1997-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,6.1829422679584605
+1997-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,60.853122294454764
+1997-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,6.8699570032288175
+1997-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,7.199715409027258
+1997-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,4.568614399789777
+1997-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,4.634341559976535
+1997-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,5.560943470532793
+1997-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,60.44808949352726
+1997-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,4.878194841403836
+1997-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,4.18199458953258
+1997-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,4.549611558063546
+1997-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,2.526567533650687
+1997-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,6.229570090924476
+1997-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,36.39554823276578
+1997-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,5.307488817877416
+1997-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,19.70775182025986
+1998-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,8.075997771593187
+1998-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,8.875741276015711
+1998-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,13.043010497228794
+1998-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,47.52098973253257
+1998-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,7.66223009849263
+1998-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,8.299585482091137
+1998-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,9.682773383258082
+1998-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,9.676715467797377
+1998-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,9.764188694462929
+1998-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,46.60005610772521
+1998-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,8.436035627775295
+1998-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,4.764950791324896
+1998-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,1.6643892748640254
+1998-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,10.817239993559875
+1998-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,3.996373918009314
+1998-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,54.09487317733335
+1998-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.6072538452584153
+1998-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.13536853964306655
+1998-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,2.951110133752016
+1998-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,9.720685589270522
+1998-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,6.759843247238227
+1998-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,60.649185582481394
+1998-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,5.047928648180118
+1998-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.009794652888201
+1998-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,5.978470874862038
+1998-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,5.113696637889158
+1998-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,5.375518612383119
+1998-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,62.06605686710185
+1998-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,6.528344058630383
+1998-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,7.031429070447104
+1998-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,4.088310100494345
+1998-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,5.75854757955082
+1998-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,6.209244795751158
+1998-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,62.522758004761776
+1998-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,5.280251824711748
+1998-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,3.929740876922411
+1998-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,4.854411048308158
+1998-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,2.682972895958072
+1998-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,7.149903225162227
+1998-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,37.78588923879269
+1998-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,5.481180856122301
+1998-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,20.920439687666796
+1999-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,13.668733761820413
+1999-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,6.890279507512179
+1999-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,8.826560353390636
+1999-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,47.94327729463419
+1999-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,7.922499367941543
+1999-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,8.329893876407937
+1999-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,13.522225483049812
+1999-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,7.904777416010082
+1999-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,8.329557936807156
+1999-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,44.902936184176994
+1999-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,8.094880859990043
+1999-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,4.407865634106032
+1999-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,2.5117472890569372
+1999-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,7.923842376565451
+1999-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,2.8205610764006837
+1999-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,54.58076312234511
+1999-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.544719578994121
+1999-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.30612962931618803
+1999-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,6.3516380398151275
+1999-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,7.715687755256935
+1999-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,5.39898928157106
+1999-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,58.31508068745649
+1999-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,5.960580077303331
+1999-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.470371905731498
+1999-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,6.339680138849286
+1999-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,5.049558609234066
+1999-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,5.448062757455375
+1999-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,58.85556943480726
+1999-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,8.280409869184975
+1999-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,7.631180390928157
+1999-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,3.409412614795161
+1999-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,6.601594682695912
+1999-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,8.502657416061606
+1999-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,61.30921898014389
+1999-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,4.222986762992812
+1999-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,3.394514813767406
+1999-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,4.963821656037608
+1999-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,4.301177632278631
+1999-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,9.995579161011435
+1999-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,34.74939153811417
+1999-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.599935023980622
+1999-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,18.969561237996444
+2000-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,8.580970270054204
+2000-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,9.626100298018624
+2000-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,10.781928072614713
+2000-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,49.57504018679575
+2000-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,8.434590042952141
+2000-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,7.213857693927178
+2000-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,11.178230804119966
+2000-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,9.571179078232355
+2000-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,8.929759513772865
+2000-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,44.5140237206429
+2000-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,7.827699787725939
+2000-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,4.239783519729227
+2000-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,2.727667482284573
+2000-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,6.850770034885724
+2000-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,3.5647288347499724
+2000-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,54.74248786127921
+2000-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.049209677185583
+2000-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.15889627642922383
+2000-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,5.130274058543753
+2000-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,9.165162707536139
+2000-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,7.705918761981353
+2000-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,58.52361210215982
+2000-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,4.9275538670480055
+2000-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.5300562640407644
+2000-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,6.562657567499528
+2000-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,5.844865788240239
+2000-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,6.891129130560161
+2000-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,57.42975910442518
+2000-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,8.007843592271554
+2000-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,8.31050727014045
+2000-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,3.6693685748270206
+2000-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,8.286911609788078
+2000-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,9.855117617434859
+2000-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,57.10988525297063
+2000-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,4.041834741465169
+2000-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,4.12745779398324
+2000-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,5.8020871885985725
+2000-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,3.7747122377403075
+2000-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,8.716149020111976
+2000-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,35.41867525430226
+2000-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.512955301971099
+2000-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,20.218796688890315
+2001-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,8.416557012695979
+2001-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,11.17551741403074
+2001-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,11.030000791233402
+2001-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,47.79705708156575
+2001-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,8.541776372493878
+2001-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,6.344171255967002
+2001-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,10.330292627211024
+2001-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,11.626821067987832
+2001-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,10.046210913869789
+2001-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,42.95226604419283
+2001-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,8.450683239396202
+2001-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,4.134080060470263
+2001-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,1.8186094915413116
+2001-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,5.709805156401362
+2001-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,3.6579246047954825
+2001-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,55.04813334432275
+2001-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,2.7024386555669677
+2001-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.20665237554953272
+2001-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,4.234674292579437
+2001-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,11.413204950653565
+2001-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,8.370320389773491
+2001-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,59.689227755236224
+2001-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,3.4380420422700544
+2001-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.4519871124279238
+2001-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,5.708222273547487
+2001-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,8.75792364228062
+2001-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,8.94814879792046
+2001-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,55.03885654761084
+2001-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,7.35724754451267
+2001-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,7.991113958909411
+2001-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,5.555855697545096
+2001-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,9.983587555442288
+2001-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,9.226703235159318
+2001-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,53.51427882406841
+2001-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,4.594926599519121
+2001-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,4.01810785093644
+2001-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,7.04569782663327
+2001-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,3.633456666135771
+2001-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,8.339480839078131
+2001-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,34.995367627528815
+2001-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,5.608943677213979
+2001-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,20.56536733831696
+2002-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,6.993904813335712
+2002-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,12.557110741524285
+2002-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,14.130947811158228
+2002-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,43.43242768272747
+2002-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,8.084512665901675
+2002-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,7.3457552897921286
+2002-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,11.640399910185396
+2002-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,13.251148392956102
+2002-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,11.296925223687362
+2002-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,38.65619620836027
+2002-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,9.37131602020945
+2002-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,4.341179270177318
+2002-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,2.88796049161158
+2002-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,7.325142226891603
+2002-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,3.9657574407706964
+2002-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,55.01694803190024
+2002-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,2.706246751368929
+2002-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.16952639868144123
+2002-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,3.6760200805040726
+2002-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,11.573255608579316
+2002-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,7.178360446279896
+2002-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,61.078593227432606
+2002-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,4.183974543077413
+2002-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.479954186592611
+2002-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,6.553660919339489
+2002-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,8.280326784845636
+2002-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,7.087851840227385
+2002-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,54.69712193784322
+2002-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,7.0244093926595355
+2002-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,8.627963354467715
+2002-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,5.8044738813708445
+2002-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,9.71864381954756
+2002-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,7.37831584256728
+2002-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,54.885336497733725
+2002-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,4.885975678331017
+2002-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,4.760482481886795
+2002-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,7.006528919900133
+2002-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,3.693274365494931
+2002-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,8.285894464646967
+2002-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,34.02972579232303
+2002-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,5.402272148243969
+2002-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,23.161502167549266
+2003-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,15.436837931798847
+2003-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,8.748058625764191
+2003-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,8.784870192172534
+2003-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,45.37784788298424
+2003-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,6.765902211721089
+2003-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,7.282515218625943
+2003-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,16.350085593835043
+2003-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,9.889661173502741
+2003-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,8.418296817933593
+2003-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,40.93590607106135
+2003-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,7.140904673556807
+2003-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,3.761603742761538
+2003-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,2.0580915549565044
+2003-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,7.09181994801718
+2003-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,3.9389420312702663
+2003-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,57.13222506493697
+2003-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,2.748280284365254
+2003-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.1602778323847854
+2003-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,5.455532424163493
+2003-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,11.33601543159373
+2003-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,7.260731486263547
+2003-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,58.777493777469
+2003-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,4.211387848741363
+2003-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.4832823621629188
+2003-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,7.909055744607444
+2003-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,6.337845990539311
+2003-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,6.399296614115036
+2003-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,55.44901752873185
+2003-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,6.1472797438650275
+2003-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,9.244723852494085
+2003-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,4.050565129656577
+2003-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,7.216559147071321
+2003-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,6.314741016508013
+2003-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,60.06814604614303
+2003-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,4.059680934622977
+2003-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,4.087730958210777
+2003-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,6.0316408884787895
+2003-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,4.933779192572173
+2003-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,9.751847591116618
+2003-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,33.414974587418186
+2003-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.772057701227258
+2003-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,22.41277090446936
+2004-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,9.738348649711403
+2004-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,12.163242994021871
+2004-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,16.419173202490633
+2004-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,38.346385421033474
+2004-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,7.737517477976514
+2004-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,7.1914297924897745
+2004-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,12.371221046613492
+2004-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,12.663371788993055
+2004-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,13.22880011604941
+2004-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,36.12793748696444
+2004-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,7.8826323263896585
+2004-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,4.222850259235965
+2004-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,1.8231617067734358
+2004-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,7.021619791069179
+2004-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,3.8737920526053475
+2004-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,52.47943767323342
+2004-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.111017957612739
+2004-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.19427904697979553
+2004-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,6.486073105830655
+2004-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,11.301113572732445
+2004-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,6.317387878128493
+2004-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,55.98585589046621
+2004-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,5.35359073286776
+2004-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.3269676161788984
+2004-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,7.694272889511325
+2004-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,5.706896406821286
+2004-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,5.573794659266115
+2004-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,55.169478778198176
+2004-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,7.699502505407852
+2004-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,8.600041974900641
+2004-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,5.005802477078878
+2004-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,7.813415492332865
+2004-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,7.223286933152249
+2004-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,56.674941365458004
+2004-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,4.561609244264056
+2004-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,3.477307238597694
+2004-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,7.02677560539383
+2004-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,4.870079742631806
+2004-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,9.889791889701534
+2004-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,32.8028933456282
+2004-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.822613335397115
+2004-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,21.317087407216714
+2005-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,13.469833339004731
+2005-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,8.327517055883824
+2005-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,8.483341504343962
+2005-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,47.54277482526575
+2005-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,7.857206759412441
+2005-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,7.438470246737634
+2005-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,16.17304448582974
+2005-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,8.923680341719141
+2005-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,8.255872417180852
+2005-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,40.606112278618816
+2005-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,8.443398803625623
+2005-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,4.528419867805676
+2005-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,3.678228193254001
+2005-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,5.439657604728026
+2005-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,3.3094842741464907
+2005-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,55.40222147224723
+2005-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,2.818151305306458
+2005-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.17984481477811537
+2005-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,6.224416503225475
+2005-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,10.3295426539538
+2005-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,6.825280970204138
+2005-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,56.43614933255715
+2005-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,6.242472819370872
+2005-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.41920498200897
+2005-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,7.960833601400604
+2005-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,5.605248734261998
+2005-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,6.290110242115568
+2005-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,53.87809497766325
+2005-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,8.907258524408382
+2005-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,9.250863949915914
+2005-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,4.857312194764306
+2005-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,6.243358119240719
+2005-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,6.940626123264084
+2005-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,59.31590552474438
+2005-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,4.983960675869436
+2005-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,4.165072899717766
+2005-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,5.984130375240031
+2005-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,3.732962930746724
+2005-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,8.312595142175269
+2005-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,34.8130696252512
+2005-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.6351582775367435
+2005-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,20.546498105444353
+2006-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,14.440682575842933
+2006-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,8.641584698558335
+2006-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,10.201016281628931
+2006-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,44.543524497064645
+2006-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,8.598383915891098
+2006-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,8.054004643052512
+2006-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,18.78556377789658
+2006-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,9.22781004442135
+2006-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,10.969270875020527
+2006-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,37.51154458890489
+2006-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,7.558590977300076
+2006-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,4.328962862301827
+2006-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,2.3754643627174437
+2006-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,6.356390937698521
+2006-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,5.369618091281361
+2006-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,53.5898670097342
+2006-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,2.864440976333986
+2006-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.2385257798737143
+2006-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,8.807914017261517
+2006-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,9.77603663726671
+2006-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,8.489444545736655
+2006-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,54.773273371513454
+2006-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,5.114650559916836
+2006-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.557418367638093
+2006-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,7.165596462242183
+2006-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,6.290005093712312
+2006-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,7.147415266851629
+2006-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,54.73707361795986
+2006-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,7.509255098013593
+2006-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,9.298624932288131
+2006-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,5.519491020862041
+2006-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,5.890022486485078
+2006-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,6.844680863647981
+2006-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,59.5392332854674
+2006-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,5.156453982438043
+2006-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,4.282871581564828
+2006-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,8.148779300910755
+2006-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,3.2224529882873076
+2006-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,8.43446850274203
+2006-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,33.43941134777558
+2006-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.674741292755738
+2006-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,20.90361271317994
+2007-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,17.948817089319856
+2007-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,6.829053421268441
+2007-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,8.72464327771684
+2007-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,44.04321365086151
+2007-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,8.820963719377636
+2007-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,8.360516779931173
+2007-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,24.058123913332754
+2007-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,6.966026257013834
+2007-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,7.469845904024126
+2007-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,37.118632577056246
+2007-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,7.902343689024897
+2007-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,4.375175773913742
+2007-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,5.853306443732814
+2007-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,6.949254515907814
+2007-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,4.297747389490626
+2007-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,49.2573980351645
+2007-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.377684214873002
+2007-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.37785339736452794
+2007-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,12.594549095227052
+2007-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,8.563563557588115
+2007-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,7.028766015357422
+2007-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,53.43435882265266
+2007-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,5.025320602435131
+2007-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.557975577790491
+2007-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,9.535869478965887
+2007-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,4.829242767788708
+2007-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,5.686415303868346
+2007-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,54.72677610240877
+2007-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,7.18410200771513
+2007-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,8.605053692524423
+2007-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,6.705813696848386
+2007-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,7.269554818636305
+2007-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,9.108956150046822
+2007-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,54.95961787758554
+2007-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,4.483054327273866
+2007-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,3.7058089432721606
+2007-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,8.477521238488068
+2007-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,3.498982316427784
+2007-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,8.724074072996999
+2007-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,32.70579480040856
+2007-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,5.383527191885664
+2007-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,21.439918538838302
+2008-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,8.402403343713964
+2008-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,7.138426302636305
+2008-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,9.585314217325639
+2008-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,51.25239001975395
+2008-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,9.842042916597
+2008-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,8.468080142899902
+2008-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,11.264820070325216
+2008-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,7.643389191379901
+2008-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,9.684031108980513
+2008-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,46.528265097043914
+2008-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,8.259455282818244
+2008-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,4.676091923871362
+2008-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,3.7083280216947174
+2008-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,6.563415085606502
+2008-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,5.341017977258632
+2008-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,49.95603868528788
+2008-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.2092255646703904
+2008-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.22295018637399774
+2008-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,5.606673689116932
+2008-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,9.267474682872479
+2008-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,8.35551321118058
+2008-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,59.13696239023891
+2008-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,4.880434678093011
+2008-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.3197210855125654
+2008-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,6.224114410930706
+2008-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,4.821597746879491
+2008-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,6.172139520794798
+2008-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,56.75190436020769
+2008-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,6.771093401583205
+2008-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,8.880995192515819
+2008-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,5.197680340890941
+2008-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,9.397659331856868
+2008-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,8.752840939841985
+2008-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,54.77625058737571
+2008-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,4.60457410716012
+2008-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,3.262116041256623
+2008-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,8.3827635992745
+2008-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,4.505987539710655
+2008-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,9.14846925101953
+2008-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,32.849727160550785
+2008-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.953898824637873
+2008-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,19.0972410319656
+2009-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,7.68961889464985
+2009-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,7.526607497937294
+2009-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,10.117453953417815
+2009-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,51.286358442475866
+2009-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,9.602275053113575
+2009-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,8.306932861516371
+2009-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,14.943023027324358
+2009-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,7.418562730652093
+2009-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,9.875975052128444
+2009-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,43.5218045160774
+2009-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,7.884370439678905
+2009-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,4.466158991712022
+2009-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,1.3038115875771195
+2009-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,7.121115881895508
+2009-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,4.682930769874594
+2009-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,53.27757567255486
+2009-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.8433272039305555
+2009-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.33008989327418575
+2009-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,4.953795498394795
+2009-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,8.041485098335778
+2009-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,6.575927585272101
+2009-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,61.28639608140741
+2009-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,5.8155805690836715
+2009-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.557548768932774
+2009-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,4.130231359854359
+2009-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,5.340456770961762
+2009-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,6.5391332347262825
+2009-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,58.398357723543825
+2009-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,7.055640241057198
+2009-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,9.753818297845152
+2009-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,2.8686058430145374
+2009-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,8.976259586418308
+2009-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,8.015402354306808
+2009-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,59.589174454158666
+2009-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,5.628784445705454
+2009-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,3.632565680089605
+2009-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,5.862042594131715
+2009-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,4.166292070546364
+2009-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,10.458289076159403
+2009-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,34.33993951519301
+2009-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.865448057001255
+2009-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,20.35073142610469
+2010-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,7.171068365528654
+2010-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,6.961240720281383
+2010-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,8.224759697277655
+2010-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,54.17385802346715
+2010-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,9.634225400479284
+2010-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,8.220282710056912
+2010-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,12.714893621807034
+2010-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,7.244001548747947
+2010-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,7.683704873332718
+2010-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,47.26185337409449
+2010-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,8.770909389323844
+2010-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,4.716018623468918
+2010-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,2.4460897191743056
+2010-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,6.87004837008355
+2010-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,3.62459495545033
+2010-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,58.92094941521992
+2010-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,4.171401148860854
+2010-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.3328844421938073
+2010-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,4.261150754792392
+2010-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,7.481694574164261
+2010-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,6.437437613444157
+2010-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,60.603531783570155
+2010-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,7.036553233061461
+2010-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.884357212471387
+2010-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,4.681303630612558
+2010-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,5.314320385641476
+2010-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,5.529140632861205
+2010-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,56.56322284965387
+2010-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,9.213262530558437
+2010-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,10.034257269488746
+2010-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,3.0849766431496133
+2010-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,7.326318186508539
+2010-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,7.116974339014296
+2010-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,61.72189450734968
+2010-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,5.839660716817461
+2010-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,3.543971059128208
+2010-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,5.841375645003406
+2010-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,3.9969030888673496
+2010-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,8.94324617536588
+2010-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,34.421446598497376
+2010-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,5.395336845247989
+2010-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,20.188197748397684
+2011-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,6.83983382169237
+2011-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,5.6747504549694945
+2011-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,7.336512287309465
+2011-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,57.36391870485196
+2011-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,9.786119548661622
+2011-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,8.046142763636052
+2011-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,10.988626825718457
+2011-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,6.10625425074681
+2011-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,7.4106986544764215
+2011-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,51.38285672585683
+2011-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,8.720553748571666
+2011-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,4.951375410763372
+2011-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,3.1782920432381254
+2011-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,5.860688720707857
+2011-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,3.3570839120493985
+2011-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,59.25171134308857
+2011-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.785105660331939
+2011-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.3689588068480181
+2011-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,5.6987650425003515
+2011-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,5.406451518130204
+2011-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,5.034473530690551
+2011-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,66.80755159971935
+2011-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,5.187267552315917
+2011-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,3.1860647269272278
+2011-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,5.339876958433292
+2011-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,3.5459224598303027
+2011-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,5.001636854285962
+2011-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,60.5950134641893
+2011-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,7.509101973826576
+2011-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,9.414489818049761
+2011-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,4.128992554200051
+2011-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,5.804300707867933
+2011-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,6.668827322557332
+2011-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,62.52700731053035
+2011-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,5.288427221235699
+2011-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,4.182910085269308
+2011-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,5.347602707176355
+2011-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,2.59125816626368
+2011-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,6.856657684317993
+2011-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,38.788190927720954
+2011-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.814074118035653
+2011-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,21.249216123986457
+2012-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,7.653110853240733
+2012-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,10.050896974134137
+2012-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,14.199859525917326
+2012-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,44.73139753053531
+2012-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,8.285957204000107
+2012-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,9.13868013593286
+2012-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,12.07258649419658
+2012-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,8.87873348693549
+2012-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,12.273563654059963
+2012-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,44.10415774326776
+2012-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,7.454241180594587
+2012-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,5.163346971461996
+2012-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,2.4968434753960453
+2012-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,3.952790198444706
+2012-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,3.7601191117106336
+2012-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,55.98814140488409
+2012-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.0898924645250196
+2012-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.473062286756049
+2012-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,5.926924409391517
+2012-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,4.641031881362445
+2012-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,6.342551398970428
+2012-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,66.86880248501791
+2012-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,3.892721613529596
+2012-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.9982904082749418
+2012-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,5.932461748931618
+2012-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,3.3647034620038574
+2012-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,6.369867985783433
+2012-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,58.216472721528945
+2012-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,6.333823266430356
+2012-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,9.738493356016171
+2012-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,5.798143216469318
+2012-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,6.14929885000501
+2012-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,9.766789393555564
+2012-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,52.947879549482174
+2012-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,5.90847417092133
+2012-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,6.199539029758336
+2012-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,7.4900796229137825
+2012-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,3.161248661119144
+2012-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,8.184809128346991
+2012-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,36.49256463068158
+2012-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.706308510188851
+2012-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,21.334258814819002
+2013-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,11.145224009280385
+2013-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,9.716189536832797
+2013-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,11.721289293611987
+2013-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,40.7122737650729
+2013-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,7.711778111813245
+2013-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,9.224378051993009
+2013-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,15.717304262265293
+2013-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,9.159160058499905
+2013-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,12.146868774920398
+2013-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,38.799282803242846
+2013-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,6.925130669247684
+2013-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,5.463803973957527
+2013-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,1.9045382235638058
+2013-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,2.560606411780819
+2013-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,3.521274494449833
+2013-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,51.870166762117826
+2013-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.314685189073622
+2013-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.639502816864384
+2013-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,4.388885163088512
+2013-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,5.181854383491356
+2013-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,6.545381962322945
+2013-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,62.63180820054694
+2013-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,5.414995099709436
+2013-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,3.569383295884231
+2013-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,5.0750266442342005
+2013-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,3.283459913213979
+2013-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,5.606888466469329
+2013-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,55.47043492065723
+2013-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,7.086424005409689
+2013-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,11.927550810692837
+2013-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,5.161070389290164
+2013-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,5.605195857351921
+2013-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,9.292358531309596
+2013-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,52.44497504398586
+2013-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,5.671748275705299
+2013-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,5.786898241669549
+2013-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,6.715200403201059
+2013-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,3.6017480454992716
+2013-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,11.374778857520656
+2013-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,32.01269156166032
+2013-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,5.4690604951315285
+2013-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,20.829901743431165
+2014-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,11.37357311357742
+2014-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,6.998455440712397
+2014-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,8.6198353151329
+2014-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,45.49642391467652
+2014-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,8.688472640142177
+2014-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,10.88987533808494
+2014-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,15.404476287236209
+2014-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,6.226647601051367
+2014-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,7.207232056631931
+2014-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,42.7083455210139
+2014-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,8.281552446307629
+2014-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,6.808241395567831
+2014-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,2.491399527734749
+2014-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,3.6333627194857328
+2014-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,4.324622418683838
+2014-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,51.055806187138764
+2014-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.5050327070271625
+2014-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.5348020247161192
+2014-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,5.502387559143074
+2014-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,4.704374198015839
+2014-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,7.571088669898916
+2014-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,60.3119431589558
+2014-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,5.937862656955768
+2014-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,3.9241940192846343
+2014-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,4.745826768944105
+2014-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,3.620549823753365
+2014-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,6.101520387101289
+2014-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,53.709203034748086
+2014-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,7.1520057756545805
+2014-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,13.036549685071062
+2014-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,5.537618018689681
+2014-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,5.025398212396708
+2014-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,7.783770643922632
+2014-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,51.33637061162963
+2014-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,5.719495754982253
+2014-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,6.1938745280838505
+2014-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,7.697526034381891
+2014-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,3.896907693430833
+2014-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,8.1959641303506
+2014-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,28.825635848794157
+2014-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,6.16055907849653
+2014-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,22.297583030333964
+2015-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,9.98805303697761
+2015-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,7.152901200332892
+2015-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,11.556422577169187
+2015-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,45.03485298964167
+2015-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,8.125898686016983
+2015-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,10.024068384894067
+2015-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,13.49413792975097
+2015-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,6.316838414123018
+2015-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,9.085788954813195
+2015-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,43.44297928655868
+2015-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,8.305287147195928
+2015-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,5.848029976509674
+2015-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,2.040839659852355
+2015-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,2.8977522458590323
+2015-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,4.508111279300289
+2015-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,48.57747168111843
+2015-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.1774187497785835
+2015-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.4557931342971568
+2015-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,6.638138653893603
+2015-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,4.3624466274644655
+2015-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,7.033767876815784
+2015-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,58.99450403752088
+2015-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,4.972772258596016
+2015-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,3.886474118796839
+2015-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,4.9560214874370025
+2015-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,3.8573882498432015
+2015-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,7.1635265954867995
+2015-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,52.31646740363091
+2015-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,5.860455170378675
+2015-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,12.475334211655593
+2015-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,6.080747037153429
+2015-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,4.724543530472174
+2015-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,8.97921759199522
+2015-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,45.87894251103531
+2015-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,5.61177448157456
+2015-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,6.631647042845968
+2015-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,7.352754135949336
+2015-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,4.42056430424334
+2015-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,9.624301993897145
+2015-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,27.978683239635025
+2015-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,5.280103443518541
+2015-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,20.553016146039607
+2016-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,11.939704910734688
+2016-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,8.28092219709848
+2016-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,12.664704699729517
+2016-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,39.65831933789133
+2016-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,7.830912998836903
+2016-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,10.600613097967429
+2016-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,16.59576591878297
+2016-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,7.014475477629423
+2016-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,10.893115137170845
+2016-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,37.96991310203705
+2016-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,7.651302422595879
+2016-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,5.84922293597545
+2016-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,3.3264583101027587
+2016-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,2.559727863642736
+2016-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,3.573798494373546
+2016-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,44.70232930185493
+2016-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.848094897297961
+2016-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.496284386127708
+2016-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,7.236114621925407
+2016-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,4.133057724893477
+2016-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,6.463371470029821
+2016-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,59.0526334675444
+2016-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,5.754477187426702
+2016-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,3.8255826630269127
+2016-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,6.446248775449673
+2016-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,3.6769038362379223
+2016-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,5.863459756805208
+2016-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,51.037627596972854
+2016-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,6.831265138413963
+2016-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,12.088591971746427
+2016-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,7.095757196256822
+2016-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,5.126608575629013
+2016-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,8.966908643189926
+2016-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,43.90631415843112
+2016-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,5.7560381194881165
+2016-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,6.093396675698019
+2016-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,9.706007789957509
+2016-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,3.9419048073994776
+2016-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,8.606200513633304
+2016-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,26.786799340689758
+2016-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,5.291780095609994
+2016-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,20.63454799635156
+2017-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,15.123778806750622
+2017-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,6.6780239325882595
+2017-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,9.41917491358451
+2017-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,41.93739761523382
+2017-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,7.943873966923813
+2017-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,11.728121935660887
+2017-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,21.359178475809916
+2017-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,5.746687545458056
+2017-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,6.9243465070688535
+2017-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,38.56345847887366
+2017-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,7.101452035874603
+2017-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,6.646280916168099
+2017-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,4.260525081709613
+2017-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,4.329410274610457
+2017-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,5.836251898673204
+2017-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,41.77373097681638
+2017-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.8498117383346737
+2017-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.41335304324555094
+2017-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,8.639558101824163
+2017-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,4.226629107524673
+2017-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,7.25600692614026
+2017-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,59.95663939927226
+2017-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,4.331545693346501
+2017-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,3.0675309032646365
+2017-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,7.967227565898949
+2017-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,3.153705370712234
+2017-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,6.054851018038634
+2017-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,51.47971427245766
+2017-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,5.393325844828948
+2017-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,11.020758937066933
+2017-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,8.739109630586963
+2017-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,3.976900652896296
+2017-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,6.451108433971804
+2017-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,46.024904026390956
+2017-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,4.735684423887646
+2017-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,4.856396481555972
+2017-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,10.083646542624313
+2017-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,2.2734993517319166
+2017-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,5.534277643475881
+2017-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,29.289136233782425
+2017-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.708181735930677
+2017-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,22.052478496908133
+2018-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,13.642919104782745
+2018-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,6.278290597853845
+2018-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,8.214673515215345
+2018-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,43.89550597442829
+2018-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,9.987316543482983
+2018-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,12.090050317260461
+2018-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,18.334337481614636
+2018-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,5.291186722776579
+2018-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,6.352494734922995
+2018-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,42.312995018926735
+2018-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,8.615239868703515
+2018-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,6.953614688988379
+2018-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,6.092624552373845
+2018-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,5.924755716727998
+2018-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,4.337563161748475
+2018-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,40.559539398956986
+2018-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.6288035394660714
+2018-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.38545300976986446
+2018-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,11.65989477931728
+2018-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,6.513213383168782
+2018-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,8.528794992433564
+2018-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,53.11192792289893
+2018-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,5.581707223452564
+2018-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,3.207926936202105
+2018-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,10.293571635999287
+2018-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,3.992585363997092
+2018-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,5.558725544836938
+2018-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,47.39710738661344
+2018-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,5.812876878664848
+2018-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,11.369296442065508
+2018-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,8.729830916476926
+2018-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,5.377234953477598
+2018-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,6.7203152518415346
+2018-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,42.34483835722281
+2018-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,5.714424059493784
+2018-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,6.196266127175436
+2018-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,10.40879776199597
+2018-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,2.6187096797040077
+2018-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,6.623560902704505
+2018-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,31.037945042692094
+2018-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,5.523926035916045
+2018-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,22.6094334142861
+2019-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,10.619615031351172
+2019-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,5.450030792074038
+2019-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,8.38404285647133
+2019-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,45.385283601232196
+2019-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,9.572008774758281
+2019-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,13.790585177073222
+2019-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,11.912094933932561
+2019-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,5.3677128433961325
+2019-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,7.305761832740847
+2019-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,46.00583497600449
+2019-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,9.969332061723287
+2019-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,8.027891028344213
+2019-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,4.061430343312857
+2019-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,4.555782965723859
+2019-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,3.9037209609341357
+2019-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,42.56662028160167
+2019-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.780642096753987
+2019-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.5763679744066494
+2019-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,10.192427222688217
+2019-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,5.261809287469649
+2019-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,5.924221769007049
+2019-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,56.45592333468242
+2019-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,6.203582672963839
+2019-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,3.6907294428953583
+2019-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,8.332305574773587
+2019-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,4.053173450549537
+2019-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,5.334044876804636
+2019-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,49.98649544250966
+2019-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,6.325564857243118
+2019-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,11.725246226508157
+2019-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,5.929710454184831
+2019-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,6.2186400006485245
+2019-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,7.29583766082578
+2019-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,48.71395856922313
+2019-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,5.200326057994317
+2019-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,6.54696270406934
+2019-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,6.542775037436628
+2019-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,2.982007438601363
+2019-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,7.908307971418344
+2019-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,31.45145146213951
+2019-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,5.850303311935368
+2019-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,23.60675814539452
+2020-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,8.11916298079735
+2020-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,6.085953131130184
+2020-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,10.340422732312025
+2020-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,46.81062193254951
+2020-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,7.297357932895092
+2020-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,13.728947865712902
+2020-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,11.14618293851262
+2020-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,5.404763827800149
+2020-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,8.37374111876777
+2020-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,48.19551086540963
+2020-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,7.603699757698109
+2020-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,7.182599098608968
+2020-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,3.8407137350850897
+2020-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,2.467540482366059
+2020-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,2.9512259524475084
+2020-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,48.50636612902681
+2020-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,2.9708122781103827
+2020-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.6124650566043478
+2020-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,6.44621583937304
+2020-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,5.384211165814401
+2020-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,7.291337905164528
+2020-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,59.34247532178541
+2020-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,5.266853355087039
+2020-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,3.7955343053185566
+2020-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,6.14324473645383
+2020-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,3.3828484800456238
+2020-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,5.518856558037289
+2020-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,52.381291399447385
+2020-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,5.595385367750917
+2020-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,13.456345347438747
+2020-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,5.484748810055568
+2020-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,5.3162439586383465
+2020-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,6.634224953880428
+2020-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,50.896486087008626
+2020-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,4.347849741749784
+2020-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,5.976093627413816
+2020-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,6.97974704025741
+2020-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,2.7432524504207065
+2020-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,6.966278563785017
+2020-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,34.7509805663059
+2020-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.509653670689534
+2020-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,23.444801585753304
+2021-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,8.982194989810395
+2021-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,8.431063069590232
+2021-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,11.14709342941204
+2021-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,42.326254824339614
+2021-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,7.097669027872372
+2021-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,12.2653438977101
+2021-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,10.703408102189664
+2021-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,7.650892682019371
+2021-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,9.721295694087694
+2021-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,45.19411366101377
+2021-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,6.782387071952113
+2021-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,6.1282093532843005
+2021-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,2.696035459184856
+2021-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,5.384224657131008
+2021-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,5.154098858088116
+2021-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,50.353740557349894
+2021-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,2.7245468808365327
+2021-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.24234082890842248
+2021-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,6.268769834878441
+2021-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,6.915979542833758
+2021-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,8.358822720102044
+2021-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,60.08460175606852
+2021-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,4.37951071131178
+2021-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,3.1346962791286943
+2021-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,6.764513388851511
+2021-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,4.088384401666064
+2021-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,6.366707115712791
+2021-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,52.477113981849904
+2021-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,5.690822903040642
+2021-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,12.972371360302837
+2021-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,5.631196035658357
+2021-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,4.8932639841399945
+2021-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,6.633207130804986
+2021-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,51.63491611544969
+2021-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,4.616063212428598
+2021-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,6.347449717944185
+2021-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,7.4672544745516944
+2021-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,2.841755798309182
+2021-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,8.472994652906712
+2021-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,31.857336696131938
+2021-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,5.433080435433266
+2021-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,23.462137294231663
+2022-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,10.392709192878133
+2022-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,7.188031866067417
+2022-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,8.610151653151513
+2022-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,43.65156619241269
+2022-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,7.390807928836831
+2022-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,13.325353038079882
+2022-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,12.302601676515359
+2022-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,6.694946198762565
+2022-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,7.538850852178151
+2022-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,44.631224591563154
+2022-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,7.5133103269891075
+2022-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,6.393664067077966
+2022-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,2.4429576226355034
+2022-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,6.068596025189535
+2022-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,4.7244103054136
+2022-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,48.82808627182842
+2022-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,2.72567196693702
+2022-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.22854189807192288
+2022-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,4.752140050073831
+2022-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,8.289983305936806
+2022-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,9.01770272392792
+2022-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,57.737412395004135
+2022-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,5.07223324823877
+2022-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.640899427448717
+2022-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,6.032353842520368
+2022-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,5.238279837188906
+2022-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,6.614080287750436
+2022-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,50.316863946788416
+2022-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,5.397610376366445
+2022-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,10.643831008664616
+2022-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,4.545203824527461
+2022-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,5.426253852886492
+2022-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,7.347673850790811
+2022-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,50.793969345928986
+2022-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,4.725615663606667
+2022-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,6.484032985929281
+2022-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,7.235944946291744
+2022-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,2.9436429825421535
+2022-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,6.995192233325758
+2022-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,31.183536617721167
+2022-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.979118388100158
+2022-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,23.964939162761834
+2023-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,9.300125202535634
+2023-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,5.293313422933514
+2023-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,7.5677808196172185
+2023-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,48.04678310792599
+2023-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,8.49921838343703
+2023-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,14.545192253738383
+2023-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,11.498289286520288
+2023-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,4.789617577727717
+2023-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,6.377091117936657
+2023-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,47.16770768745556
+2023-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,8.326709511589923
+2023-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,7.992934998594848
+2023-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,4.0595128761733825
+2023-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,4.453531548989413
+2023-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,4.302847289137738
+2023-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,41.65929392917996
+2023-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.787683390210356
+2023-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.38155986080563414
+2023-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,9.8339060688776
+2023-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,6.298627125620693
+2023-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,6.780731600310436
+2023-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,53.45271506955517
+2023-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,6.912899273031781
+2023-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.9589409410241045
+2023-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,7.184784132434484
+2023-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,4.297422951735891
+2023-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,5.774518253164278
+2023-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,46.991948488336064
+2023-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,7.044114468280616
+2023-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,13.15541858897401
+2023-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,6.066218092006008
+2023-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,3.7651612982067597
+2023-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,6.400157467996568
+2023-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,47.59924331960724
+2023-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,5.1522351042898364
+2023-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,7.834631865113164
+2023-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,7.197377389129079
+2023-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,2.9550656997116462
+2023-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,8.0748459944911
+2023-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,30.761792680361655
+2023-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,4.922653529051265
+2023-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,25.084099301790733
+2024-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,AFG,8.043055142096472
+2024-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,BGR,5.894996134320612
+2024-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,LTR,8.48708435408304
+2024-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,PFG,50.994416578595505
+2024-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,SHR,6.888503264468641
+2024-01-01T07:00:00Z,tribes_northern-cheyenne_Northern Cheyenne,Northern Cheyenne,TRE,11.113469615780348
+2024-01-01T07:00:00Z,tribes_crow_Crow,Crow,AFG,9.66378277629682
+2024-01-01T07:00:00Z,tribes_crow_Crow,Crow,BGR,5.12447023533287
+2024-01-01T07:00:00Z,tribes_crow_Crow,Crow,LTR,6.925963623990461
+2024-01-01T07:00:00Z,tribes_crow_Crow,Crow,PFG,50.109067093177195
+2024-01-01T07:00:00Z,tribes_crow_Crow,Crow,SHR,6.690559739234343
+2024-01-01T07:00:00Z,tribes_crow_Crow,Crow,TRE,5.822811000305867
+2024-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,AFG,5.132166724249459
+2024-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,BGR,5.022445766561122
+2024-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,LTR,4.497933169448311
+2024-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,PFG,38.27257107131758
+2024-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,SHR,3.936526450317325
+2024-01-01T07:00:00Z,tribes_fort-peck_Fort Peck,Fort Peck,TRE,0.3036780367581617
+2024-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,AFG,10.213598541949139
+2024-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,BGR,6.178368949184007
+2024-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,LTR,6.784094797873105
+2024-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,PFG,52.16580865550299
+2024-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,SHR,6.7437870021546615
+2024-01-01T07:00:00Z,tribes_fort-belknap_Fort Belknap,Fort Belknap,TRE,2.1742026133381467
+2024-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,AFG,9.532399972680619
+2024-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,BGR,4.367670244430408
+2024-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,LTR,4.873158148558099
+2024-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,PFG,43.428853299521975
+2024-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,SHR,6.31031291138766
+2024-01-01T07:00:00Z,tribes_rocky-boys_Rocky Boy's,Rocky Boy's,TRE,8.844076304540472
+2024-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,AFG,6.2261401463366575
+2024-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,BGR,5.251133133262386
+2024-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,LTR,6.3367354850377335
+2024-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,PFG,46.1541622377438
+2024-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,SHR,5.239115773690303
+2024-01-01T07:00:00Z,tribes_blackfeet_Blackfeet,Blackfeet,TRE,5.802744269600765
+2024-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,AFG,8.302681694612557
+2024-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,BGR,4.007735646953944
+2024-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,LTR,7.624910674842143
+2024-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,PFG,28.222263489673054
+2024-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,SHR,6.564357412596272
+2024-01-01T07:00:00Z,tribes_flathead_Flathead,Flathead,TRE,20.47281718519715

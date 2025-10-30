@@ -128,14 +128,16 @@ mod13 = process_normals(
   rgee::ee_as_rast(region = shp$geometry(), via="drive", scale=500) %>%
   normals::write_as_cog("./mod13.tif")
 
-cover = ee$ImageCollection("projects/rap-data-365417/assets/vegetation-cover-v3")$filterDate("1991-01-01", "2024-12-31")$mean() %>%
+cover = ee$ImageCollection("projects/rap-data-365417/assets/vegetation-cover-v3")$filterDate("1995-01-01", "2024-12-31")$mean() %>%
   rgee::ee_as_rast(region = shp$geometry(), via="drive", scale=100)%>%
   normals::write_as_cog("./cover.tif")
-npp = ee$ImageCollection("projects/rap-data-365417/assets/npp-partitioned-16day-v3")$filterDate("1991-01-01", "2024-12-31")$mean() %>%
+npp = process_normals(
+    ee$ImageCollection("projects/rap-data-365417/assets/npp-partitioned-16day-v3"),func = "sum",filter_start = "1995-01-01"
+  ) %>%
   rgee::ee_as_rast(region = shp$geometry(), via="drive", scale=100) %>%
   normals::write_as_cog("./npp.tif")
 
-process_to_normal_cogs <- function(r, out_dir = "~/data/blm_project/gee_data", scale_factor=0.0001) {
+process_to_normal_cogs <- function(r, out_dir = "~/data/gee", scale_factor=0.0001) {
   nms <- names(r)
 
   var_locs <- stringr::str_split(nms, "_") %>%
@@ -183,7 +185,7 @@ make_modis_annual_normals <- function(data_dir, func="sum") {
     ) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
-      func = ifelse(v %in% c("et", "pet", "gpp"), "sum", "mean"),
+      func = ifelse(stringr::str_detect(v, "et|pet|gpp"), "sum", "mean"),
     ) %>%
     dplyr::group_by(v, func) %>%
     dplyr::summarise(r = list(terra::rast(f)),
@@ -231,7 +233,7 @@ tribes = sf::read_sf("https://mco-normals.s3.us-east-2.amazonaws.com/fgb/tribes.
 tidyr::crossing(
   product = c("mod16", "mod17", "npp", "mod13", "myd13", "cover"),
   # product = c("mod16"),
-  loc_type = c("huc", "tribe", "blm")
+  loc_type = c("county")# c("huc", "tribe", "blm")
 ) %>%
   dplyr::mutate(
     resolution = dplyr::case_when(
@@ -240,14 +242,14 @@ tidyr::crossing(
     ),
     shp =
       dplyr::case_when(
-        # loc_type == "county" ~ list(county %>%
-        #                               rgee::sf_as_ee()),
-        loc_type == "huc" ~ list(huc %>%
-                                   rgee::sf_as_ee()),
-        loc_type == "tribe" ~ list(tribes %>%
-                                     rgee::sf_as_ee()),
-        loc_type == "blm" ~ list(blm %>%
-                                   rgee::sf_as_ee())
+        loc_type == "county" ~ list(county %>%
+                                      rgee::sf_as_ee())
+        # loc_type == "huc" ~ list(huc %>%
+        #                            rgee::sf_as_ee()),
+        # loc_type == "tribe" ~ list(tribes %>%
+        #                              rgee::sf_as_ee()),
+        # loc_type == "blm" ~ list(blm %>%
+        #                            rgee::sf_as_ee())
 
       ),
     coll =
@@ -263,3 +265,24 @@ tidyr::crossing(
   ) %>%
   dplyr::rowwise() %>%
   dplyr::mutate(extracted = list(reduce_to_region(shp, coll, out_name, resolution)))
+
+
+
+combine_mod13 <- function(data_dir) {
+  list.files(data_dir, full.names = T, pattern = "myd13|mod13") %>%
+    tibble::tibble(f = .) %>%
+    dplyr::mutate(b = basename(f) %>%
+                    tools::file_path_sans_ext()) %>%
+    tidyr::separate(b, c("loc", "model")) %>%
+    dplyr::group_by(loc) %>%
+    dplyr::summarise(
+      dat = list(
+        purrr::map_df(f, readr::read_csv, show_col_types=FALSE)
+      )
+    ) %>%
+    dplyr::mutate(out = glue::glue("./data/ee_extract/{loc}_mcd13.csv")) %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(dat = list(readr::write_csv(dat, out)))
+
+
+}

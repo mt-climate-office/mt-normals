@@ -1,0 +1,1639 @@
+date,id,name,variable,value
+1986-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,9.411935753040934
+1986-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,15.907640604766975
+1986-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,9.018609336280656
+1986-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,37.93956702536183
+1986-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,8.657587952283247
+1986-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,4.692397327931899
+1986-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,9.467306964699704
+1986-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,22.209320172826644
+1986-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,6.723925425030732
+1986-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,38.61736487722687
+1986-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,7.218674604582254
+1986-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.1256583912797369
+1986-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,6.605235897142979
+1986-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,18.01860528469908
+1986-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,5.476155454786875
+1986-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,38.46787514025422
+1986-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,6.384769690208518
+1986-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.8243614377711104
+1986-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,8.587683681501234
+1986-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,11.269406724280703
+1986-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,6.959617709731916
+1986-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,38.60062706635685
+1986-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,6.373220791212469
+1986-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,7.603703257718434
+1986-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,1.8455705313715092
+1986-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,1.8282222767969774
+1986-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,5.022673085018731
+1986-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,24.24116511875262
+1986-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,3.9579775025192085
+1986-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,33.15728312083707
+1986-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,3.25804963479316
+1986-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,6.509175355819098
+1986-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,8.32207442814063
+1986-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,33.317807442097156
+1986-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,8.04830695972798
+1986-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,18.208431222444805
+1986-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.117175243071256
+1986-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,7.058480699917829
+1986-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,8.482170404156765
+1986-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,41.00556098136456
+1986-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,9.955351005988142
+1986-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,13.396244697948314
+1987-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,8.262373563004838
+1987-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,16.478252197412807
+1987-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,10.211524830602912
+1987-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,35.65575405166827
+1987-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,9.082190769276393
+1987-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,5.43514968031861
+1987-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,9.954392616231067
+1987-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,18.998886448174364
+1987-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,7.04423347046957
+1987-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,39.9752211156034
+1987-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,7.407151259614467
+1987-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.4826446138746894
+1987-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,6.303828518286739
+1987-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,15.612926317994585
+1987-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,6.273073546749592
+1987-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,37.41247033623111
+1987-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,6.449956882561255
+1987-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.8531962364900216
+1987-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,6.894284353918273
+1987-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,10.704483102505097
+1987-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,7.765790039044293
+1987-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,36.869936402874835
+1987-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,6.462778401278725
+1987-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,8.014723774939995
+1987-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,1.8482522158229728
+1987-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,1.9233100133732675
+1987-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,5.177571613974971
+1987-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,23.201170880249105
+1987-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,3.675024915720884
+1987-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,29.001991638071395
+1987-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,2.8065264718800984
+1987-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,6.235558432717741
+1987-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,8.512765380650428
+1987-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,31.738062281507823
+1987-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.931201182838582
+1987-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,18.576927143299784
+1987-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.002085830069636
+1987-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,6.8646319968440945
+1987-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,8.812220630448175
+1987-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,40.503471868747475
+1987-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,10.609714313931558
+1987-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,12.58821243132137
+1988-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,6.781972425881106
+1988-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,16.35690197664476
+1988-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,9.671147506008667
+1988-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,38.80217491735409
+1988-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,8.25781770652977
+1988-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,5.084296195020962
+1988-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,4.734543761865665
+1988-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,22.179725669670066
+1988-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,9.316841996725113
+1988-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,39.83030506554648
+1988-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,7.042516517631932
+1988-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.7171201471047617
+1988-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,2.9959468699073213
+1988-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,20.412671586858153
+1988-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,7.734303465533455
+1988-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,39.16225106577759
+1988-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,5.921187423849555
+1988-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.693209858066498
+1988-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,4.780927008213474
+1988-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,12.399187599071762
+1988-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,8.822007291759036
+1988-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,37.501266103682774
+1988-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.895825684458256
+1988-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,7.681403903933164
+1988-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.1345581941763365
+1988-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.2269243706087867
+1988-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,5.357194966901305
+1988-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,23.002989568533774
+1988-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.020060784960813
+1988-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,29.121075728179125
+1988-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,2.8308386225989977
+1988-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,6.534248919100437
+1988-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,8.956920755259501
+1988-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,31.57339413573301
+1988-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.452406538092973
+1988-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,16.79222022302349
+1988-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.0442106879528352
+1988-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,7.430344054590844
+1988-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,9.766711771327971
+1988-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,39.904693620075356
+1988-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,9.315562863532147
+1988-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,11.93820850274054
+1989-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,7.677990909898961
+1989-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,16.26673802011105
+1989-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,8.213204130245064
+1989-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,39.71403074474557
+1989-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,8.743525284503447
+1989-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,3.888545683739095
+1989-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,7.556821464792675
+1989-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,21.80802712454741
+1989-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,6.065461808493868
+1989-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,42.82098109193455
+1989-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,6.9308300827764695
+1989-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,0.9529749021937166
+1989-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,4.492560394422996
+1989-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,18.878962299103947
+1989-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,5.542912540855999
+1989-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,43.058025267204194
+1989-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,6.433243093351972
+1989-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.7994930048819353
+1989-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,5.462576441634787
+1989-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,10.395070570654743
+1989-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,6.415329998383154
+1989-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,41.503764298497764
+1989-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,6.9169208545584535
+1989-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,7.780740514753345
+1989-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,1.633918380723005
+1989-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.1822555270027104
+1989-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,4.896933326654262
+1989-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,22.91724506023734
+1989-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.003333906139374
+1989-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,32.847166490788155
+1989-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,2.5791221427709417
+1989-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,6.90935881116245
+1989-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,8.267684530749115
+1989-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,32.840540427066436
+1989-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,8.050847739868535
+1989-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,16.759338761506918
+1989-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,2.3113701853561888
+1989-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,8.650070003702032
+1989-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,9.673732371024006
+1989-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,38.436326325305224
+1989-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,9.536900142709172
+1989-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,13.185478773909876
+1990-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,6.951345809552666
+1990-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,12.481121595750773
+1990-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,7.937326470430704
+1990-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,43.48201357337361
+1990-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,8.808213424656826
+1990-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,4.390558688838612
+1990-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,5.344859615160345
+1990-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,18.195834870920457
+1990-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,6.304828701826806
+1990-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,47.70184422730759
+1990-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,6.967511486818308
+1990-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,0.9095690224531986
+1990-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,4.763653895025397
+1990-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,14.15394554053713
+1990-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,6.079445507516795
+1990-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,44.4713818844889
+1990-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,6.499419099353188
+1990-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.9202959483688056
+1990-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,5.049151863592628
+1990-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,7.389304083727448
+1990-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,6.541000166312706
+1990-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,43.83828953139322
+1990-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,6.843712093544139
+1990-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,8.753204505192633
+1990-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,1.5276661496261568
+1990-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,1.802472723737342
+1990-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,4.602992041084652
+1990-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,22.395417600634435
+1990-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,3.651641578415003
+1990-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,34.2819498414241
+1990-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,2.515487283773685
+1990-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,5.486287905804679
+1990-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,7.500093400855003
+1990-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,31.313170475108528
+1990-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.864272508406812
+1990-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,18.010236348908155
+1990-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,2.497138508417185
+1990-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,6.648792976159011
+1990-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,7.849708332404845
+1990-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,37.27977184865448
+1990-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,9.787797391443718
+1990-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,12.86499722867701
+1991-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,6.710471368792475
+1991-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,11.99270055017617
+1991-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,7.878878436374905
+1991-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,45.25994194542446
+1991-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,8.209609702501231
+1991-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,4.752358342664053
+1991-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,5.9452066987770635
+1991-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,16.04179158712449
+1991-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,5.481331150974229
+1991-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,50.80838779971555
+1991-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,6.399410220164388
+1991-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,0.9259733360302097
+1991-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,3.6931426466872193
+1991-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,13.869739173681525
+1991-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,5.850878282583725
+1991-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,46.34706304919573
+1991-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,6.003642577765102
+1991-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.8438315935743677
+1991-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,4.25965209503355
+1991-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,7.792201809604131
+1991-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,6.415730342199521
+1991-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,45.129999799917016
+1991-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,6.379605639984598
+1991-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,8.353317594838465
+1991-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,1.54568690017144
+1991-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,1.8539864808078312
+1991-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,4.605616528895496
+1991-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,23.244720008378756
+1991-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,3.7845324096170345
+1991-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,31.231590947450478
+1991-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,2.3867520868280856
+1991-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,5.77630206409738
+1991-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,7.769977341007969
+1991-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,32.21151004712003
+1991-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.490810014092087
+1991-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,17.880948536250706
+1991-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,2.589303255588776
+1991-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,6.644761829876971
+1991-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,8.435627287230053
+1991-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,38.458389853928566
+1991-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,10.62915855776193
+1991-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,11.84963581505535
+1992-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,6.41825317338209
+1992-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,11.982410608566932
+1992-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,7.970895385943419
+1992-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,46.99271767686724
+1992-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,8.466035822697988
+1992-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,4.370606947523469
+1992-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,5.513387532732283
+1992-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,15.392779584040406
+1992-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,6.764190562443575
+1992-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,50.84765185696496
+1992-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,6.453083522852678
+1992-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.079193567290497
+1992-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,2.8294103392429424
+1992-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,16.39393859442508
+1992-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,6.596789064666149
+1992-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,49.00291910163578
+1992-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,5.817763313728979
+1992-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.5375216611254674
+1992-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,3.7850921811327716
+1992-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,9.777458471260973
+1992-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,7.609726898991435
+1992-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,46.387284261234896
+1992-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,6.39670593823192
+1992-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,6.822538957412387
+1992-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,1.462212739120907
+1992-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.1471267079919465
+1992-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,5.093711748382181
+1992-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,25.56020635033733
+1992-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.404407626601393
+1992-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,27.262624963803983
+1992-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,2.1874127980333467
+1992-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,5.889013066572643
+1992-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,8.112197509660565
+1992-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,33.1867275384673
+1992-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.04898506954826
+1992-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,15.449216226521532
+1992-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,2.064754239392336
+1992-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,7.169429518562195
+1992-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,8.945220893357359
+1992-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,39.431498535161126
+1992-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,9.85813136840355
+1992-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,11.444528346489683
+1993-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,6.250067676755145
+1993-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,12.026094857116941
+1993-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,8.012241695647536
+1993-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,47.088984803450614
+1993-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,8.797156723259713
+1993-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,3.883868710319439
+1993-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,3.993894624270967
+1993-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,13.42184230855955
+1993-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,6.0826162479168975
+1993-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,55.88695382473155
+1993-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,5.928537401109915
+1993-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.0798165607662915
+1993-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,4.133935231715174
+1993-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,14.786821036248403
+1993-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,5.857342955516434
+1993-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,50.6972281047755
+1993-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,5.82179845423931
+1993-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.0741584750243534
+1993-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,5.65188659783104
+1993-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,8.324029185669424
+1993-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,6.122224659957878
+1993-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,47.48388313633541
+1993-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,6.4825481652950065
+1993-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,5.461650670105697
+1993-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,1.6576499768415514
+1993-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.0738498477042677
+1993-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,4.530174692193518
+1993-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,24.4742489073394
+1993-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.492826751614086
+1993-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,21.478567174407306
+1993-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,3.0760654145170836
+1993-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,5.313228540375629
+1993-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,6.71872064162223
+1993-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,35.15004354991254
+1993-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.369701443769527
+1993-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,12.505104190705246
+1993-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.6109326964332684
+1993-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,7.001414243259011
+1993-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,7.919837441355798
+1993-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,40.78018917581831
+1993-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,9.439506804205108
+1993-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,7.837183344848373
+1994-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,6.55615484349348
+1994-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,10.847432821740666
+1994-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,8.557630785684415
+1994-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,47.98842732518163
+1994-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,8.184523188404151
+1994-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,4.373657409388708
+1994-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,5.281001204164144
+1994-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,11.402061266460025
+1994-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,5.902037686219217
+1994-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,55.105388080484516
+1994-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,6.131067039207029
+1994-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.1183929781849729
+1994-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,4.298078741719986
+1994-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,10.688460609008022
+1994-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,5.835865095000845
+1994-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,50.7432583339715
+1994-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,4.959176378578876
+1994-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.300369337853222
+1994-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,5.9221636128905315
+1994-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,5.8172970894548355
+1994-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,6.835183784266967
+1994-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,48.65746925304614
+1994-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.108402924750388
+1994-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,7.141095233999097
+1994-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,1.9314427718557725
+1994-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,1.9098578271410458
+1994-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,5.452334285144065
+1994-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,25.529879100118688
+1994-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.251049677373454
+1994-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,27.881713020598934
+1994-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,2.20483047763682
+1994-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,4.728545512329688
+1994-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,7.932883543966985
+1994-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,38.255779719048014
+1994-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,6.983430389275578
+1994-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,17.461225232145246
+1994-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,2.2570070261922823
+1994-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,6.7309015693770275
+1994-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,9.288301621500132
+1994-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,43.49564340721825
+1994-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,9.623645999963758
+1994-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,12.106668370707009
+1995-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,11.090039365198512
+1995-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,8.949629825533616
+1995-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,8.197209623935802
+1995-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,47.09597402273562
+1995-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,7.003050315379332
+1995-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,4.79088337966159
+1995-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,9.009962574956148
+1995-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,11.573975533029335
+1995-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,6.1863358477259425
+1995-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,51.26148339818747
+1995-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,5.65400343069793
+1995-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.1037199827428525
+1995-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,5.609138836575399
+1995-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,9.520804187759985
+1995-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,6.509574882919686
+1995-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,48.311386108903356
+1995-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,4.323221798747696
+1995-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.514050298848579
+1995-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,6.9614869200060765
+1995-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,5.950873861258197
+1995-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,7.72970060513571
+1995-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,46.182961929750654
+1995-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,4.60060490174205
+1995-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,8.506911834313486
+1995-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.932288684302016
+1995-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.061184798843631
+1995-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,7.388854677175218
+1995-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,25.141480525154158
+1995-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.248134051084942
+1995-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,34.37423972766831
+1995-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,4.196628077205115
+1995-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,5.045433555540739
+1995-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,10.090648334110117
+1995-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,36.51494032644861
+1995-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,6.968320759307898
+1995-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,19.932770722274874
+1995-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.815417372635977
+1995-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,6.160531636356375
+1995-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,9.811996291747226
+1995-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,42.8423892530611
+1995-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,8.687291483578042
+1995-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,14.083410629764222
+1996-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,7.348157380955334
+1996-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,8.457203778988122
+1996-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,9.263902877521302
+1996-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,50.14944433446681
+1996-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,6.856705137128975
+1996-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,5.273564895195172
+1996-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,5.554875501826425
+1996-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,10.640355966333908
+1996-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,6.385507561101109
+1996-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,55.979209123425925
+1996-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,5.189195771723834
+1996-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.2628728146538464
+1996-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,3.123339671516461
+1996-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,9.197796280794972
+1996-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,6.6783156476458885
+1996-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,51.100883116214604
+1996-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,4.6813901197042025
+1996-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,2.0647111119198147
+1996-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,5.479686608646838
+1996-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,5.243766644028169
+1996-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,7.474380679744948
+1996-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,47.9120415613273
+1996-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.310834100231862
+1996-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,9.000140029278901
+1996-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.15243533046932
+1996-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,1.5307918263181408
+1996-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,6.116734401770399
+1996-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,22.49965296079449
+1996-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,3.868282123673673
+1996-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,39.297043434513895
+1996-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,3.7853625084648606
+1996-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,4.980590386720279
+1996-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,10.184086780890588
+1996-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,35.19386576753562
+1996-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.061004549458396
+1996-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,20.407413989662153
+1996-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.1935757977411274
+1996-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,6.076532203608205
+1996-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,9.707764023359424
+1996-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,41.757905297786
+1996-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,8.484704423510934
+1996-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,13.391955074471905
+1997-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,7.415238100742529
+1997-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,10.482062978252921
+1997-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,9.06772809349753
+1997-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,47.34979802355833
+1997-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,7.518519103074257
+1997-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,5.2259356723784816
+1997-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,5.492147125172229
+1997-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,13.725705225047417
+1997-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,6.867057013040027
+1997-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,52.80558910172709
+1997-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,5.641628020568232
+1997-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.178805623163095
+1997-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,3.998544224124523
+1997-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,13.485535593639996
+1997-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,6.484809386358746
+1997-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,47.118110312113956
+1997-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,5.05927826887925
+1997-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.7182059776424785
+1997-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,5.572415986842727
+1997-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,7.190299996873412
+1997-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,7.467537545559331
+1997-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,46.731303082945644
+1997-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.34351301757688
+1997-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,7.949972798490081
+1997-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,1.7464590177048567
+1997-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,1.5102762068383764
+1997-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,4.977147891422628
+1997-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,23.550862104739906
+1997-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.078004032810268
+1997-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,35.91689555421843
+1997-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,2.684999618556439
+1997-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,5.10461060568551
+1997-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,9.46312443308185
+1997-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,35.63364694088944
+1997-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.228771696553142
+1997-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,19.87330035142911
+1997-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,2.824710717403455
+1997-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,6.577777473590512
+1997-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,9.53906486412064
+1997-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,40.81735673212104
+1997-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,9.469718775910389
+1997-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,11.944554276259723
+1998-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,6.73107501783773
+1998-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,11.86254997931866
+1998-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,10.465867846053083
+1998-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,45.6096842463891
+1998-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,7.609286152804651
+1998-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,5.73453675735009
+1998-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,4.770913530391356
+1998-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,15.639596130951606
+1998-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,7.898659192014992
+1998-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,51.03954891355089
+1998-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,6.26626470436246
+1998-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.477341314420749
+1998-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,3.347243706196351
+1998-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,14.557774441746629
+1998-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,6.643484270072936
+1998-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,48.49554023734268
+1998-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,5.265642141691953
+1998-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.7436716144033007
+1998-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,4.6806352574780075
+1998-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,7.511349687442133
+1998-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,7.479368372120054
+1998-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,48.415383317361986
+1998-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.314954345545511
+1998-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,8.343328874709131
+1998-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,1.8431367262527076
+1998-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,1.562805064029876
+1998-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,5.484669039949804
+1998-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,24.957494676393203
+1998-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.5337933491010896
+1998-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,36.52952309136825
+1998-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,2.5945337095618837
+1998-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,4.541202784033229
+1998-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,8.411483361853525
+1998-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,36.55102937609147
+1998-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.598671638018136
+1998-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,19.67715361251038
+1998-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,2.6760472599021075
+1998-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,5.412844054768234
+1998-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,8.047526932763843
+1998-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,43.239047167061194
+1998-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,10.776363424594674
+1998-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,12.5931579990375
+1999-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,9.003609202295848
+1999-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,11.662604369781846
+1999-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,10.403427896478016
+1999-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,42.87684463151334
+1999-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,7.742271641790555
+1999-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,5.5947425621561715
+1999-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,8.175225695355632
+1999-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,12.037088310035768
+1999-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,6.084343948307397
+1999-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,51.68299355631355
+1999-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,5.969977588017324
+1999-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.4320896253728461
+1999-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,4.5389833880516255
+1999-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,12.247882583249392
+1999-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,5.938296028714893
+1999-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,48.69254038388646
+1999-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,5.25617951883035
+1999-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.7868051455773448
+1999-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,6.326720341724673
+1999-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,7.3144267785990085
+1999-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,8.162867893069546
+1999-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,46.32509557421564
+1999-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.535388094255362
+1999-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,8.937298075416281
+1999-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,1.94647694479105
+1999-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,1.9066327578110311
+1999-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,6.12705106399841
+1999-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,24.28791960860459
+1999-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.190258252817037
+1999-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,35.59155601583209
+1999-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,2.9081936567294693
+1999-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,4.963687542323458
+1999-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,9.916066646246312
+1999-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,36.10153112141943
+1999-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.612265072361274
+1999-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,21.64685557691361
+1999-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.096962768121568
+1999-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,5.916814806886838
+1999-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,9.868793394901752
+1999-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,42.75466238706287
+1999-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,9.366767193748084
+1999-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,14.811996294468296
+2000-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,6.783438754534764
+2000-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,14.58094837442028
+2000-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,11.789783965213433
+2000-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,41.69400149966864
+2000-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,7.446805228911896
+2000-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,5.6263450082342565
+2000-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,5.5731449229293
+2000-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,14.12732910587949
+2000-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,8.451396865279566
+2000-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,50.98721767860871
+2000-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,5.578627040096032
+2000-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.238303890285336
+2000-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,4.083053690250578
+2000-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,13.345078580555164
+2000-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,7.6509276649704265
+2000-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,46.89221507964185
+2000-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,4.76761990143925
+2000-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.8310832788262212
+2000-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,5.460775977578098
+2000-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,9.159979611617707
+2000-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,9.86540969196352
+2000-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,44.0052268452256
+2000-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.381716956044298
+2000-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,9.296388176056187
+2000-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.032761930072736
+2000-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.2708431062155108
+2000-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,7.36802373468978
+2000-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,23.823593258685605
+2000-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.14584961223173
+2000-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,38.06770411257179
+2000-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,2.7209583096608165
+2000-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,6.398906920780937
+2000-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,11.688348175392646
+2000-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,35.321855261407215
+2000-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.597321051444116
+2000-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,22.66487906049031
+2000-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.196962638515105
+2000-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,7.571761578978157
+2000-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,11.891739139364518
+2000-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,41.53050927233603
+2000-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,9.415475373475386
+2000-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,15.08913860660915
+2001-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,7.52599735260713
+2001-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,16.18343859918927
+2001-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,10.799654444673878
+2001-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,40.566780263991724
+2001-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,7.819766699941347
+2001-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,5.237165891242067
+2001-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,5.450272227579536
+2001-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,14.224576063360498
+2001-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,7.338413744495097
+2001-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,52.16412198554546
+2001-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,5.327516398855206
+2001-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.230098305995653
+2001-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,3.0765356599076945
+2001-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,17.13627952502564
+2001-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,8.945368767272267
+2001-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,46.65755375019843
+2001-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,4.4495498693542395
+2001-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.8085234675081663
+2001-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,5.138272784143775
+2001-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,11.073160065104565
+2001-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,10.354526954374865
+2001-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,42.26398891357361
+2001-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.402275980626662
+2001-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,9.215715926498092
+2001-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.7343334568495474
+2001-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.593438366607218
+2001-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,7.637560640090141
+2001-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,23.934788080262766
+2001-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.913348760373743
+2001-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,37.75529010244636
+2001-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,3.477658284261226
+2001-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,7.098485761929803
+2001-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,11.757541400897036
+2001-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,34.112372016478254
+2001-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.76175887128797
+2001-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,21.600510231287586
+2001-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.78551557000562
+2001-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,8.171469201655746
+2001-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,12.086521206468307
+2001-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,39.73871205899823
+2001-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,9.69684396874739
+2001-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,15.524882984551425
+2002-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,7.445248673792828
+2002-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,16.403934993028876
+2002-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,11.511654879584082
+2002-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,38.46101387186175
+2002-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,8.4573331651783
+2002-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,5.472230313620232
+2002-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,4.057552907983574
+2002-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,15.891098597087941
+2002-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,8.626276316843668
+2002-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,49.96720527973684
+2002-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,5.731342017568947
+2002-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.3516576661517141
+2002-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,4.3023005772312946
+2002-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,17.238809251709878
+2002-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,7.281043113624651
+2002-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,48.641876848053485
+2002-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,4.95085400575486
+2002-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.9883605879068744
+2002-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,5.623444430042876
+2002-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,11.074454867555808
+2002-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,9.120449488163324
+2002-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,42.8241222407614
+2002-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,6.218694418175142
+2002-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,9.95891327806347
+2002-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.46036230220944
+2002-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.519356260259825
+2002-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,7.499573957111524
+2002-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,23.4740792649018
+2002-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,5.032957174503688
+2002-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,40.703434303547134
+2002-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,3.440773871904314
+2002-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,6.672913702103142
+2002-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,11.014470678408415
+2002-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,33.3805490480873
+2002-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,8.229742130387445
+2002-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,22.851672447565992
+2002-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.095887841368014
+2002-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,8.537792711367269
+2002-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,12.011641415370349
+2002-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,38.13988018596544
+2002-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,10.361918383160225
+2002-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,16.53870743232793
+2003-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,10.518323930619957
+2003-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,13.82713588531608
+2003-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,9.517878686014257
+2003-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,41.346528633977464
+2003-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,6.817093332502563
+2003-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,4.944013189363076
+2003-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,7.098787983477591
+2003-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,13.429726663826045
+2003-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,6.801586724411776
+2003-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,52.55151157731091
+2003-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,4.79850137064298
+2003-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.168086137749964
+2003-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,4.535435226945277
+2003-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,13.158956549915624
+2003-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,6.726010205539216
+2003-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,48.74193152073791
+2003-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,4.391069408319108
+2003-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.7768968033154768
+2003-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,6.502446669634579
+2003-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,8.810840461205817
+2003-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,8.511538266270932
+2003-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,43.10003618381043
+2003-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.361218676569125
+2003-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,9.52906137662245
+2003-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.391136750802982
+2003-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.767846828579066
+2003-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,7.621582726432986
+2003-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,22.585330498178465
+2003-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.88797478878659
+2003-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,39.14525424553895
+2003-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,2.943169317712598
+2003-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,6.354530830805101
+2003-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,10.790675860631397
+2003-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,34.65088894354496
+2003-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.80657721319855
+2003-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,22.44667490115295
+2003-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.005874934081679
+2003-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,8.379337112487454
+2003-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,11.695466055695766
+2003-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,39.9789549415585
+2003-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,10.052658580889002
+2003-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,16.167855129373745
+2004-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,7.917493287949386
+2004-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,17.26043985072681
+2004-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,12.67987175011574
+2004-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,37.1068523528207
+2004-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,7.498676592048365
+2004-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,4.991548272141123
+2004-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,4.8414572778664136
+2004-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,17.224863737997914
+2004-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,10.714338026148262
+2004-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,44.074394590779434
+2004-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,6.177272548829397
+2004-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.162257700549911
+2004-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,5.413073682550281
+2004-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,12.57872142295491
+2004-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,6.14244736074231
+2004-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,45.65419014509529
+2004-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,5.056469930619817
+2004-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.6364827084094251
+2004-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,7.636341227751552
+2004-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,9.253883082305766
+2004-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,8.063436979943397
+2004-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,40.754717404148614
+2004-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.60961308137776
+2004-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,9.011322078371643
+2004-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.6436673742266437
+2004-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.857319854129508
+2004-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,7.90452061392339
+2004-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,23.199067894357565
+2004-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.850354956549187
+2004-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,37.84959910051702
+2004-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,3.566717178533571
+2004-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,6.90043346206536
+2004-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,11.078948546214017
+2004-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,33.84966106612882
+2004-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,8.330605131897801
+2004-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,21.885629234495024
+2004-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.3307102843642293
+2004-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,9.055261998099866
+2004-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,11.549423800187682
+2004-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,38.71828586545868
+2004-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,11.320937311744164
+2004-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,15.500500809362546
+2005-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,10.865889287145055
+2005-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,12.96461822149513
+2005-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,8.863396616633546
+2005-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,41.516815913681135
+2005-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,8.00110162389823
+2005-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,5.371822208614851
+2005-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,7.6143048865938505
+2005-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,12.85104606252689
+2005-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,6.3893893094179
+2005-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,51.2364951826002
+2005-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,5.963465260959515
+2005-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.2401509203705123
+2005-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,5.591121686269722
+2005-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,11.646947310318922
+2005-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,6.6556376741977274
+2005-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,46.20797292629485
+2005-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,5.549584319552874
+2005-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.8274808942909682
+2005-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,7.724682285959169
+2005-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,7.873506367248115
+2005-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,8.11317806421979
+2005-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,41.921498908523
+2005-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.988653411199175
+2005-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,9.713807569787267
+2005-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.8014805401804965
+2005-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.552036971454285
+2005-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,7.795396169188332
+2005-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,23.033874715653866
+2005-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.662576311076082
+2005-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,38.15673249182243
+2005-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,3.683664835155538
+2005-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,5.848536645378901
+2005-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,10.347866508970117
+2005-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,34.67706065323947
+2005-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.849224934421024
+2005-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,23.158828115896675
+2005-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.5336418572308523
+2005-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,7.518468809713614
+2005-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,10.351015075139273
+2005-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,41.65473680899108
+2005-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,10.606134411225918
+2005-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,16.679742710056935
+2006-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,11.844606695133525
+2006-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,13.014819608196257
+2006-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,11.978371929041936
+2006-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,39.255806287709895
+2006-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,7.3616052976091675
+2006-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,5.519185484570482
+2006-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,8.874884946765677
+2006-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,13.354322861652365
+2006-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,8.287226685291623
+2006-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,49.011638783603715
+2006-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,5.55570086835078
+2006-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.3771384698314675
+2006-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,6.040950110963334
+2006-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,11.444771410584332
+2006-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,7.85631717011449
+2006-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,45.76647531273856
+2006-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,4.788916168873766
+2006-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.9291212330037006
+2006-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,8.195284639085813
+2006-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,7.6853591609482725
+2006-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,8.46014321346431
+2006-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,41.91012393911848
+2006-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.664318708877397
+2006-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,9.72052021449839
+2006-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.8166001554304514
+2006-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.3236184812110623
+2006-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,7.713161962030385
+2006-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,23.56888018264487
+2006-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.716262983843868
+2006-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,38.6984588967133
+2006-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,3.5206102262722845
+2006-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,5.395581053449288
+2006-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,10.342534554568125
+2006-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,35.65304128812161
+2006-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.746596048838873
+2006-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,22.328627016629568
+2006-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.030889993522913
+2006-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,7.365488330741425
+2006-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,10.781782797919513
+2006-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,41.77269512984076
+2006-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,10.107575293511275
+2006-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,16.394395730181003
+2007-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,17.420742501241268
+2007-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,10.902089424469334
+2007-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,9.135577726723739
+2007-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,37.98688074040473
+2007-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,7.676474001947274
+2007-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,5.220185059648787
+2007-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,13.25666296547236
+2007-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,11.991461702565323
+2007-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,7.014669023992665
+2007-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,46.824776457012604
+2007-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,5.808278508089106
+2007-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.3607615332132532
+2007-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,8.603470194773351
+2007-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,11.881492662525117
+2007-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,7.344150039415306
+2007-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,43.60171601045647
+2007-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,5.042183246807609
+2007-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.809434302288547
+2007-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,9.705811953477063
+2007-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,7.773267653770156
+2007-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,8.80053188530581
+2007-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,40.6790767209787
+2007-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.905518412864759
+2007-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,9.470762532239766
+2007-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.8289122280573933
+2007-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.3758412980552936
+2007-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,7.375230079968003
+2007-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,24.03672618741867
+2007-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,5.3990859230161385
+2007-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,38.86646888892021
+2007-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,4.4729218287692865
+2007-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,5.981630669330633
+2007-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,10.889876345794821
+2007-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,34.87724539204627
+2007-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,8.785798807285882
+2007-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,19.86300953027288
+2007-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.490086829480321
+2007-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,7.57032208202934
+2007-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,11.308354817179877
+2007-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,40.10667058743384
+2007-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,11.012949465681618
+2007-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,14.435933254141899
+2008-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,9.135826891674979
+2008-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,11.686659881820896
+2008-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,11.333770938494867
+2008-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,42.86505765032935
+2008-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,7.684564375957354
+2008-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,5.181017872853249
+2008-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,7.613039884784082
+2008-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,11.936547165066667
+2008-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,7.999071685814782
+2008-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,51.416446770632014
+2008-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,5.856485528363098
+2008-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.3426384571572312
+2008-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,5.569751943888404
+2008-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,13.116234922428404
+2008-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,7.768807969565434
+2008-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,46.46483415758809
+2008-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,5.041755977087911
+2008-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.6452224341368866
+2008-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,6.513674202833956
+2008-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,9.44098845322004
+2008-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,9.376085962863277
+2008-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,42.27077778629871
+2008-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.670588444208028
+2008-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,8.686786131392047
+2008-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.776406676304958
+2008-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.736083838317515
+2008-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,6.994853753667148
+2008-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,23.35235533202229
+2008-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.871778151424102
+2008-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,36.40244506291496
+2008-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,3.765057804523209
+2008-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,6.451347013912424
+2008-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,10.620183100161894
+2008-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,33.680133280714365
+2008-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,8.135444479415792
+2008-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,19.162331037256877
+2008-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.4831499823523053
+2008-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,7.993133798442078
+2008-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,11.013034340124195
+2008-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,39.804298157764855
+2008-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,10.80688556820061
+2008-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,14.076642464130911
+2009-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,10.03972669729524
+2009-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,11.186044612711473
+2009-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,10.531720316587698
+2009-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,43.35455662936444
+2009-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,7.901317639807277
+2009-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,5.148699299607944
+2009-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,5.6585504524715
+2009-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,12.070064974508178
+2009-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,7.411154207309763
+2009-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,53.49257870211221
+2009-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,6.300520082793724
+2009-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.4522786324371242
+2009-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,3.6877576688852836
+2009-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,12.739892583739268
+2009-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,7.531717548937841
+2009-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,48.84873864545903
+2009-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,5.497930448254953
+2009-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.7623060994555126
+2009-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,4.871633862006707
+2009-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,8.981338698366446
+2009-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,9.153181544455979
+2009-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,46.168477219493646
+2009-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,6.312735548122231
+2009-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,8.579923126231222
+2009-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.3227348004369834
+2009-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.5655685912153974
+2009-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,7.748690882389876
+2009-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,24.557296681912362
+2009-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,5.027918776505602
+2009-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,36.867917348173215
+2009-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,2.82092992797552
+2009-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,6.262315069637562
+2009-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,10.742383657930782
+2009-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,36.81377057841031
+2009-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,8.73118819086462
+2009-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,18.215380791638967
+2009-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,2.630005698223976
+2009-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,8.038078633860755
+2009-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,10.793066066170777
+2009-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,41.5233814612182
+2009-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,11.377353802659114
+2009-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,13.451890638139881
+2010-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,8.415338828685393
+2010-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,11.006862987384583
+2010-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,9.81095996681885
+2010-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,45.01995514053689
+2010-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,8.708158533516663
+2010-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,5.125932180296189
+2010-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,5.5890622017815055
+2010-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,10.692616853731526
+2010-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,6.072191588533233
+2010-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,57.0929340333853
+2010-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,6.904250431379317
+2010-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.4429975267607194
+2010-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,4.556611255604682
+2010-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,12.522982979021158
+2010-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,6.774487116573063
+2010-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,49.786778123770645
+2010-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,6.396987775244078
+2010-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,1.8727554490156981
+2010-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,5.589313481318945
+2010-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,7.700983191265673
+2010-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,8.054489549291358
+2010-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,46.33977148475195
+2010-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,6.904914941500633
+2010-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,8.501887335794349
+2010-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.416713448464719
+2010-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.4894481159985355
+2010-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,7.647685721995243
+2010-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,24.094613400432074
+2010-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,5.333537854319796
+2010-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,36.47388489532274
+2010-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,2.749614831837515
+2010-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,5.684330028810501
+2010-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,10.420417536977226
+2010-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,38.269535738198464
+2010-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,9.323631752358782
+2010-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,16.870233169651364
+2010-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,2.45780162488022
+2010-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,7.30272356386852
+2010-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,10.425771928791534
+2010-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,41.978891586665995
+2010-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,12.029190486163719
+2010-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,13.302471436281552
+2011-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,9.00060543284423
+2011-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,8.880876197941873
+2011-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,8.403131263761319
+2011-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,49.40701386446759
+2011-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,7.9680822191577825
+2011-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,4.995470553086855
+2011-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,6.679743191636458
+2011-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,8.22790182579125
+2011-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,5.178742512599059
+2011-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,60.732537259835375
+2011-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,6.015556359365381
+2011-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.4626907426446472
+2011-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,5.260844633378373
+2011-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,9.089135915248574
+2011-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,5.893465289102979
+2011-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,53.17522881636403
+2011-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,5.224749391301685
+2011-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,2.014421679578068
+2011-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,5.881241268075087
+2011-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,6.086802732619705
+2011-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,7.351351861753596
+2011-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,49.9863271771271
+2011-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.713824267972125
+2011-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,8.43591600605127
+2011-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.1950395881807294
+2011-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.047711198758746
+2011-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,6.776654449128504
+2011-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,25.48297039614141
+2011-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.804207443078285
+2011-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,38.156713548203925
+2011-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,3.219094686035474
+2011-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,5.008722785401493
+2011-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,9.989288601411678
+2011-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,39.88859801594673
+2011-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,8.560411484662389
+2011-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,17.362573478492482
+2011-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,2.6525906533079606
+2011-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,6.672288883631972
+2011-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,10.3867361977635
+2011-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,43.363703241776484
+2011-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,11.550471628473368
+2011-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,14.118617840570066
+2012-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,8.740437518530124
+2012-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,11.564486788959426
+2012-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,12.955941872394938
+2012-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,44.387254343766934
+2012-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,6.781033975078325
+2012-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,5.025284827909414
+2012-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,4.677199390069581
+2012-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,10.245865419203552
+2012-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,9.063405274759178
+2012-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,56.64980405487973
+2012-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,4.888063959288382
+2012-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.4393195246140258
+2012-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,5.721525473123289
+2012-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,8.17443556794554
+2012-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,7.262069537795812
+2012-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,49.5691362537994
+2012-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,4.148734218978492
+2012-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,2.1277560968438207
+2012-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,6.6906030413875595
+2012-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,7.223209356336498
+2012-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,9.826878132675068
+2012-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,46.162306770952654
+2012-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,4.940018483698395
+2012-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,8.252602174934998
+2012-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.817686028683976
+2012-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.4100160995747473
+2012-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,8.06122628262934
+2012-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,24.540039935230197
+2012-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.632342726298028
+2012-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,38.39282824808274
+2012-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,3.819036921116418
+2012-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,6.483923308256208
+2012-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,12.625401326746648
+2012-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,36.61123540034437
+2012-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,8.339067968521203
+2012-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,18.106849663971218
+2012-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.040705632666403
+2012-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,8.17553973055323
+2012-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,13.12552586062074
+2012-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,39.082069667846305
+2012-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,10.807352207149535
+2012-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,14.04681054496287
+2013-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,11.031951091420652
+2013-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,12.61852041943898
+2013-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,12.660020398208012
+2013-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,39.50815008361251
+2013-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,6.696502763653704
+2013-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,5.355638092574203
+2013-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,6.485107468422453
+2013-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,9.747476069869426
+2013-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,7.880273370314959
+2013-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,51.852749897276816
+2013-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,5.6542668874814215
+2013-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.694113179658574
+2013-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,4.425274311175295
+2013-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,8.001652060295818
+2013-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,6.91601193287029
+2013-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,47.04922923688505
+2013-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,4.783006016272543
+2013-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,2.3867386419719803
+2013-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,7.2387848667636145
+2013-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,7.207453110742459
+2013-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,9.195663187409894
+2013-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,42.35437141951625
+2013-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.371376159656739
+2013-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,8.974639625770497
+2013-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.565084723671221
+2013-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.518435083883452
+2013-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,8.283240842610583
+2013-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,22.121968932151184
+2013-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.854891292524587
+2013-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,39.51347747449012
+2013-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,4.277461494311131
+2013-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,7.054717495971757
+2013-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,13.07263457770551
+2013-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,32.468188925277694
+2013-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,8.132361680146325
+2013-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,20.42317591653163
+2013-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,4.009329788213071
+2013-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,8.711395163841573
+2013-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,12.95831614108921
+2013-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,36.95592282188062
+2013-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,10.12333589493854
+2013-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,15.440833107008144
+2014-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,11.556558520821703
+2014-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,8.973699434448456
+2014-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,8.622832819676375
+2014-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,42.679851316485944
+2014-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,7.86069246970811
+2014-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,6.420861553185641
+2014-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,7.470136166679458
+2014-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,8.154279022828462
+2014-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,7.122083575075745
+2014-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,51.84945161953633
+2014-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,6.37063596123013
+2014-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.9965399969974478
+2014-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,4.465622605775123
+2014-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,7.818662342464975
+2014-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,8.044603678342286
+2014-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,46.055504160032775
+2014-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,5.283249880521453
+2014-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,2.648248028432128
+2014-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,5.710130371153802
+2014-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,6.686878744497105
+2014-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,9.31543499525786
+2014-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,41.36235129193306
+2014-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.607931903032481
+2014-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,10.565782161891386
+2014-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.480284941694735
+2014-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.806456721654356
+2014-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,7.405860315160478
+2014-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,18.147861619122537
+2014-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.709165710200399
+2014-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,42.655620494953
+2014-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,4.283409012859075
+2014-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,6.285219014741426
+2014-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,11.011818016545497
+2014-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,30.057400192388084
+2014-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.883341605337362
+2014-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,22.98403246890242
+2014-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.904972152990959
+2014-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,7.892271843492292
+2014-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,11.254740936387655
+2014-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,35.6742374649142
+2014-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,11.444924545204334
+2014-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,16.606690645457533
+2015-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,11.048693590371602
+2015-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,9.320706312643795
+2015-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,10.674926191795342
+2015-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,40.85461808111468
+2015-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,8.142009105624606
+2015-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,6.0722823951968214
+2015-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,7.696850954087464
+2015-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,8.172334098519771
+2015-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,8.285861114746888
+2015-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,49.81917760540238
+2015-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,5.988634439798366
+2015-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.7068432691251945
+2015-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,4.633349902264415
+2015-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,7.469786852851444
+2015-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,8.10256743903378
+2015-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,42.1770558687728
+2015-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,4.790731860384632
+2015-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,2.9271712037477453
+2015-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,6.59228637278224
+2015-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,6.476954475349617
+2015-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,9.179576786584944
+2015-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,38.98829616925414
+2015-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.465122274439706
+2015-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,10.220799144255285
+2015-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.7676254431953082
+2015-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,3.0062724391963207
+2015-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,8.24813547659677
+2015-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,17.803996344298568
+2015-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.914229000009235
+2015-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,40.97322066138873
+2015-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,3.837798686926537
+2015-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,5.952654293765893
+2015-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,11.17297804719881
+2015-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,30.15184285992366
+2015-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.388701659577202
+2015-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,23.00519287677251
+2015-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.5978192051054387
+2015-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,7.254753989864309
+2015-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,10.903268963087621
+2015-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,37.9056558508475
+2015-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,11.241704242541413
+2015-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,16.19835681380807
+2016-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,11.404074867874842
+2016-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,9.952078330265946
+2016-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,12.704207437987606
+2016-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,36.90622475828604
+2016-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,8.165861195058662
+2016-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,6.3740790525928395
+2016-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,8.238508974754215
+2016-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,8.490573889008989
+2016-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,9.132824706003744
+2016-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,46.193850739040045
+2016-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,6.514563524212793
+2016-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.9015578724387456
+2016-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,5.890692145274
+2016-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,6.684823283433375
+2016-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,6.7759019432047465
+2016-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,41.056751530739504
+2016-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,5.704454302476106
+2016-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,2.819163092796654
+2016-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,8.17961569035815
+2016-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,6.223546282028912
+2016-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,8.992106751293425
+2016-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,36.86338583693483
+2016-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,6.278522631346652
+2016-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,10.042224192733245
+2016-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,3.2866714133940316
+2016-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.978113286225769
+2016-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,7.655931448052804
+2016-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,17.717094170043946
+2016-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,5.677646136422826
+2016-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,40.44091285747157
+2016-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,4.473073927642894
+2016-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,5.781319538055152
+2016-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,11.000288785771005
+2016-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,29.526401383968274
+2016-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.855599864235322
+2016-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,22.74303048837288
+2016-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,4.402277307336208
+2016-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,6.771315128998982
+2016-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,11.392735934686236
+2016-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,37.174581497026935
+2016-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,10.92853517398575
+2016-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,16.495946540453875
+2017-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,17.35776262669683
+2017-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,8.339743440740131
+2017-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,8.944726159654227
+2017-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,37.18814301257989
+2017-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,7.46047848635995
+2017-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,6.2644851274008095
+2017-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,12.774467849299212
+2017-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,9.199168781480639
+2017-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,9.01156976547742
+2017-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,42.68854821063986
+2017-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,6.168793455026957
+2017-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.750342806518298
+2017-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,7.377299474833157
+2017-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,6.030512056706948
+2017-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,6.703546537969315
+2017-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,41.73738131134662
+2017-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,4.639828868360677
+2017-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,2.2628181311216693
+2017-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,10.662395977416146
+2017-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,4.8356815162968045
+2017-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,7.454279533184535
+2017-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,38.30106480511478
+2017-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.20348594750911
+2017-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,9.629922073844403
+2017-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,3.1159672142564303
+2017-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.483505499935983
+2017-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,6.335288779722838
+2017-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,17.92191402206698
+2017-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,5.11335809753839
+2017-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,41.61553135795205
+2017-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,5.259892943609949
+2017-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,5.071348121849563
+2017-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,9.782965590962869
+2017-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,31.218696143074688
+2017-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.991800679600322
+2017-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,22.12313315573121
+2017-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,5.107382611900916
+2017-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,6.467999576301565
+2017-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,10.236518522963529
+2017-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,37.32030145399467
+2017-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,10.96878553987509
+2017-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,17.006270552058073
+2018-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,16.787129278195906
+2018-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,7.99539544510169
+2018-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,7.59197945751054
+2018-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,39.09477773998985
+2018-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,8.99382897026667
+2018-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,6.201564258891605
+2018-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,16.635823152665694
+2018-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,9.5624696193699
+2018-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,6.3597451039979775
+2018-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,41.26585347885465
+2018-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,6.685108940348326
+2018-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.6294257648611807
+2018-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,8.901022706895924
+2018-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,8.419089252360044
+2018-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,6.8056849982293315
+2018-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,37.34179021312863
+2018-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,5.317399109054516
+2018-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,2.3573893630124383
+2018-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,11.81790691631625
+2018-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,5.724605499911641
+2018-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,7.120517705330725
+2018-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,36.07316060393598
+2018-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.982597414753301
+2018-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,9.57820675007754
+2018-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,3.2990282848835637
+2018-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.6734238182499306
+2018-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,6.610917931104165
+2018-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,20.14241642416161
+2018-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,5.11131969306222
+2018-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,41.42767561534807
+2018-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,5.133419490065764
+2018-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,5.094398487943757
+2018-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,9.468942000324319
+2018-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,32.52363126378046
+2018-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,8.626156429349518
+2018-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,21.596445578610393
+2018-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,4.633611129761051
+2018-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,6.309413139989004
+2018-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,9.998498718841663
+2018-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,39.07474515380125
+2018-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,11.798892938692507
+2018-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,15.994399414043816
+2019-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,11.364688369814916
+2019-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,7.571598421495828
+2019-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,8.387274868413899
+2019-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,43.43749596308383
+2019-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,9.866292538772644
+2019-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,6.947034618346849
+2019-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,11.848398789932194
+2019-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,7.574170652804794
+2019-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,6.1165723335656
+2019-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,47.90051099225882
+2019-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,6.6127596231056565
+2019-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.9961002096479885
+2019-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,7.525408030003656
+2019-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,8.189642177422133
+2019-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,6.239835757879781
+2019-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,41.66594076657173
+2019-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,5.518020564290423
+2019-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,2.5434539756383487
+2019-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,8.919297257469363
+2019-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,5.588139982560043
+2019-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,7.340790321988264
+2019-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,40.011196885167436
+2019-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,6.314845432451752
+2019-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,10.122884569609196
+2019-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.551923689599589
+2019-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.5727055203417004
+2019-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,7.140939846190304
+2019-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,20.039901982442895
+2019-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.787319921412175
+2019-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,42.1627779092813
+2019-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,3.9502234047589386
+2019-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,4.785899703169619
+2019-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,9.783848729736626
+2019-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,32.485733440115524
+2019-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,8.101931414764787
+2019-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,23.765290658590512
+2019-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.4819150867479047
+2019-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,6.2795110455766485
+2019-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,10.450696399342378
+2019-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,38.782587161027024
+2019-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,11.720296295104792
+2019-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,17.538305173380774
+2020-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,10.520655799214907
+2020-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,7.488341344138868
+2020-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,9.469952638706484
+2020-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,45.54221009817026
+2020-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,7.573111117234515
+2020-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,6.8001951951810895
+2020-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,9.50193933618816
+2020-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,6.560214370258333
+2020-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,7.278115659915437
+2020-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,50.896978300615345
+2020-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,5.4876587472095935
+2020-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,2.1131153403542684
+2020-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,5.4283430631284295
+2020-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,7.073033020737355
+2020-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,6.411777355305859
+2020-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,42.70719152049344
+2020-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,4.765420429817123
+2020-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,2.618514227366889
+2020-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,7.835213214721996
+2020-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,5.276325610033234
+2020-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,7.067952545013527
+2020-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,41.73187479886521
+2020-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.242425356751157
+2020-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,9.720774805631015
+2020-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.639883412329274
+2020-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.263892793853956
+2020-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,6.415555626163589
+2020-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,21.29169374884523
+2020-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.3556443564629594
+2020-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,41.983532348902344
+2020-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,3.7047002085629948
+2020-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,5.077571414292872
+2020-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,10.418233260689922
+2020-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,33.30024751528308
+2020-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.585017697204184
+2020-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,24.035654080384923
+2020-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.1385361966523404
+2020-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,7.090399563955294
+2020-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,11.275028011244206
+2020-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,37.55345559785104
+2020-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,11.413336603393176
+2020-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,16.936844687426955
+2021-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,9.130599040189452
+2021-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,10.285841942373844
+2021-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,11.773950181634698
+2021-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,42.5825527126733
+2021-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,6.640629821329711
+2021-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,6.314397903057517
+2021-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,8.149372347261156
+2021-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,10.014404787822674
+2021-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,10.22161290691963
+2021-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,46.71891764465844
+2021-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,5.1385648013596334
+2021-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.6724258318885816
+2021-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,5.627869647163326
+2021-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,8.676057705721892
+2021-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,7.799970206768424
+2021-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,41.814229558336734
+2021-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,4.44262439080499
+2021-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,2.466957473667788
+2021-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,6.829045631038717
+2021-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,6.400968226072485
+2021-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,8.794875392290404
+2021-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,41.443061332307465
+2021-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,4.646473217901315
+2021-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,9.902243766336978
+2021-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.4866558732938016
+2021-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.3974930993212373
+2021-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,6.874771301424165
+2021-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,19.71356679413322
+2021-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.501288458961531
+2021-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,42.85607649797027
+2021-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,3.730033165097502
+2021-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,5.782332016145445
+2021-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,11.31912801876275
+2021-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,30.945507743977547
+2021-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.8023072105923
+2021-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,23.195995070319523
+2021-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.0820761058883437
+2021-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,8.082456749838805
+2021-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,12.106863492590243
+2021-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,34.44301584700437
+2021-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,11.731147599787795
+2021-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,16.54936731410288
+2022-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,10.236341436088221
+2022-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,9.832474920163051
+2022-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,10.248969388300539
+2022-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,40.799209284922206
+2022-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,7.405044175204201
+2022-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,6.364221503403582
+2022-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,9.589736331244035
+2022-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,10.035870446191685
+2022-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,7.65789556808429
+2022-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,45.60417959481277
+2022-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,5.543115178844492
+2022-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.8623325071441408
+2022-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,4.057536066621545
+2022-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,10.3211549471037
+2022-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,7.881924183671433
+2022-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,41.681182002527116
+2022-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,4.547692838692149
+2022-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,2.4757278389895543
+2022-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,6.315481086124561
+2022-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,7.316584572137184
+2022-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,9.925809929280224
+2022-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,38.50490292439688
+2022-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.163582899608988
+2022-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,9.872370565413448
+2022-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.2168435241952307
+2022-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.3359361733601722
+2022-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,6.048178372125858
+2022-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,17.872255871798387
+2022-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,3.856374131327352
+2022-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,43.69072257014602
+2022-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,3.86912981690119
+2022-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,5.536936298907445
+2022-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,10.247355134138463
+2022-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,29.453246820001535
+2022-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,7.778926925913469
+2022-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,23.367494751435707
+2022-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.8997179172863996
+2022-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,7.732158374376526
+2022-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,10.620587664167614
+2022-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,34.8400687089707
+2022-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,11.49576258687187
+2022-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,16.272066379829514
+2023-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,10.924462355625703
+2023-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,7.6043766607258
+2023-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,8.194240061477167
+2023-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,42.30483568004289
+2023-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,8.690669106505739
+2023-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,7.496971604268178
+2023-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,9.34670801365876
+2023-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,8.606991703875584
+2023-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,7.325848662626948
+2023-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,46.11173655956039
+2023-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,6.65522426261119
+2023-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,2.3058895823409835
+2023-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,6.610795984771605
+2023-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,8.077759268434397
+2023-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,5.96743675384864
+2023-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,38.60223145628664
+2023-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,5.440093267354046
+2023-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,2.7964799162442717
+2023-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,10.231482166572173
+2023-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,5.168685058548409
+2023-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,6.93286844332083
+2023-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,36.30609315451614
+2023-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,6.11968728776195
+2023-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,11.04265063124416
+2023-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.430717152168652
+2023-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,2.3049682816769805
+2023-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,6.622346122844279
+2023-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,18.053682306282642
+2023-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,4.4531579196143936
+2023-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,47.230611500829355
+2023-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,4.827140676375867
+2023-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,4.533022174323814
+2023-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,9.402453274196615
+2023-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,28.13147610877777
+2023-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,8.150927051524558
+2023-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,25.979763747582073
+2023-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,4.030061691942351
+2023-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,6.251231674856549
+2023-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,9.959494079341125
+2023-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,34.92883663554497
+2023-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,12.047586609298463
+2023-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,18.917890037248558
+2024-01-01T07:00:00Z,blm_billings_Billings District,Billings,AFG,9.550284170862026
+2024-01-01T07:00:00Z,blm_billings_Billings District,Billings,BGR,7.784935822669347
+2024-01-01T07:00:00Z,blm_billings_Billings District,Billings,LTR,8.949634084520858
+2024-01-01T07:00:00Z,blm_billings_Billings District,Billings,PFG,44.71277323765495
+2024-01-01T07:00:00Z,blm_billings_Billings District,Billings,SHR,7.400587379858162
+2024-01-01T07:00:00Z,blm_billings_Billings District,Billings,TRE,6.088881998786394
+2024-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,AFG,10.355122334798006
+2024-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,BGR,8.749039208085096
+2024-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,LTR,7.036170485845519
+2024-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,PFG,45.43145696067981
+2024-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,SHR,5.788499759420245
+2024-01-01T07:00:00Z,blm_miles-city_Miles City District,Miles City,TRE,1.7450072265296157
+2024-01-01T07:00:00Z,blm_malta_Malta District,Malta,AFG,8.113576452021858
+2024-01-01T07:00:00Z,blm_malta_Malta District,Malta,BGR,7.782375527134244
+2024-01-01T07:00:00Z,blm_malta_Malta District,Malta,LTR,5.6802915385668555
+2024-01-01T07:00:00Z,blm_malta_Malta District,Malta,PFG,36.96571648929794
+2024-01-01T07:00:00Z,blm_malta_Malta District,Malta,SHR,5.904932052529181
+2024-01-01T07:00:00Z,blm_malta_Malta District,Malta,TRE,2.1488137804381835
+2024-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,AFG,8.630292809788939
+2024-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,BGR,5.362692580158673
+2024-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,LTR,6.962322665352846
+2024-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,PFG,37.40558443839822
+2024-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,SHR,5.7157319636295565
+2024-01-01T07:00:00Z,blm_lewistown_Lewistown District,Lewistown,TRE,8.705302738622285
+2024-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,AFG,2.9920161240062284
+2024-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,BGR,3.049506986890974
+2024-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,LTR,6.883579703260746
+2024-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,PFG,16.22706966673336
+2024-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,SHR,5.443057640612139
+2024-01-01T07:00:00Z,blm_missoula_Missoula District,Missoula,TRE,39.08139011290787
+2024-01-01T07:00:00Z,blm_butte_Butte District,Butte,AFG,3.9521918454366802
+2024-01-01T07:00:00Z,blm_butte_Butte District,Butte,BGR,4.968787592671602
+2024-01-01T07:00:00Z,blm_butte_Butte District,Butte,LTR,9.609018750593533
+2024-01-01T07:00:00Z,blm_butte_Butte District,Butte,PFG,29.648174230173378
+2024-01-01T07:00:00Z,blm_butte_Butte District,Butte,SHR,8.01495082352317
+2024-01-01T07:00:00Z,blm_butte_Butte District,Butte,TRE,21.67313368288064
+2024-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,AFG,3.4155346404895863
+2024-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,BGR,6.287766795673512
+2024-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,LTR,10.036692409208532
+2024-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,PFG,37.35600587084379
+2024-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,SHR,11.652802618589439
+2024-01-01T07:00:00Z,blm_dillon_Dillon District,Dillon,TRE,16.359565769842412
