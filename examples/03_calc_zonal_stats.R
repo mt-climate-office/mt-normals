@@ -26,3 +26,44 @@ variables = c("erc", "etr", "pet", "pr", "rmax", "rmin", "sph", "srad", "th", "t
 tidyr::crossing(regions, variables) %>%
   dplyr::rowwise() %>%
   dplyr::mutate(out = list(zonal(variables, regions)))
+
+
+smart_read <- function(x) {
+  dat <- readr::read_csv(x, show_col_types = FALSE)
+  if (!("variable" %in% names(dat))) {
+    dat %<>%
+      dplyr::mutate(
+        variable = basename(x) %>%
+          tools::file_path_sans_ext() %>%
+          stringr::str_split_1("_") %>%
+          tail(1)
+      )
+  }
+
+  if ("name" %in% names(dat)) {
+    dat %<>%
+      dplyr::select(-name)
+  }
+
+  return(dat)
+}
+
+library(magrittr)
+dat <- list.files("./data/zonal_stats", pattern = ".csv", full.names = T) %>%
+  purrr::map(smart_read) %>%
+  dplyr::bind_rows() %>%
+  tidyr::separate(id, c("type", "id", "name"), sep = "_") %>%
+  dplyr::mutate(variable = ifelse(variable == "mean", "gpp", variable))
+
+dat %>%
+  dplyr::filter(!is.na(value)) %>%
+  dplyr::mutate(variable = dplyr::case_when(
+    variable == "ET" ~ "m16_et",
+    variable == "PET" ~ "m16_pet",
+    .default = tolower(variable)
+  )) %>%
+  arrow::write_dataset(
+    "./data/zonal",
+    format = "parquet",
+    partitioning = c("type", "id","variable")
+  )
