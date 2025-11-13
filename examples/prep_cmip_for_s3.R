@@ -1,9 +1,20 @@
 library(magrittr)
 
-list.files("~/data/cmip_tables/", full.names = T) %>%
-  purrr::map(rea)
+dat <- list.files("~/data/cmip", full.names = T, pattern = ".tif") %>%
+  grep(".json", ., value = T, invert = T) %>%
+  tibble::tibble(f = .) %>%
+  dplyr::mutate(bn = basename(f) %>%
+                  tools::file_path_sans_ext()) %>%
+  tidyr::separate(bn, c("model", "scenario", "drop", "variable"), sep = "_") %>%
+  dplyr::select(-drop)
 
-readr::read_csv( "/Users/Colin.Brust/data/cmip_tables//con-wet_huc_10070008_timeseries_TRUE.csv")
+historical <- dat %>%
+  dplyr::filter(time == "scenario")
+
+dat %>%
+  dplyr::filter(time != "scenario")
+
+
 smart_read <- function(x) {
   meta <- basename(x) %>%
     tools::file_path_sans_ext() %>%
@@ -26,10 +37,13 @@ smart_read <- function(x) {
     avg <- dplyr::filter(dat, year >= start, year <= end) %>%
       dplyr::pull(value) %>%
       mean()
+
+    dat %>%
+      dplyr::mutate(avg = avg) %>%
+      return()
   }
 
-  dat %>%
-    dplyr::mutate(avg = avg)
+
 }
 
 readr::read_csv(x)
