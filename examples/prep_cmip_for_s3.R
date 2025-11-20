@@ -115,4 +115,8 @@ smart_read <- function(x) {
 
 }
 
-readr::read_csv(x)
+r <- terra::rast("~/data/hurs_day_ACCESS-ESM1-5_historical_r1i1p1f1_gn_1969_v1.1.nc")
+bounds <- sf::read_sf("https://mco-normals.s3.us-east-2.amazonaws.com/fgb/hucs.fgb") %>%
+  sf::st_bbox()
+
+
