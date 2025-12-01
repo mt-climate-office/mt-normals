@@ -1,5 +1,5 @@
 library(magrittr)
-f_dir = "~/data/data"
+f_dir = "~/data/cmip/derived"
 
 
 append_historical <- function(m, v, r, historical) {
@@ -13,11 +13,10 @@ append_historical <- function(m, v, r, historical) {
 
 calc_monthly_avg <- function(f_dir) {
   list.files(f_dir, full.names = T, include.dirs = F, recursive = F) %>%
-    grep("monthly", ., invert = T, value = T) %>%
     tibble::tibble(f = .) %>%
     dplyr::mutate(bn = basename(f) %>% tools::file_path_sans_ext()) %>%
     tidyr::separate(bn, c("variable", "model", "scenario", "year"), sep = "_") %>%
-    dplyr::mutate(out_name = file.path(f_dir, "monthly", glue::glue("{variable}_{model}_{scenario}.tif"))) %>%
+    dplyr::mutate(out_name = file.path("monthly", glue::glue("{variable}_{model}_{scenario}.tif"))) %>%
     dplyr::group_by(variable, model, scenario) %>%
     dplyr::group_split() %>%
     purrr::map(function(x) {
@@ -27,7 +26,7 @@ calc_monthly_avg <- function(f_dir) {
         return(out_name)
       }
       print(glue::glue("working on {out_name}"))
-      func = ifelse(x$variable[[1]] == "pr", "sum", 'mean')
+      func = ifelse(x$variable[[1]] %in% c("pr", "eto"), "sum", 'mean')
       r <- terra::rast(x$f) %>%
         terra::tapp(index = "yearmonths", fun = func)
 
@@ -268,6 +267,48 @@ calc_derived_metrics <- function(f_dir, out_dir) {
         )
       )
   })
+}
+
+
+calc_monthly_for_derived <- function(){
+  list.files("~/data/cmip/derived", full.names = T, include.dirs = F, recursive = F) %>%
+    tibble::tibble(f = .) %>%
+    dplyr::mutate(bn = basename(f) %>% tools::file_path_sans_ext()) %>%
+    tidyr::separate(bn, c("variable", "model", "scenario", "year"), sep = "_") %>%
+    dplyr::mutate(out_name = file.path("~/data/cmip/monthly", glue::glue("{variable}_{model}_{scenario}.tif"))) %>%
+    dplyr::group_by(variable, model, scenario) %>%
+    dplyr::group_split() %>%
+    purrr::map(function(x) {
+      out_name = x$out_name[[1]]
+      if (file.exists(out_name)) {
+        print(glue::glue("{out_name} exists, skipping..."))
+        return(out_name)
+      }
+      print(glue::glue("working on {out_name}"))
+      func = ifelse(x$variable[[1]] %in% c("pr", "eto"), "sum", 'mean')
+
+      r <- x %>%
+        dplyr::rowwise() %>%
+        dplyr::mutate(
+          r = {
+            rast <- terra::rast(f)
+            n_layers <- terra::nlyr(rast)
+            if (n_layers == 1) {
+              terra::time(rast) <- as.Date(paste0(year, "-01-01"))
+            } else {
+              terra::time(rast) <- seq(as.Date(paste0(year, "-01-01")),
+                                       as.Date(paste0(year, "-12-01")),
+                                       by = "month")
+            }
+            list(rast)
+          }
+        ) %>%
+        dplyr::pull(r) %>%
+        terra::rast()
+
+      normals::write_as_cog(r, out_name)
+      return(out_name)
+    })
 }
 
 
