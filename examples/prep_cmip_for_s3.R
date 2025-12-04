@@ -76,6 +76,7 @@ list.files("~/data/cmip_tables/", full.names = T, pattern = '.csv') %>%
   dplyr::mutate(meta = basename(f) %>%
                   tools::file_path_sans_ext()) %>%
   tidyr::separate(meta, c("model", "type", "variable", "scenario"), sep = "_") %>%
+  dplyr::filter(variable == "eto") %>%
   dplyr::group_by(type, scenario, variable) %>%
   dplyr::group_split() %>%
   purrr::map(function(x) {
@@ -97,23 +98,56 @@ list.files("~/data/cmip_tables/", full.names = T, pattern = '.csv') %>%
     tmp %>%
       dplyr::group_by(variable, id, year=lubridate::year(date), scenario, model) %>%
       dplyr::summarise(
-        value = ifelse(unique(variable) %in% c("pr", "penman", "hargreaves", "above90", "con-dry", "con-wet",
+        value = ifelse(unique(variable) %in% c("pr", "eto", "hargreaves", "above90", "con-dry", "con-wet",
                                 "dry-days", "freeze-free", "gdd", "wet-days", "et_m16", "pet_m16",
-                                "gpp", "afgnpp", "pfgnpp", "shrnpp", "trenpp"), sum(value), mean(value))
+                                "gpp", "afgnpp", "pfgnpp", "shrnpp", "trenpp"), sum(value), mean(value)),
+        .groups = "drop"
       ) %>%
       dplyr::group_by(year, id, variable, scenario) %>%
       dplyr::summarise(
         val = mean(value) %>% round(3),
         lower = quantile(value, 0.1) %>% round(3),
-        upper = quantile(value, 0.9) %>% round(3)
+        upper = quantile(value, 0.9) %>% round(3),
+        .groups = "drop"
       ) %>%
-      dplyr::mutate(plot_type == "timeseries") %>%
-      tidyr::separate(id, c("plot_type", "type", "id", "name"), sep = "_") %>%
+      dplyr::mutate(plot_type = "timeseries") %>%
+      tidyr::separate(id, c("type", "id", "name"), sep = "_") %>%
+      dplyr::group_by(type, id, variable, scenario) %>%
+      dplyr::mutate(baseline = mean(val[year >= 1995 & year <= 2024], na.rm = TRUE)) %>%
       arrow::write_dataset(
         "~/data/cmip_zonal",
         format = "parquet",
-        partitioning = c("type", "id","variable")
+        partitioning = c("plot_type", "type", "id","variable")
       )
+
+    tmp %>%
+      dplyr::mutate(
+        year = lubridate::year(date),
+        month = month.abb[lubridate::month(date)],
+        grp = dplyr::case_when(
+          year %in% 1995:2024 ~ "Reference Period (1995-2024)",
+          year %in% 2040:2069 ~ "Mid Century (2040-2069)",
+          year %in% 2970:2099 ~ "End-of-Century (2070-2099)"
+        ),
+        scenario = ifelse(year >= 2015 & year <= 2024, "historical", scenario)
+      )  %>%
+      dplyr::filter(!is.na(grp)) %>%
+      dplyr::group_by(scenario, month, grp, variable, id) %>%
+      dplyr::summarise(
+        upper = quantile(value, 0.9) %>% as.numeric() %>% round(3),
+        lower = quantile(value, 0.1) %>% as.numeric() %>% round(3),
+        value = median(value) %>% round(3),
+        .groups = "drop"
+      ) %>%
+      dplyr::mutate(plot_type = "monthly") %>%
+      tidyr::separate(id, c("type", "id", "name"), sep = "_") %>%
+      arrow::write_dataset(
+        "~/data/cmip_zonal",
+        format = "parquet",
+        partitioning = c("plot_type", "type", "id","variable")
+      )
+
+
   }, .progress = TRUE)
 
 
@@ -133,7 +167,6 @@ out <- ensemble_mean %>%
         normals::write_as_cog(glue::glue("~/data/cmip_processed/{variable}_{scenario}_annual.tif"))
     )
   )
-
 
 
 # TODO: Create rasters for each variable for baseline, mid century and end of century
