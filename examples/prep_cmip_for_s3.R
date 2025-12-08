@@ -103,7 +103,7 @@ list.files("~/data/cmip_tables/", full.names = T, pattern = '.csv') %>%
         .groups = "drop"
       ) %>%
       dplyr::group_by(year, id, variable, scenario) %>%
-      dplyr::mutate(value = ifelse(variable == "pr", value * 86400, value) %>%
+      dplyr::mutate(value = ifelse(variable == "pr", value * 86400, value)) %>%
       dplyr::summarise(
         val = mean(value) %>% round(3),
         lower = quantile(value, 0.1) %>% round(3),
