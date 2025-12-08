@@ -76,8 +76,7 @@ list.files("~/data/cmip_tables/", full.names = T, pattern = '.csv') %>%
   dplyr::mutate(meta = basename(f) %>%
                   tools::file_path_sans_ext()) %>%
   tidyr::separate(meta, c("model", "type", "variable", "scenario"), sep = "_") %>%
-  dplyr::filter(variable == "eto") %>%
-  dplyr::group_by(type, scenario, variable) %>%
+  dplyr::group_by(type, variable) %>%
   dplyr::group_split() %>%
   purrr::map(function(x) {
     tmp <- x %>%
@@ -129,7 +128,6 @@ list.files("~/data/cmip_tables/", full.names = T, pattern = '.csv') %>%
           year %in% 2040:2069 ~ "Mid Century (2040-2069)",
           year %in% 2970:2099 ~ "End-of-Century (2070-2099)"
         ),
-        scenario = ifelse(year >= 2015 & year <= 2024, "historical", scenario)
       )  %>%
       dplyr::filter(!is.na(grp)) %>%
       dplyr::group_by(scenario, month, grp, variable, id) %>%
@@ -138,8 +136,7 @@ list.files("~/data/cmip_tables/", full.names = T, pattern = '.csv') %>%
         lower = quantile(value, 0.1) %>% as.numeric() %>% round(3),
         value = median(value) %>% round(3),
         .groups = "drop"
-      ) %>%
-      dplyr::mutate(plot_type = "monthly") %>%
+      ) %>% dplyr::mutate(plot_type = "monthly") %>%
       tidyr::separate(id, c("type", "id", "name"), sep = "_") %>%
       arrow::write_dataset(
         "~/data/cmip_zonal",
@@ -148,7 +145,7 @@ list.files("~/data/cmip_tables/", full.names = T, pattern = '.csv') %>%
       )
 
 
-  }, .progress = TRUE)
+  })
 
 
 
