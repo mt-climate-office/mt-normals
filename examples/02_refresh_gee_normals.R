@@ -283,6 +283,24 @@ combine_mod13 <- function(data_dir) {
     dplyr::mutate(out = glue::glue("./data/ee_extract/{loc}_mcd13.csv")) %>%
     dplyr::rowwise() %>%
     dplyr::mutate(dat = list(readr::write_csv(dat, out)))
-
-
 }
+
+
+s3 <- paws.storage::s3(
+  config = list(
+    credentials = paws.common::locate_credentials()
+  )
+)
+# List all objects
+objects <- s3$list_objects_v2(Bucket = "mco-normals", Prefix = "mt-normals/cog/")
+
+# Convert to tidy dataframe
+df <- tibble::tibble(
+  key = purrr::map_chr(objects$Contents, "Key")
+) |>
+  dplyr::filter(stringr::str_detect(key, "\\.tif$")) |>
+  dplyr::mutate(
+    dirname = stringr::str_extract(key, "(?<=mt-normals/cog/)[^/]+"),
+    filename = basename(key),
+    new_key = glue::glue("mt-normals/cog/{dirname}/normals/1995-2024/{filename}")
+  )

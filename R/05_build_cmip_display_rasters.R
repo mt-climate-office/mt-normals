@@ -43,7 +43,7 @@ joined <- dat %>%
 joined %>%
   dplyr::select(-f) %>%
   dplyr::group_by(variable, scenario) %>%
-  dplyr::group_split() %>%
+  dplyr::group_split() %>% magrittr::extract2(1) -> x
   purrr::map(function(x) {
     v = unique(x$variable)
     scenario = unique(x$scenario)
@@ -62,17 +62,21 @@ joined %>%
     r %>%
       terra::tapp(fun = "mean", index = "days") %>%
       terra::tapp(fun = fun, index = "years") %>%
+      terra::rotate()
       {
         terra::subset(., which(terra::time(.) %in% 1995:2024)) %>%
           terra::app(fun = "mean") %>%
+          terra::rotate() %>%
           normals::write_as_cog(glue::glue("~/data/cmip/agg/{v}_{scenario}_reference.tif"))
 
         terra::subset(., which(terra::time(.) %in% 2040:2069)) %>%
           terra::app(fun = "mean") %>%
+          terra::rotate() %>%
           normals::write_as_cog(glue::glue("~/data/cmip/agg/{v}_{scenario}_mid.tif"))
 
         terra::subset(., which(terra::time(.) %in% 2970:2099)) %>%
           terra::app(fun = "mean") %>%
+          terra::rotate() %>%
           normals::write_as_cog(glue::glue("~/data/cmip/agg/{v}_{scenario}_end.tif"))
 
       }
@@ -84,7 +88,9 @@ list.files("~/data/cmip/agg", full.names = T) %>%
     bn = basename(f) %>%
       tools::file_path_sans_ext()
   )  %>%
-  tidyr::separate(bn, c("variable", "scenario", "time"), sep = "_") %>%
+  tidyr::separate(bn, c("variable", "scenario", "time", "diff"), sep = "_") %>%
+  dplyr::filter(is.na(diff)) %>%
+  dplyr::select(-diff) %>%
   tidyr::pivot_wider(names_from = time, values_from = f) %>%
   tidyr::pivot_longer(-c(variable, scenario, reference), names_to = "time") %>%
   dplyr::rowwise() %>%
