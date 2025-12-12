@@ -286,21 +286,63 @@ combine_mod13 <- function(data_dir) {
 }
 
 
-s3 <- paws.storage::s3(
-  config = list(
-    credentials = paws.common::locate_credentials()
-  )
-)
+# Specify the profile name from your ~/.aws/config file
+Sys.setenv(AWS_PROFILE = "default")
+
+# Create an S3 client using the specified profile
+s3 <- paws::s3()
+s3$list_buckets()
+
 # List all objects
-objects <- s3$list_objects_v2(Bucket = "mco-normals", Prefix = "mt-normals/cog/")
+objects <-
+  paws::paginate(
+    s3$list_objects_v2(Bucket = "mco-normals", Prefix = "cog/")
+  )
+
 
 # Convert to tidy dataframe
-df <- tibble::tibble(
-  key = purrr::map_chr(objects$Contents, "Key")
-) |>
-  dplyr::filter(stringr::str_detect(key, "\\.tif$")) |>
+out <- purrr::map(
+  objects, function(x){
+    tibble::tibble(
+      key = purrr::map_chr(x$Contents, "Key")
+    )
+  }
+) %>%
+  dplyr::bind_rows() %>%
+  # dplyr::filter(stringr::str_detect(key, "\\.tif$")) |>
+  # dplyr::filter(stringr::str_detect(key, "normals/")) %>%
   dplyr::mutate(
-    dirname = stringr::str_extract(key, "(?<=mt-normals/cog/)[^/]+"),
-    filename = basename(key),
-    new_key = glue::glue("mt-normals/cog/{dirname}/normals/1995-2024/{filename}")
+    dirname = stringr::str_extract(key, "(?<=cog/)[^/]+"),
+    filename = basename(key) %>%
+      tools::file_path_sans_ext(),
+  ) %>%
+  dplyr::filter(dirname %in% c("afg", "afgnpp", "bgr", "evi", "gpp", "ltr",
+                               "m16_et", "m16_pet", "ndvi", "pfg", "pfgnpp", "shr",
+                               "shrnpp", "tre", "trenpp")) %>%
+  tidyr::separate(filename, c("time", "variable", "metric"), sep = "_") %>%
+  dplyr::mutate(
+    variable = dplyr::case_when(
+      is.na(metric) ~ dirname,
+      .default = variable
+    ),
+    dirname = dplyr::case_when(
+      dirname != variable ~ variable,
+      .default = dirname
+    ),
+    metric = "mean",
+    filename = glue::glue("{time}_{variable}_{metric}.tif")
+  ) %>%
+  dplyr::mutate(new_key = glue::glue("cog/{dirname}/normals/1995-2024/{filename}"))
+
+
+purrr::walk2(out$key, out$new_key, ~{
+  s3$copy_object(
+    Bucket = "mco-normals",
+    CopySource = paste0("mco-normals/", .x),
+    Key = .y
   )
+  # s3$delete_object(
+  #   Bucket = "mco-normals",
+  #   Key = .x
+  # )
+})
