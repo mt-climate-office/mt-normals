@@ -346,3 +346,74 @@ purrr::walk2(out$key, out$new_key, ~{
   #   Key = .x
   # )
 })
+
+
+
+# Specify the profile name from your ~/.aws/config file
+Sys.setenv(AWS_PROFILE = "default")
+
+# Create an S3 client using the specified profile
+s3 <- paws::s3()
+s3$list_buckets()
+
+# List all objects
+objects <-
+  paws::paginate(
+    s3$list_objects_v2(Bucket = "mco-normals", Prefix = "zonal/")
+  )
+
+
+out <- purrr::map(
+  objects, function(x){
+    tibble::tibble(
+      key = purrr::map_chr(x$Contents, "Key")
+    )
+  }
+) %>%
+  dplyr::bind_rows() %>%
+  dplyr::filter(
+    stringr::str_detect(
+      key, "afg|bgr|ltr|pfg|shr|tre"
+    )
+  ) %>%
+  dplyr::filter(
+    stringr::str_detect(
+      key, "npp", negate = TRUE
+    )
+  ) %>%
+  dplyr::mutate(
+    new_key = stringr::str_replace(key, "variable=([^/]+)", "variable=\\1cov")
+  )
+
+
+purrr::walk2(out$key, out$new_key, ~{
+  s3$copy_object(
+    Bucket = "mco-normals",
+    CopySource = paste0("mco-normals/", .x),
+    Key = .y
+  )
+})
+
+
+arrow::read_parquet("~/Downloads/stats.parquet") %>%
+  dplyr::mutate(
+    variable = dplyr::case_when(
+      stringr::str_detect(variable, "npp") ~ variable,
+      stringr::str_detect(variable, "afg|bgr|ltr|pfg|shr|tre") ~ paste0(variable, "cov"),
+      .default = variable
+    )
+  ) %>%
+  arrow::write_parquet("~/Downloads/stats.parquet")
+  dplyr::mutate(
+    new_key = stringr::str_replace(key, "variable=([^/]+)", "variable=\\1cov")
+  )
+  dplyr::filter(
+    stringr::str_detect(
+      variable, "afg|bgr|ltr|pfg|shr|tre"
+    )
+  ) %>%
+  dplyr::filter(
+    stringr::str_detect(
+      variable, "npp", negate = TRUE
+    )
+  )

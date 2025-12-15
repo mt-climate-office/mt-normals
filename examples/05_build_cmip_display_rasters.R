@@ -6,7 +6,8 @@ dat <- list.files("~/data/cmip/monthly", full.names = T, pattern = ".tif") %>%
     bn = basename(f) %>%
       tools::file_path_sans_ext()
   ) %>%
-  tidyr::separate(bn, c("variable", "model", "scenario"), sep = "_")
+  tidyr::separate(bn, c("variable", "model", "scenario"), sep = "_") %>%
+  dplyr::filter(variable == "pr")
 
 
 historical <- dat %>%
@@ -42,8 +43,16 @@ joined <- dat %>%
 
 joined %>%
   dplyr::select(-f) %>%
+  dplyr::rowwise() %>%
+  dplyr::mutate(
+    r = ifelse(
+      variable == "pr",
+      list(r * 86400),
+      list(r)
+    )
+  ) %>%
   dplyr::group_by(variable, scenario) %>%
-  dplyr::group_split() %>% magrittr::extract2(1) -> x
+  dplyr::group_split() %>%
   purrr::map(function(x) {
     v = unique(x$variable)
     scenario = unique(x$scenario)
@@ -62,7 +71,6 @@ joined %>%
     r %>%
       terra::tapp(fun = "mean", index = "days") %>%
       terra::tapp(fun = fun, index = "years") %>%
-      terra::rotate()
       {
         terra::subset(., which(terra::time(.) %in% 1995:2024)) %>%
           terra::app(fun = "mean") %>%

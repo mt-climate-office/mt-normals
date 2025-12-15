@@ -132,6 +132,7 @@ list.files("~/data/cmip_tables/", full.names = T, pattern = '.csv') %>%
       )  %>%
       dplyr::filter(!is.na(grp)) %>%
       dplyr::group_by(scenario, month, grp, variable, id) %>%
+      dplyr::mutate(value = ifelse(variable == "pr", value * 86400, value)) %>%
       dplyr::summarise(
         upper = quantile(value, 0.9) %>% as.numeric() %>% round(3),
         lower = quantile(value, 0.1) %>% as.numeric() %>% round(3),
