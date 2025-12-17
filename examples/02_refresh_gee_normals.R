@@ -417,3 +417,32 @@ arrow::read_parquet("~/Downloads/stats.parquet") %>%
       variable, "npp", negate = TRUE
     )
   )
+
+
+dat <- list.files("~/Downloads", pattern = "_Timeseries_", full.names = T) %>%
+  purrr::map(function(x) {
+    readr::read_csv(x) %>%
+      dplyr::select(-`system:index`, -`.geo`) %>%
+      tidyr::pivot_longer(-id) %>%
+      tidyr::separate(name, c("variable", "year", "month")) %>%
+      tidyr::separate(id, c("type", "id", "name"), sep = "_") %>%
+      dplyr::mutate(
+        date = lubridate::as_date(glue::glue("{year}-{month}-01")),
+        variable = dplyr::case_when(
+          variable == "ET" ~ "m16_et",
+          variable == "PET" ~ "m16_pet",
+          .default = tolower(variable)
+        )
+      )
+  }) %>%
+  dplyr::bind_rows()
+
+
+dat %>%
+  dplyr::select(-year, -month) %>%
+  arrow::write_dataset(
+    "~/data/zonal",
+    format = "parquet",
+    partitioning = c("type", "id","variable")
+  )
+

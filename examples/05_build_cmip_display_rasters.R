@@ -111,3 +111,8 @@ list.files("~/data/cmip/agg", full.names = T) %>%
       ))
   )
 
+arrow::read_parquet("https://mco-normals.s3.us-east-2.amazonaws.com/zonal/type=county/id=30063/variable=gpp/part-0.parquet") %>%
+  dplyr::group_by(year=as.numeric(year), id) %>%
+  dplyr::summarise(value = sum(value)/25.4) %>%
+  ggplot(aes(x=year, y=value, color=id)) + geom_line() + geom_point()
+

@@ -6,8 +6,7 @@ future::plan(future.callr::callr,
      workers = 5)
 
 
-list.files("~/Downloads", full.names = T, pattern = ".tif") %>%
-  tail(2) %>%
+list.files("~/Downloads", full.names = T, pattern = "MODIS_") %>%
   purrr::map(function(x) {
     print(x)
     r <- terra::rast(x)
@@ -89,4 +88,43 @@ r %>%
   )
 
 
+#### MIDIS ####
+
+a <- terra::rast("/Users/Colin.Brust/Downloads/MODIS_Averages_2000_2024-0000000000-0000000000.tif")
+b <- terra::rast("/Users/Colin.Brust/Downloads/MODIS_Averages_2000_2024-0000000000-0000003072.tif")
+r = terra::mosaic(a, b)
+
+write_out <- function(r, fn) {
+  print(fn)
+  if (!dir.exists(dirname(fn))) {
+    dir.create(dirname(fn), recursive = T)
+  }
+  normals::write_as_cog(r, fn)
+}
+
+names(r) %>%
+  tibble::tibble(n = .) %>%
+  tidyr::separate(n, c("variable", "d1", "time", "month"), remove = FALSE) %>%
+  dplyr::mutate(
+    variable = dplyr::case_when(
+      variable == "ET" ~ "m16_et",
+      variable == "PET" ~ "m16_pet",
+      .default = tolower(variable)
+    ),
+    month = month.abb[as.numeric(month)] %>% tolower(),
+    out_name = glue::glue("~/data/cog/{variable}/normals/1995-2024/{month}_{variable}_mean.tif")
+  ) %>%
+  dplyr::filter(!is.na(month)) %>%
+  dplyr::rowwise() %>%
+  dplyr::mutate(
+    r = list(terra::rast(out_name))
+  ) %>%
+  dplyr::group_by(variable) %>%
+  dplyr::summarise(
+    out_name = glue::glue("~/data/cog/{dplyr::first(variable)}/normals/1995-2024/annual_{dplyr::first(variable)}_mean.tif"),
+    r = dplyr::case_when(
+      dplyr::first(variable) %in% c("evi", "ndvi") ~ list(terra::rast(r) %>% terra::app("mean") %>% normals::write_as_cog(out_name)),
+      .default = list(terra::rast(r) %>% terra::app("sum") %>% normals::write_as_cog(out_name))
+    )
+  )
 

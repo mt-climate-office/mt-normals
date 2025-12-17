@@ -1,6 +1,6 @@
 library(magrittr)
 
-dat <- arrow::open_dataset("./data/zonal") %>%
+dat <- arrow::open_dataset("~/data/zonal") %>%
   dplyr::collect()
 
 
@@ -85,4 +85,4 @@ stats <- dat %>%
   dplyr::bind_rows()
 
 stats %>%
-  arrow::write_parquet("./data/stats.parquet")
+  arrow::write_parquet("~/data/stats.parquet")
